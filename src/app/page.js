@@ -75,6 +75,76 @@ export default function Home() {
     },
   ];
 
+  const gigs = [
+    {
+      category: "Video Production",
+      title: "Book Trailer for Fantasy Novel",
+      author: "Ratna Jyoti",
+      description:
+        "Need a compelling 60-second book trailer for my fantasy novel 'The Mystic Realm'...",
+      duration: "7 days",
+      proposals: "12",
+      price: "$500 - $1,000",
+      rating: "4.8",
+    },
+    {
+      category: "Design",
+      title: "Professional Book Cover Design",
+      author: "Aditi Sharma",
+      description:
+        "Looking for a modern, eye-catching cover design for my romance novel...",
+      duration: "5 days",
+      proposals: "8",
+      price: "$200 - $400",
+      rating: "4.9",
+    },
+    {
+      category: "Editing",
+      title: "Comprehensive Book Editing",
+      author: "Vikram Singh",
+      description:
+        "Need thorough editing for my 80,000-word historical fiction manuscript...",
+      duration: "10 days",
+      proposals: "5",
+      price: "$600 - $800",
+      rating: "4.7",
+    },
+    {
+      category: "Marketing",
+      title: "Social Media Marketing Campaign",
+      author: "Priya Mehta",
+      description:
+        "Create and execute a 30-day social media marketing strategy for book launch...",
+      duration: "6 days",
+      proposals: "10",
+      price: "$300 - $500",
+      rating: "4.6",
+    },
+  ];
+
+  const projects = [
+    {
+      title: "The Curse of the Wildflower",
+      author: "Smriti Sinha",
+      image: "./9.jpeg",
+    },
+    {
+      title: "A Century Between Us",
+      author: "Gayatri Chandrasekharan",
+      image: "./10.jpeg",
+    },
+    {
+      title: "The Tiger That Crashed My Wedding",
+      author: "Pranav Mishra",
+      image: "./11.jpeg",
+    },
+    {
+      title: "Sun Sakeena",
+      author: "Saadat Hasan Manto",
+      image: "./12.jpeg",
+    },
+  ];
+
   return (
     <div className="">
       <Header />
@@ -116,6 +186,119 @@ export default function Home() {
               <p className="step-desc">{step.description}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="gigs-section">
+        <h2 className="gigs-title">Active Gigs</h2>
+        <p className="gigs-subtitle">
+          Browse current projects posted by authors looking for professional
+          book services
+        </p>
+        <div className="gigs-grid">
+          {gigs.map((gig, idx) => (
+            <div
+              key={idx}
+              className={`gig-card ${idx === 1 ? "featured" : ""}`}
+            >
+              <div className="gig-top">
+                <span className="gig-tag">{gig.category}</span>
+                <span className="gig-rating">⭐ {gig.rating}</span>
+              </div>
+              <h3 className="gig-title">{gig.title}</h3>
+              <p className="gig-author">👤 by {gig.author}</p>
+              <p className="gig-desc">{gig.description}</p>
+              <div className="gig-meta">
+                <span>⏱ {gig.duration}</span>
+                <span>{gig.proposals} proposals</span>
+              </div>
+              <div className="gig-bottom">
+                <span className="gig-price">{gig.price}</span>
+                <button className="gig-btn">Apply Now</button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="view-btn">
+          <button>View All Gigs</button>
+        </div>
+      </div>
+
+      <div className="sniper-cta">
+        <div className="sniper-cta-left">
+          <h2>Become a sniper and start earning</h2>
+          <p className="subtext">
+            Monetize your book-related expertise as a side hustle
+          </p>
+          <ul className="sniper-list">
+            <li>✅&nbsp;&nbsp; Choose a gig that stands out</li>
+            <li>✅ &nbsp;&nbsp;Get noticed with professional portfolios</li>
+            <li>
+              ✅&nbsp;&nbsp; Develop a freelance business around your
+              book-related talents
+            </li>
+          </ul>
+          <button className="yellow-btn">Be a Sniper</button>
+        </div>
+        <div className="sniper-cta-right">
+          <h3>Ready to get started?</h3>
+          <p>
+            Join thousands of book service providers already earning on
+            BookSnipers
+          </p>
+          <div className="sniper-stats">
+            <div>
+              <h4>500+</h4>
+              <p>Active Freelancers</p>
+            </div>
+            <div>
+              <h4>95%</h4>
+              <p>Order Completion</p>
+            </div>
+            <div>
+              <h4>4.9⭐</h4>
+              <p>Average Rating</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="projects-section">
+        <h2 className="projects-title">How Far We Have Come</h2>
+        <p className="projects-subtitle">
+          Our snipers have delivered exceptional results for authors across
+          genres. See some of our recent cover design projects.
+        </p>
+        <div className="projects-grid">
+          {projects.map((item, idx) => (
+            <div className="project-card" key={idx}>
+              <img
+                src={item.image}
+                alt={item.title}
+                className="project-image"
+              />
+              <h3 className="project-name">{item.title}</h3>
+              <p className="project-author">by {item.author}</p>
+              <span className="project-tag">Cover Design</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="stats-section">
+        <div className="stat-box">
+          <div className="stat">
+            <h3>500+</h3>
+            <p>Projects Completed</p>
+          </div>
+          <div className="stat">
+            <h3>98%</h3>
+            <p>Client Satisfaction</p>
+          </div>
+          <div className="stat">
+            <h3>50+</h3>
+            <p>Expert Snipers</p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --themeColor: hsl(46.63deg 95.63% 64.12%);
+  --themeHoverColor: rgb(245 158 11);
 }
 
 /* @media (prefers-color-scheme: dark) {
