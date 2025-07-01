@@ -1,95 +1,123 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import "./page.css";
+import Header from "./components/header/page";
+import Banner from "./components/banner/page";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const categories = [
+    {
+      name: "Book Trailers",
+      icon: "🎥",
+      image: "./1.jpeg",
+      highlight: true,
+    },
+    {
+      name: "Editing & Proofreading",
+      icon: "🖊️",
+      image: "./2.jpeg",
+    },
+    {
+      name: "Cover Design",
+      icon: "🎨",
+      image: "./3.jpeg",
+    },
+    {
+      name: "Book Marketing",
+      icon: "📈",
+      image: "./4.jpeg",
+    },
+    {
+      name: "Formatting",
+      icon: "📄",
+      image: "./5.jpeg",
+    },
+    {
+      name: "Translation",
+      icon: "🌐",
+      image: "./6.jpeg",
+    },
+    {
+      name: "Ghost Writing",
+      icon: "⚡",
+      image: "./7.jpeg",
+    },
+    {
+      name: "Beta Reading",
+      icon: "👤",
+      image: "./8.jpeg",
+    },
+  ];
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const steps = [
+    {
+      icon: "👥",
+      title: "Sales Team Connects",
+      description:
+        "Our sales representatives like Tanvi reach out to authors who need book services, identifying their specific requirements.",
+    },
+    {
+      icon: "📄",
+      title: "Author Posts Gig",
+      description:
+        "Authors like Ratna Jyoti post their project details, budget, and timeline on BookSnipers platform.",
+    },
+    {
+      icon: "👥",
+      title: "Service Providers Apply",
+      description:
+        "Qualified professionals review the gig and submit proposals with their portfolio and pricing.",
+    },
+    {
+      icon: "✅",
+      title: "Project Completion",
+      description:
+        "Author selects the best provider, work gets completed, and everyone gets paid securely.",
+    },
+  ];
+
+  return (
+    <div className="">
+      <Header />
+      <Banner />
+
+      <div className="category-section">
+        <h2 className="category-title">Explore by category</h2>
+        <div className="category-grid">
+          {categories.map((cat, idx) => (
+            <div key={idx} className="category-card">
+              <div
+                className="category-image"
+                style={{ backgroundImage: `url(${cat.image})` }}
+              >
+                <span className="category-icon">{cat.icon}</span>
+              </div>
+              <div
+                className={`category-label ${cat.highlight ? "highlight" : ""}`}
+              >
+                {cat.name}
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      <div className="how-it-works">
+        <h2 className="how-title">How BookSnipers Works</h2>
+        <p className="how-subtitle">
+          Our precision approach ensures authors get connected with the right
+          service providers for their specific needs
+        </p>
+        <div className="how-steps">
+          {steps.map((step, idx) => (
+            <div key={idx} className="step-card">
+              <div className="step-icon">{step.icon}</div>
+              <div className="step-number">{idx + 1}</div>
+              <h3 className="step-title">{step.title}</h3>
+              <p className="step-desc">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
