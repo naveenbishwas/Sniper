@@ -1,7 +1,3 @@
-body {
-  padding-bottom: 100px;
-}
-
 .category-section {
   padding: 60px 20px;
   background-color: var(--background);
@@ -581,6 +577,7 @@ body {
     flex-wrap: unset;
     gap: 30px;
     padding: 30px 20px;
+    border-radius: unset;
   }
 
   .stat p {
@@ -589,5 +586,128 @@ body {
 
   .stat h3 {
     font-size: 1.6rem;
+  }
+}
+
+.snipers-support-section {
+  background: linear-gradient(to right, #0c0e12, #111827);
+  padding: 100px 20px;
+  text-align: center;
+  color: #fff;
+  margin-top: 8%;
+}
+
+.snipers-icon {
+  background-color: var(--themeColor);
+  padding: 8px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  width: 80px;
+  height: 80px;
+}
+
+#logo-icon {
+  stroke: #000;
+  width: 40px;
+  height: 40px;
+}
+
+.snipers-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.snipers-desc {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.snipers-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.snipers-btn {
+  background-color: #ffd54f;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.snipers-btn:hover {
+  background-color: #fbc02d;
+}
+
+.snipers-trust {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: #94a3b8;
+}
+
+.snipers-avatars {
+  display: flex;
+  align-items: center;
+  gap: -10px;
+  margin-left: 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-left: -8px;
+  display: inline-block;
+}
+
+.avatar.yellow {
+  background: #ffd54f;
+}
+
+.avatar.orange {
+  background: #f59e0b;
+}
+
+.avatar.dark {
+  background: #1e293b;
+}
+
+.avatar.number {
+  background: #ffd54f;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .snipers-title {
+    font-size: 1.8rem;
+  }
+
+  .snipers-desc {
+    font-size: 1rem;
+  }
+
+  .snipers-cta {
+    gap: 20px;
   }
 }

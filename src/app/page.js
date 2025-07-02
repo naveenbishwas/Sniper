@@ -2,6 +2,7 @@ import Image from "next/image";
 import "./page.css";
 import Header from "./components/header/page";
 import Banner from "./components/banner/page";
+import Footer from "./components/footer/page";
 
 export default function Home() {
   const categories = [
@@ -301,6 +302,50 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <div className="snipers-support-section">
+        <div className="snipers-icon">
+          <svg
+            id="logo-icon"
+            class="header__logo"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#f4c200"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+        </div>
+
+        <h2 className="snipers-title">Our Snipers Have Got You</h2>
+        <p className="snipers-desc">
+          Join thousands of authors who trust BookSnipers for their publishing
+          needs. From cover design to marketing campaigns, our expert snipers
+          deliver results with precision.
+        </p>
+
+        <div className="snipers-cta">
+          <button className="snipers-btn">Join Us</button>
+          <div className="snipers-trust">
+            <p>Trusted by 10,000+ authors</p>
+            <div className="snipers-avatars">
+              <div className="avatar yellow"></div>
+              <div className="avatar orange"></div>
+              <div className="avatar dark"></div>
+              <div className="avatar number">+10k</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 }
