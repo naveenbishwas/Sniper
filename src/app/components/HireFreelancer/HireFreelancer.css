@@ -1,0 +1,107 @@
+/* Basic layout */
+.hiring-page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  color: #333;
+}
+
+/* Headings */
+h3 {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solidrgb(17, 17, 17) c;
+  transition: 0.3s;
+  background-color: #fff;
+  color: #000;
+}
+
+input[type="text"]:focus {
+  border-color: #6c63ff;
+  outline: none;
+}
+
+/* Option Buttons Wrapper */
+.option-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Radio options */
+.option {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.option:hover {
+  border-color: #6c63ff;
+  background-color: #f0f0ff;
+}
+
+.option input[type="radio"] {
+  display: none;
+}
+
+/* Selected state */
+.option.selected {
+  border: 2px solid #6c63ff;
+  background-color: #eceaff;
+}
+
+/* CTA Button */
+.next {
+  padding: 12px 25px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next:hover {
+  background-color: #574dd0;
+}
+
+/* Response section */
+.response,
+.be-content {
+  margin-top: 40px;
+  text-align: center;
+  background-color: #f0f0ff;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #444;
+  border: 1px solid #d1ceff;
+}
+
+.question {
+  text-align: center;
+}
+
+.next-btn {
+  display: flex;
+  justify-content: center;
+}

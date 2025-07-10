@@ -3,6 +3,9 @@ import "./page.css";
 import Header from "./components/header/page";
 import Banner from "./components/banner/page";
 import Footer from "./components/footer/page";
+import { useAuth } from "@/context/AuthContext";
+import Signup from "./components/signup/page";
+import GigsPage from "./components/gigsPage/page";
 
 export default function Home() {
   const categories = [
@@ -147,7 +150,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="">
+    <div className="main-page">
       <Header />
       <Banner />
 
@@ -307,16 +310,16 @@ export default function Home() {
         <div className="snipers-icon">
           <svg
             id="logo-icon"
-            class="header__logo"
+            className="header__logo"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="#f4c200"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <circle cx="12" cy="12" r="10"></circle>
             <circle cx="12" cy="12" r="6"></circle>

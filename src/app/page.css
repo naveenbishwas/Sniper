@@ -571,6 +571,10 @@
   color: #607d8b;
 }
 
+.main-page {
+  max-width: 100% !important;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .stat-box {
