@@ -97,7 +97,7 @@ export default function LoginClient() {
         </button>
 
         <p className="signup-link">
-          Don’t have an account? <a href="/components/signup">Sign up</a>
+          Dont have an account? <a href="/components/signup">Sign up</a>
         </p>
         <p className="forget-password-link">
           <a href="/components/forgetPassword">Forget Password?</a>
