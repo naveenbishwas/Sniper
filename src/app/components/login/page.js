@@ -115,7 +115,7 @@
 // }
 // app/components/login/page.js
 import { Suspense } from "react";
-import LoginClient from "./LoginClient"; // Rename your login UI to LoginClient.jsx
+import LoginClient from "./loginClient";
 
 export default function LoginPageWrapper() {
   return (
