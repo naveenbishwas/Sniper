@@ -18,10 +18,16 @@ export default function Header() {
       </div>
 
       <div className="header__right">
-        <Link href="/components/signup" className="header__signin">
+        <Link
+          href="/components/signup?role=beSniper"
+          className="header__signin"
+        >
           Hire a Freelancer
         </Link>
-        <Link href="/components/signup" className="header__join">
+        <Link
+          href="/components/signup?role=HireFreelancer"
+          className="header__join"
+        >
           Be a Freelancer
         </Link>
       </div>
