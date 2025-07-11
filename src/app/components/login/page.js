@@ -119,7 +119,7 @@ import LoginClient from "./loginClient";
 
 export default function LoginPageWrapper() {
   return (
-    <Suspense fallback={<p>Loading login...</p>}>
+    <Suspense fallback={<p>Loadings login...</p>}>
       <LoginClient />
     </Suspense>
   );

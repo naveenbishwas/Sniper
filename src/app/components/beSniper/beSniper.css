@@ -1,5 +1,4 @@
-/* Basic layout */
-.sniper-page {
+/* Basic layout .sniper-page {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
   padding: 20px;
   max-width: 500px;
@@ -7,7 +6,6 @@
   color: #333;
 }
 
-/* Headings */
 h3 {
   font-size: 20px;
   margin-top: 30px;
@@ -31,7 +29,6 @@ input[type="text"]:focus {
   outline: none;
 }
 
-/* Option Buttons Wrapper */
 .option-buttons {
   display: flex;
   flex-direction: column;
@@ -39,7 +36,6 @@ input[type="text"]:focus {
   margin-bottom: 30px;
 }
 
-/* Radio options */
 .option {
   display: flex;
   align-items: center;
@@ -61,13 +57,11 @@ input[type="text"]:focus {
   display: none;
 }
 
-/* Selected state */
 .option.selected {
   border: 2px solid #6c63ff;
   background-color: #eceaff;
 }
 
-/* CTA Button */
 .next {
   padding: 12px 25px;
   background-color: #6c63ff;
@@ -83,7 +77,6 @@ input[type="text"]:focus {
   background-color: #574dd0;
 }
 
-/* Response section */
 .response,
 .be-content {
   margin-top: 40px;
@@ -104,4 +97,154 @@ input[type="text"]:focus {
 .next-btn {
   display: flex;
   justify-content: center;
+} */
+
+/* Container */
+.sniper-page {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px 20px;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+.question {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Option buttons (radio style) */
+.option-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  background-color: #e8f0ff;
+}
+
+.option.selected {
+  background-color: #e0edff;
+  border-color: #0070f3;
+}
+
+.option input {
+  display: none;
+}
+
+.option span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Form fields */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-fields input,
+.form-fields textarea {
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
+  color: #000;
+}
+
+.form-fields input:focus,
+.form-fields textarea:focus {
+  border-color: #0070f3;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Next button */
+.next-btn {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.next-btn .next {
+  padding: 12px 30px;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.next-btn .next:hover {
+  background-color: #0056c7;
+}
+
+/* Mobile responsive */
+@media (max-width: 500px) {
+  .option-buttons {
+    gap: 12px;
+  }
+
+  .option {
+    padding: 12px 14px;
+  }
+
+  .next-btn .next {
+    width: 100%;
+  }
+
+  .form-fields input,
+  .form-fields textarea {
+    font-size: 14px;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.input-label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+.private-note {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+  font-style: italic;
 }
