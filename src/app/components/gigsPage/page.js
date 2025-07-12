@@ -1,5 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import "./gigsPage.css";
+import { getAuth } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 const gigs = [
   {
@@ -24,31 +28,67 @@ const gigs = [
     price: "$200 - $400",
     rating: "4.9",
   },
-  {
-    category: "Editing",
-    title: "Comprehensive Book Editing",
-    author: "Vikram Singh",
-    description:
-      "Need thorough editing for my 80,000-word historical fiction manuscript...",
-    duration: "10 days",
-    proposals: "5",
-    price: "$600 - $800",
-    rating: "4.7",
-  },
-  {
-    category: "Marketing",
-    title: "Social Media Marketing Campaign",
-    author: "Priya Mehta",
-    description:
-      "Create and execute a 30-day social media marketing strategy for book launch...",
-    duration: "6 days",
-    proposals: "10",
-    price: "$300 - $500",
-    rating: "4.6",
-  },
+  // {
+  //   category: "Editing",
+  //   title: "Comprehensive Book Editing",
+  //   author: "Vikram Singh",
+  //   description:
+  //     "Need thorough editing for my 80,000-word historical fiction manuscript...",
+  //   duration: "10 days",
+  //   proposals: "5",
+  //   price: "$600 - $800",
+  //   rating: "4.7",
+  // },
+  // {
+  //   category: "Marketing",
+  //   title: "Social Media Marketing Campaign",
+  //   author: "Priya Mehta",
+  //   description:
+  //     "Create and execute a 30-day social media marketing strategy for book launch...",
+  //   duration: "6 days",
+  //   proposals: "10",
+  //   price: "$300 - $500",
+  //   rating: "4.6",
+  // },
 ];
 
 const GigsPage = () => {
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+
+        if (!currentUser) {
+          setError("User not logged in.");
+          setLoading(false);
+          return;
+        }
+
+        const db = getFirestore();
+        const docRef = doc(db, "users", currentUser.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setUserData(docSnap.data());
+        } else {
+          setError("No data found for this user.");
+        }
+      } catch (err) {
+        setError("Failed to fetch user data.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <>
       <div className="gigs-grid" id="gigsPage">
@@ -71,6 +111,19 @@ const GigsPage = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div>
+        <h2>👋 Welcome, {userData?.name || "User"}!</h2>
+        <p>
+          <strong>Email:</strong> {userData?.email}
+        </p>
+        <p>
+          <strong>Phone Number:</strong> {userData?.phone || "N/A"}
+        </p>
+        <p>
+          <strong>Role:</strong> {userData?.role || "N/A"}
+        </p>
       </div>
     </>
   );
