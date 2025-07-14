@@ -248,3 +248,68 @@ textarea {
   margin-left: 6px;
   font-style: italic;
 }
+.input-error {
+  border: 2px solid red;
+  outline: none;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.post-gig {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.post-gig .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.post-gig label {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.post-gig input,
+.post-gig textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
+  color: #000;
+}
+
+.input-error {
+  border-color: red !important;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.input-error {
+  border: 2px solid red;
+  outline: none;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.next-prev-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}

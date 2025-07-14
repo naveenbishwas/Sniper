@@ -44,3 +44,9 @@ a {
     color-scheme: dark;
   }
 }
+
+.next-prev-btn {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
