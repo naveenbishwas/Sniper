@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import "./beSniper.css";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase"; // Adjust path to your Firebase config
+import { db } from "@/lib/firebase";
 
 const BeSniper = () => {
   const [step, setStep] = useState(1);
@@ -11,10 +11,10 @@ const BeSniper = () => {
   const [experience, setExperience] = useState("");
   const [howDoneBefore, setHowDoneBefore] = useState("");
   const [errors, setErrors] = useState({});
+  const [successMsg, setSuccessMsg] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
-    // code: "",
     bio: "",
     language: "",
     occupation: "",
@@ -29,8 +29,9 @@ const BeSniper = () => {
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" }); // Clear error when user types
+    setErrors({ ...errors, [e.target.name]: "" });
   };
+
   const handleMainSubmit = () => {
     if (!freelancerType) {
       setErrors((prev) => ({
@@ -40,7 +41,6 @@ const BeSniper = () => {
       return;
     }
 
-    // Clear any previous freelancerType error before proceeding
     setErrors((prev) => {
       const { freelancerType, ...rest } = prev;
       return rest;
@@ -50,25 +50,16 @@ const BeSniper = () => {
   };
 
   const handlePeopleStep = () => {
-    const newErrors = {};
-
-    if (!experience.trim()) {
-      newErrors.experience = "Please enter your work experience.";
-    } else if (isNaN(experience) || Number(experience) < 0) {
-      newErrors.experience = "Experience must be a valid number.";
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors((prev) => ({ ...prev, ...newErrors }));
+    if (!experience.trim() || isNaN(experience) || Number(experience) < 0) {
+      setErrors((prev) => ({
+        ...prev,
+        experience: "Experience must be a valid number.",
+      }));
       return;
     }
 
-    setErrors((prev) => ({ ...prev, experience: "" })); // Clear any old error
+    setErrors((prev) => ({ ...prev, experience: "" }));
     setStep(3);
-  };
-
-  const backPeopleStep = () => {
-    setStep((prev) => Math.max(prev - 1, 1));
   };
 
   const handleDoneBeforeStep = () => {
@@ -80,7 +71,6 @@ const BeSniper = () => {
       return;
     }
 
-    // Clear error before going to next step
     setErrors((prev) => {
       const { howDoneBefore, ...rest } = prev;
       return rest;
@@ -89,11 +79,10 @@ const BeSniper = () => {
     setStep(4);
   };
 
-  const handleDetailsStep = () => {
+  const handleDetailsSubmit = async () => {
     const newErrors = {};
     const {
       name,
-      // code,
       bio,
       language,
       occupation,
@@ -108,16 +97,19 @@ const BeSniper = () => {
       newErrors.name = "Full Name must be at least 3 letters.";
     else if (!/^[A-Za-z\s]+$/.test(name))
       newErrors.name = "Full Name can only contain letters and spaces.";
-    // if (!code.trim()) newErrors.code = "Freelancer Code is required.";
+
     if (!bio.trim() || bio.length < 20 || /[\d]{10}|@|\+91/.test(bio))
       newErrors.bio = "Bio must be 20+ characters and without contact info.";
+
     if (!language.trim()) newErrors.language = "Languages Known is required.";
     if (!occupation.trim()) newErrors.occupation = "Occupation is required.";
     if (!skills.trim()) newErrors.skills = "Skills are required.";
+
     if (!link.trim() || !isValidURL(link))
       newErrors.link = "Enter valid Portfolio Link.";
     if (!work.trim() || !isValidURL(work))
       newErrors.work = "Enter valid Work Link.";
+
     if (!email.trim() || !isValidEmail(email))
       newErrors.email = "Enter valid Email.";
     if (!isValidPhone(phone)) newErrors.phone = "Phone must be 10 digits.";
@@ -126,84 +118,17 @@ const BeSniper = () => {
       setErrors(newErrors);
       return;
     }
-    setStep(5);
-  };
-
-  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isValidPhone = (phone) => /^[0-9]{10,15}$/.test(phone);
-  const isValidURL = (url) =>
-    /^(https?:\/\/)?([\w\d\-]+\.){1,}([a-zA-Z]{2,})(\/.*)?$/.test(url);
-
-  const handleSubmitForm = async () => {
-    const {
-      name,
-      bio,
-      language,
-      occupation,
-      skills,
-      link,
-      work,
-      email,
-      phone,
-      gigTopic,
-      gigDescription,
-    } = formData;
-
-    const newErrors = {};
-
-    if (!name.trim() || name.length < 3) {
-      newErrors.name = "Full Name must be at least 3 letters.";
-    } else if (!/^[A-Za-z\s]+$/.test(name)) {
-      newErrors.name = "Full Name can only contain letters and spaces.";
-    }
-
-    if (!bio.trim() || bio.length < 20 || /[\d]{10}|@|\+91/.test(bio)) {
-      newErrors.bio = "Bio must be 20+ characters and without contact info.";
-    }
-
-    if (!language.trim()) newErrors.language = "Languages Known is required.";
-    if (!occupation.trim()) newErrors.occupation = "Occupation is required.";
-    if (!skills.trim()) newErrors.skills = "Skills are required.";
-    if (!link.trim() || !isValidURL(link))
-      newErrors.link = "Enter valid Portfolio Link.";
-    if (!work.trim() || !isValidURL(work))
-      newErrors.work = "Enter valid Work Link.";
-    if (!email.trim() || !isValidEmail(email))
-      newErrors.email = "Enter valid Email.";
-    if (!isValidPhone(phone))
-      newErrors.phone = "Phone must be 10 to 15 digits.";
-    if (!gigTopic || gigTopic.trim().length < 3)
-      newErrors.gigTopic = "Topic must be at least 3 characters.";
-    if (!gigDescription || gigDescription.trim().length < 10)
-      newErrors.gigDescription = "Please describe your gig in more detail.";
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    const submission = {
-      freelancerType,
-      experience,
-      howDoneBefore,
-      name,
-      bio,
-      language,
-      occupation,
-      skills,
-      link,
-      work,
-      email,
-      phone,
-      gigTopic,
-      gigDescription,
-      createdAt: new Date().toISOString(),
-    };
 
     try {
-      await addDoc(collection(db, "freelancer-submissions"), submission);
-      alert("✅ Form submitted successfully!");
+      await addDoc(collection(db, "be-sniper-forms"), {
+        freelancerType,
+        experience,
+        howDoneBefore,
+        ...formData,
+        createdAt: new Date().toISOString(),
+      });
 
+      setSuccessMsg("✅ Form submitted successfully!");
       setStep(1);
       setFreelancerType("");
       setExperience("");
@@ -221,12 +146,16 @@ const BeSniper = () => {
         gigTopic: "",
         gigDescription: "",
       });
-      setErrors({});
     } catch (error) {
-      console.error("❌ Firebase error:", error);
-      alert("Submission failed. Please try again.");
+      alert("❌ Submission failed. Try again.");
+      console.error("Firebase error:", error);
     }
   };
+
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isValidPhone = (phone) => /^[0-9]{10,15}$/.test(phone);
+  const isValidURL = (url) =>
+    /^(https?:\/\/)?([\w\d\-]+\.){1,}([a-zA-Z]{2,})(\/.*)?$/.test(url);
 
   return (
     <div className="sniper-page">
@@ -261,7 +190,6 @@ const BeSniper = () => {
           {errors.freelancerType && (
             <p className="error-text">{errors.freelancerType}</p>
           )}
-
           <div className="next-btn">
             <button className="next" onClick={handleMainSubmit}>
               Next
@@ -290,16 +218,12 @@ const BeSniper = () => {
             )}
           </div>
           <div className="next-prev-btn">
-            <div className="next-btn">
-              <button className="next" onClick={backPeopleStep}>
-                Prev
-              </button>
-            </div>
-            <div className="next-btn">
-              <button className="next" onClick={handlePeopleStep}>
-                Next
-              </button>
-            </div>
+            <button className="next" onClick={() => setStep(1)}>
+              Prev
+            </button>
+            <button className="next" onClick={handlePeopleStep}>
+              Next
+            </button>
           </div>
         </div>
       )}
@@ -307,19 +231,15 @@ const BeSniper = () => {
       {step === 3 && (
         <div className="done">
           <h3 className="question">Have you done freelance work before?</h3>
-          <div
-            className={`option-buttons ${
-              errors.howDoneBefore ? "input-error" : ""
-            }`}
-          >
+          <div className="option-buttons">
             {[
               "Getting Started",
               "Done Offline Before",
               "Done Online Before",
               "Both Online & Offline",
-            ].map((label, index) => (
+            ].map((label) => (
               <label
-                key={index}
+                key={label}
                 className={`option ${
                   howDoneBefore === label ? "selected" : ""
                 }`}
@@ -340,18 +260,13 @@ const BeSniper = () => {
           {errors.howDoneBefore && (
             <p className="error-text">{errors.howDoneBefore}</p>
           )}
-
           <div className="next-prev-btn">
-            <div className="next-btn">
-              <button className="next" onClick={backPeopleStep}>
-                Prev
-              </button>
-            </div>
-            <div className="next-btn">
-              <button className="next" onClick={handleDoneBeforeStep}>
-                Next
-              </button>
-            </div>
+            <button className="next" onClick={() => setStep(2)}>
+              Prev
+            </button>
+            <button className="next" onClick={handleDoneBeforeStep}>
+              Next
+            </button>
           </div>
         </div>
       )}
@@ -359,10 +274,10 @@ const BeSniper = () => {
       {step === 4 && (
         <div className="user-details-form">
           <h3 className="question">Please fill in your details</h3>
+          {successMsg && <p className="success-text">{successMsg}</p>}
           <div className="form-fields">
             {[
               { name: "name", label: "Full Name *Private" },
-              // { name: "code", label: "Freelancer code *Public" },
               { name: "bio", label: "Bio *No contact info" },
               { name: "language", label: "Languages Known" },
               { name: "occupation", label: "Occupation" },
@@ -388,62 +303,11 @@ const BeSniper = () => {
               </div>
             ))}
           </div>
-
           <div className="next-prev-btn">
-            <div className="next-btn">
-              <button className="next" onClick={() => setStep(3)}>
-                Prev
-              </button>
-            </div>
-            <div className="next-btn">
-              <button className="next" onClick={handleDetailsStep}>
-                Next
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 5 && (
-        <div className="post-gig">
-          <h3 className="question">Post Your Gig</h3>
-
-          <div className="form-group">
-            <label htmlFor="gigTopic">Topic</label>
-            <input
-              type="text"
-              id="gigTopic"
-              name="gigTopic"
-              placeholder="Enter topic"
-              value={formData.gigTopic || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, gigTopic: e.target.value })
-              }
-              className={errors.gigTopic ? "input-error" : ""}
-            />
-            {errors.gigTopic && <p className="error-text">{errors.gigTopic}</p>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="gigDescription">Describe More</label>
-            <textarea
-              id="gigDescription"
-              name="gigDescription"
-              rows="4"
-              placeholder="Write details..."
-              value={formData.gigDescription || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, gigDescription: e.target.value })
-              }
-              className={errors.gigDescription ? "input-error" : ""}
-            ></textarea>
-            {errors.gigDescription && (
-              <p className="error-text">{errors.gigDescription}</p>
-            )}
-          </div>
-
-          <div className="next-btn">
-            <button className="next" onClick={handleSubmitForm}>
+            <button className="next" onClick={() => setStep(3)}>
+              Prev
+            </button>
+            <button className="next" onClick={handleDetailsSubmit}>
               Submit
             </button>
           </div>

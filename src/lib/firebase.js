@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAHtsoGggdUeZJdGj5cgAmcdPvHCR2QjAE",
-  authDomain: "sniper-app-c8fb5.firebaseapp.com",
-  projectId: "sniper-app-c8fb5",
-  storageBucket: "sniper-app-c8fb5.appspot.com", // ✅ fixed .app → .appspot.com
-  messagingSenderId: "645350161133",
-  appId: "1:645350161133:web:a339ed9e42fb684e696ae4",
-  measurementId: "G-KT9NRN13N6",
+  apiKey: "AIzaSyD0rkRpGc7CaZkokxbj7kOVmZunFT6pq2s",
+  authDomain: "sniper-85a51.firebaseapp.com",
+  projectId: "sniper-85a51",
+  storageBucket: "sniper-85a51.firebasestorage.app",
+  messagingSenderId: "502797706138",
+  appId: "1:502797706138:web:ba0b4e75c16ce1e6549023",
+  measurementId: "G-56553T4KR2",
 };
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);

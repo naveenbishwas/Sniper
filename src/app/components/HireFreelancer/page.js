@@ -313,9 +313,98 @@ const HireFreelancer = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmitForm = () => {
-    if (!validateForm()) return;
-    sendToFirebase(formData);
+  const handleSubmitForm = async () => {
+    const {
+      name,
+      bio,
+      language,
+      occupation,
+      skills,
+      link,
+      work,
+      email,
+      phone,
+      gigTopic,
+      gigDescription,
+    } = formData;
+
+    const newErrors = {};
+
+    if (!name.trim() || name.length < 3) {
+      newErrors.name = "Full Name must be at least 3 letters.";
+    } else if (!/^[A-Za-z\s]+$/.test(name)) {
+      newErrors.name = "Full Name can only contain letters and spaces.";
+    }
+
+    if (!bio.trim() || bio.length < 20 || /[\d]{10}|@|\+91/.test(bio)) {
+      newErrors.bio = "Bio must be 20+ characters and without contact info.";
+    }
+
+    if (!language.trim()) newErrors.language = "Languages Known is required.";
+    if (!occupation.trim()) newErrors.occupation = "Occupation is required.";
+    if (!skills.trim()) newErrors.skills = "Skills are required.";
+    if (!link.trim() || !isValidURL(link))
+      newErrors.link = "Enter valid Portfolio Link.";
+    if (!work.trim() || !isValidURL(work))
+      newErrors.work = "Enter valid Work Link.";
+    if (!email.trim() || !isValidEmail(email))
+      newErrors.email = "Enter valid Email.";
+    if (!isValidPhone(phone))
+      newErrors.phone = "Phone must be 10 to 15 digits.";
+    if (!gigTopic || gigTopic.trim().length < 3)
+      newErrors.gigTopic = "Topic must be at least 3 characters.";
+    if (!gigDescription || gigDescription.trim().length < 10)
+      newErrors.gigDescription = "Please describe your gig in more detail.";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    const submission = {
+      freelancerType,
+      experience,
+      howDoneBefore,
+      name,
+      bio,
+      language,
+      occupation,
+      skills,
+      link,
+      work,
+      email,
+      phone,
+      gigTopic,
+      gigDescription,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      await addDoc(collection(db, "freelancer-submissions"), submission);
+      alert("✅ Form submitted successfully!");
+
+      setStep(1);
+      setFreelancerType("");
+      setExperience("");
+      setHowDoneBefore("");
+      setFormData({
+        name: "",
+        bio: "",
+        language: "",
+        occupation: "",
+        skills: "",
+        link: "",
+        work: "",
+        email: "",
+        phone: "",
+        gigTopic: "",
+        gigDescription: "",
+      });
+      setErrors({});
+    } catch (error) {
+      console.error("❌ Firebase error:", error);
+      alert("Submission failed. Please try again.");
+    }
   };
 
   const sendToFirebase = async (data) => {
@@ -468,6 +557,52 @@ const HireFreelancer = () => {
             >
               Previous
             </button>
+            <button className="next" onClick={handleSubmitForm}>
+              Submit
+            </button>
+          </div>
+        </div>
+      )}
+
+      {step === 4 && (
+        <div className="post-gig">
+          <h3 className="question">Post Your Gig</h3>
+
+          <div className="form-group">
+            <label htmlFor="gigTopic">Topic</label>
+            <input
+              type="text"
+              id="gigTopic"
+              name="gigTopic"
+              placeholder="Enter topic"
+              value={formData.gigTopic || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, gigTopic: e.target.value })
+              }
+              className={errors.gigTopic ? "input-error" : ""}
+            />
+            {errors.gigTopic && <p className="error-text">{errors.gigTopic}</p>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="gigDescription">Describe More</label>
+            <textarea
+              id="gigDescription"
+              name="gigDescription"
+              rows="4"
+              placeholder="Write details..."
+              value={formData.gigDescription || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, gigDescription: e.target.value })
+              }
+              className={errors.gigDescription ? "input-error" : ""}
+            ></textarea>
+            {errors.gigDescription && (
+              <p className="error-text">{errors.gigDescription}</p>
+            )}
+          </div>
+
+          <div className="next-btn">
             <button className="next" onClick={handleSubmitForm}>
               Submit
             </button>

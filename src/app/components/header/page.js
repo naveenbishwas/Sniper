@@ -19,10 +19,10 @@ export default function Header() {
 
       <div className="header__right">
         <Link href="/signup?role=beSniper" className="header__signin">
-          Hire a Freelancer
+          Be a Freelancer
         </Link>
         <Link href="/signup?role=HireFreelancer" className="header__join">
-          Be a Freelancer
+          Hire a Freelancer
         </Link>
       </div>
     </header>
