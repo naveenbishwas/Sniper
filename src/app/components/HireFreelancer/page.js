@@ -8,7 +8,7 @@
 //   const [firstField, setFirstField] = useState("");
 //   const [step, setStep] = useState(1);
 //   const [formData, setFormData] = useState({
-//     name: "",
+//     fullName: "",
 //     email: "",
 //     phone: "",
 //     bio: "",
@@ -17,36 +17,79 @@
 //   });
 
 //   const handleInputChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//     const { name, value } = e.target;
+
+//     // Restrict number fields to digits only
+//     if (name === "phone" || name === "peopleWorking") {
+//       const numericValue = value.replace(/\D/g, "");
+//       setFormData((prev) => ({ ...prev, [name]: numericValue }));
+//     } else if (name === "post") {
+//       // Allow only URL-safe characters
+//       const linkValue = value.replace(/[^\w\-.:/?&=#]/g, "");
+//       setFormData((prev) => ({ ...prev, [name]: linkValue }));
+//     } else if (name === "fullName") {
+//       // Allow only letters and spaces
+//       const nameValue = value.replace(/[^A-Za-z\s]/g, "");
+//       setFormData((prev) => ({ ...prev, [name]: nameValue }));
+//     } else {
+//       setFormData((prev) => ({ ...prev, [name]: value }));
+//     }
 //   };
 
 //   const handleFirstField = () => {
 //     if (!firstField) {
-//       alert("Please select a service type.");
+//       alert("Please select what you plan to hire service for.");
 //       return;
 //     }
-
-//     if (firstField === "personal") {
-//       setStep(3); // go directly to form
-//     } else {
-//       setStep(2); // show how-many-people field
-//     }
+//     setStep(firstField === "personal" ? 3 : 2);
 //   };
 
 //   const handlePeopleStep = () => {
-//     if (!formData.peopleWorking.trim()) {
-//       alert("Please enter how many people work in your company.");
+//     const people = formData.peopleWorking.trim();
+//     if (!people || isNaN(people) || Number(people) <= 0) {
+//       alert("Please enter a valid number of people.");
 //       return;
 //     }
-//     setStep(3); // go to form step
+//     setStep(3);
+//   };
+
+//   const validateForm = () => {
+//     const { fullName, email, phone, bio, post } = formData;
+
+//     if (!fullName.trim() || fullName.length < 3) {
+//       alert("Full Name must be at least 3 letters.");
+//       return false;
+//     }
+//     if (!/^[A-Za-z\s]+$/.test(fullName)) {
+//       alert("Full Name can only contain letters and spaces.");
+//       return false;
+//     }
+
+//     if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) {
+//       alert("Please enter a valid email address.");
+//       return false;
+//     }
+
+//     if (!/^\d{10,15}$/.test(phone)) {
+//       alert("Phone number must be 10–15 digits.");
+//       return false;
+//     }
+
+//     if (!bio.trim() || bio.length < 20) {
+//       alert("Bio must be at least 20 characters.");
+//       return false;
+//     }
+
+//     if (post && !/^https?:\/\/[\w\-.:/?&=#]+$/.test(post)) {
+//       alert("Please enter a valid URL in the Post field.");
+//       return false;
+//     }
+
+//     return true;
 //   };
 
 //   const handleSubmitForm = () => {
-//     const { name, email, phone, bio } = formData;
-//     if (!name || !email || !phone || !bio) {
-//       alert("Please fill in all required fields.");
-//       return;
-//     }
+//     if (!validateForm()) return;
 //     sendToFirebase(formData);
 //   };
 
@@ -59,11 +102,10 @@
 //       });
 
 //       alert("✅ Form submitted successfully!");
-//       // Reset
 //       setStep(1);
 //       setFirstField("");
 //       setFormData({
-//         name: "",
+//         fullName: "",
 //         email: "",
 //         phone: "",
 //         bio: "",
@@ -133,10 +175,11 @@
 //           <div className="form-fields">
 //             <input
 //               type="text"
-//               name="name"
-//               placeholder="Your Name"
-//               value={formData.name}
+//               name="fullName"
+//               placeholder="Full Name"
+//               value={formData.fullName}
 //               onChange={handleInputChange}
+//               required
 //             />
 //             <input
 //               type="email"
@@ -144,6 +187,7 @@
 //               placeholder="Your Email"
 //               value={formData.email}
 //               onChange={handleInputChange}
+//               required
 //             />
 //             <input
 //               type="tel"
@@ -151,17 +195,19 @@
 //               placeholder="Phone Number"
 //               value={formData.phone}
 //               onChange={handleInputChange}
+//               required
 //             />
 //             <textarea
 //               name="bio"
-//               placeholder="Tell us about yourself"
+//               placeholder="Tell us about yourself (min. 20 characters)"
 //               value={formData.bio}
 //               onChange={handleInputChange}
+//               required
 //             />
 //             <input
 //               type="text"
 //               name="post"
-//               placeholder="Post a gig (Optional)"
+//               placeholder="Post a gig (Optional, add valid URL)"
 //               value={formData.post}
 //               onChange={handleInputChange}
 //             />
@@ -197,77 +243,74 @@ const HireFreelancer = () => {
     post: "",
     peopleWorking: "",
   });
+  const [formErrors, setFormErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Restrict number fields to digits only
     if (name === "phone" || name === "peopleWorking") {
       const numericValue = value.replace(/\D/g, "");
       setFormData((prev) => ({ ...prev, [name]: numericValue }));
     } else if (name === "post") {
-      // Allow only URL-safe characters
       const linkValue = value.replace(/[^\w\-.:/?&=#]/g, "");
       setFormData((prev) => ({ ...prev, [name]: linkValue }));
     } else if (name === "fullName") {
-      // Allow only letters and spaces
       const nameValue = value.replace(/[^A-Za-z\s]/g, "");
       setFormData((prev) => ({ ...prev, [name]: nameValue }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
+
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleFirstField = () => {
     if (!firstField) {
-      alert("Please select what you plan to hire service for.");
+      setFormErrors({ firstField: "Please select a service type." });
       return;
     }
+    setFormErrors({});
     setStep(firstField === "personal" ? 3 : 2);
   };
 
   const handlePeopleStep = () => {
-    const people = formData.peopleWorking.trim();
-    if (!people || isNaN(people) || Number(people) <= 0) {
-      alert("Please enter a valid number of people.");
+    if (!formData.peopleWorking || Number(formData.peopleWorking) <= 0) {
+      setFormErrors({ peopleWorking: "Enter a valid number of people." });
       return;
     }
+    setFormErrors({});
     setStep(3);
   };
 
   const validateForm = () => {
     const { fullName, email, phone, bio, post } = formData;
+    let errors = {};
 
     if (!fullName.trim() || fullName.length < 3) {
-      alert("Full Name must be at least 3 letters.");
-      return false;
+      errors.fullName = "Full Name must be at least 3 letters.";
     }
     if (!/^[A-Za-z\s]+$/.test(fullName)) {
-      alert("Full Name can only contain letters and spaces.");
-      return false;
+      errors.fullName = "Only letters and spaces allowed.";
     }
 
     if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) {
-      alert("Please enter a valid email address.");
-      return false;
+      errors.email = "Enter a valid email address.";
     }
 
     if (!/^\d{10,15}$/.test(phone)) {
-      alert("Phone number must be 10–15 digits.");
-      return false;
+      errors.phone = "Phone number must be 10–15 digits.";
     }
 
     if (!bio.trim() || bio.length < 20) {
-      alert("Bio must be at least 20 characters.");
-      return false;
+      errors.bio = "Bio must be at least 20 characters.";
     }
 
     if (post && !/^https?:\/\/[\w\-.:/?&=#]+$/.test(post)) {
-      alert("Please enter a valid URL in the Post field.");
-      return false;
+      errors.post = "Enter a valid URL.";
     }
 
-    return true;
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmitForm = () => {
@@ -321,7 +364,9 @@ const HireFreelancer = () => {
               </label>
             ))}
           </div>
-
+          {formErrors.firstField && (
+            <p className="error-text">{formErrors.firstField}</p>
+          )}
           <div className="next-btn">
             <button className="next" onClick={handleFirstField}>
               Next
@@ -341,9 +386,15 @@ const HireFreelancer = () => {
               value={formData.peopleWorking}
               onChange={handleInputChange}
             />
+            {formErrors.peopleWorking && (
+              <p className="error-text">{formErrors.peopleWorking}</p>
+            )}
           </div>
 
           <div className="next-btn">
+            <button className="next" onClick={() => setStep(1)}>
+              Previous
+            </button>
             <button className="next" onClick={handlePeopleStep}>
               Next
             </button>
@@ -363,6 +414,10 @@ const HireFreelancer = () => {
               onChange={handleInputChange}
               required
             />
+            {formErrors.fullName && (
+              <p className="error-text">{formErrors.fullName}</p>
+            )}
+
             <input
               type="email"
               name="email"
@@ -371,6 +426,10 @@ const HireFreelancer = () => {
               onChange={handleInputChange}
               required
             />
+            {formErrors.email && (
+              <p className="error-text">{formErrors.email}</p>
+            )}
+
             <input
               type="tel"
               name="phone"
@@ -379,6 +438,10 @@ const HireFreelancer = () => {
               onChange={handleInputChange}
               required
             />
+            {formErrors.phone && (
+              <p className="error-text">{formErrors.phone}</p>
+            )}
+
             <textarea
               name="bio"
               placeholder="Tell us about yourself (min. 20 characters)"
@@ -386,6 +449,8 @@ const HireFreelancer = () => {
               onChange={handleInputChange}
               required
             />
+            {formErrors.bio && <p className="error-text">{formErrors.bio}</p>}
+
             <input
               type="text"
               name="post"
@@ -393,9 +458,16 @@ const HireFreelancer = () => {
               value={formData.post}
               onChange={handleInputChange}
             />
+            {formErrors.post && <p className="error-text">{formErrors.post}</p>}
           </div>
 
           <div className="next-btn">
+            <button
+              className="next"
+              onClick={() => setStep(firstField === "personal" ? 1 : 2)}
+            >
+              Previous
+            </button>
             <button className="next" onClick={handleSubmitForm}>
               Submit
             </button>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import {
   getAuth,
@@ -18,10 +18,21 @@ export default function Signup() {
   const searchParams = useSearchParams();
 
   // Get the role from query params: 'beSniper' or 'HireFreelancer'
-  const role = searchParams.get("role");
-  if (role) {
-    localStorage.setItem("userRole", role);
-  }
+  // const role = searchParams.get("role");
+  // if (role) {
+  //   localStorage.setItem("userRole", role);
+  // }
+  const rawRole = searchParams.get("role");
+  const role = rawRole || localStorage.getItem("userRole") || null;
+
+  useEffect(() => {
+    if (!role) {
+      // Optional: redirect or show an error message
+      router.push("/"); // or show a controlled fallback
+    } else {
+      localStorage.setItem("userRole", role);
+    }
+  }, [role]);
 
   const [showPassword, setShowPassword] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -77,7 +88,6 @@ export default function Signup() {
     setError("");
     try {
       await signInWithPopup(auth, new GoogleAuthProvider());
-
       // Redirect based on role after Google login
       if (role === "beSniper") {
         router.push("/components/beSniper");
@@ -165,7 +175,7 @@ export default function Signup() {
           </button>
 
           <p className="login-link">
-            Already have an account? <a href="/components/login">Login</a>
+            Already have an account? <a href="/login">Login</a>
           </p>
         </form>
       </div>

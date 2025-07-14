@@ -4,7 +4,7 @@ import Header from "./components/header/page";
 import Banner from "./components/banner/page";
 import Footer from "./components/footer/page";
 import { useAuth } from "@/context/AuthContext";
-import Signup from "./components/signup/page";
+import Signup from "./signup/page";
 import GigsPage from "./components/gigsPage/page";
 
 export default function Home() {

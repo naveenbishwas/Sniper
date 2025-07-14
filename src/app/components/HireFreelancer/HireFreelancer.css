@@ -235,6 +235,9 @@ textarea {
 .next-btn {
   text-align: center;
   margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .next {
@@ -249,4 +252,14 @@ textarea {
 
 .next:hover {
   background-color: #005bb5;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+.next-btn .back {
+  margin-right: 10px;
 }
