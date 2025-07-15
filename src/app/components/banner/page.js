@@ -1,5 +1,6 @@
 import Head from "next/head";
 import "./banner.css";
+import Link from "next/link";
 
 export default function Banner() {
   return (
@@ -20,8 +21,12 @@ export default function Banner() {
         </p>
         <div className="sniper-search-section"></div>
         <div className="sniper-buttons">
-          <button className="btn-black">Hire a Sniper</button>
-          <button className="btn-white">Be a Sniper</button>
+          <Link href="/components/gigsPage">
+            <button className="btn-black">Hire a Sniper</button>
+          </Link>
+          <Link href="/components/cardProfile">
+            <button className="btn-white">Be a Sniper</button>
+          </Link>
         </div>
       </div>
     </>
