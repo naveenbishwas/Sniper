@@ -45,18 +45,22 @@
 }
 
 .header__signin:hover {
-  background-color: #f4b300;
-  color: #000;
+  background-color: var(--themeColor);
+  color: var(--background);
 }
 
 .header__join {
-  background-color: #f4b300;
-  color: black;
+  background-color: var(--themeColor);
+  color: var(--background);
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
+}
+
+.header__join:hover {
+  background-color: var(--themeHoverColor);
 }
 
 .header__icon-wrapper {

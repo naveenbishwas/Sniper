@@ -25,9 +25,13 @@
   font-weight: bold;
 }
 
+.footer-logo span {
+  color: var(--themeColor);
+}
+
 .footer-icon {
   background: var(--themeColor);
-  color: #000;
+  color: var(--background);
   border-radius: 6px;
   display: grid;
   place-items: center;
@@ -38,7 +42,7 @@
 .footer-column p {
   font-size: 1rem;
   margin-bottom: 20px;
-  color: #dab520;
+  color: var(--background);
   line-height: 1.5;
   margin-top: 20px;
 }
@@ -47,7 +51,7 @@
   margin-bottom: 20px;
   margin-top: 20px;
   font-size: 1rem;
-  color: #dab520;
+  color: var(--background);
   cursor: pointer;
 }
 
@@ -57,14 +61,14 @@
 }
 
 .footer-contact-icon {
-  background: #1a1a1a;
+  background: var(--background);
   width: 36px;
   height: 36px;
   border-radius: 6px;
   display: grid;
   place-items: center;
   font-size: 1.1rem;
-  color: #facc15;
+  color: var(--themeColor);
   cursor: pointer;
 }
 
@@ -85,7 +89,7 @@
   text-align: center;
   padding-top: 20px;
   font-size: 0.9rem;
-  color: #dab520;
+  color: var(--background);
   margin-top: 40px;
 }
 

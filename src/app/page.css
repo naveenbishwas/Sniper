@@ -64,7 +64,7 @@
 }
 
 .category-label.highlight {
-  color: #f9a825;
+  color: var(--foreground);
 }
 
 /* Responsive Layout */
@@ -137,7 +137,8 @@
 
 .step-icon {
   font-size: 2rem;
-  background-color: var(--themeColor);
+  background-color: var(--background);
+  /* border: 0.5px solid var(--foreground); */
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -147,8 +148,8 @@
 }
 
 .step-number {
-  background: var(--foreground);
-  color: var(--themeColor);
+  background: var(--themeColor);
+  color: var(--background);
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -236,7 +237,7 @@
 }
 
 .gig-card:hover {
-  border: 2px solid #fdd835;
+  border: 2px solid var(--themeHoverColor);
 }
 
 .gig-top {
@@ -248,7 +249,7 @@
 
 .gig-tag {
   background: var(--themeColor);
-  color: #000;
+  color: var(--background);
   font-weight: 600;
   font-size: 0.75rem;
   padding: 5px 10px;
@@ -295,7 +296,7 @@
 
 .gig-price {
   font-weight: 700;
-  color: #f9a825;
+  color: var(--themeColor);
   font-size: 1rem;
 }
 
@@ -321,7 +322,7 @@
   padding: 13px 20px;
   background-color: var(--themeColor);
   border: none;
-  color: var(--foreground);
+  color: var(--background);
   border-radius: 8px;
   transition: all 0.2s ease;
 }
@@ -377,8 +378,8 @@
 }
 
 .yellow-btn {
-  background-color: #ffd54f;
-  color: #000;
+  background-color: var(--themeColor);
+  color: var(--background);
   font-weight: 600;
   font-size: 1.2rem;
   border: none;
@@ -509,12 +510,16 @@
 
 .project-tag {
   display: inline-block;
-  background: #ffd54f;
-  color: #000;
+  background: var(--themeColor);
+  color: var(--background);
   font-weight: 600;
   font-size: 0.8rem;
   padding: 6px 14px;
   border-radius: 999px;
+}
+
+svg#logo-icon {
+  stroke: var(--background);
 }
 
 /* Responsive */
@@ -542,6 +547,7 @@
   background-color: #fff;
   display: flex;
   justify-content: center;
+  padding-bottom: 6%;
 }
 
 .stat-box {
@@ -598,7 +604,6 @@
   padding: 100px 20px;
   text-align: center;
   color: #fff;
-  margin-top: 8%;
 }
 
 .snipers-icon {
@@ -640,8 +645,8 @@
 }
 
 .snipers-btn {
-  background-color: #ffd54f;
-  color: #000;
+  background-color: var(--themeColor);
+  color: var(--background);
   font-weight: bold;
   font-size: 1rem;
   border: none;
@@ -652,7 +657,7 @@
 }
 
 .snipers-btn:hover {
-  background-color: #fbc02d;
+  background-color: var(--themeHoverColor);
 }
 
 .snipers-trust {
@@ -680,7 +685,7 @@
 }
 
 .avatar.yellow {
-  background: #ffd54f;
+  background: var(--themeColor);
 }
 
 .avatar.orange {
@@ -692,8 +697,8 @@
 }
 
 .avatar.number {
-  background: #ffd54f;
-  color: #000;
+  background: var(--themeColor);
+  color: var(--background);
   font-size: 0.8rem;
   font-weight: bold;
   display: flex;
