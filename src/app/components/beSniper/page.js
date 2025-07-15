@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import "./beSniper.css";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 const BeSniper = () => {
   const [step, setStep] = useState(1);
@@ -23,8 +24,6 @@ const BeSniper = () => {
     work: "",
     email: "",
     phone: "",
-    gigTopic: "",
-    gigDescription: "",
   });
 
   const handleInputChange = (e) => {
@@ -79,6 +78,8 @@ const BeSniper = () => {
     setStep(4);
   };
 
+  const router = useRouter();
+
   const handleDetailsSubmit = async () => {
     const newErrors = {};
     const {
@@ -129,6 +130,8 @@ const BeSniper = () => {
       });
 
       setSuccessMsg("✅ Form submitted successfully!");
+      router.push("/components/successfull");
+
       setStep(1);
       setFreelancerType("");
       setExperience("");
@@ -143,8 +146,6 @@ const BeSniper = () => {
         work: "",
         email: "",
         phone: "",
-        gigTopic: "",
-        gigDescription: "",
       });
     } catch (error) {
       alert("❌ Submission failed. Try again.");

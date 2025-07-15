@@ -263,3 +263,92 @@ textarea {
 .next-btn .back {
   margin-right: 10px;
 }
+
+.post-gig {
+  background-color: #f9f9f9;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.post-gig .question {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.post-gig .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.post-gig label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.post-gig input,
+.post-gig textarea {
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #000;
+  transition: border 0.2s ease;
+}
+
+.post-gig input:focus,
+.post-gig textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.input-error {
+  border-color: #e74c3c !important;
+  background-color: #fff8f8;
+}
+
+.error-text {
+  font-size: 13px;
+  color: #e74c3c;
+  margin-top: 5px;
+}
+
+.post-gig .next-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.post-gig .next-btn .next {
+  padding: 12px 30px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.post-gig .next-btn .next:hover {
+  background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

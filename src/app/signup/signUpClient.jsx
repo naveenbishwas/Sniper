@@ -9,26 +9,22 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase"; // Make sure this is correct path
 import "./signup.css";
-import { v4 as uuidv4 } from "uuid";
+import Link from "next/link";
 
 export default function Signup() {
   const auth = getAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Get the role from query params: 'beSniper' or 'HireFreelancer'
-  // const role = searchParams.get("role");
-  // if (role) {
-  //   localStorage.setItem("userRole", role);
-  // }
   const rawRole = searchParams.get("role");
   const role = rawRole || localStorage.getItem("userRole") || null;
 
   useEffect(() => {
     if (!role) {
-      // Optional: redirect or show an error message
-      router.push("/"); // or show a controlled fallback
+      router.push("/");
     } else {
       localStorage.setItem("userRole", role);
     }
@@ -39,13 +35,33 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
-  const [error, setError] = useState("");
+
+  // ✅ Unique ID function
+  const generateUniqueId = async (name) => {
+    const cleanedName = name.toLowerCase().replace(/\s/g, "");
+    const randomNum = Math.floor(100 + Math.random() * 900);
+    const uniqueId = `${cleanedName}${randomNum}`;
+
+    const docRef = doc(db, "uniqueUserIds", uniqueId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return generateUniqueId(name); // retry if already exists
+    }
+
+    await setDoc(docRef, {
+      uniqueId,
+      createdAt: new Date().toISOString(),
+      email,
+      name,
+    });
+
+    return uniqueId;
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setErrorMsg("");
-    setSuccessMsg("");
 
     if (!fullName || !email || !password) {
       setErrorMsg("All fields are required.");
@@ -58,26 +74,27 @@ export default function Signup() {
         email,
         password
       );
-      const user = userCredential.user;
-      const uniqueId = user.uid;
-      console.log(uniqueId);
-      console.log("User signed up:", userCredential.user);
-      setSuccessMsg("Account created successfully!");
-      // alert(`Your Unique Id is =${uniqueId}`);
 
-      // Redirect based on role
+      // ✅ Generate & Save Unique ID
+      const uniqueId = await generateUniqueId(fullName);
+      localStorage.setItem("uniqueId", uniqueId);
+      console.log(uniqueId);
+
+      // ✅ Save other form values (optional)
+      localStorage.setItem("fullName", fullName);
+      localStorage.setItem("email", email);
+
+      // ✅ Redirect to respective form
       if (role === "beSniper") {
         router.push("/components/beSniper");
       } else if (role === "HireFreelancer") {
         router.push("/components/HireFreelancer");
       } else {
-        router.push("/"); // fallback
+        router.push("/");
       }
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        setErrorMsg(
-          "⚠️ This email is already registered. Please login to fill your details."
-        );
+        setErrorMsg("This email is already registered. Please login.");
       } else {
         setErrorMsg(error.message || "Signup failed");
       }
@@ -85,10 +102,14 @@ export default function Signup() {
   };
 
   const loginWithGoogle = async () => {
-    setError("");
     try {
       await signInWithPopup(auth, new GoogleAuthProvider());
-      // Redirect based on role after Google login
+
+      // Optionally generate unique ID for Google users as well
+      const uniqueId = await generateUniqueId(fullName || "googleuser");
+      console.log(uniqueId);
+      localStorage.setItem("uniqueId", uniqueId);
+
       if (role === "beSniper") {
         router.push("/components/beSniper");
       } else if (role === "HireFreelancer") {
@@ -97,7 +118,7 @@ export default function Signup() {
         router.push("/");
       }
     } catch (err) {
-      setError(err.message || "Google login failed");
+      setErrorMsg(err.message || "Google login failed");
     }
   };
 
@@ -118,13 +139,11 @@ export default function Signup() {
           </h2>
 
           {errorMsg && <p className="error">{errorMsg}</p>}
-          {successMsg && <p className="success">{successMsg}</p>}
 
           <label htmlFor="name">Full Name</label>
           <input
             type="text"
             id="name"
-            name="name"
             placeholder="Your name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
@@ -135,7 +154,6 @@ export default function Signup() {
           <input
             type="email"
             id="email"
-            name="email"
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -147,15 +165,14 @@ export default function Signup() {
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              name="password"
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
             <button
+              id="show"
               type="button"
-              className="toggle-password"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "Hide" : "Show"}
@@ -165,7 +182,6 @@ export default function Signup() {
           <button type="submit" className="submit-btn">
             Sign Up
           </button>
-
           <button
             type="button"
             onClick={loginWithGoogle}
@@ -174,9 +190,14 @@ export default function Signup() {
             Signup with Google
           </button>
 
-          <p className="login-link">
-            Already have an account? <a href="/login">Login</a>
-          </p>
+          <div className="sign-login">
+            <p>
+              Dont have account
+              <span>
+                <Link href="/login">Login</Link>
+              </span>
+            </p>
+          </div>
         </form>
       </div>
     </>

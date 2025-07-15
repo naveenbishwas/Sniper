@@ -1,0 +1,100 @@
+.success-page {
+  height: 100vh;
+  background: #f2f5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+.success-card {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+}
+
+.success-card h1 {
+  font-size: 26px;
+  color: #2e7d32;
+  margin-bottom: 14px;
+}
+
+.success-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.uid-box {
+  background-color: #f3f4f6;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #333;
+  word-break: break-word;
+}
+
+.success-card button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.success-card button:hover {
+  background-color: #0056b3;
+}
+
+.success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f4ff;
+}
+
+.success-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.success-card h1 {
+  color: #2e7d32;
+  font-size: 2rem;
+}
+
+.success-card p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.uid-box {
+  margin: 20px 0;
+  background: #eef7ff;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: monospace;
+  color: #333;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

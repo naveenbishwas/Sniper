@@ -103,3 +103,26 @@ body {
 .btn-google:hover {
   background: #464646;
 }
+
+button#show {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  background: none;
+  color: #000;
+  border: none;
+  font-size: 12px;
+}
+
+.sign-login p {
+  text-align: center;
+  color: grey;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.sign-login p a {
+  color: #0074ef;
+  margin-left: 6px;
+  text-decoration: underline;
+}
