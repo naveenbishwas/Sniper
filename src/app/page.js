@@ -63,7 +63,7 @@ export default function Home() {
       icon: "📄",
       title: "Author Posts Gig",
       description:
-        "Authors like Ratna Jyoti post their project details, budget, and timeline on BookSnipers platform.",
+        "Authors like Ratna Jyoti post their project details, budget, and timeline on HubHawks Live platform.",
     },
     {
       icon: "👥",
@@ -176,7 +176,7 @@ export default function Home() {
       </div>
 
       <div className="how-it-works">
-        <h2 className="how-title">How BookSnipers Works</h2>
+        <h2 className="how-title">How HubHawks Live Works</h2>
         <p className="how-subtitle">
           Our precision approach ensures authors get connected with the right
           service providers for their specific needs
@@ -247,8 +247,8 @@ export default function Home() {
         <div className="sniper-cta-right">
           <h3>Ready to get started?</h3>
           <p>
-            Join thousands of book service providers already earning on
-            BookSnipers
+            Join thousands of book service providers already earning on HubHawks
+            Live
           </p>
           <div className="sniper-stats">
             <div>
@@ -329,7 +329,7 @@ export default function Home() {
 
         <h2 className="snipers-title">Our Snipers Have Got You</h2>
         <p className="snipers-desc">
-          Join thousands of authors who trust BookSnipers for their publishing
+          Join thousands of authors who trust HubHawks Live for their publishing
           needs. From cover design to marketing campaigns, our expert snipers
           deliver results with precision.
         </p>

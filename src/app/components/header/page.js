@@ -14,7 +14,7 @@ export default function Header() {
           unoptimized
           alt="logo"
         ></Image>
-        <span className="header__brand">BookSnipers</span>
+        <span className="header__brand">HubHawks Live</span>
       </div>
 
       <div className="header__right">
