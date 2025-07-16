@@ -26,10 +26,10 @@ export default function Banner() {
         </p>
         <div className="sniper-search-section"></div>
         <div className="sniper-buttons">
-          <Link href="/components/gigsPage">
+          <Link href="/signup">
             <button className="btn-black">Hire a Sniper</button>
           </Link>
-          <Link href="/components/cardProfile">
+          <Link href="/signup">
             <button className="btn-white">Be a Sniper</button>
           </Link>
         </div>

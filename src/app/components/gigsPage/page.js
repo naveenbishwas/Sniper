@@ -101,14 +101,14 @@ const GigsPage = () => {
             <h3 className="gig-title">{gig.title}</h3>
             <p className="gig-author">👤 by {gig.author}</p>
             <p className="gig-desc">{gig.description}</p>
-            <div className="gig-meta">
+            {/* <div className="gig-meta">
               <span>⏱ {gig.duration}</span>
               <span>{gig.proposals} proposals</span>
-            </div>
-            <div className="gig-bottom">
+            </div> */}
+            {/* <div className="gig-bottom">
               <span className="gig-price">{gig.price}</span>
               <button className="gig-btn">Apply Now</button>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
