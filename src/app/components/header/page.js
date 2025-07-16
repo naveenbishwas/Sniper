@@ -18,6 +18,9 @@ export default function Header() {
       </div>
 
       <div className="header__right">
+        <Link href="/login" className="login-btn">
+          Login
+        </Link>
         <Link href="/signup?role=beSniper" className="header__signin">
           Be a Freelancer
         </Link>
