@@ -535,6 +535,10 @@ svg#logo-icon {
     grid-template-columns: 1fr;
   }
 
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
   .sniper-cta-left {
     text-align: left;
   }

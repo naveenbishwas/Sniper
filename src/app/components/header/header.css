@@ -7,7 +7,7 @@
   border-bottom: 1px solid #dbdbdb;
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
   top: 0;
 }
 
@@ -87,16 +87,16 @@
   }
 
   .header__signin {
-    font-size: 15px;
+    font-size: 10px;
     margin-top: -5px;
+    width: 92px;
+    height: auto;
+    padding: 5px 0px;
+    border: 1px solid #000;
   }
 
   .header__brand {
-    font-size: 24px;
-  }
-
-  .header__join {
-    display: none;
+    font-size: 15px;
   }
 
   .header__logo {
@@ -115,5 +115,12 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .header__join {
+    font-size: 10px;
+    width: 92px;
+    padding: 5px 5px;
+    margin-top: -5px;
   }
 }

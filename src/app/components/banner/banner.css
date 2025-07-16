@@ -154,11 +154,11 @@
 @media (max-width: 480px) {
   .sniper-title {
     font-size: 1.8rem;
-    margin-top: 12%;
+    margin-top: 30%;
   }
 
   .sniper-subtitle {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .sniper-hero {
