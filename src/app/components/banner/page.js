@@ -9,6 +9,11 @@ export default function Banner() {
         <title>Snipers Landing</title>
       </Head>
       <div className="sniper-hero">
+        <video autoPlay muted loop playsInline className="background-video">
+          <source src="/background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
         <h1 className="sniper-title">
           The Snipers will take it
           <br />
