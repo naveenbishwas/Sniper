@@ -5,27 +5,41 @@ import Image from "next/image";
 export default function Header() {
   return (
     <header className="header">
+      {/* <div className="">hhh</div> */}
       <div className="header__left">
         <Image
-          src={"./logo1.jpeg"}
+          src={"/logo3.png"}
           className="header__logo"
           width={55}
           height={55}
           unoptimized
           alt="logo"
         ></Image>
-        <span className="header__brand">HubHawks Live</span>
       </div>
 
       <div className="header__right">
-        <Link href="/login" className="login-btn">
-          Login
-        </Link>
         <Link href="/signup?role=beSniper" className="header__signin">
           Be a Freelancer
         </Link>
         <Link href="/signup?role=HireFreelancer" className="header__join">
           Hire a Freelancer
+        </Link>
+        <Link href="/login" className="login-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="23"
+            height="23"
+            fill="currentColor"
+            className="bi bi-person-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+            <path
+              fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+            />
+          </svg>
+          <p>Login</p>
         </Link>
       </div>
     </header>

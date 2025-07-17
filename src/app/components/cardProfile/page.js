@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import "./cardProfile.css";
 import { v4 as uuidv4 } from "uuid";
+import Header from "../header/page";
+import Footer from "../footer/page";
 
 const samplePurposes = [
   "Looking for Freelance Projects",
@@ -42,18 +44,22 @@ export default function RandomCardsPage() {
   }, []);
 
   return (
-    <div className="page-container">
-      <h1>Meet Our Community</h1>
-      <div className="cards-grid">
-        {cards.map((card, idx) => (
-          <div key={idx} className="card">
-            <img src={card.img} alt="avatar" />
-            <p className="uid">ID: {card.id}</p>
-            <p className="purpose">{card.purpose}</p>
-            <p className="bio">{card.bio}</p>
-          </div>
-        ))}
+    <>
+      <Header />
+      <div className="page-container">
+        <h1>Meet Our Community</h1>
+        <div className="cards-grid">
+          {cards.map((card, idx) => (
+            <div key={idx} className="card">
+              <img src={card.img} alt="avatar" />
+              <p className="uid">ID: {card.id}</p>
+              <p className="purpose">{card.purpose}</p>
+              <p className="bio">{card.bio}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

@@ -1,4 +1,4 @@
-.gigs-grid {
+/* .gigs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
@@ -18,7 +18,7 @@
 }
 
 .gig-card:hover {
-  border: 2px solid #fdd835;
+  border: 2px solid var(--themeHoverColor);
 }
 
 .gig-top {
@@ -30,7 +30,7 @@
 
 .gig-tag {
   background: var(--themeColor);
-  color: #000;
+  color: var(--background);
   font-weight: 600;
   font-size: 0.75rem;
   padding: 5px 10px;
@@ -98,4 +98,177 @@
 
 #gigsPage {
   margin-top: 10% !important;
+  padding-bottom: 5%;
+} */
+
+.gigs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gig-card {
+  background: var(--background);
+  border-radius: 10px;
+  padding: 25px 20px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 0.5px solid #000;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.gig-card:hover {
+  border: 2px solid var(--themeHoverColor);
+}
+
+.gig-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.gig-tag {
+  background: var(--themeColor);
+  color: var(--background);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.gig-rating {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.gig-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 10px 0 5px;
+}
+
+.gig-author {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.gig-desc {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.gig-meta {
+  font-size: 0.85rem;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.gig-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gig-price {
+  font-weight: 700;
+  color: #f9a825;
+  font-size: 1rem;
+}
+
+.gig-btn {
+  background: var(--foreground);
+  color: var(--background);
+  font-weight: 600;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.gig-btn:hover {
+  background: #3a3a3a;
+}
+
+#gigsPage {
+  padding-bottom: 5%;
+}
+
+.gigs-title {
+  text-align: center;
+  margin-top: 5%;
+  padding: 5%;
+}
+
+/* --- Responsive Breakpoints --- */
+@media (max-width: 1024px) {
+  .gigs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gigs-grid {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+  }
+
+  .gigs-title {
+    margin-top: 15%;
+    padding-bottom: 0;
+  }
+
+  .gig-card {
+    padding: 20px 16px;
+  }
+
+  .gig-title {
+    font-size: 1.1rem;
+  }
+
+  .gig-author,
+  .gig-desc,
+  .gig-meta {
+    font-size: 0.9rem;
+  }
+
+  .gig-price {
+    font-size: 0.95rem;
+  }
+
+  .gig-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gig-title {
+    font-size: 1rem;
+  }
+
+  .gig-author,
+  .gig-desc,
+  .gig-meta {
+    font-size: 0.85rem;
+  }
+
+  .gig-btn {
+    padding: 7px 14px;
+    font-size: 0.85rem;
+  }
+
+  #gigsPage {
+    margin-top: 10% !important;
+  }
 }

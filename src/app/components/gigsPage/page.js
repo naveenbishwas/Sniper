@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import "./gigsPage.css";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import Header from "../header/page";
+import Footer from "../footer/page";
 
 const gigs = [
   {
@@ -91,6 +93,8 @@ const GigsPage = () => {
 
   return (
     <>
+      <Header />
+      <h1 className="gigs-title">All Gigs</h1>
       <div className="gigs-grid" id="gigsPage">
         {gigs.map((gig, idx) => (
           <div key={idx} className={`gig-card ${idx === 1 ? "featured" : ""}`}>
@@ -112,6 +116,7 @@ const GigsPage = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </>
   );
 };
