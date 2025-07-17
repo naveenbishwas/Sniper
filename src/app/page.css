@@ -435,11 +435,16 @@
 }
 
 /* Responsive */
+
 @media (max-width: 768px) {
   .sniper-cta {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  #home-gigs-title {
+    margin-top: 0;
   }
 
   .sniper-cta-right {

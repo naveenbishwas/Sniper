@@ -194,7 +194,9 @@ export default function Home() {
       </div>
 
       <div className="gigs-section">
-        <h2 className="gigs-title">Active Gigs</h2>
+        <h2 className="gigs-title" id="home-gigs-title">
+          Active Gigs
+        </h2>
         <p className="gigs-subtitle">
           Browse current projects posted by authors looking for professional
           book services
