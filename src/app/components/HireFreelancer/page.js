@@ -5,7 +5,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
-const HireFreelancer = () => {
+const HireFreelancer = ({ onClose }) => {
   const [firstField, setFirstField] = useState("");
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
@@ -147,169 +147,188 @@ const HireFreelancer = () => {
   };
 
   return (
-    <div className="hiring-page">
-      {step === 1 && (
-        <div className="plan">
-          <h3 className="question">What do you plan to hire service for?</h3>
-          <div className="option-buttons">
-            {["personal", "job", "business"].map((value) => (
-              <label
-                key={value}
-                className={`option ${firstField === value ? "selected" : ""}`}
-              >
-                <input
-                  type="radio"
-                  name="firstField"
-                  value={value}
-                  onChange={() => setFirstField(value)}
-                />
-                <span>{value.charAt(0).toUpperCase() + value.slice(1)}</span>
-              </label>
-            ))}
-          </div>
-          {formErrors.firstField && (
-            <p className="error-text">{formErrors.firstField}</p>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
+        <div className="hiring-page">
+          <button className="close-modal" onClick={onClose}>
+            &times;
+          </button>
+          {step === 1 && (
+            <div className="plan">
+              <h3 className="question">
+                What do you plan to hire service for?
+              </h3>
+              <div className="option-buttons">
+                {["personal", "job", "business"].map((value) => (
+                  <label
+                    key={value}
+                    className={`option ${
+                      firstField === value ? "selected" : ""
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="firstField"
+                      value={value}
+                      onChange={() => setFirstField(value)}
+                    />
+                    <span>
+                      {value.charAt(0).toUpperCase() + value.slice(1)}
+                    </span>
+                  </label>
+                ))}
+              </div>
+              {formErrors.firstField && (
+                <p className="error-text">{formErrors.firstField}</p>
+              )}
+              <div className="next-btn">
+                <button className="next" onClick={handleFirstField}>
+                  Next
+                </button>
+              </div>
+            </div>
           )}
-          <div className="next-btn">
-            <button className="next" onClick={handleFirstField}>
-              Next
-            </button>
-          </div>
+
+          {step === 2 && (
+            <div className="how-many-people">
+              <h3 className="question">
+                How many people work at your company?
+              </h3>
+              <div className="form-fields">
+                <input
+                  type="text"
+                  name="peopleWorking"
+                  placeholder="e.g., 5"
+                  value={formData.peopleWorking}
+                  onChange={handleInputChange}
+                />
+                {formErrors.peopleWorking && (
+                  <p className="error-text">{formErrors.peopleWorking}</p>
+                )}
+              </div>
+              <div className="next-btn">
+                <button className="next" onClick={() => setStep(1)}>
+                  Previous
+                </button>
+                <button className="next" onClick={handlePeopleStep}>
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className="user-details-form">
+              <h3 className="question">Please fill in your details</h3>
+              <div className="form-fields">
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                />
+                {formErrors.fullName && (
+                  <p className="error-text">{formErrors.fullName}</p>
+                )}
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                {formErrors.email && (
+                  <p className="error-text">{formErrors.email}</p>
+                )}
+
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                />
+                {formErrors.phone && (
+                  <p className="error-text">{formErrors.phone}</p>
+                )}
+
+                <textarea
+                  name="bio"
+                  placeholder="Tell us about yourself (min. 20 characters)"
+                  value={formData.bio}
+                  onChange={handleInputChange}
+                />
+                {formErrors.bio && (
+                  <p className="error-text">{formErrors.bio}</p>
+                )}
+              </div>
+
+              <div className="next-btn">
+                <button
+                  className="next"
+                  onClick={() => setStep(firstField === "personal" ? 1 : 2)}
+                >
+                  Previous
+                </button>
+                <button
+                  className="next"
+                  onClick={() => {
+                    if (validateForm()) setStep(4);
+                  }}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="post-gig">
+              <h3 className="question">Post Your Gig</h3>
+
+              <div className="form-group">
+                <label htmlFor="gigTopic">Topic</label>
+                <input
+                  type="text"
+                  id="gigTopic"
+                  name="gigTopic"
+                  placeholder="Enter topic"
+                  value={formData.gigTopic}
+                  onChange={handleInputChange}
+                  className={errors.gigTopic ? "input-error" : ""}
+                />
+                {errors.gigTopic && (
+                  <p className="error-text">{errors.gigTopic}</p>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="gigDescription">Describe More</label>
+                <textarea
+                  id="gigDescription"
+                  name="gigDescription"
+                  rows="4"
+                  placeholder="Write details..."
+                  value={formData.gigDescription}
+                  onChange={handleInputChange}
+                  className={errors.gigDescription ? "input-error" : ""}
+                ></textarea>
+                {errors.gigDescription && (
+                  <p className="error-text">{errors.gigDescription}</p>
+                )}
+              </div>
+
+              <div className="next-btn">
+                <button className="next" onClick={handleGigSubmit}>
+                  Submit
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-
-      {step === 2 && (
-        <div className="how-many-people">
-          <h3 className="question">How many people work at your company?</h3>
-          <div className="form-fields">
-            <input
-              type="text"
-              name="peopleWorking"
-              placeholder="e.g., 5"
-              value={formData.peopleWorking}
-              onChange={handleInputChange}
-            />
-            {formErrors.peopleWorking && (
-              <p className="error-text">{formErrors.peopleWorking}</p>
-            )}
-          </div>
-          <div className="next-btn">
-            <button className="next" onClick={() => setStep(1)}>
-              Previous
-            </button>
-            <button className="next" onClick={handlePeopleStep}>
-              Next
-            </button>
-          </div>
-        </div>
-      )}
-
-      {step === 3 && (
-        <div className="user-details-form">
-          <h3 className="question">Please fill in your details</h3>
-          <div className="form-fields">
-            <input
-              type="text"
-              name="fullName"
-              placeholder="Full Name"
-              value={formData.fullName}
-              onChange={handleInputChange}
-            />
-            {formErrors.fullName && (
-              <p className="error-text">{formErrors.fullName}</p>
-            )}
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-            {formErrors.email && (
-              <p className="error-text">{formErrors.email}</p>
-            )}
-
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleInputChange}
-            />
-            {formErrors.phone && (
-              <p className="error-text">{formErrors.phone}</p>
-            )}
-
-            <textarea
-              name="bio"
-              placeholder="Tell us about yourself (min. 20 characters)"
-              value={formData.bio}
-              onChange={handleInputChange}
-            />
-            {formErrors.bio && <p className="error-text">{formErrors.bio}</p>}
-          </div>
-
-          <div className="next-btn">
-            <button
-              className="next"
-              onClick={() => setStep(firstField === "personal" ? 1 : 2)}
-            >
-              Previous
-            </button>
-            <button
-              className="next"
-              onClick={() => {
-                if (validateForm()) setStep(4);
-              }}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
-
-      {step === 4 && (
-        <div className="post-gig">
-          <h3 className="question">Post Your Gig</h3>
-
-          <div className="form-group">
-            <label htmlFor="gigTopic">Topic</label>
-            <input
-              type="text"
-              id="gigTopic"
-              name="gigTopic"
-              placeholder="Enter topic"
-              value={formData.gigTopic}
-              onChange={handleInputChange}
-              className={errors.gigTopic ? "input-error" : ""}
-            />
-            {errors.gigTopic && <p className="error-text">{errors.gigTopic}</p>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="gigDescription">Describe More</label>
-            <textarea
-              id="gigDescription"
-              name="gigDescription"
-              rows="4"
-              placeholder="Write details..."
-              value={formData.gigDescription}
-              onChange={handleInputChange}
-              className={errors.gigDescription ? "input-error" : ""}
-            ></textarea>
-            {errors.gigDescription && (
-              <p className="error-text">{errors.gigDescription}</p>
-            )}
-          </div>
-
-          <div className="next-btn">
-            <button className="next" onClick={handleGigSubmit}>
-              Submit
-            </button>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

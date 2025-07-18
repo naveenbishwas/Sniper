@@ -1,55 +1,33 @@
+"use client";
+
 import Image from "next/image";
 import "./page.css";
 import Header from "./components/header/page";
 import Banner from "./components/banner/page";
 import Footer from "./components/footer/page";
 import { useAuth } from "@/context/AuthContext";
-import Signup from "./signup/page";
+import SignupModal from "./signup/signUpClient";
 import GigsPage from "./components/gigsPage/page";
+import BeSniperModal from "./components/beSniper/page";
+import HireFreelancer from "./components/HireFreelancer/page";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [showSignup, setShowSignup] = useState(false);
+  const [showBeSniper, setShowBeSniper] = useState(false);
+  const [showHire, setShowHire] = useState(false);
+  const [showSteps, setShowSteps] = useState(false);
+  const [role, setRole] = useState(null);
+
   const categories = [
-    {
-      name: "Book Trailers",
-      icon: "🎥",
-      image: "./1.jpeg",
-      highlight: true,
-    },
-    {
-      name: "Editing & Proofreading",
-      icon: "🖊️",
-      image: "./2.jpeg",
-    },
-    {
-      name: "Cover Design",
-      icon: "🎨",
-      image: "./3.jpeg",
-    },
-    {
-      name: "Book Marketing",
-      icon: "📈",
-      image: "./4.jpeg",
-    },
-    {
-      name: "Formatting",
-      icon: "📄",
-      image: "./5.jpeg",
-    },
-    {
-      name: "Translation",
-      icon: "🌐",
-      image: "./6.jpeg",
-    },
-    {
-      name: "Ghost Writing",
-      icon: "⚡",
-      image: "./7.jpeg",
-    },
-    {
-      name: "Beta Reading",
-      icon: "👤",
-      image: "./8.jpeg",
-    },
+    { name: "Book Trailers", icon: "🎥", image: "./1.jpeg", highlight: true },
+    { name: "Editing & Proofreading", icon: "🖊️", image: "./2.jpeg" },
+    { name: "Cover Design", icon: "🎨", image: "./3.jpeg" },
+    { name: "Book Marketing", icon: "📈", image: "./4.jpeg" },
+    { name: "Formatting", icon: "📄", image: "./5.jpeg" },
+    { name: "Translation", icon: "🌐", image: "./6.jpeg" },
+    { name: "Ghost Writing", icon: "⚡", image: "./7.jpeg" },
+    { name: "Beta Reading", icon: "👤", image: "./8.jpeg" },
   ];
 
   const steps = [
@@ -142,18 +120,41 @@ export default function Home() {
       author: "Pranav Mishra",
       image: "./11.jpeg",
     },
-    {
-      title: "Sun Sakeena",
-      author: "Saadat Hasan Manto",
-      image: "./12.jpeg",
-    },
+    { title: "Sun Sakeena", author: "Saadat Hasan Manto", image: "./12.jpeg" },
   ];
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (localStorage.getItem("showBeSniperModal") === "true") {
+        setShowSteps(true);
+        localStorage.removeItem("showBeSniperModal");
+      }
+
+      if (localStorage.getItem("showHireFreelancerModal") === "true") {
+        setShowHire(true);
+        localStorage.removeItem("showHireFreelancerModal");
+      }
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = showSignup || showSteps ? "hidden" : "auto";
+  }, [showSignup, showSteps]);
+
+  const handleSignupClick = (selectedRole) => {
+    setRole(selectedRole);
+    localStorage.setItem("userRole", selectedRole);
+    setShowSignup(true);
+  };
 
   return (
     <div className="main-page">
-      <Header />
+      <Header onSignupClick={handleSignupClick} />
       <Banner />
 
+      {/* Categories */}
       <div className="category-section">
         <h2 className="category-title">Explore by category</h2>
         <div className="category-grid">
@@ -175,6 +176,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* How it works */}
       <div className="how-it-works">
         <h2 className="how-title">How HubHawks Live Works</h2>
         <p className="how-subtitle">
@@ -193,6 +195,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Gigs */}
       <div className="gigs-section">
         <h2 className="gigs-title" id="home-gigs-title">
           Active Gigs
@@ -230,6 +233,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Sniper CTA */}
       <div className="sniper-cta">
         <div className="sniper-cta-left">
           <h2>Become a sniper and start earning</h2>
@@ -237,11 +241,10 @@ export default function Home() {
             Monetize your book-related expertise as a side hustle
           </p>
           <ul className="sniper-list">
-            <li>✅&nbsp;&nbsp; Choose a gig that stands out</li>
-            <li>✅ &nbsp;&nbsp;Get noticed with professional portfolios</li>
+            <li>✅ Choose a gig that stands out</li>
+            <li>✅ Get noticed with professional portfolios</li>
             <li>
-              ✅&nbsp;&nbsp; Develop a freelance business around your
-              book-related talents
+              ✅ Develop a freelance business around your book-related talents
             </li>
           </ul>
           <button className="yellow-btn">Be a Sniper</button>
@@ -269,6 +272,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Projects */}
       <div className="projects-section">
         <h2 className="projects-title">How Far We Have Come</h2>
         <p className="projects-subtitle">
@@ -291,6 +295,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Stats */}
       <div className="stats-section">
         <div className="stat-box">
           <div className="stat">
@@ -308,6 +313,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Final CTA */}
       <div className="snipers-support-section">
         <div className="snipers-icon">
           <svg
@@ -316,7 +322,6 @@ export default function Home() {
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            viewBox="0 0 24 24"
             fill="none"
             stroke="#f4c200"
             strokeWidth="2"
@@ -328,14 +333,12 @@ export default function Home() {
             <circle cx="12" cy="12" r="2"></circle>
           </svg>
         </div>
-
         <h2 className="snipers-title">Our Snipers Have Got You</h2>
         <p className="snipers-desc">
           Join thousands of authors who trust HubHawks Live for their publishing
           needs. From cover design to marketing campaigns, our expert snipers
           deliver results with precision.
         </p>
-
         <div className="snipers-cta">
           <button className="snipers-btn">Join Us</button>
           <div className="snipers-trust">
@@ -351,6 +354,10 @@ export default function Home() {
       </div>
 
       <Footer />
+
+      {showSignup && <SignupModal onClose={() => setShowSignup(false)} />}
+      {showSteps && <BeSniperModal onClose={() => setShowSteps(false)} />}
+      {showHire && <HireFreelancer onClose={() => setShowHire(false)} />}
     </div>
   );
 }

@@ -76,3 +76,36 @@ a {
 .next:hover {
   background-color: #005bb5;
 }
+
+/* backdrop */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+/* modal container inherits old .signup-container styles */
+.signup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: 90%;
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px 24px;
+  z-index: 1000;
+}
+
+/* optional close icon */
+.close-modal {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
