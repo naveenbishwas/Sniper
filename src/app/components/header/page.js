@@ -45,6 +45,7 @@
 //     </header>
 //   );
 // }
+"use client";
 
 import Image from "next/image";
 import "./header.css";
