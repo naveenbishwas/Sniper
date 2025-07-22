@@ -8,9 +8,8 @@
   position: sticky;
   width: 100%;
   top: 0;
-  z-index: 2;
-  top: 0;
-  transition: transform 0.4s ease-in-out;
+  z-index: 100;
+  transition: transform all 0.3s;
 }
 
 .header__left {
