@@ -50,10 +50,31 @@
 import Image from "next/image";
 import "./header.css";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Header({ onSignupClick }) {
+  const [show, setShow] = useState(true);
+
+  let lastScrollY = 0;
+
+  useEffect(() => {
+    const controlHeader = () => {
+      if (window.scrollY > lastScrollY) {
+        setShow(false); // scroll down
+      } else {
+        setShow(true); // scroll up
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener("scroll", controlHeader);
+    return () => window.removeEventListener("scroll", controlHeader);
+  }, []);
   return (
-    <header className="header">
+    <header
+      className="header"
+      style={{ transform: show ? "translateY(0)" : "translateY(-100%)" }}
+    >
       <div className="header__left">
         <Link href="/">
           <Image

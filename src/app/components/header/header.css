@@ -5,10 +5,12 @@
   padding: 10px 40px;
   background: white;
   border-bottom: 1px solid #dbdbdb;
-  position: fixed;
+  position: sticky;
   width: 100%;
+  top: 0;
   z-index: 2;
   top: 0;
+  transition: transform 0.4s ease-in-out;
 }
 
 .header__left {

@@ -18,126 +18,93 @@ export default function Home() {
   const [showHire, setShowHire] = useState(false);
   const [showSteps, setShowSteps] = useState(false);
   const [role, setRole] = useState(null);
+  const [current, setCurrent] = useState(0);
+  const [slideDirection, setSlideDirection] = useState("right");
+  const [animationClass, setAnimationClass] = useState("");
 
-  const categories = [
-    { name: "Book Trailers", icon: "🎥", image: "./1.jpeg", highlight: true },
-    { name: "Editing & Proofreading", icon: "🖊️", image: "./2.jpeg" },
-    { name: "Cover Design", icon: "🎨", image: "./3.jpeg" },
-    { name: "Book Marketing", icon: "📈", image: "./4.jpeg" },
-    { name: "Formatting", icon: "📄", image: "./5.jpeg" },
-    { name: "Translation", icon: "🌐", image: "./6.jpeg" },
-    { name: "Ghost Writing", icon: "⚡", image: "./7.jpeg" },
-    { name: "Beta Reading", icon: "👤", image: "./8.jpeg" },
-  ];
-
-  const steps = [
+  const freelancers = [
     {
-      icon: "👥",
-      title: "Sales Team Connects",
-      description:
-        "Our sales representatives like Tanvi reach out to authors who need book services, identifying their specific requirements.",
+      name: "Liam Wilson",
+      title: "Data Analyst",
+      desc: "Transforming data into actionable insights for informed decision-making.",
+      image: "/p1.jpg",
     },
     {
-      icon: "📄",
-      title: "Author Posts Gig",
-      description:
-        "Authors like Ratna Jyoti post their project details, budget, and timeline on HubHawks Live platform.",
+      name: "Sarah Lee",
+      title: "Content Writer",
+      desc: "Creating stunning visuals that capture your brand’s essence.",
+      image: "/p2.jpg",
     },
     {
-      icon: "👥",
-      title: "Service Providers Apply",
-      description:
-        "Qualified professionals review the gig and submit proposals with their portfolio and pricing.",
+      name: "Noah Taylor",
+      title: "Video Editor",
+      desc: "Creating seamless mobile experiences across platforms.",
+      image: "/p3.jpg",
     },
     {
-      icon: "✅",
-      title: "Project Completion",
-      description:
-        "Author selects the best provider, work gets completed, and everyone gets paid securely.",
+      name: "Emma Davis",
+      title: "Social Media Manager",
+      desc: "Building brand awareness through engaging social media strategies.",
+      image: "/p4.jpg",
     },
   ];
 
-  const gigs = [
+  const testimonials = [
     {
-      category: "Video Production",
-      title: "Book Trailer for Fantasy Novel",
-      author: "Ratna Jyoti",
-      description:
-        "Need a compelling 60-second book trailer for my fantasy novel 'The Mystic Realm'...",
-      duration: "7 days",
-      proposals: "12",
-      price: "$500 - $1,000",
-      rating: "4.8",
+      image: "/t1.jpg",
+      stars: 5,
+      text: "Lorem ipsum dolor sit amet consectetur non adipiscing elit gravida posuere odio metus adipiscing tincidunt venenatis amet sagittis tellus porttitor enim blandit venenatis tellus.",
+      name: "Randall Robertson",
+      title: "Project lead at Agency",
+      logo: "/agency-logo.png",
+      color: "var(--themeColor)",
     },
     {
-      category: "Design",
-      title: "Professional Book Cover Design",
-      author: "Aditi Sharma",
-      description:
-        "Looking for a modern, eye-catching cover design for my romance novel...",
-      duration: "5 days",
-      proposals: "8",
-      price: "$200 - $400",
-      rating: "4.9",
+      image: "/t2.jpg",
+      stars: 4,
+      text: "Dolor sit amet consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh.",
+      name: "Laura White",
+      title: "Design Director at Bright",
+      logo: "/bright-logo.png",
+      color: "var(--themeColor)",
     },
     {
-      category: "Editing",
-      title: "Comprehensive Book Editing",
-      author: "Vikram Singh",
-      description:
-        "Need thorough editing for my 80,000-word historical fiction manuscript...",
-      duration: "10 days",
-      proposals: "5",
-      price: "$600 - $800",
-      rating: "4.7",
-    },
-    {
-      category: "Marketing",
-      title: "Social Media Marketing Campaign",
-      author: "Priya Mehta",
-      description:
-        "Create and execute a 30-day social media marketing strategy for book launch...",
-      duration: "6 days",
-      proposals: "10",
-      price: "$300 - $500",
-      rating: "4.6",
+      image: "/t3.jpg",
+      stars: 5,
+      text: "Amazing team! Really helped streamline our workflow and project delivery. Couldn’t recommend more.",
+      name: "Mohit Sharma",
+      title: "CEO at TechWay",
+      logo: "/techway-logo.png",
+      color: "var(--themeColor)",
     },
   ];
 
-  const projects = [
-    {
-      title: "The Curse of the Wildflower",
-      author: "Smriti Sinha",
-      image: "./9.jpeg",
-    },
-    {
-      title: "A Century Between Us",
-      author: "Gayatri Chandrasekharan",
-      image: "./10.jpeg",
-    },
-    {
-      title: "The Tiger That Crashed My Wedding",
-      author: "Pranav Mishra",
-      image: "./11.jpeg",
-    },
-    { title: "Sun Sakeena", author: "Saadat Hasan Manto", image: "./12.jpeg" },
-  ];
+  const length = testimonials.length;
+
+  const handleNext = () => {
+    setAnimationClass("slide-right");
+    setTimeout(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length);
+    }, 50); // triggers animation smoothly
+  };
+
+  const handlePrev = () => {
+    setAnimationClass("slide-left");
+    setTimeout(() => {
+      setCurrent((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+    }, 50);
+  };
+
+  const { image, stars, text, name, title, logo, color } =
+    testimonials[current];
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (localStorage.getItem("showBeSniperModal") === "true") {
-        setShowSteps(true);
-        localStorage.removeItem("showBeSniperModal");
-      }
+    const timer = setTimeout(() => {
+      setAnimationClass(""); // remove class after animation finishes
+    }, 500); // match animation-duration
 
-      if (localStorage.getItem("showHireFreelancerModal") === "true") {
-        setShowHire(true);
-        localStorage.removeItem("showHireFreelancerModal");
-      }
-    }, 100);
-
-    return () => clearTimeout(timeout);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [current]);
 
   useEffect(() => {
     document.body.style.overflow = showSignup || showSteps ? "hidden" : "auto";
@@ -153,9 +120,8 @@ export default function Home() {
     <div className="main-page">
       <Header onSignupClick={handleSignupClick} />
       <Banner />
-
       {/* Categories */}
-      <div className="category-section">
+      {/* <div className="category-section">
         <h2 className="category-title">Explore by category</h2>
         <div className="category-grid">
           {categories.map((cat, idx) => (
@@ -174,29 +140,142 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
+      <section className="browse-talent-section">
+        <div className="browse-talent-container">
+          <h1>Browse talent by category</h1>
+          <p>
+            Connect with talented freelancers across various fields. Our
+            platform offers a diverse range of services to meet your project
+            needs.
+          </p>
+          <div className="browse-buttons">
+            <button className="post-job-btn">Post a Job</button>
+            <a href="#" className="view-categories-link">
+              View all categories
+            </a>
+          </div>
 
-      {/* How it works */}
-      <div className="how-it-works">
-        <h2 className="how-title">How HubHawks Live Works</h2>
-        <p className="how-subtitle">
-          Our precision approach ensures authors get connected with the right
-          service providers for their specific needs
-        </p>
-        <div className="how-steps">
-          {steps.map((step, idx) => (
-            <div key={idx} className="step-card">
-              <div className="step-icon">{step.icon}</div>
-              <div className="step-number">{idx + 1}</div>
-              <h3 className="step-title">{step.title}</h3>
-              <p className="step-desc">{step.description}</p>
+          <div className="category-cards">
+            <div className="card">
+              <div className="icon">🌐</div>
+              <h3>Digital Marketing</h3>
+              <p>
+                Bring your vision to life with digital marketing professionals
+                ready to assist you.
+              </p>
             </div>
-          ))}
+
+            <div className="card">
+              <div className="icon">✏️</div>
+              <h3>Graphic & Design</h3>
+              <p>
+                Bring your vision to life with creative graphic design
+                professionals ready to assist you.
+              </p>
+            </div>
+
+            <div className="card">
+              <div className="icon">🖥️</div>
+              <h3>Programming & Tech</h3>
+              <p>
+                Bring your vision to life with technologists around the world
+                ready to assist you.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <hr id="border-line" />
+
+      {/* <section className="vetting-section">
+        <div className="vetting-wrapper">
+          <div className="vetting-container">
+            <div className="vetting-text">
+              <h2>How HubHawks Live Works</h2>
+              <p>
+                Our precision approach ensures authors get connected with the
+                right service providers for their specific needs
+              </p>
+              <div className="vetting-buttons">
+                <button className="hire-btn">Hire freelancer</button>
+                <button className="learn-btn">Learn more</button>
+              </div>
+            </div>
+
+            <div className="vetting-scrollable">
+              {[1, 2, 3, 4, 5].map((item, index) => (
+                <div className="vetting-card" key={index}>
+                  <div className="vetting-image">
+                    <Image
+                      src={`/process${item % 2 === 0 ? "2" : "1"}.png`}
+                      width={350}
+                      height={220}
+                      alt={`process-${item}`}
+                      unoptimized
+                    />
+                  </div>
+                  <div className="vetting-info">
+                    <span className="discount">{item}% off pass</span>
+                    <h3>In-depth skill review</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur lorem non
+                      adipiscing elit convallis dolor ut enim.
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section> */}
+      <section className="vetting-section">
+        <div className="vetting-wrapper">
+          <div className="vetting-container">
+            {/* Left Sticky Column */}
+            <div className="vetting-text">
+              <h2>How HubHawks Live Works</h2>
+              <p>
+                Our precision approach ensures authors get connected with the
+                right service providers for their specific needs
+              </p>
+              <div className="vetting-buttons">
+                <button className="hire-btn">Hire freelancer</button>
+                <button className="learn-btn">Learn more</button>
+              </div>
+            </div>
+
+            {/* Right Scrollable Cards */}
+            <div className="vetting-scrollable">
+              {[1, 2, 3, 4, 5].map((item, index) => (
+                <div className="vetting-card" key={index}>
+                  <div className="vetting-image">
+                    <Image
+                      src={`/process${item % 2 === 0 ? "2" : "1"}.png`}
+                      width={350}
+                      height={220}
+                      alt={`process-${item}`}
+                      unoptimized
+                    />
+                  </div>
+                  <div className="vetting-info">
+                    <span className="discount">{item}% off pass</span>
+                    <h3>In-depth skill review</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur lorem non
+                      adipiscing elit convallis dolor ut enim.
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Gigs */}
-      <div className="gigs-section">
+      {/* <div className="gigs-section">
         <h2 className="gigs-title" id="home-gigs-title">
           Active Gigs
         </h2>
@@ -231,9 +310,135 @@ export default function Home() {
         <div className="view-btn">
           <button>View All Gigs</button>
         </div>
-      </div>
+      </div> */}
 
-      {/* Sniper CTA */}
+      {/* <section className="hero-section">
+        <div className="" id="dark-overlay"></div>
+        <div className="hero-content">
+          <div className="hero-container">
+            <div className="hero-text">
+              <h1>Experience freelance talent like never before</h1>
+              <p>
+                Partnering with top freelancers can elevate your projects and
+                drive results. Our platform connects you with skilled
+                professionals ready to tackle your unique challenges. Experience
+                the flexibility and expertise that comes with freelance
+                collaboration.
+              </p>
+              <div className="hero-buttons">
+                <button className="orange-btn">Post a Job</button>
+                <a href="#" className="browse-link">
+                  Browse Freelancers →
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="hero-cards">
+            <div className="hero-card">
+              <h3>Diverse Talent Pool</h3>
+              <p>
+                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
+                plum topping cake toffee powder cupcake tiramisu apple pie.
+              </p>
+              <a href="#">Browse Freelancers →</a>
+            </div>
+            <div className="hero-card">
+              <h3>Easily post Jobs</h3>
+              <p>
+                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
+                plum topping cake toffee powder cupcake tiramisu apple pie.
+              </p>
+              <a href="#">Post a Job →</a>
+            </div>
+            <div className="hero-card">
+              <h3>Manage Contracts</h3>
+              <p>
+                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
+                plum topping cake toffee powder cupcake tiramisu apple pie.
+              </p>
+              <a href="#">Sign up →</a>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      <section className="hero-section">
+        <div className="" id="dark-overlay"></div>
+        <div className="hero-content">
+          <div className="hero-container">
+            <div className="hero-text">
+              <h1>Experience freelance talent like never before</h1>
+              <p>
+                Partnering with top freelancers can elevate your projects and
+                drive results. Our platform connects you with skilled
+                professionals ready to tackle your unique challenges. Experience
+                the flexibility and expertise that comes with freelance
+                collaboration.
+              </p>
+              <div className="hero-buttons">
+                <button className="orange-btn">Post a Job</button>
+                <a href="#" className="browse-link">
+                  Browse Freelancers →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="hero-cards">
+            <div className="hero-card">
+              <h3>Diverse Talent Pool</h3>
+              <p>
+                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
+                plum topping cake toffee powder cupcake tiramisu apple pie.
+              </p>
+              <a href="#">Browse Freelancers →</a>
+            </div>
+            <div className="hero-card">
+              <h3>Easily post Jobs</h3>
+              <p>
+                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
+                plum topping cake toffee powder cupcake tiramisu apple pie.
+              </p>
+              <a href="#">Post a Job →</a>
+            </div>
+            <div className="hero-card">
+              <h3>Manage Contracts</h3>
+              <p>
+                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
+                plum topping cake toffee powder cupcake tiramisu apple pie.
+              </p>
+              <a href="#">Sign up →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="freelancer-section">
+        <h1>Vetted talent at your fingertips!</h1>
+        <div className="freelancer-header">
+          <p>Discover skilled freelancers ready to assist you.</p>
+          <a href="#">View all →</a>
+        </div>
+
+        <div className="freelancer-grid">
+          {freelancers.map((freelancer, index) => (
+            <div className="freelancer-card" key={index}>
+              <img
+                src={freelancer.image}
+                alt={freelancer.name}
+                className="freelancer-image"
+              />
+              <h3>{freelancer.name}</h3>
+              <span>{freelancer.title}</span>
+              <p className="desc">{freelancer.desc}</p>
+              <div className="freelancer-actions">
+                <button>View Profile</button>
+                <a href="#">Book a Call →</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <div className="sniper-cta">
         <div className="sniper-cta-left">
           <h2>Become a sniper and start earning</h2>
@@ -272,8 +477,43 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Projects */}
-      <div className="projects-section">
+      <section className="testimonial-section">
+        <div className="testimonial-wrapper">
+          {/* Left Column */}
+          <div className="testimonial-left">
+            <h2>Here’s what our great customers say.</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipiscing elit sed
+              accumsan ultrices aliquam nibh lectus non feugiat placerat ut
+              facilisis velit neque.
+            </p>
+            <div className="testimonial-buttons">
+              <button onClick={handlePrev}>&larr;</button>
+              <button onClick={handleNext}>&rarr;</button>
+            </div>
+          </div>
+
+          {/* Right Column (Card) */}
+          <div className={`testimonial-card ${animationClass}`}>
+            <div className="testimonial-photo">
+              <img src={image} alt={name} />
+            </div>
+            <div className="testimonial-content">
+              <div className="testimonial-stars">
+                {"★".repeat(stars)}
+                {"☆".repeat(5 - stars)}
+              </div>
+              <p className="testimonial-text">{text}</p>
+              <h4>{name}</h4>
+              <p className="testimonial-title" style={{ color: color }}>
+                {title}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <div className="projects-section">
         <h2 className="projects-title">How Far We Have Come</h2>
         <p className="projects-subtitle">
           Our snipers have delivered exceptional results for authors across
@@ -293,10 +533,9 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
-      {/* Stats */}
-      <div className="stats-section">
+      {/* <div className="stats-section">
         <div className="stat-box">
           <div className="stat">
             <h3>500+</h3>
@@ -311,50 +550,44 @@ export default function Home() {
             <p>Expert Snipers</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* Final CTA */}
-      <div className="snipers-support-section">
-        <div className="snipers-icon">
-          <svg
-            id="logo-icon"
-            className="header__logo"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="#f4c200"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
-        </div>
-        <h2 className="snipers-title">Our Snipers Have Got You</h2>
-        <p className="snipers-desc">
-          Join thousands of authors who trust HubHawks Live for their publishing
-          needs. From cover design to marketing campaigns, our expert snipers
-          deliver results with precision.
-        </p>
-        <div className="snipers-cta">
-          <button className="snipers-btn">Join Us</button>
-          <div className="snipers-trust">
-            <p>Trusted by 10,000+ authors</p>
-            <div className="snipers-avatars">
-              <div className="avatar yellow"></div>
-              <div className="avatar orange"></div>
-              <div className="avatar dark"></div>
-              <div className="avatar number">+10k</div>
-            </div>
+      <div className="sniper-support-df">
+        <div className="snipers-support-section">
+          <div className="snipers-icon">
+            <svg
+              id="logo-icon"
+              className="header__logo"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="#f4c200"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
+          <h2 className="snipers-title">Our Snipers Have Got You</h2>
+          <p className="snipers-desc">
+            Join thousands of authors who trust HubHawks Live for their
+            publishing needs. From cover design to marketing campaigns, our
+            expert snipers deliver results with precision.
+          </p>
+          <div className="snipers-cta">
+            <button className="snipers-btn">Join Us</button>
+            <button className="snipers-btn" id="post">
+              Join Us
+            </button>
           </div>
         </div>
       </div>
-
+      
       <Footer />
-
       {showSignup && <SignupModal onClose={() => setShowSignup(false)} />}
       {showSteps && <BeSniperModal onClose={() => setShowSteps(false)} />}
       {showHire && <HireFreelancer onClose={() => setShowHire(false)} />}
