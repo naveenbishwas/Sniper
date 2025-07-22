@@ -1,6 +1,7 @@
 import React from "react";
 import "./footer.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -102,6 +103,9 @@ const Footer = () => {
           <p>
             © 2024 BookSnipers. All rights reserved. Precision targeting for
             your book services.
+          </p>
+          <p>
+            Designed By <Link href="https://unnity.in/">Unnity</Link>
           </p>
         </div>
       </footer>

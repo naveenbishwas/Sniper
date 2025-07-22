@@ -1,102 +1,5 @@
-.category-section {
-  padding: 60px 20px;
-  background-color: var(--background);
-  text-align: center;
-}
-
-.category-title {
-  font-size: 2.5rem;
-  text-transform: capitalize;
-  font-weight: 700;
-  margin-bottom: 40px;
-}
-
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 1350px;
-  margin: 0 auto;
-  row-gap: 30px;
-  column-gap: 25px;
-}
-
 #border-line {
   border: 0.4px solid rgb(215, 214, 214);
-}
-
-.category-card {
-  background: var(--background);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
-  cursor: pointer;
-  border: 0.5px solid #eaeaea;
-}
-
-.category-card:hover {
-  transform: translateY(-5px);
-}
-
-.category-image {
-  height: 130px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  transition: filter 0.3s ease, brightness 0.3s ease;
-}
-
-.category-image:hover {
-  filter: brightness(0.5) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
-}
-
-.category-icon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: var(--background);
-  padding: 8px;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.category-label {
-  padding: 20px 15px;
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #000;
-}
-
-.category-label.highlight {
-  color: var(--foreground);
-}
-
-/* Responsive Layout */
-@media (max-width: 1024px) {
-  .category-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .category-title {
-    font-size: 1.6rem;
-  }
-
-  .category-label {
-    font-size: 17px;
-  }
-}
-
-@media (max-width: 480px) {
-  .category-title {
-    font-size: 1.4rem;
-  }
 }
 
 .how-it-works {
@@ -489,76 +392,6 @@
   }
 }
 
-.projects-section {
-  padding: 80px 20px;
-  background-color: #fff;
-  text-align: center;
-}
-
-.projects-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.projects-subtitle {
-  font-size: 1.1rem;
-  color: #555;
-  max-width: 700px;
-  margin: 0 auto 40px;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  max-width: 1350px;
-  margin: 0 auto;
-}
-
-.project-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  text-align: center;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  padding-bottom: 20px;
-}
-
-.project-image {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-}
-
-.project-name {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-top: 15px;
-}
-
-.project-author {
-  font-size: 0.95rem;
-  color: hsl(215deg 13.79% 34.12%);
-  font-weight: 500;
-  margin-bottom: 10px;
-  padding: 13px 0;
-}
-
-.project-tag {
-  display: inline-block;
-  background: var(--themeColor);
-  color: var(--background);
-  font-weight: 600;
-  font-size: 0.8rem;
-  padding: 6px 14px;
-  border-radius: 999px;
-}
-
-svg#logo-icon {
-  stroke: var(--background);
-}
-
 /* Responsive */
 @media (max-width: 1024px) {
   .projects-grid {
@@ -622,62 +455,6 @@ svg#logo-icon {
 
   section.hero-section {
     margin-top: 20%;
-  }
-}
-
-.stats-section {
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 6%;
-}
-
-.stat-box {
-  background-color: #f9fafb;
-  border-radius: 12px;
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 60px;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.03);
-  border: 1px solid #cbcbcb;
-}
-
-.stat h3 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.stat p {
-  font-size: 1rem;
-  color: #607d8b;
-}
-
-.main-page {
-  max-width: 100% !important;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .stat-box {
-    flex-wrap: unset;
-    gap: 30px;
-    padding: 30px 20px;
-    border-radius: unset;
-  }
-
-  .stat p {
-    font-size: 13px;
-  }
-
-  .stat h3 {
-    font-size: 1.6rem;
   }
 }
 
@@ -814,6 +591,7 @@ svg#logo-icon {
 
 .browse-talent-section {
   padding: 80px 20px;
+  padding-top: 50px;
   background-color: #fff;
   font-family: Arial, sans-serif;
 }

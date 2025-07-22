@@ -110,6 +110,26 @@ export default function Home() {
     document.body.style.overflow = showSignup || showSteps ? "hidden" : "auto";
   }, [showSignup, showSteps]);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (localStorage.getItem("showBeSniperModal") === "true") {
+        setShowSteps(true);
+        localStorage.removeItem("showBeSniperModal");
+      }
+
+      if (localStorage.getItem("showHireFreelancerModal") === "true") {
+        setShowHire(true);
+        localStorage.removeItem("showHireFreelancerModal");
+      }
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = showSignup || showSteps ? "hidden" : "auto";
+  }, [showSignup, showSteps]);
+
   const handleSignupClick = (selectedRole) => {
     setRole(selectedRole);
     localStorage.setItem("userRole", selectedRole);
@@ -120,27 +140,7 @@ export default function Home() {
     <div className="main-page">
       <Header onSignupClick={handleSignupClick} />
       <Banner />
-      {/* Categories */}
-      {/* <div className="category-section">
-        <h2 className="category-title">Explore by category</h2>
-        <div className="category-grid">
-          {categories.map((cat, idx) => (
-            <div key={idx} className="category-card">
-              <div
-                className="category-image"
-                style={{ backgroundImage: `url(${cat.image})` }}
-              >
-                <span className="category-icon">{cat.icon}</span>
-              </div>
-              <div
-                className={`category-label ${cat.highlight ? "highlight" : ""}`}
-              >
-                {cat.name}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> */}
+
       <section className="browse-talent-section">
         <div className="browse-talent-container">
           <h1>Browse talent by category</h1>
@@ -189,47 +189,6 @@ export default function Home() {
 
       <hr id="border-line" />
 
-      {/* <section className="vetting-section">
-        <div className="vetting-wrapper">
-          <div className="vetting-container">
-            <div className="vetting-text">
-              <h2>How HubHawks Live Works</h2>
-              <p>
-                Our precision approach ensures authors get connected with the
-                right service providers for their specific needs
-              </p>
-              <div className="vetting-buttons">
-                <button className="hire-btn">Hire freelancer</button>
-                <button className="learn-btn">Learn more</button>
-              </div>
-            </div>
-
-            <div className="vetting-scrollable">
-              {[1, 2, 3, 4, 5].map((item, index) => (
-                <div className="vetting-card" key={index}>
-                  <div className="vetting-image">
-                    <Image
-                      src={`/process${item % 2 === 0 ? "2" : "1"}.png`}
-                      width={350}
-                      height={220}
-                      alt={`process-${item}`}
-                      unoptimized
-                    />
-                  </div>
-                  <div className="vetting-info">
-                    <span className="discount">{item}% off pass</span>
-                    <h3>In-depth skill review</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur lorem non
-                      adipiscing elit convallis dolor ut enim.
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
       <section className="vetting-section">
         <div className="vetting-wrapper">
           <div className="vetting-container">
@@ -246,7 +205,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Scrollable Cards */}
             <div className="vetting-scrollable">
               {[1, 2, 3, 4, 5].map((item, index) => (
                 <div className="vetting-card" key={index}>
@@ -312,55 +270,6 @@ export default function Home() {
         </div>
       </div> */}
 
-      {/* <section className="hero-section">
-        <div className="" id="dark-overlay"></div>
-        <div className="hero-content">
-          <div className="hero-container">
-            <div className="hero-text">
-              <h1>Experience freelance talent like never before</h1>
-              <p>
-                Partnering with top freelancers can elevate your projects and
-                drive results. Our platform connects you with skilled
-                professionals ready to tackle your unique challenges. Experience
-                the flexibility and expertise that comes with freelance
-                collaboration.
-              </p>
-              <div className="hero-buttons">
-                <button className="orange-btn">Post a Job</button>
-                <a href="#" className="browse-link">
-                  Browse Freelancers →
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="hero-cards">
-            <div className="hero-card">
-              <h3>Diverse Talent Pool</h3>
-              <p>
-                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
-                plum topping cake toffee powder cupcake tiramisu apple pie.
-              </p>
-              <a href="#">Browse Freelancers →</a>
-            </div>
-            <div className="hero-card">
-              <h3>Easily post Jobs</h3>
-              <p>
-                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
-                plum topping cake toffee powder cupcake tiramisu apple pie.
-              </p>
-              <a href="#">Post a Job →</a>
-            </div>
-            <div className="hero-card">
-              <h3>Manage Contracts</h3>
-              <p>
-                Toffee sweet macaroon chocolate cake lollipop shortbread. Sugar
-                plum topping cake toffee powder cupcake tiramisu apple pie.
-              </p>
-              <a href="#">Sign up →</a>
-            </div>
-          </div>
-        </div>
-      </section> */}
       <section className="hero-section">
         <div className="" id="dark-overlay"></div>
         <div className="hero-content">
@@ -479,7 +388,6 @@ export default function Home() {
 
       <section className="testimonial-section">
         <div className="testimonial-wrapper">
-          {/* Left Column */}
           <div className="testimonial-left">
             <h2>Here’s what our great customers say.</h2>
             <p>
@@ -493,7 +401,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Column (Card) */}
           <div className={`testimonial-card ${animationClass}`}>
             <div className="testimonial-photo">
               <img src={image} alt={name} />
@@ -512,45 +419,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* <div className="projects-section">
-        <h2 className="projects-title">How Far We Have Come</h2>
-        <p className="projects-subtitle">
-          Our snipers have delivered exceptional results for authors across
-          genres. See some of our recent cover design projects.
-        </p>
-        <div className="projects-grid">
-          {projects.map((item, idx) => (
-            <div className="project-card" key={idx}>
-              <img
-                src={item.image}
-                alt={item.title}
-                className="project-image"
-              />
-              <h3 className="project-name">{item.title}</h3>
-              <p className="project-author">by {item.author}</p>
-              <span className="project-tag">Cover Design</span>
-            </div>
-          ))}
-        </div>
-      </div> */}
-
-      {/* <div className="stats-section">
-        <div className="stat-box">
-          <div className="stat">
-            <h3>500+</h3>
-            <p>Projects Completed</p>
-          </div>
-          <div className="stat">
-            <h3>98%</h3>
-            <p>Client Satisfaction</p>
-          </div>
-          <div className="stat">
-            <h3>50+</h3>
-            <p>Expert Snipers</p>
-          </div>
-        </div>
-      </div> */}
 
       <div className="sniper-support-df">
         <div className="snipers-support-section">
@@ -586,7 +454,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       <Footer />
       {showSignup && <SignupModal onClose={() => setShowSignup(false)} />}
       {showSteps && <BeSniperModal onClose={() => setShowSteps(false)} />}
