@@ -143,17 +143,21 @@ export default function Home() {
 
       <section className="browse-talent-section">
         <div className="browse-talent-container">
-          <h1>Browse talent by category</h1>
-          <p>
-            Connect with talented freelancers across various fields. Our
-            platform offers a diverse range of services to meet your project
-            needs.
-          </p>
-          <div className="browse-buttons">
-            <button className="post-job-btn">Post a Job</button>
-            <a href="#" className="view-categories-link">
-              View all categories
-            </a>
+          <div className="browse-talent-container-df">
+            <span>
+              <h1>Browse talent by category</h1>
+              <p>
+                Connect with talented freelancers across various fields. Our
+                platform offers a diverse range of services to meet your project
+                needs.
+              </p>
+            </span>
+            <div className="browse-buttons">
+              <button className="post-job-btn">Post a Job</button>
+              <a href="#" className="view-categories-link">
+                View all categories
+              </a>
+            </div>
           </div>
 
           <div className="category-cards">
@@ -206,7 +210,7 @@ export default function Home() {
             </div>
 
             <div className="vetting-scrollable">
-              {[1, 2, 3, 4, 5].map((item, index) => (
+              {[1, 2, 3, 4].map((item, index) => (
                 <div className="vetting-card" key={index}>
                   <div className="vetting-image">
                     <Image
@@ -361,7 +365,7 @@ export default function Home() {
               ✅ Develop a freelance business around your book-related talents
             </li>
           </ul>
-          <button className="yellow-btn">Be a Sniper</button>
+          <button className="yellow-btn">Be a Freelancer</button>
         </div>
         <div className="sniper-cta-right">
           <h3>Ready to get started?</h3>
@@ -449,7 +453,7 @@ export default function Home() {
           <div className="snipers-cta">
             <button className="snipers-btn">Join Us</button>
             <button className="snipers-btn" id="post">
-              Join Us
+              Post a Job
             </button>
           </div>
         </div>

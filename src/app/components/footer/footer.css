@@ -31,7 +31,6 @@
 }
 
 .footer-icon {
-  background: var(--themeColor);
   color: var(--background);
   border-radius: 6px;
   display: grid;

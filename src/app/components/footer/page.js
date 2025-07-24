@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="footer-logo">
               <div className="footer-icon">
                 <Image
-                  src={"/logo1.jpeg"}
+                  src={"/logo3.png"}
                   className="header__logo"
                   width={55}
                   height={55}
@@ -20,7 +20,6 @@ const Footer = () => {
                   alt="logo"
                 ></Image>
               </div>
-              <span>BookSnipers</span>
             </div>
             <p>
               Precision targeting for book services.
@@ -105,7 +104,10 @@ const Footer = () => {
             your book services.
           </p>
           <p>
-            Designed By <Link href="https://unnity.in/">Unnity</Link>
+            Designed By{" "}
+            <Link href="https://unnity.in/" target="_blank">
+              Unnity
+            </Link>
           </p>
         </div>
       </footer>
