@@ -338,6 +338,8 @@ export default function Home() {
               <Image
                 src={freelancer.image}
                 alt={freelancer.name}
+                width={0}
+                height={0}
                 className="freelancer-image"
               />
               <h3>{freelancer.name}</h3>
@@ -407,7 +409,7 @@ export default function Home() {
 
           <div className={`testimonial-card ${animationClass}`}>
             <div className="testimonial-photo">
-              <Image src={image} alt={name} />
+              <Image src={image} alt={name} width={0} height={0} unoptimized />
             </div>
             <div className="testimonial-content">
               <div className="testimonial-stars">
