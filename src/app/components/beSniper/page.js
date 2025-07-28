@@ -428,7 +428,7 @@ export default function BeSniperModal({ onClose }) {
     else if (!/^[A-Za-z\s]+$/.test(name))
       newErrors.name = "Full Name can only contain letters and spaces.";
 
-    if (!bio.trim() || bio.length < 20 || /[\d]{10}|@|\+91/.test(bio))
+    if (!bio.trim() || bio.length < 150 || /[\d]{10}|@|\+91/.test(bio))
       newErrors.bio = "Bio must be 20+ characters and without contact info.";
 
     if (!language.trim()) newErrors.language = "Languages Known is required.";
@@ -608,7 +608,10 @@ export default function BeSniperModal({ onClose }) {
                   <div className="form-fields">
                     {[
                       { name: "name", label: "Full Name *Private" },
-                      { name: "bio", label: "Bio *No contact info" },
+                      {
+                        name: "bio",
+                        label: "Bio *No contact info(Chars Limit:- Min 150)",
+                      },
                       { name: "language", label: "Languages Known" },
                       { name: "occupation", label: "Occupation" },
                       { name: "skills", label: "Skills" },

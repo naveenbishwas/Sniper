@@ -10,6 +10,8 @@ import {
 } from "firebase/auth";
 import { useAuth } from "@/context/AuthContext";
 import { useHasMounted } from "@/hooks/useHasMounted";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 import "./login.css";
 
@@ -47,11 +49,79 @@ export default function LoginClient() {
     }
   };
 
+  // const redirectUser = async () => {
+  //   const currentUser = auth.currentUser;
+
+  //   if (!currentUser) return;
+
+  //   try {
+  //     const userRef = doc(db, "users", currentUser.uid);
+  //     const userSnap = await getDoc(userRef);
+
+  //     if (userSnap.exists()) {
+  //       const userData = userSnap.data();
+
+  //       if (userData.userType === "beSniper") {
+  //         router.replace("/components/gigsPage");
+  //       } else if (userData.userType === "HireFreelancer") {
+  //         router.replace("/components/cardProfile");
+  //       } else {
+  //         router.replace("/");
+  //       }
+  //     } else {
+  //       console.log("User document not found.");
+  //       router.replace("/");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching user role:", error);
+  //     router.replace("/");
+  //   }
+  // };
+
+  // const loginWithEmail = async () => {
+  //   setError("");
+  //   try {
+  //     await signInWithEmailAndPassword(auth, email, password);
+  //     redirectUser();
+  //   } catch (err) {
+  //     if (err.code === "auth/user-not-found") {
+  //       setError("⚠️ User not found. Please sign up first.");
+  //     } else if (err.code === "auth/wrong-password") {
+  //       setError("⚠️ Incorrect password.");
+  //     } else {
+  //       setError(err.message || "⚠️ Login failed.");
+  //     }
+  //   }
+  // };
+
   const loginWithEmail = async () => {
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      redirectUser();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      // ✅ Fetch role from Firestore
+      const userDocRef = doc(db, "users", user.email);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const role = userDoc.data().role;
+        localStorage.setItem("userRole", role);
+
+        if (role === "beSniper") {
+          router.replace("/components/gigsPage");
+        } else if (role === "HireFreelancer") {
+          router.replace("/components/cardProfile");
+        } else {
+          router.replace("/");
+        }
+      } else {
+        setError("⚠️ No role information found. Please contact support.");
+      }
     } catch (err) {
       if (err.code === "auth/user-not-found") {
         setError("⚠️ User not found. Please sign up first.");
@@ -63,13 +133,41 @@ export default function LoginClient() {
     }
   };
 
+  // const loginWithGoogle = async () => {
+  //   setError("");
+  //   try {
+  //     await signInWithPopup(auth, new GoogleAuthProvider());
+  //     redirectUser();
+  //   } catch (err) {
+  //     setError(err.message || "⚠️ Google login failed.");
+  //   }
+  // };
+
   const loginWithGoogle = async () => {
     setError("");
+
     try {
-      await signInWithPopup(auth, new GoogleAuthProvider());
-      redirectUser();
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      const user = result.user;
+
+      const userDocRef = doc(db, "users", user.email);
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (!userSnapshot.exists()) {
+        setError("⚠️ No role info found for this Google account.");
+        return;
+      }
+
+      const role = userSnapshot.data().role;
+
+      localStorage.setItem("userRole", role);
+      localStorage.setItem("email", user.email);
+
+      router.replace(
+        role === "beSniper" ? "/components/gigsPage" : "/components/cardProfile"
+      );
     } catch (err) {
-      setError(err.message || "⚠️ Google login failed.");
+      setError(err.message || "Google login failed");
     }
   };
 

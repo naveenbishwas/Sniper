@@ -1,208 +1,3 @@
-// "use client";
-
-// import { useState, useEffect } from "react";
-// import Head from "next/head";
-// import {
-//   getAuth,
-//   createUserWithEmailAndPassword,
-//   GoogleAuthProvider,
-//   signInWithPopup,
-// } from "firebase/auth";
-// import { useRouter, useSearchParams } from "next/navigation";
-// import { doc, getDoc, setDoc } from "firebase/firestore";
-// import { db } from "@/lib/firebase"; // Make sure this is correct path
-// import "./signup.css";
-// import Link from "next/link";
-
-// export default function Signup() {
-//   const auth = getAuth();
-//   const router = useRouter();
-//   const searchParams = useSearchParams();
-
-//   const rawRole = searchParams.get("role");
-//   const role = rawRole || localStorage.getItem("userRole") || null;
-
-//   useEffect(() => {
-//     if (!role) {
-//       router.push("/");
-//     } else {
-//       localStorage.setItem("userRole", role);
-//     }
-//   }, [role]);
-
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [fullName, setFullName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [errorMsg, setErrorMsg] = useState("");
-
-//   // ✅ Unique ID function
-//   const generateUniqueId = async (name) => {
-//     const cleanedName = name.toLowerCase().replace(/\s/g, "");
-//     const randomNum = Math.floor(100 + Math.random() * 900);
-//     const uniqueId = `${cleanedName}${randomNum}`;
-
-//     const docRef = doc(db, "uniqueUserIds", uniqueId);
-//     const docSnap = await getDoc(docRef);
-
-//     if (docSnap.exists()) {
-//       return generateUniqueId(name); // retry if already exists
-//     }
-
-//     await setDoc(docRef, {
-//       uniqueId,
-//       createdAt: new Date().toISOString(),
-//       email,
-//       name,
-//     });
-
-//     return uniqueId;
-//   };
-
-//   const handleSignup = async (e) => {
-//     e.preventDefault();
-//     setErrorMsg("");
-
-//     if (!fullName || !email || !password) {
-//       setErrorMsg("All fields are required.");
-//       return;
-//     }
-
-//     try {
-//       const userCredential = await createUserWithEmailAndPassword(
-//         auth,
-//         email,
-//         password
-//       );
-
-//       // ✅ Generate & Save Unique ID
-//       const uniqueId = await generateUniqueId(fullName);
-//       localStorage.setItem("uniqueId", uniqueId);
-//       console.log(uniqueId);
-
-//       // ✅ Save other form values (optional)
-//       localStorage.setItem("fullName", fullName);
-//       localStorage.setItem("email", email);
-
-//       // ✅ Redirect to respective form
-//       if (role === "beSniper") {
-//         router.push("/components/beSniper");
-//       } else if (role === "HireFreelancer") {
-//         router.push("/components/HireFreelancer");
-//       } else {
-//         router.push("/");
-//       }
-//     } catch (error) {
-//       if (error.code === "auth/email-already-in-use") {
-//         setErrorMsg("This email is already registered. Please login.");
-//       } else {
-//         setErrorMsg(error.message || "Signup failed");
-//       }
-//     }
-//   };
-
-//   const loginWithGoogle = async () => {
-//     try {
-//       await signInWithPopup(auth, new GoogleAuthProvider());
-
-//       // Optionally generate unique ID for Google users as well
-//       const uniqueId = await generateUniqueId(fullName || "googleuser");
-//       console.log(uniqueId);
-//       localStorage.setItem("uniqueId", uniqueId);
-
-//       if (role === "beSniper") {
-//         router.push("/components/beSniper");
-//       } else if (role === "HireFreelancer") {
-//         router.push("/components/HireFreelancer");
-//       } else {
-//         router.push("/");
-//       }
-//     } catch (err) {
-//       setErrorMsg(err.message || "Google login failed");
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Head>
-//         <title>Signup Page</title>
-//       </Head>
-//       <div className="signup-container">
-//         <form className="signup-form" onSubmit={handleSignup}>
-//           <h2>
-//             Sign up to{" "}
-//             {role === "beSniper"
-//               ? "Hire a Freelancer"
-//               : role === "HireFreelancer"
-//               ? "Be a Freelancer"
-//               : "Get Started"}
-//           </h2>
-
-//           {errorMsg && <p className="error">{errorMsg}</p>}
-
-//           <label htmlFor="name">Full Name</label>
-//           <input
-//             type="text"
-//             id="name"
-//             placeholder="Your name"
-//             value={fullName}
-//             onChange={(e) => setFullName(e.target.value)}
-//             required
-//           />
-
-//           <label htmlFor="email">Email</label>
-//           <input
-//             type="email"
-//             id="email"
-//             placeholder="you@example.com"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//           />
-
-//           <label htmlFor="password">Password</label>
-//           <div className="password-wrapper">
-//             <input
-//               type={showPassword ? "text" : "password"}
-//               id="password"
-//               placeholder="Enter password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//               required
-//             />
-//             <button
-//               id="show"
-//               type="button"
-//               onClick={() => setShowPassword(!showPassword)}
-//             >
-//               {showPassword ? "Hide" : "Show"}
-//             </button>
-//           </div>
-
-//           <button type="submit" className="submit-btn">
-//             Sign Up
-//           </button>
-//           <button
-//             type="button"
-//             onClick={loginWithGoogle}
-//             className="btn-google"
-//           >
-//             Signup with Google
-//           </button>
-
-//           <div className="sign-login">
-//             <p>
-//               Dont have account
-//               <span>
-//                 <Link href="/login">Login</Link>
-//               </span>
-//             </p>
-//           </div>
-//         </form>
-//       </div>
-//     </>
-//   );
-// }
 "use client";
 
 import { useState } from "react";
@@ -253,6 +48,40 @@ export default function SignupModal({ onClose }) {
     return uniqueId;
   };
 
+  // const handleSignup = async (e) => {
+  //   e.preventDefault();
+  //   setErrorMsg("");
+
+  //   if (!fullName || !email || !password) {
+  //     setErrorMsg("All fields are required.");
+  //     return;
+  //   }
+
+  //   try {
+  //     await createUserWithEmailAndPassword(auth, email, password);
+
+  //     const uniqueId = await generateUniqueId(fullName);
+  //     localStorage.setItem("uniqueId", uniqueId);
+  //     localStorage.setItem("fullName", fullName);
+  //     localStorage.setItem("email", email);
+
+  //     // ✅ Store flow state and redirect
+  //     if (role === "beSniper") {
+  //       localStorage.setItem("showBeSniperModal", "true");
+  //     } else if (role === "HireFreelancer") {
+  //       localStorage.setItem("showHireFreelancerModal", "true");
+  //     }
+
+  //     window.location.href = "/"; // ✅ redirect to homepage
+  //   } catch (error) {
+  //     setErrorMsg(
+  //       error.code === "auth/email-already-in-use"
+  //         ? "This email is already registered. Please login."
+  //         : error.message || "Signup failed"
+  //     );
+  //   }
+  // };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setErrorMsg("");
@@ -263,12 +92,37 @@ export default function SignupModal({ onClose }) {
     }
 
     try {
+      // ✅ Check if email already exists in users collection
+      const userDocRef = doc(db, "users", email); // Using email as doc ID
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (userSnapshot.exists()) {
+        const existingRole = userSnapshot.data().role;
+        if (existingRole !== role) {
+          setErrorMsg(
+            `This email is already registered as a ${existingRole}. You can't register again as ${role}.`
+          );
+          return;
+        }
+      }
+
+      // ✅ Create Firebase Auth account
       await createUserWithEmailAndPassword(auth, email, password);
 
+      // ✅ Generate & Save Unique ID
       const uniqueId = await generateUniqueId(fullName);
       localStorage.setItem("uniqueId", uniqueId);
       localStorage.setItem("fullName", fullName);
       localStorage.setItem("email", email);
+
+      // ✅ Save to Firestore
+      await setDoc(userDocRef, {
+        email,
+        name: fullName,
+        role,
+        uniqueId,
+        createdAt: new Date().toISOString(),
+      });
 
       // ✅ Store flow state and redirect
       if (role === "beSniper") {
@@ -277,7 +131,7 @@ export default function SignupModal({ onClose }) {
         localStorage.setItem("showHireFreelancerModal", "true");
       }
 
-      window.location.href = "/"; // ✅ redirect to homepage
+      window.location.href = "/";
     } catch (error) {
       setErrorMsg(
         error.code === "auth/email-already-in-use"
@@ -287,20 +141,73 @@ export default function SignupModal({ onClose }) {
     }
   };
 
+  // const loginWithGoogle = async () => {
+  //   try {
+  //     await signInWithPopup(auth, new GoogleAuthProvider());
+  //     const uniqueId = await generateUniqueId(fullName || "googleuser");
+  //     localStorage.setItem("uniqueId", uniqueId);
+
+  //     if (role === "beSniper") {
+  //       localStorage.setItem("showBeSniperModal", "true");
+  //     } else if (role === "HireFreelancer") {
+  //       localStorage.setItem("showHireFreelancerModal", "true");
+  //     }
+  //     window.location.href = "/";
+  //   } catch (err) {
+  //     setErrorMsg(err.message || "Google login failed");
+  //   }
+  // };
   const loginWithGoogle = async () => {
+    setErrorMsg("");
+
     try {
-      await signInWithPopup(auth, new GoogleAuthProvider());
-      const uniqueId = await generateUniqueId(fullName || "googleuser");
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      const user = result.user;
+
+      const userDocRef = doc(db, "users", user.email);
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (userSnapshot.exists()) {
+        // ✅ Already signed up — prevent role conflict
+        const existingRole = userSnapshot.data().role;
+
+        if (existingRole !== role) {
+          setErrorMsg(
+            `This email is already registered as a ${existingRole}. You can't register again as ${role}.`
+          );
+          return;
+        }
+
+        // ✅ Redirect directly
+        localStorage.setItem("userRole", existingRole);
+        router.replace(
+          existingRole === "beSniper"
+            ? "/components/gigsPage"
+            : "/components/cardProfile"
+        );
+        return;
+      }
+
+      // 🆕 First-time Google user
+      const uniqueId = await generateUniqueId(user.displayName || "googleuser");
+
+      await setDoc(userDocRef, {
+        email: user.email,
+        name: user.displayName || "Google User",
+        role,
+        uniqueId,
+        createdAt: new Date().toISOString(),
+      });
+
+      localStorage.setItem("userRole", role);
+      localStorage.setItem("email", user.email);
       localStorage.setItem("uniqueId", uniqueId);
 
-      if (role === "beSniper") {
-        localStorage.setItem("showBeSniperModal", "true");
-      } else if (role === "HireFreelancer") {
-        localStorage.setItem("showHireFreelancerModal", "true");
-      }
-      window.location.href = "/";
+      router.replace(
+        role === "beSniper" ? "/components/gigsPage" : "/components/cardProfile"
+      );
     } catch (err) {
-      setErrorMsg(err.message || "Google login failed");
+      setErrorMsg(err.message || "Google signup failed");
     }
   };
 

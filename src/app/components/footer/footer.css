@@ -12,7 +12,7 @@
   flex-wrap: wrap;
   max-width: 1350px;
   margin: 0 auto;
-  gap: 40px;
+  gap: 30px;
 }
 
 .footer-column {
@@ -28,6 +28,11 @@
 
 .footer-logo span {
   color: var(--themeColor);
+}
+
+.footer-logo .footer-icon img {
+  width: 100px;
+  height: auto;
 }
 
 .footer-icon {
@@ -57,6 +62,7 @@
 
 .footer-icons {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 

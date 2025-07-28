@@ -1,0 +1,47 @@
+/* app/terms/terms.css */
+.terms-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  line-height: 1.7;
+  background-color: #fff;
+}
+
+.terms-container h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #111;
+}
+
+.terms-container section {
+  margin-bottom: 30px;
+}
+
+.terms-container section h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.terms-container section p {
+  font-size: 16px;
+}
+
+.terms-container a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.terms-container a:hover {
+  text-decoration: underline;
+}
+
+.terms-final {
+  margin-top: 40px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+}
