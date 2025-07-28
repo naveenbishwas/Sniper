@@ -141,75 +141,75 @@ export default function SignupModal({ onClose }) {
     }
   };
 
-  // const loginWithGoogle = async () => {
-  //   try {
-  //     await signInWithPopup(auth, new GoogleAuthProvider());
-  //     const uniqueId = await generateUniqueId(fullName || "googleuser");
-  //     localStorage.setItem("uniqueId", uniqueId);
-
-  //     if (role === "beSniper") {
-  //       localStorage.setItem("showBeSniperModal", "true");
-  //     } else if (role === "HireFreelancer") {
-  //       localStorage.setItem("showHireFreelancerModal", "true");
-  //     }
-  //     window.location.href = "/";
-  //   } catch (err) {
-  //     setErrorMsg(err.message || "Google login failed");
-  //   }
-  // };
   const loginWithGoogle = async () => {
-    setErrorMsg("");
-
     try {
-      const result = await signInWithPopup(auth, new GoogleAuthProvider());
-      const user = result.user;
-
-      const userDocRef = doc(db, "users", user.email);
-      const userSnapshot = await getDoc(userDocRef);
-
-      if (userSnapshot.exists()) {
-        // ✅ Already signed up — prevent role conflict
-        const existingRole = userSnapshot.data().role;
-
-        if (existingRole !== role) {
-          setErrorMsg(
-            `This email is already registered as a ${existingRole}. You can't register again as ${role}.`
-          );
-          return;
-        }
-
-        // ✅ Redirect directly
-        localStorage.setItem("userRole", existingRole);
-        router.replace(
-          existingRole === "beSniper"
-            ? "/components/gigsPage"
-            : "/components/cardProfile"
-        );
-        return;
-      }
-
-      // 🆕 First-time Google user
-      const uniqueId = await generateUniqueId(user.displayName || "googleuser");
-
-      await setDoc(userDocRef, {
-        email: user.email,
-        name: user.displayName || "Google User",
-        role,
-        uniqueId,
-        createdAt: new Date().toISOString(),
-      });
-
-      localStorage.setItem("userRole", role);
-      localStorage.setItem("email", user.email);
+      await signInWithPopup(auth, new GoogleAuthProvider());
+      const uniqueId = await generateUniqueId(fullName || "googleuser");
       localStorage.setItem("uniqueId", uniqueId);
 
-      router.replace(
-        role === "beSniper" ? "/components/gigsPage" : "/components/cardProfile"
-      );
+      if (role === "beSniper") {
+        localStorage.setItem("showBeSniperModal", "true");
+      } else if (role === "HireFreelancer") {
+        localStorage.setItem("showHireFreelancerModal", "true");
+      }
+      window.location.href = "/";
     } catch (err) {
-      setErrorMsg(err.message || "Google signup failed");
+      setErrorMsg(err.message || "Google login failed");
     }
   };
+  // const loginWithGoogle = async () => {
+  //   setErrorMsg("");
+
+  //   try {
+  //     const result = await signInWithPopup(auth, new GoogleAuthProvider());
+  //     const user = result.user;
+
+  //     const userDocRef = doc(db, "users", user.email);
+  //     const userSnapshot = await getDoc(userDocRef);
+
+  //     if (userSnapshot.exists()) {
+  //       // ✅ Already signed up — prevent role conflict
+  //       const existingRole = userSnapshot.data().role;
+
+  //       if (existingRole !== role) {
+  //         setErrorMsg(
+  //           `This email is already registered as a ${existingRole}. You can't register again as ${role}.`
+  //         );
+  //         return;
+  //       }
+
+  //       // ✅ Redirect directly
+  //       localStorage.setItem("userRole", existingRole);
+  //       router.replace(
+  //         existingRole === "beSniper"
+  //           ? "/components/gigsPage"
+  //           : "/components/cardProfile"
+  //       );
+  //       return;
+  //     }
+
+  //     // 🆕 First-time Google user
+  //     const uniqueId = await generateUniqueId(user.displayName || "googleuser");
+
+  //     await setDoc(userDocRef, {
+  //       email: user.email,
+  //       name: user.displayName || "Google User",
+  //       role,
+  //       uniqueId,
+  //       createdAt: new Date().toISOString(),
+  //     });
+
+  //     localStorage.setItem("userRole", role);
+  //     localStorage.setItem("email", user.email);
+  //     localStorage.setItem("uniqueId", uniqueId);
+
+  //     router.replace(
+  //       role === "beSniper" ? "/components/gigsPage" : "/components/cardProfile"
+  //     );
+  //   } catch (err) {
+  //     setErrorMsg(err.message || "Google signup failed");
+  //   }
+  // };
 
   return (
     <>

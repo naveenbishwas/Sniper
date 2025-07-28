@@ -32,10 +32,10 @@ export default function RefundPolicyPage() {
             </li>
             <li>
               For damaged or defective books, HubHawks will issue a refund if
-              the item can't be replaced.
+              the item cant be replaced.
             </li>
             <li>
-              Customised boxes can't be returned, but they can be refunded or
+              Customised boxes cant be returned, but they can be refunded or
               replaced within 30 days if they are damaged, defective, or
               different from the ordered product.
             </li>

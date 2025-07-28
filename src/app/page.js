@@ -335,7 +335,7 @@ export default function Home() {
         <div className="freelancer-grid">
           {freelancers.map((freelancer, index) => (
             <div className="freelancer-card" key={index}>
-              <img
+              <Image
                 src={freelancer.image}
                 alt={freelancer.name}
                 className="freelancer-image"
@@ -407,7 +407,7 @@ export default function Home() {
 
           <div className={`testimonial-card ${animationClass}`}>
             <div className="testimonial-photo">
-              <img src={image} alt={name} />
+              <Image src={image} alt={name} />
             </div>
             <div className="testimonial-content">
               <div className="testimonial-stars">
