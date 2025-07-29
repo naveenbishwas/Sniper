@@ -360,3 +360,12 @@ textarea {
     transform: translateY(0);
   }
 }
+
+.form-group select {
+  background: #fff;
+  color: #696767;
+  padding: 10px 10px;
+  border-radius: 8px;
+  border: 1px solid #cfcfcf;
+  font-size: 15px;
+}

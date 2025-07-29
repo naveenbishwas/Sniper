@@ -1,12 +1,12 @@
 // "use client";
 
-// import React, { useState } from "react";
+// import React, { useState, useEffect } from "react";
 // import "./beSniper.css";
-// import { collection, addDoc } from "firebase/firestore";
+// import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
 // import { db } from "@/lib/firebase";
 // import { useRouter } from "next/navigation";
 
-// const BeSniper = () => {
+// export default function BeSniperModal({ onClose }) {
 //   const [step, setStep] = useState(1);
 //   const [freelancerType, setFreelancerType] = useState("");
 //   const [experience, setExperience] = useState("");
@@ -26,9 +26,40 @@
 //     phone: "",
 //   });
 
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     document.body.style.overflow = "hidden";
+//     return () => {
+//       document.body.style.overflow = "auto";
+//     };
+//   }, []);
+
 //   const handleInputChange = (e) => {
 //     setFormData({ ...formData, [e.target.name]: e.target.value });
 //     setErrors({ ...errors, [e.target.name]: "" });
+//   };
+
+//   const generateUniqueId = async (name) => {
+//     const cleanedName = name.toLowerCase().replace(/\s/g, "");
+//     const randomNum = Math.floor(100 + Math.random() * 900);
+//     const uniqueId = `${cleanedName}${randomNum}`;
+
+//     const docRef = doc(db, "uniqueUserIds", uniqueId);
+//     const docSnap = await getDoc(docRef);
+
+//     if (docSnap.exists()) {
+//       return generateUniqueId(name);
+//     }
+
+//     await setDoc(docRef, {
+//       uniqueId,
+//       createdAt: new Date().toISOString(),
+//       email: formData.email,
+//       name: formData.name,
+//     });
+
+//     return uniqueId;
 //   };
 
 //   const handleMainSubmit = () => {
@@ -78,8 +109,6 @@
 //     setStep(4);
 //   };
 
-//   const router = useRouter();
-
 //   const handleDetailsSubmit = async () => {
 //     const newErrors = {};
 //     const {
@@ -99,8 +128,8 @@
 //     else if (!/^[A-Za-z\s]+$/.test(name))
 //       newErrors.name = "Full Name can only contain letters and spaces.";
 
-//     if (!bio.trim() || bio.length < 20 || /[\d]{10}|@|\+91/.test(bio))
-//       newErrors.bio = "Bio must be 20+ characters and without contact info.";
+//     if (!bio.trim() || bio.length < 150 || /[\d]{10}|@|\+91/.test(bio))
+//       newErrors.bio = "Bio must be 150+ characters and without contact info.";
 
 //     if (!language.trim()) newErrors.language = "Languages Known is required.";
 //     if (!occupation.trim()) newErrors.occupation = "Occupation is required.";
@@ -121,32 +150,21 @@
 //     }
 
 //     try {
+//       const uniqueId = await generateUniqueId(formData.name);
+
 //       await addDoc(collection(db, "be-sniper-forms"), {
 //         freelancerType,
 //         experience,
 //         howDoneBefore,
 //         ...formData,
+//         uniqueId,
 //         createdAt: new Date().toISOString(),
 //       });
 
-//       setSuccessMsg("✅ Form submitted successfully!");
-//       router.push("/components/successfull");
+//       localStorage.setItem("uniqueId", uniqueId);
+//       localStorage.setItem("userRole", "beSniper");
 
-//       setStep(1);
-//       setFreelancerType("");
-//       setExperience("");
-//       setHowDoneBefore("");
-//       setFormData({
-//         name: "",
-//         bio: "",
-//         language: "",
-//         occupation: "",
-//         skills: "",
-//         link: "",
-//         work: "",
-//         email: "",
-//         phone: "",
-//       });
+//       router.push("/components/successfull");
 //     } catch (error) {
 //       alert("❌ Submission failed. Try again.");
 //       console.error("Firebase error:", error);
@@ -159,173 +177,202 @@
 //     /^(https?:\/\/)?([\w\d\-]+\.){1,}([a-zA-Z]{2,})(\/.*)?$/.test(url);
 
 //   return (
-//     <div className="sniper-page">
-//       {step === 1 && (
-//         <div className="kind-of-freelancer">
-//           <h3 className="question">What kind of freelancer are you?</h3>
-//           <div className="option-buttons">
-//             {[
-//               { value: "agency-employer", label: "Agency / Employer" },
-//               { value: "side-hustle", label: "Side Hustle" },
-//               { value: "solo-freelancer", label: "Solo Freelancer" },
-//             ].map((option) => (
-//               <label
-//                 key={option.value}
-//                 className={`option ${
-//                   freelancerType === option.value ? "selected" : ""
-//                 } ${errors.freelancerType ? "input-error" : ""}`}
-//               >
-//                 <input
-//                   type="radio"
-//                   name="freelancerType"
-//                   value={option.value}
-//                   onChange={() => {
-//                     setFreelancerType(option.value);
-//                     setErrors((prev) => ({ ...prev, freelancerType: "" }));
-//                   }}
-//                 />
-//                 <span>{option.label}</span>
-//               </label>
-//             ))}
-//           </div>
-//           {errors.freelancerType && (
-//             <p className="error-text">{errors.freelancerType}</p>
-//           )}
-//           <div className="next-btn">
-//             <button className="next" onClick={handleMainSubmit}>
-//               Next
+//     <>
+//       <div className="modal-overlay" onClick={onClose}>
+//         <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
+//           <div className="sniper-page">
+//             <button className="close-modal" onClick={onClose}>
+//               &times;
 //             </button>
-//           </div>
-//         </div>
-//       )}
 
-//       {step === 2 && (
-//         <div className="work-experience">
-//           <h3 className="question">What is your work experience?</h3>
-//           <div className="form-fields">
-//             <input
-//               type="number"
-//               name="experience"
-//               placeholder="e.g., 3"
-//               value={experience}
-//               onChange={(e) => {
-//                 setExperience(e.target.value);
-//                 setErrors((prev) => ({ ...prev, experience: "" }));
-//               }}
-//               className={errors.experience ? "input-error" : ""}
-//             />
-//             {errors.experience && (
-//               <p className="error-text">{errors.experience}</p>
+//             {/* Step 1 */}
+//             {step === 1 && (
+//               <div className="kind-of-freelancer">
+//                 <h3 className="question">What kind of freelancer are you?</h3>
+//                 <div className="option-buttons">
+//                   {[
+//                     { value: "agency-employer", label: "Agency / Employer" },
+//                     { value: "side-hustle", label: "Side Hustle" },
+//                     { value: "solo-freelancer", label: "Solo Freelancer" },
+//                   ].map((option) => (
+//                     <label
+//                       key={option.value}
+//                       className={`option ${
+//                         freelancerType === option.value ? "selected" : ""
+//                       } ${errors.freelancerType ? "input-error" : ""}`}
+//                     >
+//                       <input
+//                         type="radio"
+//                         name="freelancerType"
+//                         value={option.value}
+//                         onChange={() => {
+//                           setFreelancerType(option.value);
+//                           setErrors((prev) => ({
+//                             ...prev,
+//                             freelancerType: "",
+//                           }));
+//                         }}
+//                       />
+//                       <span>{option.label}</span>
+//                     </label>
+//                   ))}
+//                 </div>
+//                 {errors.freelancerType && (
+//                   <p className="error-text">{errors.freelancerType}</p>
+//                 )}
+//                 <div className="next-btn">
+//                   <button className="next" onClick={handleMainSubmit}>
+//                     Next
+//                   </button>
+//                 </div>
+//               </div>
+//             )}
+
+//             {/* Step 2 */}
+//             {step === 2 && (
+//               <div className="work-experience">
+//                 <h3 className="question">What is your work experience?</h3>
+//                 <div className="form-fields">
+//                   <input
+//                     type="number"
+//                     name="experience"
+//                     placeholder="e.g., 3"
+//                     value={experience}
+//                     onChange={(e) => {
+//                       setExperience(e.target.value);
+//                       setErrors((prev) => ({ ...prev, experience: "" }));
+//                     }}
+//                     className={errors.experience ? "input-error" : ""}
+//                   />
+//                   {errors.experience && (
+//                     <p className="error-text">{errors.experience}</p>
+//                   )}
+//                 </div>
+//                 <div className="next-prev-btn">
+//                   <button className="next" onClick={() => setStep(1)}>
+//                     Prev
+//                   </button>
+//                   <button className="next" onClick={handlePeopleStep}>
+//                     Next
+//                   </button>
+//                 </div>
+//               </div>
+//             )}
+
+//             {/* Step 3 */}
+//             {step === 3 && (
+//               <div className="done">
+//                 <h3 className="question">
+//                   Have you done freelance work before?
+//                 </h3>
+//                 <div className="option-buttons">
+//                   {[
+//                     "Getting Started",
+//                     "Done Offline Before",
+//                     "Done Online Before",
+//                     "Both Online & Offline",
+//                   ].map((label) => (
+//                     <label
+//                       key={label}
+//                       className={`option ${
+//                         howDoneBefore === label ? "selected" : ""
+//                       }`}
+//                     >
+//                       <input
+//                         type="radio"
+//                         name="howDoneBefore"
+//                         value={label}
+//                         onChange={() => {
+//                           setHowDoneBefore(label);
+//                           setErrors((prev) => ({
+//                             ...prev,
+//                             howDoneBefore: "",
+//                           }));
+//                         }}
+//                       />
+//                       <span>{label}</span>
+//                     </label>
+//                   ))}
+//                 </div>
+//                 {errors.howDoneBefore && (
+//                   <p className="error-text">{errors.howDoneBefore}</p>
+//                 )}
+//                 <div className="next-prev-btn">
+//                   <button className="next" onClick={() => setStep(2)}>
+//                     Prev
+//                   </button>
+//                   <button className="next" onClick={handleDoneBeforeStep}>
+//                     Next
+//                   </button>
+//                 </div>
+//               </div>
+//             )}
+
+//             {/* Step 4 */}
+//             {step === 4 && (
+//               <div className="user-details-form">
+//                 <div className="user-details-form-scroll">
+//                   <h3 className="question">Please fill in your details</h3>
+//                   {successMsg && <p className="success-text">{successMsg}</p>}
+//                   <div className="form-fields">
+//                     {[
+//                       { name: "name", label: "Full Name *Private" },
+//                       {
+//                         name: "bio",
+//                         label: "Bio *No contact info (Chars Limit:- Min 150)",
+//                       },
+//                       { name: "language", label: "Languages Known" },
+//                       { name: "occupation", label: "Occupation" },
+//                       { name: "skills", label: "Skills" },
+//                       { name: "link", label: "Portfolio Link" },
+//                       {
+//                         name: "work",
+//                         label: "Best Work Link *No contact info",
+//                       },
+//                       { name: "email", label: "Email *Private" },
+//                       { name: "phone", label: "Phone Number *Active" },
+//                     ].map((field, idx) => (
+//                       <div className="form-group" key={idx}>
+//                         <label className="input-label">{field.label}</label>
+//                         <input
+//                           type={field.name === "email" ? "email" : "text"}
+//                           name={field.name}
+//                           placeholder={field.label}
+//                           value={formData[field.name]}
+//                           onChange={handleInputChange}
+//                           className={errors[field.name] ? "input-error" : ""}
+//                         />
+//                         {errors[field.name] && (
+//                           <p className="error-text">{errors[field.name]}</p>
+//                         )}
+//                       </div>
+//                     ))}
+//                   </div>
+//                   <div className="next-prev-btn">
+//                     <button className="next" onClick={() => setStep(3)}>
+//                       Prev
+//                     </button>
+//                     <button className="next" onClick={handleDetailsSubmit}>
+//                       Submit
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
 //             )}
 //           </div>
-//           <div className="next-prev-btn">
-//             <button className="next" onClick={() => setStep(1)}>
-//               Prev
-//             </button>
-//             <button className="next" onClick={handlePeopleStep}>
-//               Next
-//             </button>
-//           </div>
 //         </div>
-//       )}
-
-//       {step === 3 && (
-//         <div className="done">
-//           <h3 className="question">Have you done freelance work before?</h3>
-//           <div className="option-buttons">
-//             {[
-//               "Getting Started",
-//               "Done Offline Before",
-//               "Done Online Before",
-//               "Both Online & Offline",
-//             ].map((label) => (
-//               <label
-//                 key={label}
-//                 className={`option ${
-//                   howDoneBefore === label ? "selected" : ""
-//                 }`}
-//               >
-//                 <input
-//                   type="radio"
-//                   name="howDoneBefore"
-//                   value={label}
-//                   onChange={() => {
-//                     setHowDoneBefore(label);
-//                     setErrors((prev) => ({ ...prev, howDoneBefore: "" }));
-//                   }}
-//                 />
-//                 <span>{label}</span>
-//               </label>
-//             ))}
-//           </div>
-//           {errors.howDoneBefore && (
-//             <p className="error-text">{errors.howDoneBefore}</p>
-//           )}
-//           <div className="next-prev-btn">
-//             <button className="next" onClick={() => setStep(2)}>
-//               Prev
-//             </button>
-//             <button className="next" onClick={handleDoneBeforeStep}>
-//               Next
-//             </button>
-//           </div>
-//         </div>
-//       )}
-
-//       {step === 4 && (
-//         <div className="user-details-form">
-//           <h3 className="question">Please fill in your details</h3>
-//           {successMsg && <p className="success-text">{successMsg}</p>}
-//           <div className="form-fields">
-//             {[
-//               { name: "name", label: "Full Name *Private" },
-//               { name: "bio", label: "Bio *No contact info" },
-//               { name: "language", label: "Languages Known" },
-//               { name: "occupation", label: "Occupation" },
-//               { name: "skills", label: "Skills" },
-//               { name: "link", label: "Portfolio Link" },
-//               { name: "work", label: "Best Work Link *No contact info" },
-//               { name: "email", label: "Email *Private" },
-//               { name: "phone", label: "Phone Number *Active" },
-//             ].map((field, idx) => (
-//               <div className="form-group" key={idx}>
-//                 <label className="input-label">{field.label}</label>
-//                 <input
-//                   type={field.name === "email" ? "email" : "text"}
-//                   name={field.name}
-//                   placeholder={field.label}
-//                   value={formData[field.name]}
-//                   onChange={handleInputChange}
-//                   className={errors[field.name] ? "input-error" : ""}
-//                 />
-//                 {errors[field.name] && (
-//                   <p className="error-text">{errors[field.name]}</p>
-//                 )}
-//               </div>
-//             ))}
-//           </div>
-//           <div className="next-prev-btn">
-//             <button className="next" onClick={() => setStep(3)}>
-//               Prev
-//             </button>
-//             <button className="next" onClick={handleDetailsSubmit}>
-//               Submit
-//             </button>
-//           </div>
-//         </div>
-//       )}
-//     </div>
+//       </div>
+//     </>
 //   );
-// };
-
-// export default BeSniper;
+// }
 
 "use client";
 
 import React, { useState, useEffect } from "react";
 import "./beSniper.css";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { generateUniqueId } from "@/lib/generateUniqueId"; // ✅ NEW IMPORT
 import { useRouter } from "next/navigation";
 
 export default function BeSniperModal({ onClose }) {
@@ -347,6 +394,8 @@ export default function BeSniperModal({ onClose }) {
     email: "",
     phone: "",
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -407,8 +456,6 @@ export default function BeSniperModal({ onClose }) {
     setStep(4);
   };
 
-  const router = useRouter();
-
   const handleDetailsSubmit = async () => {
     const newErrors = {};
     const {
@@ -429,7 +476,7 @@ export default function BeSniperModal({ onClose }) {
       newErrors.name = "Full Name can only contain letters and spaces.";
 
     if (!bio.trim() || bio.length < 150 || /[\d]{10}|@|\+91/.test(bio))
-      newErrors.bio = "Bio must be 20+ characters and without contact info.";
+      newErrors.bio = "Bio must be 150+ characters and without contact info.";
 
     if (!language.trim()) newErrors.language = "Languages Known is required.";
     if (!occupation.trim()) newErrors.occupation = "Occupation is required.";
@@ -450,19 +497,33 @@ export default function BeSniperModal({ onClose }) {
     }
 
     try {
-      const docRef = await addDoc(collection(db, "be-sniper-forms"), {
-        freelancerType,
-        experience,
-        howDoneBefore,
-        ...formData,
+      const role = "beSniper";
+      const uniqueId = await generateUniqueId(name, email, role);
+
+      // ✅ Save in users collection
+      await setDoc(doc(db, "users", email), {
+        email,
+        name,
+        role,
+        uniqueId,
         createdAt: new Date().toISOString(),
       });
 
-      const uniqueId = docRef.id;
-      localStorage.setItem("uniqueId", uniqueId);
-      localStorage.setItem("userRole", "beSniper");
+      // ✅ Save full form data in be-sniper-forms
+      await addDoc(collection(db, "be-sniper-forms"), {
+        ...formData,
+        freelancerType,
+        experience,
+        howDoneBefore,
+        role,
+        uniqueId,
+        createdAt: new Date().toISOString(),
+      });
 
-      router.push("/components/successfull"); // ✅ redirect to SuccessPage
+      localStorage.setItem("uniqueId", uniqueId);
+      localStorage.setItem("userRole", role);
+
+      router.push("/components/successfull");
     } catch (error) {
       alert("❌ Submission failed. Try again.");
       console.error("Firebase error:", error);
@@ -483,6 +544,7 @@ export default function BeSniperModal({ onClose }) {
               &times;
             </button>
 
+            {/* Step 1 */}
             {step === 1 && (
               <div className="kind-of-freelancer">
                 <h3 className="question">What kind of freelancer are you?</h3>
@@ -525,6 +587,7 @@ export default function BeSniperModal({ onClose }) {
               </div>
             )}
 
+            {/* Step 2 */}
             {step === 2 && (
               <div className="work-experience">
                 <h3 className="question">What is your work experience?</h3>
@@ -555,6 +618,7 @@ export default function BeSniperModal({ onClose }) {
               </div>
             )}
 
+            {/* Step 3 */}
             {step === 3 && (
               <div className="done">
                 <h3 className="question">
@@ -579,7 +643,10 @@ export default function BeSniperModal({ onClose }) {
                         value={label}
                         onChange={() => {
                           setHowDoneBefore(label);
-                          setErrors((prev) => ({ ...prev, howDoneBefore: "" }));
+                          setErrors((prev) => ({
+                            ...prev,
+                            howDoneBefore: "",
+                          }));
                         }}
                       />
                       <span>{label}</span>
@@ -600,6 +667,7 @@ export default function BeSniperModal({ onClose }) {
               </div>
             )}
 
+            {/* Step 4 */}
             {step === 4 && (
               <div className="user-details-form">
                 <div className="user-details-form-scroll">
@@ -610,7 +678,7 @@ export default function BeSniperModal({ onClose }) {
                       { name: "name", label: "Full Name *Private" },
                       {
                         name: "bio",
-                        label: "Bio *No contact info(Chars Limit:- Min 150)",
+                        label: "Bio *No contact info (Chars Limit:- Min 150)",
                       },
                       { name: "language", label: "Languages Known" },
                       { name: "occupation", label: "Occupation" },

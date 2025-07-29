@@ -20,33 +20,18 @@
 //     gigTopic: "",
 //     gigDescription: "",
 //     gigDeadline: "",
+//     gigBudget: "",
+//     category: "",
 //   });
-
-//   // const handleInputChange = (e) => {
-//   //   const { name, value } = e.target;
-
-//   //   if (name === "phone" || name === "peopleWorking") {
-//   //     const numericValue = value.replace(/\D/g, "");
-//   //     setFormData((prev) => ({ ...prev, [name]: numericValue }));
-//   //   } else if (name === "fullName") {
-//   //     const nameValue = value.replace(/[^A-Za-z\s]/g, "");
-//   //     setFormData((prev) => ({ ...prev, [name]: nameValue }));
-//   //   } else {
-//   //     setFormData((prev) => ({ ...prev, [name]: value }));
-//   //   }
-
-//   //   setFormErrors((prev) => ({ ...prev, [name]: "" }));
-//   //   setErrors((prev) => ({ ...prev, [name]: "" }));
-//   // };
 
 //   const handleInputChange = (e) => {
 //     const { name, value } = e.target;
 
-//     if (name === "phone" || name === "peopleWorking") {
-//       const numericValue = value.replace(/\D/g, ""); // Allow only digits
+//     if (name === "phone" || name === "peopleWorking" || name === "gigBudget") {
+//       const numericValue = value.replace(/\D/g, "");
 //       setFormData((prev) => ({ ...prev, [name]: numericValue }));
 //     } else if (name === "fullName") {
-//       const nameValue = value.replace(/[^A-Za-z\s]/g, ""); // Allow only letters and spaces
+//       const nameValue = value.replace(/[^A-Za-z\s]/g, "");
 //       setFormData((prev) => ({ ...prev, [name]: nameValue }));
 //     } else if (name === "gigDescription") {
 //       const emailRegex = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;
@@ -65,7 +50,6 @@
 //       setFormData((prev) => ({ ...prev, [name]: value }));
 //     }
 
-//     // Clear previous errors for this field
 //     setFormErrors((prev) => ({ ...prev, [name]: "" }));
 //     setErrors((prev) => ({ ...prev, [name]: "" }));
 //   };
@@ -116,7 +100,8 @@
 //   };
 
 //   const handleGigSubmit = async () => {
-//     const { gigTopic, gigDescription } = formData;
+//     const { gigTopic, gigDescription, gigDeadline, gigBudget, category } =
+//       formData;
 //     let newErrors = {};
 
 //     if (!gigTopic || gigTopic.trim().length < 3) {
@@ -127,12 +112,24 @@
 //       newErrors.gigDescription = "Please describe your gig in more detail.";
 //     }
 
+//     if (!category) {
+//       newErrors.category = "Please select a category.";
+//     }
+
+//     if (!gigDeadline) {
+//       newErrors.gigDeadline = "Please select a deadline.";
+//     }
+
+//     if (!gigBudget || isNaN(gigBudget) || Number(gigBudget) <= 0) {
+//       newErrors.gigBudget = "Enter a valid numeric budget.";
+//     }
+
 //     if (Object.keys(newErrors).length > 0) {
 //       setErrors(newErrors);
 //       return;
 //     }
 
-//     console.log("🔥 Sending to Firebase:", formData); // debug log
+//     console.log("🔥 Sending to Firebase:", formData);
 //     await sendToFirebase(formData);
 //   };
 
@@ -146,7 +143,6 @@
 //         createdAt: new Date().toISOString(),
 //       });
 
-//       // alert("✅ Form submitted successfully!");
 //       router.push("/components/successfull");
 
 //       setStep(1);
@@ -161,6 +157,9 @@
 //         peopleWorking: "",
 //         gigTopic: "",
 //         gigDescription: "",
+//         gigDeadline: "",
+//         gigBudget: "",
+//         category: "",
 //       });
 //     } catch (error) {
 //       console.error("❌ Firebase error:", error);
@@ -175,6 +174,7 @@
 //           <button className="close-modal" onClick={onClose}>
 //             &times;
 //           </button>
+
 //           {step === 1 && (
 //             <div className="plan">
 //               <h3 className="question">
@@ -344,26 +344,60 @@
 //                 )}
 //               </div>
 
-//               <div className="form-group">
-//                 <label htmlFor="category">Describe More</label>
-//                 <select
-//                   id="category"
-//                   name="category"
-//                   value={formData.category}
-//                   onChange={handleInputChange}
-//                   className={errors.category ? "input-error" : ""}
-//                 >
-//                   <option value="">Select a category</option>
-//                   <option value="fashion">Fashion</option>
-//                   <option value="electronics">Electronics</option>
-//                   <option value="home-decor">Home Decor</option>
-//                   <option value="beauty">Beauty</option>
-//                   <option value="sports">Sports</option>
-//                 </select>
-//                 {errors.category && (
-//                   <p className="error-text">{errors.category}</p>
-//                 )}
-//               </div>
+//               <select
+//                 id="category"
+//                 name="category"
+//                 value={formData.category}
+//                 onChange={handleInputChange}
+//                 className={errors.category ? "input-error" : ""}
+//               >
+//                 <option value="">Select a category</option>
+//                 <option value="graphic-designing">
+//                   Graphic Designers / Graphic Designing
+//                 </option>
+//                 <option value="copywriting">Copywriters / Copywriting</option>
+//                 <option value="copy-editing">
+//                   Copy Editors / Copy Editing
+//                 </option>
+//                 <option value="proofreading">
+//                   Proofreaders / Proofreading
+//                 </option>
+//                 <option value="beta-reading">
+//                   Beta Readers / Beta Reading
+//                 </option>
+//                 <option value="translation">Translators / Translation</option>
+//                 <option value="illustration">
+//                   Illustrators / Illustration
+//                 </option>
+//                 <option value="ghost-writing">
+//                   Ghost Writers / Ghost Writing
+//                 </option>
+//                 <option value="voice-over">
+//                   Voice Over Artists / Voice Over
+//                 </option>
+//                 <option value="video-editing">
+//                   Video Editors / Video Editing
+//                 </option>
+//                 <option value="typesetting">Typesetter / Typesetting</option>
+//                 <option value="literary-representation">
+//                   Literary Agents / Literary Representation
+//                 </option>
+//                 <option value="social-media-management">
+//                   Social Media Managers / Social Media Management
+//                 </option>
+//                 <option value="amazon-marketing-services">
+//                   Amazon Marketing Executives / Amazon Marketing Services
+//                 </option>
+//                 <option value="web-development">
+//                   Full Stack Developers / Web Development
+//                 </option>
+//                 <option value="content-writing">
+//                   Content Writers / Content Writing
+//                 </option>
+//                 <option value="event-coordination">
+//                   Emcees / Event Coordination
+//                 </option>
+//               </select>
 
 //               <div className="form-group">
 //                 <label htmlFor="gigDeadline">Deadline</label>
@@ -414,9 +448,10 @@
 "use client";
 import React, { useState } from "react";
 import "./HireFreelancer.css";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import { generateUniqueId } from "@/lib/generateUniqueId"; // ✅ NEW IMPORT
 
 const HireFreelancer = ({ onClose }) => {
   const [firstField, setFirstField] = useState("");
@@ -437,10 +472,12 @@ const HireFreelancer = ({ onClose }) => {
     category: "",
   });
 
+  const router = useRouter();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "phone" || name === "peopleWorking" || name === "gigBudget") {
+    if (["phone", "peopleWorking", "gigBudget"].includes(name)) {
       const numericValue = value.replace(/\D/g, "");
       setFormData((prev) => ({ ...prev, [name]: numericValue }));
     } else if (name === "fullName") {
@@ -542,19 +579,30 @@ const HireFreelancer = ({ onClose }) => {
       return;
     }
 
-    console.log("🔥 Sending to Firebase:", formData);
-    await sendToFirebase(formData);
-  };
-
-  const router = useRouter();
-
-  const sendToFirebase = async (data) => {
     try {
-      await addDoc(collection(db, "sniper-forms"), {
-        plan: firstField,
-        ...data,
+      const role = "HireFreelancer";
+      const { fullName, email } = formData;
+
+      const uniqueId = await generateUniqueId(fullName, email, role);
+
+      await setDoc(doc(db, "users", email), {
+        name: fullName,
+        email,
+        role,
+        uniqueId,
         createdAt: new Date().toISOString(),
       });
+
+      await addDoc(collection(db, "sniper-forms"), {
+        plan: firstField,
+        ...formData,
+        role,
+        uniqueId,
+        createdAt: new Date().toISOString(),
+      });
+
+      localStorage.setItem("uniqueId", uniqueId);
+      localStorage.setItem("userRole", role);
 
       router.push("/components/successfull");
 
@@ -588,6 +636,7 @@ const HireFreelancer = ({ onClose }) => {
             &times;
           </button>
 
+          {/* STEP 1 */}
           {step === 1 && (
             <div className="plan">
               <h3 className="question">
@@ -624,6 +673,7 @@ const HireFreelancer = ({ onClose }) => {
             </div>
           )}
 
+          {/* STEP 2 */}
           {step === 2 && (
             <div className="how-many-people">
               <h3 className="question">
@@ -652,6 +702,7 @@ const HireFreelancer = ({ onClose }) => {
             </div>
           )}
 
+          {/* STEP 3 */}
           {step === 3 && (
             <div className="user-details-form">
               <h3 className="question">Please fill in your details</h3>
@@ -719,6 +770,7 @@ const HireFreelancer = ({ onClose }) => {
             </div>
           )}
 
+          {/* STEP 4 */}
           {step === 4 && (
             <div className="post-gig">
               <h3 className="question">Post Your Gig</h3>
@@ -757,26 +809,27 @@ const HireFreelancer = ({ onClose }) => {
                 )}
               </div>
 
-              <div className="form-group">
-                <label htmlFor="category">Describe More</label>
-                <select
-                  id="category"
-                  name="category"
-                  value={formData.category}
-                  onChange={handleInputChange}
-                  className={errors.category ? "input-error" : ""}
-                >
-                  <option value="">Select a category</option>
-                  <option value="fashion">Fashion</option>
-                  <option value="electronics">Electronics</option>
-                  <option value="home-decor">Home Decor</option>
-                  <option value="beauty">Beauty</option>
-                  <option value="sports">Sports</option>
-                </select>
-                {errors.category && (
-                  <p className="error-text">{errors.category}</p>
-                )}
-              </div>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleInputChange}
+                className={errors.category ? "input-error" : ""}
+              >
+                <option value="">Select a category</option>
+                <option value="graphic-designing">Graphic Designing</option>
+                <option value="copywriting">Copywriting</option>
+                <option value="proofreading">Proofreading</option>
+                <option value="translation">Translation</option>
+                <option value="voice-over">Voice Over</option>
+                <option value="video-editing">Video Editing</option>
+                <option value="web-development">Web Development</option>
+                <option value="content-writing">Content Writing</option>
+                <option value="social-media-management">
+                  Social Media Management
+                </option>
+                {/* Add more options as needed */}
+              </select>
 
               <div className="form-group">
                 <label htmlFor="gigDeadline">Deadline</label>
