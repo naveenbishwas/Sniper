@@ -762,7 +762,7 @@ export default function BeSniperModal({ onClose }) {
     bio: "",
     language: "",
     occupation: "",
-    skills: "",
+    categories: "",
     link: "",
     work: "",
     email: "",
@@ -841,7 +841,7 @@ export default function BeSniperModal({ onClose }) {
       bio,
       language,
       occupation,
-      skills,
+      categories,
       link,
       work,
       email,
@@ -858,7 +858,7 @@ export default function BeSniperModal({ onClose }) {
 
     if (!language.trim()) newErrors.language = "Languages Known is required.";
     if (!occupation.trim()) newErrors.occupation = "Occupation is required.";
-    if (!skills.trim()) newErrors.skills = "Skills are required.";
+    if (!categories.trim()) newErrors.categories = "Category is required.";
 
     if (!link.trim() || !isValidURL(link))
       newErrors.link = "Enter valid Portfolio Link.";
@@ -910,6 +910,26 @@ export default function BeSniperModal({ onClose }) {
   const isValidPhone = (phone) => /^[0-9]{10,15}$/.test(phone);
   const isValidURL = (url) =>
     /^(https?:\/\/)?([\w\d\-]+\.){1,}([a-zA-Z]{2,})(\/.*)?$/.test(url);
+
+  const categoryOptions = [
+    "Graphic Designers / Graphic Designing",
+    "Copywriters / Copywriting",
+    "Copy Editors / Copy Editing",
+    "Proofreaders / Proofreading",
+    "Beta Readers / Beta Reading",
+    "Translators / Translation",
+    "Illustrators / Illustration",
+    "Ghost Writers / Ghost Writing",
+    "Voice Over Artists / Voice Over",
+    "Video Editors / Video Editing",
+    "Typesetter / Typesetting",
+    "Literary Agents / Literary Representation",
+    "Social Media Managers / Social Media Management",
+    "Amazon Marketing Executives / Amazon Marketing Services",
+    "Full Stack Developers / Web Development",
+    "Content Writers / Content Writing",
+    "Emcees / Event Coordination",
+  ];
 
   return (
     <>
@@ -1058,7 +1078,6 @@ export default function BeSniperModal({ onClose }) {
                       },
                       { name: "language", label: "Languages Known" },
                       { name: "occupation", label: "Occupation" },
-                      { name: "skills", label: "Skills" },
                       { name: "link", label: "Portfolio Link" },
                       {
                         name: "work",
@@ -1082,6 +1101,27 @@ export default function BeSniperModal({ onClose }) {
                         )}
                       </div>
                     ))}
+
+                    {/* CATEGORIES DROPDOWN */}
+                    <div className="form-group">
+                      <label className="input-label">Category</label>
+                      <select
+                        name="categories"
+                        value={formData.categories}
+                        onChange={handleInputChange}
+                        className={errors.categories ? "input-error" : ""}
+                      >
+                        <option value="">Select Category</option>
+                        {categoryOptions.map((cat, idx) => (
+                          <option key={idx} value={cat}>
+                            {cat}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.categories && (
+                        <p className="error-text">{errors.categories}</p>
+                      )}
+                    </div>
                   </div>
                   <div className="next-prev-btn">
                     <button className="next" onClick={() => setStep(3)}>

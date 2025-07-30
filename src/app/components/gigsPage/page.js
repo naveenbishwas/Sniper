@@ -129,6 +129,7 @@ import "./gigsPage.css";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import Header from "../header/page";
 import Footer from "../footer/page";
+import Link from "next/link";
 
 const GigsPage = () => {
   const [gigs, setGigs] = useState([]);
@@ -196,7 +197,12 @@ const GigsPage = () => {
               </div>
               <div className="gig-bottom">
                 <span className="gig-price">{gig.price}</span>
-                <button className="gig-btn">Apply Now</button>
+                <Link
+                  href="https://wa.me/919643138042?text=Hi%2C%20I%20saw%20your%20website%20and%20I'm%20interested%20in%20your%20services.
+"
+                >
+                  <button className="gig-btn">Apply Now</button>
+                </Link>
               </div>
             </div>
           ))}

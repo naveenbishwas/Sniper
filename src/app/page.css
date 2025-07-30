@@ -1233,6 +1233,7 @@
 
 .testimonial-photo img {
   width: 350px;
+  height: auto;
   border-radius: 20px;
 }
 

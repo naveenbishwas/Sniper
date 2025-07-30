@@ -5,6 +5,7 @@ import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { generateUniqueId } from "@/lib/generateUniqueId"; // ✅ NEW IMPORT
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const HireFreelancer = ({ onClose }) => {
   const [firstField, setFirstField] = useState("");
@@ -16,6 +17,7 @@ const HireFreelancer = ({ onClose }) => {
     fullName: "",
     email: "",
     phone: "",
+    // image: null,
     bio: "",
     peopleWorking: "",
     gigTopic: "",
@@ -103,16 +105,23 @@ const HireFreelancer = ({ onClose }) => {
   };
 
   const handleGigSubmit = async () => {
-    const { gigTopic, gigDescription, gigDeadline, gigBudget, category } =
-      formData;
+    const {
+      gigTopic,
+      gigDescription,
+      gigDeadline,
+      gigBudget,
+      category,
+      // image,
+    } = formData;
     let newErrors = {};
 
     if (!gigTopic || gigTopic.trim().length < 3) {
       newErrors.gigTopic = "Topic must be at least 3 characters.";
     }
 
-    if (!gigDescription || gigDescription.trim().length < 10) {
-      newErrors.gigDescription = "Please describe your gig in more detail.";
+    if (!gigDescription || gigDescription.trim().length < 250) {
+      newErrors.gigDescription =
+        "Please describe your gig in more detail min 250.";
     }
 
     if (!category) {
@@ -127,6 +136,10 @@ const HireFreelancer = ({ onClose }) => {
       newErrors.gigBudget = "Enter a valid numeric budget.";
     }
 
+    // if (!image) {
+    //   newErrors.image = "Please upload an image.";
+    // }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -138,11 +151,17 @@ const HireFreelancer = ({ onClose }) => {
 
       const uniqueId = await generateUniqueId(fullName, email, role);
 
+      // const storage = getStorage();
+      // const imageRef = ref(storage, `user-images/${email}-${Date.now()}`);
+      // await uploadBytes(imageRef, image);
+      // const imageUrl = await getDownloadURL(imageRef);
+
       await setDoc(doc(db, "users", email), {
         name: fullName,
         email,
         role,
         uniqueId,
+        // imageUrl,
         createdAt: new Date().toISOString(),
       });
 
@@ -150,6 +169,7 @@ const HireFreelancer = ({ onClose }) => {
         plan: firstField,
         ...formData,
         role,
+        // imageUrl,
         uniqueId,
         createdAt: new Date().toISOString(),
       });
@@ -167,6 +187,7 @@ const HireFreelancer = ({ onClose }) => {
         fullName: "",
         email: "",
         phone: "",
+        // image: null,
         bio: "",
         peopleWorking: "",
         gigTopic: "",
@@ -265,6 +286,7 @@ const HireFreelancer = ({ onClose }) => {
                   name="fullName"
                   placeholder="Full Name"
                   value={formData.fullName}
+                  required
                   onChange={handleInputChange}
                 />
                 {formErrors.fullName && (
@@ -276,6 +298,7 @@ const HireFreelancer = ({ onClose }) => {
                   name="email"
                   placeholder="Your Email"
                   value={formData.email}
+                  required
                   onChange={handleInputChange}
                 />
                 {formErrors.email && (
@@ -287,8 +310,25 @@ const HireFreelancer = ({ onClose }) => {
                   name="phone"
                   placeholder="Phone Number"
                   value={formData.phone}
+                  required
                   onChange={handleInputChange}
                 />
+                {formErrors.phone && (
+                  <p className="error-text">{formErrors.phone}</p>
+                )}
+
+                {/* <input
+                  type="file"
+                  accept="image/*"
+                  required
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      image: e.target.files[0],
+                    }))
+                  }
+                /> */}
+
                 {formErrors.phone && (
                   <p className="error-text">{formErrors.phone}</p>
                 )}

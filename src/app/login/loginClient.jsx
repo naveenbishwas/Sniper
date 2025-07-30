@@ -133,16 +133,6 @@ export default function LoginClient() {
     }
   };
 
-  // const loginWithGoogle = async () => {
-  //   setError("");
-  //   try {
-  //     await signInWithPopup(auth, new GoogleAuthProvider());
-  //     redirectUser();
-  //   } catch (err) {
-  //     setError(err.message || "⚠️ Google login failed.");
-  //   }
-  // };
-
   const loginWithGoogle = async () => {
     setError("");
 
