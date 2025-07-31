@@ -878,8 +878,17 @@ export default function BeSniperModal({ onClose }) {
       const role = "beSniper";
       const uniqueId = await generateUniqueId(name, email, role);
 
-      await setDoc(doc(db, "users", email), {
-        email,
+      // await setDoc(doc(db, "users", email), {
+      //   email,
+      //   name,
+      //   role,
+      //   uniqueId,
+      //   createdAt: new Date().toISOString(),
+      // });
+
+      await setDoc(doc(db, "users", email.toLowerCase()), {
+        ...formData,
+        email: email.toLowerCase(),
         name,
         role,
         uniqueId,
