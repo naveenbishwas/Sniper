@@ -285,6 +285,46 @@ export default function SignupModal({ onClose }) {
   };
 
   // ✅ Email/Password Signup Handler
+  // const handleSignup = async (e) => {
+  //   e.preventDefault();
+  //   setErrorMsg("");
+
+  //   if (!fullName || !email || !password) {
+  //     setErrorMsg("All fields are required.");
+  //     return;
+  //   }
+
+  //   try {
+  //     await createUserWithEmailAndPassword(auth, email, password);
+
+  //     const uniqueId = await generateUniqueId(fullName, email);
+  //     localStorage.setItem("uniqueId", uniqueId);
+  //     localStorage.setItem("fullName", fullName);
+  //     localStorage.setItem("email", email);
+
+  //     const userEmail = email.toLowerCase();
+  //     await setDoc(doc(db, "users", userEmail), {
+  //       email: userEmail,
+  //       role: role || "unknown",
+  //       fullName,
+  //     });
+
+  //     if (role === "beSniper") {
+  //       localStorage.setItem("showBeSniperModal", "true");
+  //     } else if (role === "HireFreelancer") {
+  //       localStorage.setItem("showHireFreelancerModal", "true");
+  //     }
+
+  //     window.location.href = "/";
+  //   } catch (error) {
+  //     setErrorMsg(
+  //       error.code === "auth/email-already-in-use"
+  //         ? "This email is already registered. Please login."
+  //         : error.message || "Signup failed"
+  //     );
+  //   }
+  // };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setErrorMsg("");
@@ -302,6 +342,15 @@ export default function SignupModal({ onClose }) {
       localStorage.setItem("fullName", fullName);
       localStorage.setItem("email", email);
 
+      // ✅ FIX: Save user data to Firestore
+      const userEmail = email.toLowerCase();
+      await setDoc(doc(db, "users", userEmail), {
+        email: userEmail,
+        role: role || "unknown",
+        fullName,
+      });
+
+      // ✅ Store modal flags for redirection
       if (role === "beSniper") {
         localStorage.setItem("showBeSniperModal", "true");
       } else if (role === "HireFreelancer") {

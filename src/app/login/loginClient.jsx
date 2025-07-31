@@ -168,7 +168,6 @@
 //     </div>
 //   );
 // }
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -181,9 +180,8 @@ import {
 } from "firebase/auth";
 import { useAuth } from "@/context/AuthContext";
 import { useHasMounted } from "@/hooks/useHasMounted";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-
 import "./login.css";
 
 export default function LoginClient() {
@@ -196,9 +194,12 @@ export default function LoginClient() {
     urlRole || localStorage.getItem("userRole") || ""
   );
 
-  if (urlRole) {
-    localStorage.setItem("userRole", urlRole);
-  }
+  useEffect(() => {
+    if (urlRole) {
+      localStorage.setItem("userRole", urlRole);
+      setRole(urlRole);
+    }
+  }, [urlRole]);
 
   const [showPassword, setShowPassword] = useState(false);
   const { user, loading } = useAuth();
@@ -208,10 +209,22 @@ export default function LoginClient() {
 
   useEffect(() => {
     if (hasMounted && !loading && user) {
-      // We don’t redirect here anymore until we get role from Firestore
-      // Prevents redirecting using old localStorage value
+      // Prevents redirecting with outdated localStorage role
     }
   }, [hasMounted, user, loading]);
+
+  const getFriendlyError = (code) => {
+    switch (code) {
+      case "auth/email-already-in-use":
+        return "This email is already registered.";
+      case "auth/user-not-found":
+        return "No user found. Please sign up.";
+      case "auth/wrong-password":
+        return "Incorrect password.";
+      default:
+        return "Something went wrong. Please try again.";
+    }
+  };
 
   const redirectUser = (userRole) => {
     if (userRole === "beSniper") {
@@ -226,6 +239,11 @@ export default function LoginClient() {
   const loginWithEmail = async () => {
     setError("");
 
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -234,7 +252,7 @@ export default function LoginClient() {
       );
       const user = userCredential.user;
 
-      const emailKey = user.email.toLowerCase(); // Ensures document match
+      const emailKey = user.email.toLowerCase();
       const userDocRef = doc(db, "users", emailKey);
       const userDoc = await getDoc(userDocRef);
 
@@ -242,20 +260,13 @@ export default function LoginClient() {
         const userRole = userDoc.data().role;
         localStorage.setItem("userRole", userRole);
         localStorage.setItem("email", user.email);
-
         redirectUser(userRole);
       } else {
         setError("⚠️ No role information found. Please contact support.");
       }
     } catch (err) {
       console.error("Login Error:", err);
-      if (err.code === "auth/user-not-found") {
-        setError("⚠️ User not found. Please sign up first.");
-      } else if (err.code === "auth/wrong-password") {
-        setError("⚠️ Incorrect password.");
-      } else {
-        setError(err.message || "⚠️ Login failed.");
-      }
+      setError(getFriendlyError(err.code));
     }
   };
 
@@ -266,6 +277,7 @@ export default function LoginClient() {
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
       const user = result.user;
 
+      const name = user.displayName || "googleuser";
       const emailKey = user.email.toLowerCase();
       const userDocRef = doc(db, "users", emailKey);
       const userDoc = await getDoc(userDocRef);
@@ -274,14 +286,22 @@ export default function LoginClient() {
         const userRole = userDoc.data().role;
         localStorage.setItem("userRole", userRole);
         localStorage.setItem("email", user.email);
-
         redirectUser(userRole);
       } else {
-        setError("⚠️ No role info found for this Google account.");
+        // ✅ Create new Firestore doc with unknown or fallback role
+        await setDoc(userDocRef, {
+          email: emailKey,
+          role: role || "unknown",
+          fullName: name,
+        });
+
+        localStorage.setItem("userRole", role || "unknown");
+        localStorage.setItem("email", user.email);
+        redirectUser(role || "unknown");
       }
     } catch (err) {
       console.error("Google Login Error:", err);
-      setError(err.message || "Google login failed");
+      setError(getFriendlyError(err.code));
     }
   };
 
