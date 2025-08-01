@@ -346,9 +346,9 @@ export default function LoginClient() {
           Login with Google
         </button>
 
-        <p className="signup-link">
+        {/* <p className="signup-link">
           Don’t have an account? <a href="/signup">Sign up</a>
-        </p>
+        </p> */}
         <p className="forget-password-link">
           <a href="/components/forgetPassword">Forgot Password?</a>
         </p>

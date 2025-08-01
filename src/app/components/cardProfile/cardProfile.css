@@ -14,8 +14,10 @@
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .card {
@@ -25,6 +27,21 @@
   text-align: center;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
+
+  /* Text wrapping and overflow control */
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+
+  /* Ensure card doesn't grow beyond container */
+  max-width: 100%;
+  min-width: 0; /* Allow flex items to shrink below content size */
+
+  /* Set consistent height */
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
 }
 
 .card:hover {
@@ -36,12 +53,19 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 12px;
+  margin: 0 auto 12px auto;
+  flex-shrink: 0;
 }
 
 .uid {
   font-weight: bold;
   margin-bottom: 8px;
+  font-size: 14px;
+
+  /* Handle long IDs */
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .purpose {
@@ -49,37 +73,118 @@
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 8px;
+
+  /* Handle long purpose text */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .bio {
   font-size: 13px;
   color: #777;
+  line-height: 1.4;
+  flex-grow: 1;
+
+  /* Handle long bio text with ellipsis after 4 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Fallback for browsers that don't support line-clamp */
+  max-height: 4.8em; /* 4 lines * 1.4 line-height * 0.86em font-size ≈ 4.8em */
+
+  /* Word wrapping */
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Responsive Breakpoints */
 @media (max-width: 1200px) {
   .cards-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 900px) {
   .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .page-container {
+    padding: 30px 15px;
   }
 }
 
 @media (max-width: 600px) {
   .cards-grid {
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
   }
 
   .card {
-    padding: 20px 12px;
+    padding: 14px;
+    min-height: 200px;
+  }
+
+  .page-container {
+    padding: 20px 10px;
   }
 
   .page-container h1 {
     font-size: 1.5rem;
-    margin-top: 12%;
+    margin-top: 8%;
   }
+
+  .uid {
+    font-size: 13px;
+  }
+
+  .purpose {
+    font-size: 13px;
+  }
+
+  .bio {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card:hover .bio {
+  -webkit-line-clamp: unset;
+  max-height: none;
+  overflow: visible;
+}
+
+.card p {
+  font-size: 17px;
+  color: #475569;
+  margin-top: 20px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 4; */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
