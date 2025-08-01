@@ -236,6 +236,40 @@ export default function LoginClient() {
     }
   };
 
+  // const loginWithEmail = async () => {
+  //   setError("");
+
+  //   if (password.length < 6) {
+  //     setError("Password must be at least 6 characters.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const userCredential = await signInWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     const user = userCredential.user;
+
+  //     const emailKey = user.email.toLowerCase();
+  //     const userDocRef = doc(db, "users", emailKey);
+  //     const userDoc = await getDoc(userDocRef);
+
+  //     if (userDoc.exists()) {
+  //       const userRole = userDoc.data().role;
+  //       localStorage.setItem("userRole", userRole);
+  //       localStorage.setItem("email", user.email);
+  //       redirectUser(userRole);
+  //     } else {
+  //       setError("⚠️ No role information found. Please contact support.");
+  //     }
+  //   } catch (err) {
+  //     console.error("Login Error:", err);
+  //     setError(getFriendlyError(err.code));
+  //   }
+  // };
+
   const loginWithEmail = async () => {
     setError("");
 
@@ -257,10 +291,14 @@ export default function LoginClient() {
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
-        const userRole = userDoc.data().role;
-        localStorage.setItem("userRole", userRole);
+        const userData = userDoc.data();
+        const fullName = userData.fullName || user.email.split("@")[0];
+
+        localStorage.setItem("userRole", userData.role);
         localStorage.setItem("email", user.email);
-        redirectUser(userRole);
+        localStorage.setItem("fullName", fullName); // ✅ now it will work in header
+
+        redirectUser(userData.role);
       } else {
         setError("⚠️ No role information found. Please contact support.");
       }
@@ -269,6 +307,42 @@ export default function LoginClient() {
       setError(getFriendlyError(err.code));
     }
   };
+
+  // const loginWithGoogle = async () => {
+  //   setError("");
+
+  //   try {
+  //     const result = await signInWithPopup(auth, new GoogleAuthProvider());
+  //     const user = result.user;
+
+  //     const name = user.displayName || "googleuser";
+  //     const emailKey = user.email.toLowerCase();
+  //     const userDocRef = doc(db, "users", emailKey);
+  //     const userDoc = await getDoc(userDocRef);
+
+  //     if (userDoc.exists()) {
+  //       const userRole = userDoc.data().role;
+  //       localStorage.setItem("userRole", userRole);
+  //       localStorage.setItem("email", user.email);
+  //       localStorage.setItem("fullName", userData.fullName || "User");
+  //       redirectUser(userRole);
+  //     } else {
+  //       // ✅ Create new Firestore doc with unknown or fallback role
+  //       await setDoc(userDocRef, {
+  //         email: emailKey,
+  //         role: role || "unknown",
+  //         fullName: name,
+  //       });
+
+  //       localStorage.setItem("userRole", role || "unknown");
+  //       localStorage.setItem("email", user.email);
+  //       redirectUser(role || "unknown");
+  //     }
+  //   } catch (err) {
+  //     console.error("Google Login Error:", err);
+  //     setError(getFriendlyError(err.code));
+  //   }
+  // };
 
   const loginWithGoogle = async () => {
     setError("");
@@ -283,12 +357,16 @@ export default function LoginClient() {
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
-        const userRole = userDoc.data().role;
-        localStorage.setItem("userRole", userRole);
+        const userData = userDoc.data(); // ✅ You were missing this line
+        const fullName = userData.fullName || name;
+
+        localStorage.setItem("userRole", userData.role);
         localStorage.setItem("email", user.email);
-        redirectUser(userRole);
+        localStorage.setItem("fullName", fullName);
+
+        redirectUser(userData.role);
       } else {
-        // ✅ Create new Firestore doc with unknown or fallback role
+        // ✅ Create new Firestore doc if not exists
         await setDoc(userDocRef, {
           email: emailKey,
           role: role || "unknown",
@@ -297,6 +375,8 @@ export default function LoginClient() {
 
         localStorage.setItem("userRole", role || "unknown");
         localStorage.setItem("email", user.email);
+        localStorage.setItem("fullName", name);
+
         redirectUser(role || "unknown");
       }
     } catch (err) {
