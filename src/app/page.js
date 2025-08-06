@@ -79,6 +79,29 @@ export default function Home() {
     },
   ];
 
+  const projects = [
+    {
+      title: "The Curse of the Wildflower",
+      author: "Smriti Sinha",
+      image: "./9.jpeg",
+    },
+    {
+      title: "A Century Between Us",
+      author: "Gayatri Chandrasekharan",
+      image: "./10.jpeg",
+    },
+    {
+      title: "The Tiger That Crashed My Wedding",
+      author: "Pranav Mishra",
+      image: "./11.jpeg",
+    },
+    {
+      title: "Sun Sakeena",
+      author: "Saadat Hasan Manto",
+      image: "./12.jpeg",
+    },
+  ];
+
   const length = testimonials.length;
 
   const handleNext = () => {
@@ -236,44 +259,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gigs */}
-      {/* <div className="gigs-section">
-        <h2 className="gigs-title" id="home-gigs-title">
-          Active Gigs
-        </h2>
-        <p className="gigs-subtitle">
-          Browse current projects posted by authors looking for professional
-          book services
-        </p>
-        <div className="gigs-grid">
-          {gigs.map((gig, idx) => (
-            <div
-              key={idx}
-              className={`gig-card ${idx === 1 ? "featured" : ""}`}
-            >
-              <div className="gig-top">
-                <span className="gig-tag">{gig.category}</span>
-                <span className="gig-rating">⭐ {gig.rating}</span>
-              </div>
-              <h3 className="gig-title">{gig.title}</h3>
-              <p className="gig-author">👤 by {gig.author}</p>
-              <p className="gig-desc">{gig.description}</p>
-              <div className="gig-meta">
-                <span>⏱ {gig.duration}</span>
-                <span>{gig.proposals} proposals</span>
-              </div>
-              <div className="gig-bottom">
-                <span className="gig-price">{gig.price}</span>
-                <button className="gig-btn">Apply Now</button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="view-btn">
-          <button>View All Gigs</button>
-        </div>
-      </div> */}
-
       <section className="hero-section">
         <div className="" id="dark-overlay"></div>
         <div className="hero-content">
@@ -389,6 +374,28 @@ export default function Home() {
               <p>Average Rating</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="projects-section">
+        <h2 className="projects-title">How Far We Have Come</h2>
+        <p className="projects-subtitle">
+          Our snipers have delivered exceptional results for authors across
+          genres. See some of our recent cover design projects.
+        </p>
+        <div className="projects-grid">
+          {projects.map((item, idx) => (
+            <div className="project-card" key={idx}>
+              <img
+                src={item.image}
+                alt={item.title}
+                className="project-image"
+              />
+              <h3 className="project-name">{item.title}</h3>
+              <p className="project-author">by {item.author}</p>
+              <span className="project-tag">Cover Design</span>
+            </div>
+          ))}
         </div>
       </div>
 

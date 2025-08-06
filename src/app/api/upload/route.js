@@ -1,39 +1,36 @@
+export const dynamic = "force-dynamic";
+
 import { S3 } from "aws-sdk";
 import formidable from "formidable";
 import fs from "fs";
-import { promisify } from "util";
 import { NextResponse } from "next/server";
 
-// Disable the default body parser
+// Required to disable Next.js default body parsing
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-// Convert request to a Node.js-style readable stream
-function getNodeRequest(request) {
-  const readable = request.body;
-  readable.headers = request.headers;
-  readable.method = request.method;
-  readable.url = request.url;
-  return readable;
+// Helper to parse form using a Promise
+function parseFormData(req) {
+  const form = formidable({ multiples: false, keepExtensions: true });
+  return new Promise((resolve, reject) => {
+    form.parse(req, (err, fields, files) => {
+      if (err) reject(err);
+      else resolve({ fields, files });
+    });
+  });
 }
 
-// Handle POST upload
-export async function POST(request) {
-  const form = new formidable.IncomingForm({ keepExtensions: true });
-
-  const parseForm = promisify(form.parse);
-
+export async function POST(req) {
   try {
-    const nodeReq = getNodeRequest(request);
-    const [fields, files] = await parseForm(nodeReq);
+    const { fields, files } = await parseFormData(req);
 
     const file = files.file;
 
     const fileContent = fs.readFileSync(file.filepath);
-    const fileName = Date.now() + "_" + file.originalFilename;
+    const fileName = `${Date.now()}_${file.originalFilename}`;
 
     const s3 = new S3({
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -45,15 +42,15 @@ export async function POST(request) {
       Bucket: process.env.AWS_BUCKET_NAME,
       Key: fileName,
       Body: fileContent,
-      ACL: "public-read",
       ContentType: file.mimetype,
+      ACL: "public-read",
     };
 
-    const uploadResult = await s3.upload(params).promise();
+    const upload = await s3.upload(params).promise();
 
-    return NextResponse.json({ success: true, url: uploadResult.Location });
+    return NextResponse.json({ success: true, url: upload.Location });
   } catch (err) {
-    console.error("Upload failed:", err);
+    console.error("Upload error:", err);
     return NextResponse.json(
       { success: false, error: err.message },
       { status: 500 }
