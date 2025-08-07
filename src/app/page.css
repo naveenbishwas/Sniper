@@ -588,10 +588,8 @@
     gap: 20px;
   }
 }
-
 .browse-talent-section {
   padding: 80px 20px;
-  padding-top: 50px;
   background-color: #fff;
   font-family: Arial, sans-serif;
 }
@@ -599,7 +597,6 @@
 .browse-talent-container {
   max-width: 1350px;
   margin: auto;
-  text-align: left;
   padding: 3% 0;
 }
 
@@ -612,16 +609,11 @@
 }
 
 .browse-talent-container p {
-  font-size: 18px;
+  font-size: 15px;
   color: #475569;
   margin-bottom: 30px;
-  max-width: 50%;
-  margin-top: 2%;
+  max-width: 75%;
   line-height: 1.5;
-}
-
-.category-cards p {
-  max-width: 100%;
 }
 
 .browse-buttons {
@@ -632,32 +624,49 @@
 }
 
 .post-job-btn {
-  background-color: var(--themeColor);
+  background-color: #c00;
   color: white;
   border: none;
   padding: 12px 24px;
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .view-categories-link {
   font-size: 16px;
-  color: #0f172a;
+  color: var(--background);
+  width: 180px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--themeColor);
+  text-align: center;
   text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
 }
 
-.category-cards {
+.view-categories-link:hover {
+  background-color: #0f172a;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.view-all-btn {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 3%;
 }
 
+.category-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
 .card {
-  flex: 1;
-  min-width: 280px;
   background-color: white;
   border: 1px solid #d4d4d4;
   border-radius: 16px;
@@ -676,28 +685,28 @@
 }
 
 .card h3 {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   color: #0f172a;
-  margin-bottom: 15px;
-  margin-top: 30px;
-}
-
-.card p {
-  font-size: 17px;
-  color: #475569;
   margin-top: 20px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .category-cards {
-    flex-direction: column;
-  }
+.card p {
+  font-size: 15px;
+  color: #475569;
+  margin-top: 15px;
+}
 
-  .browse-buttons {
-    align-items: flex-start;
-    gap: 10px;
+/* Responsive */
+@media (max-width: 1024px) {
+  .category-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .category-cards {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
@@ -830,6 +839,15 @@
 
 .browse-talent-container-df {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.browse-talent-container-df span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 @media (max-width: 900px) {

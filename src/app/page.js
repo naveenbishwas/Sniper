@@ -21,6 +21,7 @@ export default function Home() {
   const [current, setCurrent] = useState(0);
   const [slideDirection, setSlideDirection] = useState("right");
   const [animationClass, setAnimationClass] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const freelancers = [
     {
@@ -102,6 +103,96 @@ export default function Home() {
     },
   ];
 
+  const categories = [
+    {
+      icon: "🌐",
+      title: "Digital Marketing",
+      desc: "Bring your vision to life with digital marketing professionals ready to assist you.",
+    },
+    {
+      icon: "✏️",
+      title: "Graphic & Design",
+      desc: "Bring your vision to life with creative graphic design professionals ready to assist you.",
+    },
+    {
+      icon: "🖥️",
+      title: "Programming & Tech",
+      desc: "Bring your vision to life with technologists around the world ready to assist you.",
+    },
+    {
+      icon: "📢",
+      title: "Sales & Marketing",
+      desc: "Scale your outreach with top sales experts.",
+    },
+    {
+      icon: "📚",
+      title: "Writing & Translation",
+      desc: "Craft content or translate ideas with language pros.",
+    },
+    {
+      icon: "🎥",
+      title: "Video & Animation",
+      desc: "Engaging visuals brought to life by experts.",
+    },
+    {
+      icon: "🎵",
+      title: "Music & Audio",
+      desc: "Audio editing, production, and music pros.",
+    },
+    {
+      icon: "🔍",
+      title: "SEO Services",
+      desc: "Boost your rankings with SEO strategies.",
+    },
+    {
+      icon: "📱",
+      title: "Mobile App Dev",
+      desc: "Create stunning apps for Android & iOS.",
+    },
+    {
+      icon: "🧮",
+      title: "Data Entry",
+      desc: "Reliable and fast data entry services.",
+    },
+    {
+      icon: "🛒",
+      title: "eCommerce Dev",
+      desc: "Build your online store with eCommerce devs.",
+    },
+    {
+      icon: "📈",
+      title: "Finance & Accounting",
+      desc: "Manage your money with expert guidance.",
+    },
+    {
+      icon: "👨‍⚖️",
+      title: "Legal Consulting",
+      desc: "Legal professionals at your service.",
+    },
+    {
+      icon: "🧠",
+      title: "AI & Machine Learning",
+      desc: "Smart solutions powered by AI.",
+    },
+    {
+      icon: "👔",
+      title: "Business Consulting",
+      desc: "Strategic advice to scale your business.",
+    },
+    {
+      icon: "🧪",
+      title: "Engineering & Architecture",
+      desc: "Real-world builds & virtual plans.",
+    },
+    {
+      icon: "🤝",
+      title: "Customer Support",
+      desc: "Keep clients happy with support experts.",
+    },
+  ];
+
+  const visibleCategories = showAll ? categories : categories.slice(0, 8);
+
   const length = testimonials.length;
 
   const handleNext = () => {
@@ -177,40 +268,26 @@ export default function Home() {
             </span>
             <div className="browse-buttons">
               <button className="post-job-btn">Post a Job</button>
-              <a href="#" className="view-categories-link">
-                View all categories
-              </a>
             </div>
           </div>
 
           <div className="category-cards">
-            <div className="card">
-              <div className="icon">🌐</div>
-              <h3>Digital Marketing</h3>
-              <p>
-                Bring your vision to life with digital marketing professionals
-                ready to assist you.
-              </p>
-            </div>
-
-            <div className="card">
-              <div className="icon">✏️</div>
-              <h3>Graphic & Design</h3>
-              <p>
-                Bring your vision to life with creative graphic design
-                professionals ready to assist you.
-              </p>
-            </div>
-
-            <div className="card">
-              <div className="icon">🖥️</div>
-              <h3>Programming & Tech</h3>
-              <p>
-                Bring your vision to life with technologists around the world
-                ready to assist you.
-              </p>
-            </div>
+            {visibleCategories.map((cat, index) => (
+              <div className="card" key={index}>
+                <div className="icon">{cat.icon}</div>
+                <h3>{cat.title}</h3>
+                <p>{cat.desc}</p>
+              </div>
+            ))}
           </div>
+          <span className="view-all-btn">
+            <a
+              className="view-categories-link"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? "View Less" : "View all categories"}
+            </a>
+          </span>
         </div>
       </section>
 
