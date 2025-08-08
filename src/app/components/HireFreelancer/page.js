@@ -402,27 +402,30 @@ const HireFreelancer = ({ onClose }) => {
                 )}
               </div>
 
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                className={errors.category ? "input-error" : ""}
-              >
-                <option value="">Select a category</option>
-                <option value="graphic-designing">Graphic Designing</option>
-                <option value="copywriting">Copywriting</option>
-                <option value="proofreading">Proofreading</option>
-                <option value="translation">Translation</option>
-                <option value="voice-over">Voice Over</option>
-                <option value="video-editing">Video Editing</option>
-                <option value="web-development">Web Development</option>
-                <option value="content-writing">Content Writing</option>
-                <option value="social-media-management">
-                  Social Media Management
-                </option>
-                {/* Add more options as needed */}
-              </select>
+              <div className="form-group">
+                <label htmlFor="category">Category</label>
+                <select
+                  id="category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  className={errors.category ? "input-error" : ""}
+                >
+                  <option value="">Select a category</option>
+                  <option value="graphic-designing">Graphic Designing</option>
+                  <option value="copywriting">Copywriting</option>
+                  <option value="proofreading">Proofreading</option>
+                  <option value="translation">Translation</option>
+                  <option value="voice-over">Voice Over</option>
+                  <option value="video-editing">Video Editing</option>
+                  <option value="web-development">Web Development</option>
+                  <option value="content-writing">Content Writing</option>
+                  <option value="social-media-management">
+                    Social Media Management
+                  </option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
 
               <div className="form-group">
                 <label htmlFor="gigDeadline">Deadline</label>
