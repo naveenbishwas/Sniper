@@ -188,3 +188,98 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* ====== Filter Bar (shared styling) ====== */
+.filters-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 0 auto 18px auto;
+  padding: 10px 12px;
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, #ffffffcc 0%, #ffffff 70%);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
+}
+
+.filters-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.select-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.nice-select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 10px 42px 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 0.95rem;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 270px;
+}
+
+.nice-select:focus {
+  outline: none;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.2);
+}
+
+.select-caret {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+  color: #475569;
+}
+
+.result-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #0ea5e910;
+  color: #0369a1;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px dashed #7dd3fc;
+}
+
+/* Responsive tweaks for filter bar */
+@media (max-width: 640px) {
+  .filters-inner {
+    gap: 10px;
+  }
+  .nice-select {
+    min-width: 100%;
+    width: 100%;
+  }
+  .filter-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

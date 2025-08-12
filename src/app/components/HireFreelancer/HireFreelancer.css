@@ -380,10 +380,10 @@ select#category {
   color: #333;
   transition: border-color 0.3s, box-shadow 0.3s;
   appearance: none;
-  background-image: url(
+  /* background-image: url(
     data:image/svg + xml;charset=US-ASCII,
     %3Csvgwidth="12"height="8"viewBox="0 0 12 8"xmlns="http://www.w3.org/2000/svg"%3E%3Cpathd="M1 1l5 5 5-5"stroke="%23333"stroke-width="2"fill="none"fill-rule="evenodd"/%3E%3C/svg%3E
-  );
+  ); */
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 12px;
