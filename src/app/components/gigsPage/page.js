@@ -318,7 +318,9 @@ const GigsPage = () => {
   return (
     <>
       <Header />
-      <h1 className="gigs-title">All Gigs</h1>
+      <h1 className="gigs-title" id="title">
+        All Gigs
+      </h1>
 
       {/* Filter Bar */}
       <div className="filters-bar">
