@@ -1429,8 +1429,11 @@
 
 .project-tag {
   display: inline-block;
-  background: #ffd54f;
-  color: #000;
+  /* background: var(--themeColor); */
+  background-color: #fff;
+  border: 1px solid #a62b2b;
+  /* color: #ffffff; */
+  color: var(--themeColor);
   font-weight: 600;
   font-size: 0.8rem;
   padding: 6px 14px;
