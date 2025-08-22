@@ -17,7 +17,7 @@ const mediaItems = [
     id: "v2",
     type: "video",
     title: "Not Indian Enough",
-    // src: "/trailer.mp4",
+
     src: "https://res.cloudinary.com/deg6wt06k/video/upload/v1755842744/trailer_pyesvr.mp4",
     poster: "/not-india.png",
   },
@@ -25,7 +25,7 @@ const mediaItems = [
     id: "v3",
     type: "video",
     title: "Rise of The Fallen",
-    // src: "/final.mp4",
+
     src: "https://res.cloudinary.com/deg6wt06k/video/upload/v1755842694/final_oyshe0.mp4",
     poster: "/rise.png",
   },
