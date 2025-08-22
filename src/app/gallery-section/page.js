@@ -88,7 +88,6 @@ export default function GalleryPage() {
 
   const handleOpen = (item) => setOpenItem(item);
   const handleClose = () => {
-    // stop video playback & reset
     if (videoRef.current) {
       try {
         videoRef.current.pause();
