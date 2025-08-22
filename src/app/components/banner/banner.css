@@ -1,0 +1,166 @@
+.sniper-hero {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  min-height: 95vh;
+  padding: 80px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.sniper-title,
+.sniper-subtitle,
+.sniper-buttons {
+  position: relative;
+  z-index: 1;
+}
+
+.sniper-title {
+  font-size: 4.3rem;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  color: var(--background);
+  line-height: 1.1;
+  margin-top: 5%;
+}
+
+.sniper-subtitle {
+  font-size: 1.5rem;
+  color: var(--background);
+  max-width: 800px;
+  margin: 30px auto 30px;
+  line-height: 1.3;
+  padding: 0 10px;
+}
+
+.sniper-search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.search-input {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(244, 180, 0, 0.3);
+  padding: 8px 16px;
+  max-width: 650px;
+  width: 100%;
+}
+
+.search-input svg {
+  color: #8a8a8a;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.sniper-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  padding: 8px 12px;
+}
+
+.sniper-search-btn {
+  background-color: black;
+  color: #ffcf33;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 12px;
+}
+
+.sniper-search-btn:hover {
+  background-color: #1a1a1a;
+}
+
+.sniper-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-black,
+.btn-white {
+  padding: 10px 24px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-size: 17px;
+  font-family: sans-serif;
+}
+
+.btn-black {
+  background-color: var(--themeColor);
+  color: var(--background);
+}
+
+.btn-white {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 2px solid var(--foreground);
+}
+
+/* === Responsive Styling === */
+@media (max-width: 768px) {
+  .sniper-title {
+    font-size: 2.2rem;
+  }
+
+  .sniper-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .sniper-input {
+    width: 100%;
+  }
+
+  .sniper-buttons {
+    flex-wrap: nowrap;
+  }
+
+  .btn-black,
+  .btn-white {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sniper-title {
+    font-size: 1.8rem;
+    margin-top: 30%;
+  }
+
+  .sniper-subtitle {
+    font-size: 1rem;
+  }
+
+  .sniper-hero {
+    padding: 60px 15px;
+  }
+}

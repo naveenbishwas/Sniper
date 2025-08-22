@@ -1,0 +1,130 @@
+.footer {
+  background-color: #fafafa;
+  color: #facc15;
+  padding: 80px 20px 30px;
+  font-family: sans-serif;
+  border-top: 1px solid #ba0201;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1350px;
+  margin: 0 auto;
+  gap: 30px;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.footer-logo span {
+  color: var(--themeColor);
+}
+
+.footer-logo .footer-icon img {
+  width: 100px;
+  height: auto;
+}
+
+.footer-icon {
+  color: var(--background);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+
+.footer-column p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: var(--foreground);
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.footer-column ul li {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 1rem;
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.footer-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-contact-icon {
+  background: var(--background);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  color: var(--themeColor);
+  cursor: pointer;
+  border: 1px solid #000;
+}
+
+.footer-column h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--themeColor);
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: var(--background);
+  margin-top: 70px;
+}
+
+.footer-bottom p {
+  color: var(--foreground);
+}
+
+#footer-icon {
+  stroke: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-logo {
+    justify-content: flex-start;
+  }
+}
+
+.footer-bottom p:last-of-type {
+  margin-top: 15px;
+}
+
+.footer-bottom p a {
+  font-weight: bolder;
+  text-decoration: underline;
+}
