@@ -5,7 +5,6 @@ import "./page.css";
 import Header from "./components/header/page";
 import Banner from "./components/banner/page";
 import Footer from "./components/footer/page";
-import { useAuth } from "@/context/AuthContext";
 import SignupModal from "./signup/signUpClient";
 import GigsPage from "./components/gigsPage/page";
 import BeSniperModal from "./components/beSniper/page";
@@ -13,16 +12,16 @@ import HireFreelancer from "./components/HireFreelancer/page";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export default function Home() {
+export default function Home({ images }) {
   const [showSignup, setShowSignup] = useState(false);
   const [showBeSniper, setShowBeSniper] = useState(false);
   const [showHire, setShowHire] = useState(false);
   const [showSteps, setShowSteps] = useState(false);
   const [role, setRole] = useState(null);
   const [current, setCurrent] = useState(0);
-  const [slideDirection, setSlideDirection] = useState("right");
   const [animationClass, setAnimationClass] = useState("");
-  const [showAll, setShowAll] = useState(false);
+
+  // Gallery images
 
   const freelancers = [
     {
@@ -58,7 +57,6 @@ export default function Home() {
       text: "Lorem ipsum dolor sit amet consectetur non adipiscing elit gravida posuere odio metus adipiscing tincidunt venenatis amet sagittis tellus porttitor enim blandit venenatis tellus.",
       name: "Randall Robertson",
       title: "Project lead at Agency",
-      logo: "/agency-logo.png",
       color: "var(--themeColor)",
     },
     {
@@ -67,7 +65,6 @@ export default function Home() {
       text: "Dolor sit amet consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh.",
       name: "Laura White",
       title: "Design Director at Bright",
-      logo: "/bright-logo.png",
       color: "var(--themeColor)",
     },
     {
@@ -76,31 +73,82 @@ export default function Home() {
       text: "Amazing team! Really helped streamline our workflow and project delivery. Couldn’t recommend more.",
       name: "Mohit Sharma",
       title: "CEO at TechWay",
-      logo: "/techway-logo.png",
       color: "var(--themeColor)",
     },
   ];
 
-  const projects = [
+  const [loadedImages, setLoadedImages] = useState(new Set());
+
+  const handleImageLoad = (index) => {
+    setLoadedImages((prev) => new Set([...prev, index]));
+  };
+
+  const defaultImages = [
+    { src: "https://picsum.photos/300/400?random=1", alt: "Random 1" },
+    { src: "https://picsum.photos/300/600?random=2", alt: "Random 2" },
+    { src: "https://picsum.photos/300/350?random=3", alt: "Random 3" },
+    { src: "https://picsum.photos/300/500?random=4", alt: "Random 4" },
+    { src: "https://picsum.photos/300/450?random=5", alt: "Random 5" },
+    { src: "https://picsum.photos/300/550?random=6", alt: "Random 6" },
+    { src: "https://picsum.photos/300/380?random=7", alt: "Random 7" },
+    { src: "https://picsum.photos/300/480?random=8", alt: "Random 8" },
+    { src: "https://picsum.photos/300/420?random=9", alt: "Random 9" },
+    { src: "https://picsum.photos/300/520?random=10", alt: "Random 10" },
+  ];
+
+  const imagesToRender = images?.length ? images : defaultImages;
+
+  // const projects = [
+  //   {
+  //     title: "The Curse of the Wildflower",
+  //     author: "Smriti Sinha",
+  //     image: "./9.jpeg",
+  //   },
+  //   {
+  //     title: "A Century Between Us",
+  //     author: "Gayatri Chandrasekharan",
+  //     image: "./10.jpeg",
+  //   },
+  //   {
+  //     title: "The Tiger That Crashed My Wedding",
+  //     author: "Pranav Mishra",
+  //     image: "./11.jpeg",
+  //   },
+  //   {
+  //     title: "Sun Sakeena",
+  //     author: "Saadat Hasan Manto",
+  //     image: "./12.jpeg",
+  //   },
+  // ];
+
+  const steps = [
     {
-      title: "The Curse of the Wildflower",
-      author: "Smriti Sinha",
-      image: "./9.jpeg",
+      id: 1,
+      image: "/process1.png",
+      title: "Consultation call",
+      description:
+        "Our dedicated sales team reaches out to understand your specific needs and project goals.",
     },
     {
-      title: "A Century Between Us",
-      author: "Gayatri Chandrasekharan",
-      image: "./10.jpeg",
+      id: 2,
+      image: "/process2.png",
+      title: "Project Brief",
+      description:
+        "Authors post detailed project requirements on the platform, outlining their specific needs and expectations.",
     },
     {
-      title: "The Tiger That Crashed My Wedding",
-      author: "Pranav Mishra",
-      image: "./11.jpeg",
+      id: 3,
+      image: "/process1.png",
+      title: "Freelancers Apply",
+      description:
+        "Qualified service providers submit proposals after carefully reviewing your project requirements.",
     },
     {
-      title: "Sun Sakeena",
-      author: "Saadat Hasan Manto",
-      image: "./12.jpeg",
+      id: 4,
+      image: "/process2.png",
+      title: "Project Process",
+      description:
+        "Our targeted matching system ensures authors connect with the ideal service providers, after which secure payment processing enables the work to get underway.",
     },
   ];
 
@@ -192,33 +240,30 @@ export default function Home() {
     },
   ];
 
-  const visibleCategories = showAll ? categories : categories.slice(0, 8);
-
-  const length = testimonials.length;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const slidesToShow = 4;
+  const nextSlide = () =>
+    setCurrentIndex((p) => (p >= categories.length - slidesToShow ? 0 : p + 1));
+  const prevSlide = () =>
+    setCurrentIndex((p) => (p <= 0 ? categories.length - slidesToShow : p - 1));
 
   const handleNext = () => {
     setAnimationClass("slide-right");
-    setTimeout(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, 50); // triggers animation smoothly
+    setTimeout(() => setCurrent((p) => (p + 1) % testimonials.length), 50);
   };
-
   const handlePrev = () => {
     setAnimationClass("slide-left");
-    setTimeout(() => {
-      setCurrent((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-    }, 50);
+    setTimeout(
+      () => setCurrent((p) => (p === 0 ? testimonials.length - 1 : p - 1)),
+      50
+    );
   };
 
-  const { image, stars, text, name, title, logo, color } =
-    testimonials[current];
+  const { image, stars, text, name, title, color } = testimonials[current];
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimationClass(""); // remove class after animation finishes
-    }, 500); // match animation-duration
-
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setAnimationClass(""), 500);
+    return () => clearTimeout(t);
   }, [current]);
 
   useEffect(() => {
@@ -231,19 +276,13 @@ export default function Home() {
         setShowSteps(true);
         localStorage.removeItem("showBeSniperModal");
       }
-
       if (localStorage.getItem("showHireFreelancerModal") === "true") {
         setShowHire(true);
         localStorage.removeItem("showHireFreelancerModal");
       }
     }, 100);
-
     return () => clearTimeout(timeout);
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = showSignup || showSteps ? "hidden" : "auto";
-  }, [showSignup, showSteps]);
 
   const handleSignupClick = (selectedRole) => {
     setRole(selectedRole);
@@ -261,11 +300,7 @@ export default function Home() {
           <div className="browse-talent-container-df">
             <span>
               <h1>Browse talent by category</h1>
-              <p>
-                Connect with talented freelancers across various fields. Our
-                platform offers a diverse range of services to meet your project
-                needs.
-              </p>
+              <p>Connect with talented freelancers across various fields.</p>
             </span>
             <div className="browse-buttons">
               <button className="post-job-btn">Post a Job</button>
@@ -273,22 +308,74 @@ export default function Home() {
           </div>
 
           <div className="category-cards">
-            {visibleCategories.map((cat, index) => (
-              <div className="card" key={index}>
-                <div className="icon">{cat.icon}</div>
-                <h3>{cat.title}</h3>
-                <p>{cat.desc}</p>
+            <div className="slider-container" aria-roledescription="carousel">
+              <button
+                className="nav-button prev-button"
+                onClick={prevSlide}
+                aria-label="Previous"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                  />
+                </svg>
+              </button>
+
+              <div className="slider-wrapper">
+                <div className="fade fade-left" aria-hidden="true"></div>
+                <div className="fade fade-right" aria-hidden="true"></div>
+
+                <div
+                  className="slider-track"
+                  style={{
+                    transform: `translateX(-${
+                      currentIndex * (100 / slidesToShow)
+                    }%)`,
+                  }}
+                >
+                  {categories.map((cat, index) => (
+                    <div className="slide" key={index}>
+                      <div className="card">
+                        <div className="icon">{cat.icon}</div>
+                        <h3>{cat.title}</h3>
+                        <p>{cat.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+
+              <button
+                className="nav-button next-button"
+                onClick={nextSlide}
+                aria-label="Next"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
-          <span className="view-all-btn">
-            <a
-              className="view-categories-link"
-              onClick={() => setShowAll(!showAll)}
-            >
-              {showAll ? "View Less" : "View all categories"}
-            </a>
-          </span>
         </div>
       </section>
 
@@ -297,12 +384,11 @@ export default function Home() {
       <section className="vetting-section">
         <div className="vetting-wrapper">
           <div className="vetting-container">
-            {/* Left Sticky Column */}
             <div className="vetting-text">
-              <h2>How HubHawks Live Works</h2>
+              <h2>Your Journey with Hubhawks live</h2>
               <p>
-                Our precision approach ensures authors get connected with the
-                right service providers for their specific needs
+                Our talented professionals are ready to bring your ideas to
+                life. To go live, start here
               </p>
               <div className="vetting-buttons">
                 <button className="hire-btn">Hire freelancer</button>
@@ -311,24 +397,20 @@ export default function Home() {
             </div>
 
             <div className="vetting-scrollable">
-              {[1, 2, 3, 4].map((item, index) => (
-                <div className="vetting-card" key={index}>
+              {steps.map((step) => (
+                <div className="vetting-card" key={step.id}>
                   <div className="vetting-image">
                     <Image
-                      src={`/process${item % 2 === 0 ? "2" : "1"}.png`}
+                      src={step.image}
                       width={350}
                       height={220}
-                      alt={`process-${item}`}
+                      alt={step.title}
                       unoptimized
                     />
                   </div>
                   <div className="vetting-info">
-                    <span className="discount">{item}% off pass</span>
-                    <h3>In-depth skill review</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur lorem non
-                      adipiscing elit convallis dolor ut enim.
-                    </p>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
                   </div>
                 </div>
               ))}
@@ -338,7 +420,7 @@ export default function Home() {
       </section>
 
       <section className="hero-section">
-        <div className="" id="dark-overlay"></div>
+        <div id="dark-overlay"></div>
         <div className="hero-content">
           <div className="hero-container">
             <div className="hero-text">
@@ -346,9 +428,7 @@ export default function Home() {
               <p>
                 Partnering with top freelancers can elevate your projects and
                 drive results. Our platform connects you with skilled
-                professionals ready to tackle your unique challenges. Experience
-                the flexibility and expertise that comes with freelance
-                collaboration.
+                professionals ready to tackle your unique challenges.
               </p>
               <div className="hero-buttons">
                 <button className="orange-btn">Post a Job</button>
@@ -404,6 +484,7 @@ export default function Home() {
                 width={0}
                 height={0}
                 className="freelancer-image"
+                unoptimized
               />
               <h3>{freelancer.name}</h3>
               <span>{freelancer.title}</span>
@@ -417,65 +498,32 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="sniper-cta">
-        <div className="sniper-cta-left">
-          <h2>Become a sniper and start earning</h2>
-          <p className="subtext">
-            Monetize your book-related expertise as a side hustle
-          </p>
-          <ul className="sniper-list">
-            <li>✅ Choose a gig that stands out</li>
-            <li>✅ Get noticed with professional portfolios</li>
-            <li>
-              ✅ Develop a freelance business around your book-related talents
-            </li>
-          </ul>
-          <button className="yellow-btn">Be a Freelancer</button>
-        </div>
-        <div className="sniper-cta-right">
-          <h3>Ready to get started?</h3>
-          <p>
-            Join thousands of book service providers already earning on HubHawks
-            Live
-          </p>
-          <div className="sniper-stats">
-            <div>
-              <h4>500+</h4>
-              <p>Active Freelancers</p>
-            </div>
-            <div>
-              <h4>95%</h4>
-              <p>Order Completion</p>
-            </div>
-            <div>
-              <h4>4.9⭐</h4>
-              <p>Average Rating</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      {/* ===== Projects with Masonry Gallery Section ===== */}
       <div className="projects-section">
         <h2 className="projects-title">How Far We Have Come</h2>
         <p className="projects-subtitle">
           Our snipers have delivered exceptional results for authors across
           genres. See some of our recent cover design projects.
         </p>
-        <div className="projects-grid">
-          {projects.map((item, idx) => (
-            <div className="project-card" key={idx}>
+        <div className="masonry">
+          {imagesToRender.map((image, index) => (
+            <div
+              key={index}
+              className={`masonryItem ${
+                loadedImages.has(index) ? "loaded" : ""
+              }`}
+            >
               <img
-                src={item.image}
-                alt={item.title}
-                className="project-image"
+                src={image.src}
+                alt={image.alt || ""}
+                className="masonryImage"
+                onLoad={() => handleImageLoad(index)}
+                loading="lazy"
               />
-              <h3 className="project-name">{item.title}</h3>
-              <p className="project-author">by {item.author}</p>
-              <span className="project-tag">Cover Design</span>
+              {image.caption && <div className="caption">{image.caption}</div>}
             </div>
           ))}
         </div>
-
         <span>
           <Link href="/gallery-section">
             <button className="view-btn">View All</button>
@@ -509,7 +557,7 @@ export default function Home() {
               </div>
               <p className="testimonial-text">{text}</p>
               <h4>{name}</h4>
-              <p className="testimonial-title" style={{ color: color }}>
+              <p className="testimonial-title" style={{ color }}>
                 {title}
               </p>
             </div>

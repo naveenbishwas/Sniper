@@ -14,15 +14,11 @@ export default function Banner() {
           Your browser does not support the video tag.
         </video>
 
-        <h1 className="sniper-title">
-          The Snipers will take it
-          <br />
-          from here
-        </h1>
+        <h1 className="sniper-title">We will take it from here!</h1>
         <p className="sniper-subtitle">
-          Connect with expert book service professionals who deliver precision
-          results. From cover design to marketing campaigns, our snipers hit the
-          target every time.
+          Connect with book service professionals who are committed to
+          delivering flawless results. From cover design to marketing campaigns,
+          we hit the target every time.
         </p>
         <div className="sniper-search-section"></div>
         <div className="sniper-buttons">
