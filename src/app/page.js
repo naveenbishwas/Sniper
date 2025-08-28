@@ -9,7 +9,7 @@ import SignupModal from "./signup/signUpClient";
 import GigsPage from "./components/gigsPage/page";
 import BeSniperModal from "./components/beSniper/page";
 import HireFreelancer from "./components/HireFreelancer/page";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 export default function Home({ images }) {
@@ -20,8 +20,86 @@ export default function Home({ images }) {
   const [role, setRole] = useState(null);
   const [current, setCurrent] = useState(0);
   const [animationClass, setAnimationClass] = useState("");
+  const progressRef = useRef(null);
+  const itemsRef = useRef([]);
 
   // Gallery images
+  const items = [
+    {
+      title: "Alpine Majesty",
+      desc: "Towering peaks pierce through misty clouds in this dramatic mountain landscape.",
+      src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Mountain landscape",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Urban Symmetry",
+      desc: "Glass and steel create mesmerizing patterns in modern architectural design.",
+      src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Modern architecture",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Nature's Power",
+      desc: "A majestic waterfall cascades through lush green forest.",
+      src: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Waterfall",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Golden Hour",
+      desc: "Warm sunlight bathes the landscape in ethereal golden tones.",
+      src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Mountain sunset",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "City Lights",
+      desc: "The urban landscape comes alive with countless twinkling lights.",
+      src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Serene Waters",
+      desc: "A pristine lake reflects the surrounding landscape like a mirror.",
+      src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Nature landscape",
+      creditHref: "https://unsplash.com",
+    },
+  ];
+
+  // Scroll progress bar
+  useEffect(() => {
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const winScroll = doc.scrollTop || document.body.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      const progress = Math.min(100, (winScroll / height) * 100);
+      if (progressRef.current) progressRef.current.style.width = `${progress}%`;
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Intersection observer for fade-up animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("mmg-fade-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    itemsRef.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const freelancers = [
     {
@@ -84,14 +162,18 @@ export default function Home({ images }) {
   };
 
   const defaultImages = [
-    { src: "https://picsum.photos/300/400?random=1", alt: "Random 1" },
-    { src: "https://picsum.photos/300/600?random=2", alt: "Random 2" },
-    { src: "https://picsum.photos/300/350?random=3", alt: "Random 3" },
-    { src: "https://picsum.photos/300/500?random=4", alt: "Random 4" },
-    { src: "https://picsum.photos/300/450?random=5", alt: "Random 5" },
-    { src: "https://picsum.photos/300/550?random=6", alt: "Random 6" },
-    { src: "https://picsum.photos/300/380?random=7", alt: "Random 7" },
-    { src: "https://picsum.photos/300/480?random=8", alt: "Random 8" },
+    // { src: "https://picsum.photos/300/400?random=1", alt: "Random 1" },
+    // { src: "https://picsum.photos/300/600?random=2", alt: "Random 2" },
+    // { src: "https://picsum.photos/300/350?random=3", alt: "Random 3" },
+    // { src: "https://picsum.photos/300/500?random=4", alt: "Random 4" },
+    // { src: "https://picsum.photos/300/450?random=5", alt: "Random 5" },
+    // { src: "https://picsum.photos/300/550?random=6", alt: "Random 6" },
+    // { src: "https://picsum.photos/300/380?random=7", alt: "Random 7" },
+    { src: "./9.jpeg", alt: "Random 8" },
+    { src: "./9.jpeg", alt: "Random 8" },
+    { src: "./9.jpeg", alt: "Random 8" },
+    { src: "./9.jpeg", alt: "Random 8" },
+    { src: "./9.jpeg", alt: "Random 8" },
     { src: "https://picsum.photos/300/420?random=9", alt: "Random 9" },
     { src: "https://picsum.photos/300/520?random=10", alt: "Random 10" },
   ];
@@ -505,7 +587,7 @@ export default function Home({ images }) {
           Our snipers have delivered exceptional results for authors across
           genres. See some of our recent cover design projects.
         </p>
-        <div className="masonry">
+        {/* <div className="masonry">
           {imagesToRender.map((image, index) => (
             <div
               key={index}
@@ -523,6 +605,47 @@ export default function Home({ images }) {
               {image.caption && <div className="caption">{image.caption}</div>}
             </div>
           ))}
+        </div> */}
+        <div className="mmg-root">
+          <div ref={progressRef} className="mmg-scroll-indicator" />
+
+          <div className="mmg-container">
+            <h1 className="mmg-title">Inspiring Gallery</h1>
+
+            <div className="mmg-gallery">
+              {items.map((item, idx) => (
+                <article
+                  key={idx}
+                  ref={(el) => (itemsRef.current[idx] = el)}
+                  className="mmg-item"
+                  style={{ ["--delay"]: String(idx + 1) }}
+                >
+                  <div className="mmg-item-inner">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="mmg-img"
+                      loading="lazy"
+                    />
+
+                    <div className="mmg-overlay">
+                      <h2 className="mmg-card-title">{item.title}</h2>
+                      <p className="mmg-card-desc">{item.desc}</p>
+                    </div>
+
+                    <a
+                      href={item.creditHref}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="mmg-credit"
+                    >
+                      Photo by Unsplash
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
         <span>
           <Link href="/gallery-section">

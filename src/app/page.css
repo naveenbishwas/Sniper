@@ -1712,3 +1712,143 @@
     transform: translateY(0);
   }
 }
+
+:root {
+  --mmg-accent: #00a89d;
+  --mmg-text: #5c5e5f;
+  --mmg-bg: #f8f8f8;
+}
+
+.mmg-root {
+  min-height: 100vh;
+  background: var(--mmg-bg);
+  color: var(--mmg-text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.mmg-scroll-indicator {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 3px;
+  background: var(--mmg-accent);
+  z-index: 1000;
+  transition: width 0.3s ease;
+  width: 0;
+}
+
+.mmg-container {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.mmg-title {
+  font-size: clamp(2.25rem, 2.5vw + 1.5rem, 3.5rem);
+  margin-bottom: 2rem;
+  color: var(--mmg-accent);
+  text-align: center;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: mmg-fadeUp 0.8s ease forwards;
+}
+
+/* Masonry (CSS columns) */
+.mmg-gallery {
+  columns: 3;
+  column-gap: 1.5rem;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .mmg-gallery {
+    columns: 2;
+  }
+}
+@media (max-width: 480px) {
+  .mmg-gallery {
+    columns: 1;
+  }
+}
+
+.mmg-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: mmg-fadeUp 0.8s ease forwards;
+  animation-delay: calc(var(--delay) * 0.2s);
+}
+
+.mmg-item-inner {
+  position: relative;
+  display: block;
+}
+
+.mmg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.mmg-item-inner:hover .mmg-img {
+  transform: scale(1.05);
+}
+
+.mmg-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 168, 157, 0.9), transparent);
+  padding: 2rem 1.5rem;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+.mmg-item-inner:hover .mmg-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mmg-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.mmg-card-desc {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.mmg-credit {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: #fff;
+  font-size: 0.8rem;
+  opacity: 0.85;
+  text-decoration: none;
+}
+.mmg-credit:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes mmg-fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mmg-fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
