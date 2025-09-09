@@ -420,9 +420,9 @@ export default function SignupModal({ onClose }) {
           <h2>
             Sign up to{" "}
             {role === "beSniper"
-              ? "Hire a Freelancer"
+              ? "Be a Sniper"
               : role === "HireFreelancer"
-              ? "Be a Freelancer"
+              ? "Hire a Freelancer"
               : "Get Started"}
           </h2>
 

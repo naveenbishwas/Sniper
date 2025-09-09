@@ -127,7 +127,7 @@ export default function BeSniperModal({ onClose }) {
       }
     }
 
-    if (!categories.trim()) newErrors.categories = "Category is required.";
+    // if (!categories.trim()) newErrors.categories = "Category is required.";
 
     if (!link.trim() || !isValidURL(link))
       newErrors.link = "Enter valid Portfolio Link.";
@@ -214,25 +214,25 @@ export default function BeSniperModal({ onClose }) {
   const isValidURL = (url) =>
     /^(https?:\/\/)?([\w\d\-]+\.){1,}([a-zA-Z]{2,})(\/.*)?$/.test(url);
 
-  const categoryOptions = [
-    "Graphic Designers / Graphic Designing",
-    "Copywriters / Copywriting",
-    "Copy Editors / Copy Editing",
-    "Proofreaders / Proofreading",
-    "Beta Readers / Beta Reading",
-    "Translators / Translation",
-    "Illustrators / Illustration",
-    "Ghost Writers / Ghost Writing",
-    "Voice Over Artists / Voice Over",
-    "Video Editors / Video Editing",
-    "Typesetter / Typesetting",
-    "Literary Agents / Literary Representation",
-    "Social Media Managers / Social Media Management",
-    "Amazon Marketing Executives / Amazon Marketing Services",
-    "Full Stack Developers / Web Development",
-    "Content Writers / Content Writing",
-    "Emcees / Event Coordination",
-  ];
+  // const categoryOptions = [
+  //   "Graphic Designers / Graphic Designing",
+  //   "Copywriters / Copywriting",
+  //   "Copy Editors / Copy Editing",
+  //   "Proofreaders / Proofreading",
+  //   "Beta Readers / Beta Reading",
+  //   "Translators / Translation",
+  //   "Illustrators / Illustration",
+  //   "Ghost Writers / Ghost Writing",
+  //   "Voice Over Artists / Voice Over",
+  //   "Video Editors / Video Editing",
+  //   "Typesetter / Typesetting",
+  //   "Literary Agents / Literary Representation",
+  //   "Social Media Managers / Social Media Management",
+  //   "Amazon Marketing Executives / Amazon Marketing Services",
+  //   "Full Stack Developers / Web Development",
+  //   "Content Writers / Content Writing",
+  //   "Emcees / Event Coordination",
+  // ];
 
   const languageOptions = [
     "English",
@@ -523,7 +523,7 @@ export default function BeSniperModal({ onClose }) {
                     ))}
 
                     {/* CATEGORIES DROPDOWN */}
-                    <div className="form-group">
+                    {/* <div className="form-group">
                       <label className="input-label">Category</label>
                       <select
                         name="categories"
@@ -541,7 +541,7 @@ export default function BeSniperModal({ onClose }) {
                       {errors.categories && (
                         <p className="error-text">{errors.categories}</p>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="next-prev-btn">
                     <button className="next" onClick={() => setStep(3)}>

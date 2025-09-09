@@ -273,7 +273,7 @@ export default function RandomCardsPage() {
 
             return {
               id: data.uniqueId || doc.id.slice(0, 8),
-              img: data.avatarUrl || "/default-avatar.png",
+              img: data.avatarUrl || "/t1.jpg",
               purpose: (data.category || "Freelancer").toString(),
               bio: data.bio || "No bio available",
               createdAt: data.createdAt || null,

@@ -119,9 +119,13 @@ const HireFreelancer = ({ onClose }) => {
       newErrors.gigTopic = "Topic must be at least 3 characters.";
     }
 
-    if (!gigDescription || gigDescription.trim().length < 250) {
+    if (
+      !gigDescription ||
+      gigDescription.trim().length < 150 ||
+      gigDescription.trim().length > 250
+    ) {
       newErrors.gigDescription =
-        "Please describe your gig in more detail min 250.";
+        "Please describe your gig in more detail (150 to 250 characters).";
     }
 
     if (!category) {
