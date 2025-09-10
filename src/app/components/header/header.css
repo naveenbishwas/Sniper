@@ -116,7 +116,7 @@
 }
 
 .header__left img {
-  width: 80px;
+  width: 150px;
   height: auto;
 }
 
@@ -203,4 +203,150 @@
   align-items: center;
   font-size: 18px;
   cursor: pointer;
+}
+
+/* Avatar button */
+.account-wrap {
+  position: relative;
+}
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #111;
+  color: #fff;
+  font-weight: 800;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+/* Popover */
+.account-popover {
+  position: absolute;
+  right: 0;
+  top: 46px;
+  width: 280px;
+  background: #fff;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  padding: 14px;
+  z-index: 1000;
+}
+
+.acc-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.acc-initial {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+.acc-name {
+  font-weight: 800;
+}
+.acc-email,
+.acc-role {
+  font-size: 12px;
+  color: #555;
+}
+
+.acc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.acc-label {
+  font-size: 12px;
+  color: #666;
+}
+.acc-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: #f6f7f8;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.acc-actions {
+  gap: 10px;
+}
+.acc-copy {
+  background: #111;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.acc-link {
+  color: #111;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.acc-footer {
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+.acc-signout {
+  width: 100%;
+  background: #755555;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.account-popover {
+  position: absolute;
+  right: 0;
+  top: 46px;
+  width: 280px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+  border-top: 4px solid transparent;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(90deg, #a066ff, #6ad1e3);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Unique ID pill */
+.acc-id {
+  background: #f5ecff;
+  color: #6b21a8;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* Copy button */
+.acc-copy {
+  background: #9333ea;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.acc-copy:hover {
+  background: #7e22ce;
 }

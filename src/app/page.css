@@ -588,11 +588,13 @@
     gap: 20px;
   }
 }
+
 .browse-talent-section {
   padding: 60px 20px;
   background-color: #fff;
   font-family: Arial, sans-serif;
   padding-top: 30px;
+  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
 }
 
 .browse-talent-container {
@@ -722,7 +724,7 @@
   box-shadow: var(--card-shadow);
   transition: transform 0.25s ease, box-shadow 0.25s ease,
     border-color 0.2s ease;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgb(0 0 0 / 28%);
 }
 
 .card:hover {
@@ -841,6 +843,7 @@
     margin-bottom: 10px;
   }
 }
+
 .vetting-section {
   background: #f9fafc;
   padding: 80px 20px;
@@ -861,51 +864,104 @@
   position: relative;
   height: 100vh;
 }
-
+/* --- Container & typography --- */
 .vetting-text {
-  flex: 1;
-  align-self: flex-start;
-  min-width: 300px;
+  max-width: 600px; /* keeps the block tidy */
 }
 
 .vetting-text h2 {
   color: var(--foreground);
   font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-weight: 700;
+  margin: 0 0 10px; /* tighter */
 }
 
 .vetting-text p {
   color: #4b5563;
-  font-size: 18px;
-  margin-bottom: 30px;
-  max-width: 400px;
+  font-size: 16px;
+  margin: 0 0 20px; /* was 30 */
+  max-width: 520px;
+  line-height: 1.5;
 }
 
+/* --- Buttons row --- */
 .vetting-buttons {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  gap: 14px;
   flex-wrap: wrap;
+  margin-bottom: 16px; /* consistent spacing before trust icons */
+}
+
+.hire-btn,
+.learn-btn {
+  padding: 12px 22px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 24px;
 }
 
 .hire-btn {
   background-color: var(--themeColor);
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 24px;
-  font-size: 16px;
-  cursor: pointer;
+  color: #fff;
+  border: 0;
 }
-
 .learn-btn {
   background: transparent;
   color: var(--foreground);
-  padding: 12px 24px;
   border: 1px solid var(--foreground);
-  border-radius: 24px;
-  font-size: 16px;
-  cursor: pointer;
+}
+
+/* --- Trust icons grid --- */
+.vetting-trust {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr)); /* wider cells */
+  gap: 14px 24px; /* row/column gaps */
+  margin-top: 6%; /* small, not % */
+  justify-items: start; /* align left */
+  align-items: start;
+  /* remove the problematic offsets */
+  margin-left: 0;
+}
+
+/* Each trust item: icon + text in a row */
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.trust-item .ti {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.08));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.trust-item:hover .ti {
+  transform: translateY(-1px) scale(1.03);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+}
+
+.trust-item span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.25;
+  max-width: none; /* let it flow */
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .vetting-trust {
+    grid-template-columns: 1fr; /* stack neatly on small screens */
+    gap: 12px;
+  }
+  .trust-item .ti {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .vetting-scrollable {
@@ -1027,6 +1083,211 @@
 
   .vetting-container {
     height: auto; /* Avoid fixed 100vh causing scroll issue */
+  }
+}
+
+/* SECTION WRAPPER */
+section.integration {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 8%;
+}
+.integration-df {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px;
+  background-color: #111725;
+  overflow: hidden;
+  margin-top: 7%;
+  border-radius: 21px;
+}
+
+/* LEFT: MARQUEE COLUMNS */
+.integration-left {
+  display: flex;
+  position: relative;
+}
+.integration-left::before,
+.integration-left::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 2;
+  pointer-events: none;
+}
+.integration-left::before {
+  top: 0;
+  background: linear-gradient(to bottom, #161942, rgb(2 66 227 / 0%));
+}
+.integration-left::after {
+  bottom: 0;
+  background: linear-gradient(to top, #191a3d, rgba(244, 240, 230, 0));
+}
+
+/* Each column */
+.integration-list-marquee {
+  width: 220px;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Vertical track inside column */
+.integration-marquee-inner {
+  width: 185px; /* keeps items the same width as cards */
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  animation-duration: 20s; /* slower/cleaner loop */
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* Directional animations */
+.integration-list-marquee.up .integration-marquee-inner {
+  animation-name: scroll-up;
+}
+.integration-list-marquee.down .integration-marquee-inner {
+  animation-name: scroll-down;
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+/* CARD (image + title) */
+.integration-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.integration-card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Image box + image */
+.integration-img-wrapper {
+  position: relative;
+  width: 185px;
+  height: 240px;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.integration-img {
+  object-fit: cover;
+  width: 185px; /* keep for safety with width/height props */
+  height: 240px;
+  display: block;
+}
+
+/* Title under image */
+.integration-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  padding: 8px 10px 0;
+}
+
+/* RIGHT SIDE COPY */
+.integration-right {
+  max-width: 450px;
+}
+.integration-right h1 {
+  font-family: "__nextjs-Geist";
+  font-size: 3rem;
+  margin-top: 5%;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.integration-right p {
+  font-size: 19px;
+  line-height: 1.6;
+  color: #c2c2c2;
+  margin-bottom: 30px;
+  margin-top: 5%;
+}
+
+/* CTA */
+.cta-button {
+  background: #f7e03c;
+  color: #000;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s ease;
+}
+#integration-btn {
+  background-color: #fff;
+  color: #000;
+  margin-top: 13%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+#integration-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: #000;
+}
+
+.cta-button:hover {
+  background: #e7d12a;
+}
+.arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .integration-left {
+    display: none;
+  }
+  .integration-right h1 {
+    font-size: 2rem;
+  }
+  .integration-df {
+    padding: 20px;
+    margin-top: -2%;
+    border-radius: 15px;
+  }
+  #integration-btn {
+    width: 210px;
   }
 }
 
@@ -1219,85 +1480,143 @@
   text-decoration: none;
   font-weight: bold;
 }
+:root {
+  /* Accent outline color from your reference (blue). Change if needed */
+  --card-accent: #2b77ff;
+  /* Primary CTA color: black (swap to #e53935 for red) */
+  --cta-bg: #111;
+  --cta-bg-hover: #000;
+}
 
 .freelancer-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  gap: 28px;
   max-width: 1350px;
   margin: auto;
 }
 
-.freelancer-card {
-  background: #fefefe;
-  border-radius: 24px;
-  padding: 30px 20px;
-  width: 290px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.103);
-  transition: 0.3s ease;
+/* --- Card V2 --- */
+.freelancer-card.v2 {
+  width: 300px;
+  border-radius: 18px;
+  background: #fff;
+  border: 2px solid #111725;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden; /* keep rounded corners clean */
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
-.freelancer-card:hover {
-  transform: translateY(-4px);
+.freelancer-card.v2:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1);
+  border-color: color-mix(in oklab, var(--card-accent) 86%, white);
 }
 
+/* Top media strip (light gray like the ref) */
+.freelancer-media {
+  height: 140px;
+  background: radial-gradient(
+    120px 120px at 50% 40%,
+    #e9e9ee 0%,
+    #e5e5ea 60%,
+    #f1f1f4 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+/* Portrait: contained and softly rounded */
 .freelancer-image {
-  width: 100%;
-  max-width: 180px;
-  border-radius: 20px;
-  margin-bottom: 20px;
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  background: #fff; /* fallback behind PNGs */
 }
 
-.freelancer-card h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
+/* Body */
+.freelancer-body {
+  padding: 18px 18px 22px;
+  text-align: left;
+}
+
+.freelancer-name {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 800;
   color: #111;
 }
 
-.freelancer-card span {
-  display: block;
-  margin: 8px 0;
-  color: #555;
-  font-size: 14px;
+.freelancer-subtitle {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.35;
+  color: #2c2c2c;
 }
 
-.freelancer-card .desc {
-  font-size: 14px;
+.freelancer-role {
+  margin: 0 0 18px;
+  font-size: 13.5px;
   color: #666;
-  margin: 15px 0;
-  line-height: 1.4;
 }
 
-.freelancer-actions {
+/* Actions */
+.freelancer-actions.v2 {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
 }
 
-.freelancer-actions button {
-  background-color: var(--themeColor);
-  color: white;
-  padding: 10px 16px;
+/* Primary CTA: black pill */
+.hire-btn {
+  background: var(--brand);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-weight: 700;
   font-size: 14px;
-  transition: all 0.3s ease;
-  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.hire-btn:hover {
+  background: var(--cta-bg-hover);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+.hire-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
 }
 
-.freelancer-actions button:hover {
-  background-color: var(--themeHoverColor);
-}
-
-.freelancer-actions a {
+/* Optional ghost link */
+.ghost-link {
+  font-weight: 700;
+  font-size: 14px;
   color: #111;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
+}
+.ghost-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive polish */
+@media (max-width: 520px) {
+  .freelancer-card.v2 {
+    width: 92vw;
+    max-width: 360px;
+  }
+  .freelancer-body {
+    padding: 16px;
+  }
 }
 
 /* Responsive */
@@ -1718,13 +2037,12 @@
     transform: translateY(0);
   }
 }
-
 :root {
   --mmg-accent: #00a89d;
   --mmg-text: #5c5e5f;
   --mmg-bg: #f8f8f8;
 }
-
+/* Root container */
 .mmg-root {
   min-height: 100vh;
   background: var(--mmg-bg);
@@ -1733,6 +2051,7 @@
     "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+/* Scroll progress bar */
 .mmg-scroll-indicator {
   position: fixed;
   left: 0;
@@ -1744,12 +2063,14 @@
   width: 0;
 }
 
+/* Layout container */
 .mmg-container {
   max-width: 1400px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
+/* Section title (optional if you use it) */
 .mmg-title {
   font-size: clamp(2.25rem, 2.5vw + 1.5rem, 3.5rem);
   margin-bottom: 2rem;
@@ -1761,12 +2082,13 @@
   animation: mmg-fadeUp 0.8s ease forwards;
 }
 
-/* Masonry (CSS columns) */
+/* Masonry grid layout */
 .mmg-gallery {
-  columns: 3;
-  column-gap: 1.5rem;
+  columns: 4;
+  column-gap: 1rem;
   width: 100%;
 }
+
 @media (max-width: 768px) {
   .mmg-gallery {
     columns: 2;
@@ -1778,6 +2100,7 @@
   }
 }
 
+/* Masonry item */
 .mmg-item {
   break-inside: avoid;
   margin-bottom: 1.5rem;
@@ -1788,23 +2111,56 @@
   transform: translateY(20px);
   animation: mmg-fadeUp 0.8s ease forwards;
   animation-delay: calc(var(--delay) * 0.2s);
+  background: #fff; /* nice card base */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Inner wrapper establishes stacking context for overlay/hover image */
 .mmg-item-inner {
   position: relative;
   display: block;
+  overflow: hidden;
 }
 
+/* Images — default stays in normal flow to set height */
 .mmg-img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.3s ease;
-}
-.mmg-item-inner:hover .mmg-img {
-  transform: scale(1.05);
+  position: relative;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* Default/base image defines layout height */
+.default-img {
+  z-index: 1; /* in flow; no absolute positioning */
+  opacity: 1;
+  transform: scale(1);
+  /* visibility: visible; */
+}
+
+/* Hover image is layered on top only */
+.hover-img {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(1.05); /* slight zoom already prepared */
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Swap on hover */
+.mmg-item-inner:hover .default-img {
+  opacity: 0;
+  transform: scale(1.02);
+}
+.mmg-item-inner:hover .hover-img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Overlay (title + desc) */
 .mmg-overlay {
   position: absolute;
   left: 0;
@@ -1815,13 +2171,15 @@
   color: #fff;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 3;
 }
 .mmg-item-inner:hover .mmg-overlay {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Overlay text */
 .mmg-card-title {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
@@ -1830,30 +2188,38 @@
 .mmg-card-desc {
   font-size: 0.95rem;
   line-height: 1.4;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
+/* Credit link */
 .mmg-credit {
   position: absolute;
   right: 10px;
   bottom: 10px;
   color: #fff;
   font-size: 0.8rem;
-  opacity: 0.85;
+  opacity: 0.9;
   text-decoration: none;
+  z-index: 4;
 }
 .mmg-credit:hover {
   text-decoration: underline;
   opacity: 1;
 }
 
-/* Animations */
+/* Animation keyframes */
 @keyframes mmg-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+/* Optional manual fade-in utility */
 .mmg-fade-in {
   opacity: 1 !important;
   transform: translateY(0) !important;

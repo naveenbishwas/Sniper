@@ -27,68 +27,100 @@ export default function Home({ images }) {
   const items = [
     {
       title: "Total Timepass",
-      // desc: "Towering peaks pierce through misty clouds in this dramatic mountain landscape.",
-      src: "/timepass.jpg",
+      src: "/timepass-front.png",
       alt: "Mountain landscape",
-      // creditHref: "https://unsplash.com",
+      hoverSrc: "/timepass-back.png",
     },
     {
-      title: "sun sakeena",
-      // desc: "Glass and steel create mesmerizing patterns in modern architectural design.",
-      src: "/sakeena.jpg",
+      title: "Sun Sakeena",
+      src: "/sakeena-front.png", // ✅ leading slash
+      hoverSrc: "/sakeena-back.png",
       alt: "Modern architecture",
       creditHref: "https://unsplash.com",
     },
     {
       title: "Dear Remembrance",
-      // desc: "A majestic waterfall cascades through lush green forest.",
-      src: "/spread.jpg",
+      src: "/dear-front.png", // ✅
+      hoverSrc: "/dear-back.png",
       alt: "Waterfall",
       creditHref: "https://unsplash.com",
     },
     {
       title: "⁠The Tiger that crashed my wedding",
-      // desc: "A pristine lake reflects the surrounding landscape like a mirror.",
-      src: "11.jpeg",
+      src: "/11.jpeg", // ✅
+      // hoverSrc: "/timepass-back.png",
       alt: "Nature landscape",
       creditHref: "https://unsplash.com",
     },
     {
       title: "Harmonia",
-      // desc: "Warm sunlight bathes the landscape in ethereal golden tones.",
-      src: "ikigai.jpg",
+      src: "/ikigai-front.png", // ✅
+      hoverSrc: "/ikigai-back.png",
       alt: "Mountain sunset",
       creditHref: "https://unsplash.com",
     },
     {
       title: "Guilt Trip",
-      // desc: "The urban landscape comes alive with countless twinkling lights.",
-      src: "guilt.jpg",
+      src: "/guilt-front.png", // ✅
+      hoverSrc: "/guilt-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
     {
       title: "⁠Financial Literacy",
-      // desc: "The urban landscape comes alive with countless twinkling lights.",
-      src: "financial.jpg",
+      src: "/financial.jpg", // ✅
+      hoverSrc: "/timepass-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
     {
       title: "Ekaki",
-      // desc: "The urban landscape comes alive with countless twinkling lights.",
-      src: "ekaki.png",
+      src: "/ekaki.png", // ✅
+      // hoverSrc: "/timepass-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
     {
       title: "Daggers of Treason",
-      // desc: "The urban landscape comes alive with countless twinkling lights.",
-      src: "dagger.jpg",
+      src: "/dragger-front.png", // ✅
+      hoverSrc: "/dragger-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
   ];
+
+  const gallery = [
+    {
+      src: "/sakeena-front.png",
+      alt: "Sun Sakeena",
+      // href: "https://architect-sigma.vercel.app/",
+    },
+    {
+      src: "/guilt-front.png",
+      alt: "Guilt Trip",
+      // href: "https://cupidclothings.com/",
+    },
+    { src: "/timepass-front.png", alt: "Total Timepass" },
+    {
+      src: "/ikigai-front.png",
+      alt: "Harmonia",
+      // href: "https://www.devkinandansteel.com/",
+    },
+    {
+      src: "/dear-front.png",
+      alt: "Dear Remembrance",
+      // href: "https://www.kryysglobal.com/",
+    },
+    {
+      src: "/dragger-front.png",
+      alt: "Daggers",
+      // href: "https://aivajewellery.com/",
+    },
+  ];
+
+  const columns = [0, 1, 2].map((col) =>
+    gallery.filter((_, i) => i % 3 === col)
+  );
 
   // Scroll progress bar
   useEffect(() => {
@@ -439,6 +471,91 @@ export default function Home({ images }) {
 
       <hr id="border-line" />
 
+      <section className="integration">
+        <div className="integration-df">
+          <div className="integration-left">
+            {["up", "down", "up"].map((direction, colIdx) => (
+              <div
+                key={colIdx}
+                className={`integration-list-marquee ${direction}`}
+              >
+                <div className="integration-marquee-inner">
+                  {[...columns[colIdx], ...columns[colIdx]].map((item, idx) => (
+                    <div key={idx} className="integration-card">
+                      {item.href ? (
+                        <Link
+                          href={item.href}
+                          aria-label={item.alt}
+                          className="integration-card-link"
+                          target="_blank"
+                        >
+                          <div className="integration-img-wrapper">
+                            <Image
+                              src={item.src}
+                              alt={item.alt}
+                              width={185}
+                              height={240}
+                              className="integration-img"
+                              loading="eager"
+                            />
+                          </div>
+                          <h3 className="integration-title">{item.alt}</h3>
+                        </Link>
+                      ) : (
+                        <>
+                          <div className="integration-img-wrapper">
+                            <Image
+                              src={item.src}
+                              alt={item.alt}
+                              width={185}
+                              height={240}
+                              className="integration-img"
+                              loading="eager"
+                            />
+                          </div>
+                          <h3 className="integration-title">{item.alt}</h3>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="integration-right">
+            <h1>A showcase of the projects we’ve delivered</h1>
+            <p>
+              Impactful book designs, publishing assets, and campaigns that
+              helped authors reach more readers and build lasting brands.
+            </p>
+            <Link href="/snapshot-project">
+              <button className="cta-button" id="integration-btn">
+                Explore our work
+                <span className="arrow-wrapper">
+                  <span className="arrow first-arrow">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="vetting-section">
         <div className="vetting-wrapper">
           <div className="vetting-container">
@@ -446,11 +563,147 @@ export default function Home({ images }) {
               <h2>Your Journey with Hubhawks live</h2>
               <p>
                 Our talented professionals are ready to bring your ideas to
-                life. To go live, start here
+                life. To go live, start here. Every author begins with an idea —
+                a story, a message, a vision waiting to be shared. At Hubhawks,
+                we help transform that spark into a clear, structured journey.
               </p>
+              <p>
+                From shaping your first draft to refining details and preparing
+                for publication, our process ensures your words grow into a
+                masterpiece that reaches the readers it deserves.
+              </p>
+
+              <p>
+                A spark of imagination that deserves to shine. At Hubhawks, we
+                turn that spark into a structured path, supporting you through
+                writing, editing, design, and launch. Our author-first approach
+                ensures your story not only comes alive but also reaches the
+                right audience, leaving a lasting impact in the world of
+                readers.
+              </p>
+
               <div className="vetting-buttons">
                 <button className="hire-btn">Hire freelancer</button>
                 <button className="learn-btn">Learn more</button>
+              </div>
+
+              {/* Trust icons */}
+              <div className="vetting-trust">
+                {/* Award-winning (medal + star) */}
+                <div
+                  className="trust-item"
+                  role="img"
+                  aria-label="Award-Winning Designers"
+                >
+                  <svg viewBox="0 0 64 64" className="ti ti-medal">
+                    <defs>
+                      <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stopColor="#FFC94C" />
+                        <stop offset="1" stopColor="#FF9F1C" />
+                      </linearGradient>
+                    </defs>
+                    <circle cx="32" cy="28" r="14" fill="url(#g-gold)" />
+                    <polygon
+                      points="32,20 35,26 42,27 37,31 38,38 32,35 26,38 27,31 22,27 29,26"
+                      fill="#fff"
+                      opacity=".95"
+                    />
+                    <path
+                      d="M22 6l8 10M42 6l-8 10"
+                      stroke="#5B6BFF"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span>Award-Winning Designers</span>
+                </div>
+
+                {/* Author-first (open book + quill) */}
+                <div
+                  className="trust-item"
+                  role="img"
+                  aria-label="Author-First Process"
+                >
+                  <svg viewBox="0 0 64 64" className="ti ti-book">
+                    <path
+                      d="M8 14c8-4 16-4 24 0v36c-8-4-16-4-24 0V14z"
+                      fill="#A066FF"
+                    />
+                    <path
+                      d="M32 14c8-4 16-4 24 0v36c-8-4-16-4-24 0V14z"
+                      fill="#6AD1E3"
+                    />
+                    <path
+                      d="M40 20l-8 10 14-6"
+                      stroke="#fff"
+                      strokeWidth="3"
+                      fill="none"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M20 20h8"
+                      stroke="#fff"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span>Author-First Process</span>
+                </div>
+
+                {/* Fast turnaround (calendar + check) */}
+                <div
+                  className="trust-item"
+                  role="img"
+                  aria-label="Fast Turnaround"
+                >
+                  <svg viewBox="0 0 64 64" className="ti ti-calendar">
+                    <rect
+                      x="8"
+                      y="12"
+                      width="48"
+                      height="40"
+                      rx="8"
+                      fill="#FF6B6B"
+                    />
+                    <path d="M16 22h32" stroke="#fff" strokeWidth="3" />
+                    <path
+                      d="M22 34l6 6 14-14"
+                      stroke="#fff"
+                      strokeWidth="4"
+                      fill="none"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="20" cy="12" r="4" fill="#fff" />
+                    <circle cx="44" cy="12" r="4" fill="#fff" />
+                  </svg>
+                  <span>Fast Turnaround</span>
+                </div>
+
+                {/* Rights-safe (shield + ©) */}
+                <div
+                  className="trust-item"
+                  role="img"
+                  aria-label="Rights-Safe & Secure"
+                >
+                  <svg viewBox="0 0 64 64" className="ti ti-shield">
+                    <path
+                      d="M32 6l18 6v14c0 13-8 22-18 26-10-4-18-13-18-26V12l18-6z"
+                      fill="#00C853"
+                    />
+                    <circle cx="32" cy="30" r="10" fill="#fff" />
+                    <text
+                      x="32"
+                      y="34"
+                      textAnchor="middle"
+                      fontSize="12"
+                      fontWeight="700"
+                      fill="#00C853"
+                    >
+                      ©
+                    </text>
+                  </svg>
+                  <span>Rights-Safe & Secure</span>
+                </div>
               </div>
             </div>
 
@@ -536,24 +789,31 @@ export default function Home({ images }) {
         </a>
 
         <div className="freelancer-grid">
-          {freelancers.map((freelancer, index) => (
-            <div className="freelancer-card" key={index}>
-              <Image
-                src={freelancer.image}
-                alt={freelancer.name}
-                width={0}
-                height={0}
-                className="freelancer-image"
-                unoptimized
-              />
-              <h3>{freelancer.name}</h3>
-              <span>{freelancer.title}</span>
-              <p className="desc">{freelancer.desc}</p>
-              <div className="freelancer-actions">
-                <button>View Profile</button>
-                <a href="#">Book a Call →</a>
+          {freelancers.map((f, i) => (
+            <article className="freelancer-card v2" key={i}>
+              <div className="freelancer-media">
+                <Image
+                  src={f.image}
+                  alt={f.name}
+                  width={0}
+                  height={0}
+                  className="freelancer-image"
+                  unoptimized
+                />
               </div>
-            </div>
+
+              <div className="freelancer-body">
+                <h3 className="freelancer-name">{f.name}</h3>
+                <p className="freelancer-subtitle">{f.title}</p>
+                <p className="freelancer-role">{f.desc}</p>
+
+                <div className="freelancer-actions v2">
+                  <button className="hire-btn">Hire</button>
+                  {/* Optional secondary link — keep if you want */}
+                  {/* <a href="#" className="ghost-link">View Profile</a> */}
+                </div>
+              </div>
+            </article>
           ))}
         </div>
       </section>
@@ -565,31 +825,11 @@ export default function Home({ images }) {
           Our snipers have delivered exceptional results for authors across
           genres. See some of our recent cover design projects.
         </p>
-        {/* <div className="masonry">
-          {imagesToRender.map((image, index) => (
-            <div
-              key={index}
-              className={`masonryItem ${
-                loadedImages.has(index) ? "loaded" : ""
-              }`}
-            >
-              <img
-                src={image.src}
-                alt={image.alt || ""}
-                className="masonryImage"
-                onLoad={() => handleImageLoad(index)}
-                loading="lazy"
-              />
-              {image.caption && <div className="caption">{image.caption}</div>}
-            </div>
-          ))}
-        </div> */}
+
         <div className="mmg-root">
           <div ref={progressRef} className="mmg-scroll-indicator" />
 
           <div className="mmg-container">
-            {/* <h1 className="mmg-title">Inspiring Gallery</h1> */}
-
             <div className="mmg-gallery">
               {items.map((item, idx) => (
                 <article
@@ -599,32 +839,46 @@ export default function Home({ images }) {
                   style={{ ["--delay"]: String(idx + 1) }}
                 >
                   <div className="mmg-item-inner">
+                    {/* Default image controls layout height */}
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="mmg-img"
+                      className="mmg-img default-img"
                       loading="lazy"
                     />
+
+                    {/* Hover image layered on top only when present */}
+                    {item.hoverSrc && (
+                      <img
+                        src={item.hoverSrc}
+                        alt={`${item.alt} (hover)`}
+                        className="mmg-img hover-img"
+                        loading="lazy"
+                      />
+                    )}
 
                     <div className="mmg-overlay">
                       <h2 className="mmg-card-title">{item.title}</h2>
                       <p className="mmg-card-desc">{item.desc}</p>
                     </div>
 
-                    <a
-                      href={item.creditHref}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="mmg-credit"
-                    >
-                      Photo by Unsplash
-                    </a>
+                    {item.creditHref && (
+                      <a
+                        href={item.creditHref}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="mmg-credit"
+                      >
+                        Photo by Unsplash
+                      </a>
+                    )}
                   </div>
                 </article>
               ))}
             </div>
           </div>
         </div>
+
         <span>
           <Link href="/gallery-section">
             <button className="view-btn">View All</button>
