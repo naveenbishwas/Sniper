@@ -1190,8 +1190,14 @@
   font-family: Arial, sans-serif;
 }
 
+#talent-btn {
+  margin-top: -4%;
+  float: right;
+  display: none;
+}
+
 .freelancer-header {
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;

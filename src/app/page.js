@@ -26,45 +26,66 @@ export default function Home({ images }) {
   // Gallery images
   const items = [
     {
-      title: "Alpine Majesty",
-      desc: "Towering peaks pierce through misty clouds in this dramatic mountain landscape.",
-      src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      title: "Total Timepass",
+      // desc: "Towering peaks pierce through misty clouds in this dramatic mountain landscape.",
+      src: "/timepass.jpg",
       alt: "Mountain landscape",
-      creditHref: "https://unsplash.com",
+      // creditHref: "https://unsplash.com",
     },
     {
-      title: "Urban Symmetry",
-      desc: "Glass and steel create mesmerizing patterns in modern architectural design.",
-      src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      title: "sun sakeena",
+      // desc: "Glass and steel create mesmerizing patterns in modern architectural design.",
+      src: "/sakeena.jpg",
       alt: "Modern architecture",
       creditHref: "https://unsplash.com",
     },
     {
-      title: "Nature's Power",
-      desc: "A majestic waterfall cascades through lush green forest.",
-      src: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      title: "Dear Remembrance",
+      // desc: "A majestic waterfall cascades through lush green forest.",
+      src: "/spread.jpg",
       alt: "Waterfall",
       creditHref: "https://unsplash.com",
     },
     {
-      title: "Golden Hour",
-      desc: "Warm sunlight bathes the landscape in ethereal golden tones.",
-      src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      title: "⁠The Tiger that crashed my wedding",
+      // desc: "A pristine lake reflects the surrounding landscape like a mirror.",
+      src: "11.jpeg",
+      alt: "Nature landscape",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Harmonia",
+      // desc: "Warm sunlight bathes the landscape in ethereal golden tones.",
+      src: "ikigai.jpg",
       alt: "Mountain sunset",
       creditHref: "https://unsplash.com",
     },
     {
-      title: "City Lights",
-      desc: "The urban landscape comes alive with countless twinkling lights.",
-      src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      title: "Guilt Trip",
+      // desc: "The urban landscape comes alive with countless twinkling lights.",
+      src: "guilt.jpg",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
     {
-      title: "Serene Waters",
-      desc: "A pristine lake reflects the surrounding landscape like a mirror.",
-      src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Nature landscape",
+      title: "⁠Financial Literacy",
+      // desc: "The urban landscape comes alive with countless twinkling lights.",
+      src: "financial.jpg",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Ekaki",
+      // desc: "The urban landscape comes alive with countless twinkling lights.",
+      src: "ekaki.png",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Daggers of Treason",
+      // desc: "The urban landscape comes alive with countless twinkling lights.",
+      src: "dagger.jpg",
+      alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
   ];
@@ -236,89 +257,44 @@ export default function Home({ images }) {
 
   const categories = [
     {
-      icon: "🌐",
-      title: "Digital Marketing",
-      desc: "Bring your vision to life with digital marketing professionals ready to assist you.",
+      icon: "🎨",
+      title: "Book Cover Designing",
+      desc: "Eye-catching book covers designed to attract readers and reflect your story.",
     },
     {
-      icon: "✏️",
-      title: "Graphic & Design",
-      desc: "Bring your vision to life with creative graphic design professionals ready to assist you.",
+      icon: "✍️",
+      title: "Ghostwriting",
+      desc: "Professional ghostwriters bring your ideas to life with engaging words.",
     },
     {
-      icon: "🖥️",
-      title: "Programming & Tech",
-      desc: "Bring your vision to life with technologists around the world ready to assist you.",
-    },
-    {
-      icon: "📢",
-      title: "Sales & Marketing",
-      desc: "Scale your outreach with top sales experts.",
-    },
-    {
-      icon: "📚",
-      title: "Writing & Translation",
-      desc: "Craft content or translate ideas with language pros.",
-    },
-    {
-      icon: "🎥",
-      title: "Video & Animation",
-      desc: "Engaging visuals brought to life by experts.",
-    },
-    {
-      icon: "🎵",
-      title: "Music & Audio",
-      desc: "Audio editing, production, and music pros.",
-    },
-    {
-      icon: "🔍",
-      title: "SEO Services",
-      desc: "Boost your rankings with SEO strategies.",
-    },
-    {
-      icon: "📱",
-      title: "Mobile App Dev",
-      desc: "Create stunning apps for Android & iOS.",
-    },
-    {
-      icon: "🧮",
-      title: "Data Entry",
-      desc: "Reliable and fast data entry services.",
-    },
-    {
-      icon: "🛒",
-      title: "eCommerce Dev",
-      desc: "Build your online store with eCommerce devs.",
-    },
-    {
-      icon: "📈",
-      title: "Finance & Accounting",
-      desc: "Manage your money with expert guidance.",
-    },
-    {
-      icon: "👨‍⚖️",
-      title: "Legal Consulting",
-      desc: "Legal professionals at your service.",
-    },
-    {
-      icon: "🧠",
-      title: "AI & Machine Learning",
-      desc: "Smart solutions powered by AI.",
-    },
-    {
-      icon: "👔",
-      title: "Business Consulting",
-      desc: "Strategic advice to scale your business.",
-    },
-    {
-      icon: "🧪",
-      title: "Engineering & Architecture",
-      desc: "Real-world builds & virtual plans.",
+      icon: "🌍",
+      title: "Translation",
+      desc: "Accurate, culturally relevant translations across multiple languages.",
     },
     {
       icon: "🤝",
-      title: "Customer Support",
-      desc: "Keep clients happy with support experts.",
+      title: "Literary Representation",
+      desc: "Get connected with trusted literary agents to publish and promote your work.",
+    },
+    {
+      icon: "📈",
+      title: "Amazon Marketing Services (AMS)",
+      desc: "Boost your book’s visibility and sales with expert Amazon marketing strategies.",
+    },
+    {
+      icon: "🖌️",
+      title: "Illustrations",
+      desc: "Custom illustrations that add depth, creativity, and appeal to your projects.",
+    },
+    {
+      icon: "🎙️",
+      title: "Voice Over",
+      desc: "Professional voice artists deliver clear, expressive, and impactful narration.",
+    },
+    {
+      icon: "🎬",
+      title: "Video Editing",
+      desc: "High-quality editing to make your videos engaging, polished, and impactful.",
     },
   ];
 
@@ -554,8 +530,10 @@ export default function Home({ images }) {
         <h1>Vetted talent at your fingertips!</h1>
         <div className="freelancer-header">
           <p>Discover skilled freelancers ready to assist you.</p>
-          <a href="#">View all →</a>
         </div>
+        <a href="#" id="talent-btn">
+          View all →
+        </a>
 
         <div className="freelancer-grid">
           {freelancers.map((freelancer, index) => (
@@ -610,7 +588,7 @@ export default function Home({ images }) {
           <div ref={progressRef} className="mmg-scroll-indicator" />
 
           <div className="mmg-container">
-            <h1 className="mmg-title">Inspiring Gallery</h1>
+            {/* <h1 className="mmg-title">Inspiring Gallery</h1> */}
 
             <div className="mmg-gallery">
               {items.map((item, idx) => (
