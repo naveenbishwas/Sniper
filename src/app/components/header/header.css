@@ -304,49 +304,10 @@
 }
 .acc-signout {
   width: 100%;
-  background: #755555;
+  background: var(--brand);
   border: 1px solid #e5e5e5;
   border-radius: 8px;
   padding: 8px 10px;
   cursor: pointer;
   font-weight: 600;
-}
-
-.account-popover {
-  position: absolute;
-  right: 0;
-  top: 46px;
-  width: 280px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-  padding: 16px;
-  border-top: 4px solid transparent;
-  background-image: linear-gradient(#fff, #fff),
-    linear-gradient(90deg, #a066ff, #6ad1e3);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-}
-
-/* Unique ID pill */
-.acc-id {
-  background: #f5ecff;
-  color: #6b21a8;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
-}
-
-/* Copy button */
-.acc-copy {
-  background: #9333ea;
-  color: #fff;
-  border: 0;
-  border-radius: 8px;
-  padding: 8px 10px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.acc-copy:hover {
-  background: #7e22ce;
 }
