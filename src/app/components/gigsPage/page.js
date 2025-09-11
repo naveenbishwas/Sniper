@@ -3,7 +3,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./gigsPage.css";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebaseClient"; // ← use the singleton
+// import { db } from "@/lib/firebaseClient";
+import { db } from "@/lib/firebase";
 import Header from "../header/page";
 import Footer from "../footer/page";
 import Link from "next/link";
@@ -29,7 +30,6 @@ const CATEGORIES = [
   "Emcees / Event Coordination",
 ];
 
-// dropdown label -> regex tests for your stored categories
 const CATEGORY_TESTS = {
   "Graphic Designers / Graphic Designing": [/graphic[\s-]*design/i],
   "Copywriters / Copywriting": [/copy[\s-]*writing|copywriter/i],
@@ -54,14 +54,41 @@ const CATEGORY_TESTS = {
   "Emcees / Event Coordination": [/emcee|event[\s-]*coordination/i],
 };
 
+// ---- simple local cache keys
+const CACHE_KEY = "gigsCacheV1";
+const CAT_KEY = "gigsSelectedCategory";
+
 export default function GigsPage() {
   const [gigs, setGigs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(
+    typeof window !== "undefined"
+      ? localStorage.getItem(CAT_KEY) || "All"
+      : "All"
+  );
 
+  // Load cached gigs instantly (so reloads don’t look empty), then refresh from Firestore
   useEffect(() => {
     let alive = true;
+
+    // 1) hydrate from cache (if present)
+    if (typeof window !== "undefined") {
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (raw) {
+          const cached = JSON.parse(raw);
+          if (Array.isArray(cached)) {
+            setGigs(cached);
+            setLoading(false); // show cached immediately
+          }
+        }
+      } catch (e) {
+        // ignore cache errors
+      }
+    }
+
+    // 2) fetch fresh data
     (async () => {
       try {
         const snap = await getDocs(collection(db, "sniper-forms"));
@@ -76,18 +103,37 @@ export default function GigsPage() {
             author: data.fullName || "Anonymous",
           };
         });
-        if (alive) setGigs(rows);
+
+        if (!alive) return;
+        setGigs(rows);
+        setError("");
+        setLoading(false);
+
+        // 3) save to cache for future reloads
+        if (typeof window !== "undefined") {
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify(rows));
+          } catch {}
+        }
       } catch (e) {
         console.error("Error fetching gigs:", e);
-        if (alive) setError("Could not load gigs. Please try again later.");
-      } finally {
-        if (alive) setLoading(false);
+        if (!alive) return;
+        setError("Could not load gigs. Please try again later.");
+        setLoading(false);
       }
     })();
+
     return () => {
-      alive = false; // avoid state updates after unmount (StrictMode)
+      alive = false; // avoid state updates after unmount
     };
   }, []);
+
+  // persist selected category so it survives reloads
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(CAT_KEY, selectedCategory);
+    }
+  }, [selectedCategory]);
 
   const filteredGigs = useMemo(() => {
     if (selectedCategory === "All") return gigs;
@@ -135,12 +181,14 @@ export default function GigsPage() {
       {loading ? (
         <p className="loading-text">Loading gigs...</p>
       ) : error ? (
-        <p className="error-text">{error}</p>
+        <p className="error-text" id="gigs-error">
+          {error}
+        </p>
       ) : filteredGigs.length === 0 ? (
         <p className="error-text">No gigs found for this category.</p>
       ) : (
         <div className="gigs-grid" id="gigsPage">
-          {filteredGigs.map((gig, idx) => (
+          {/* {filteredGigs.map((gig, idx) => (
             <div
               key={idx}
               className={`gig-card ${idx === 1 ? "featured" : ""}`}
@@ -155,6 +203,34 @@ export default function GigsPage() {
               <div className="gig-meta">
                 <span>📅 {gig.deadline}</span>
               </div>
+              <div className="gig-bottom">
+                <span className="gig-price">{gig.price}</span>
+                <Link href="https://wa.me/919643138042?text=Hi%2C%20I%20saw%20your%20website%20and%20I'm%20interested%20in%20your%20services.">
+                  <button className="gig-btn">Chat Now</button>
+                </Link>
+              </div>
+            </div>
+          ))} */}
+          {filteredGigs.map((gig, idx) => (
+            <div
+              key={idx}
+              className={`gig-card ${idx === 1 ? "featured" : ""}`}
+            >
+              <div className="gig-top">
+                <span className="gig-tag">{gig.category}</span>
+                <span className="gig-rating">⭐ 4.9</span>
+              </div>
+
+              {/* NEW: body wrapper so the bottom bar aligns */}
+              <div className="gig-body">
+                <h3 className="gig-title">{gig.title}</h3>
+                <p className="gig-author">👤 by {gig.author}</p>
+                <p className="gig-desc">{gig.description}</p>
+                <div className="gig-meta">
+                  <span>📅 {gig.deadline}</span>
+                </div>
+              </div>
+
               <div className="gig-bottom">
                 <span className="gig-price">{gig.price}</span>
                 <Link href="https://wa.me/919643138042?text=Hi%2C%20I%20saw%20your%20website%20and%20I'm%20interested%20in%20your%20services.">

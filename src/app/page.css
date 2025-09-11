@@ -14,6 +14,41 @@
   margin-bottom: 10px;
 }
 
+.number-stats {
+  padding: 2% 4% 3% 3%;
+}
+
+/* Stats row (keeps 5 in a row, space-balanced, responsive) */
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(140px, 1fr));
+  align-items: start;
+  gap: 24px;
+  margin: 40px 0 0; /* separate from grid above */
+}
+
+.about__stats .stat {
+  text-align: center; /* matches reference visual */
+  padding: 8px 6px;
+}
+
+.stat__num {
+  font-size: 40px;
+  font-weight: 800;
+  color: #111725;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.stat__label {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  color: var(--brandColor);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .how-subtitle {
   font-size: 1.2rem;
   color: #555;
@@ -587,6 +622,10 @@
   .snipers-cta {
     gap: 20px;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .browse-talent-section {
@@ -2055,6 +2094,7 @@ section.integration {
   --mmg-text: #5c5e5f;
   --mmg-bg: #f8f8f8;
 }
+
 /* Root container */
 .mmg-root {
   min-height: 100vh;

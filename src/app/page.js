@@ -48,7 +48,7 @@ export default function Home({ images }) {
     {
       title: "⁠The Tiger that crashed my wedding",
       src: "/11.jpeg", // ✅
-      // hoverSrc: "/timepass-back.png",
+      hoverSrc: "/11-2.png",
       alt: "Nature landscape",
       creditHref: "https://unsplash.com",
     },
@@ -57,6 +57,13 @@ export default function Home({ images }) {
       src: "/ikigai-front.png", // ✅
       hoverSrc: "/ikigai-back.png",
       alt: "Mountain sunset",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "Kalyuga 2",
+      src: "/kal-front.png", // ✅
+      hoverSrc: "/kal-back.png",
+      alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
     {
@@ -69,21 +76,44 @@ export default function Home({ images }) {
     {
       title: "⁠Financial Literacy",
       src: "/financial.jpg", // ✅
-      hoverSrc: "/timepass-back.png",
+      hoverSrc: "/financial-back.jpg",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "The Curse of Wildflower",
+      src: "/wild-front.png", // ✅
+      hoverSrc: "/wild-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
     {
       title: "Ekaki",
       src: "/ekaki.png", // ✅
-      // hoverSrc: "/timepass-back.png",
+      hoverSrc: "/ekaki-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
+
     {
       title: "Daggers of Treason",
       src: "/dragger-front.png", // ✅
       hoverSrc: "/dragger-back.png",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
+
+    {
+      title: "The Crown Blood",
+      src: "/crown-front.png", // ✅
+      hoverSrc: "/crown-back.png",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
+    {
+      title: "The Rise of Immortal",
+      src: "/rise2-front.png", // ✅
+      hoverSrc: "/rise2-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
@@ -121,6 +151,52 @@ export default function Home({ images }) {
   const columns = [0, 1, 2].map((col) =>
     gallery.filter((_, i) => i % 3 === col)
   );
+
+  function runCounter(el, to) {
+    const duration = 1200; // ms
+    const start = Number(String(el.textContent).replace(/[^\d]/g, "")) || 0;
+    const t0 = performance.now();
+
+    function tick(now) {
+      const p = Math.min((now - t0) / duration, 1);
+      const val = Math.round(start + (to - start) * p);
+      el.textContent = `${val}+`;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const useAboutCountersObserver = () => {
+    const rootRef = useRef(null);
+    const fired = useRef(false);
+
+    useEffect(() => {
+      if (!rootRef.current) return;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (!fired.current && entries.some((e) => e.isIntersecting)) {
+            fired.current = true;
+            rootRef.current
+              .querySelectorAll("[data-counter-to]")
+              .forEach((node) => {
+                const to =
+                  parseInt(node.getAttribute("data-counter-to"), 10) || 0;
+                runCounter(node, to);
+              });
+          }
+        },
+        { threshold: 0.35 }
+      );
+
+      io.observe(rootRef.current);
+      return () => io.disconnect();
+    }, []);
+
+    return rootRef;
+  };
+
+  const aboutCountersRef = useAboutCountersObserver();
 
   // Scroll progress bar
   useEffect(() => {
@@ -232,29 +308,6 @@ export default function Home({ images }) {
   ];
 
   const imagesToRender = images?.length ? images : defaultImages;
-
-  // const projects = [
-  //   {
-  //     title: "The Curse of the Wildflower",
-  //     author: "Smriti Sinha",
-  //     image: "./9.jpeg",
-  //   },
-  //   {
-  //     title: "A Century Between Us",
-  //     author: "Gayatri Chandrasekharan",
-  //     image: "./10.jpeg",
-  //   },
-  //   {
-  //     title: "The Tiger That Crashed My Wedding",
-  //     author: "Pranav Mishra",
-  //     image: "./11.jpeg",
-  //   },
-  //   {
-  //     title: "Sun Sakeena",
-  //     author: "Saadat Hasan Manto",
-  //     image: "./12.jpeg",
-  //   },
-  // ];
 
   const steps = [
     {
@@ -385,7 +438,48 @@ export default function Home({ images }) {
       <Header onSignupClick={handleSignupClick} />
       <Banner />
 
-      <section className="browse-talent-section">
+      <section className="number-stats" ref={aboutCountersRef} id="about">
+        <div className="about__stats">
+          <div className="stat">
+            <div className="stat__num" data-counter-to="1200">
+              0+
+            </div>
+            <div className="stat__label">Authors & Publishers Served</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat__num" data-counter-to="900">
+              0+
+            </div>
+            <div className="stat__label">Pro Freelancers Onboarded</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat__num" data-counter-to="1500">
+              0+
+            </div>
+            <div className="stat__label">
+              Book Covers & Illustrations Delivered
+            </div>
+          </div>
+
+          <div className="stat">
+            <div className="stat__num" data-counter-to="2200">
+              0+
+            </div>
+            <div className="stat__label">Manuscripts Edited & Proofread</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat__num" data-counter-to="1100">
+              0+
+            </div>
+            <div className="stat__label">5-Star Client Reviews</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="browse-talent-section" id="service-section">
         <div className="browse-talent-container">
           <div className="browse-talent-container-df">
             <span>
@@ -529,7 +623,7 @@ export default function Home({ images }) {
               Impactful book designs, publishing assets, and campaigns that
               helped authors reach more readers and build lasting brands.
             </p>
-            <Link href="/snapshot-project">
+            <Link href="/snapshot">
               <button className="cta-button" id="integration-btn">
                 Explore our work
                 <span className="arrow-wrapper">
@@ -560,12 +654,13 @@ export default function Home({ images }) {
         <div className="vetting-wrapper">
           <div className="vetting-container">
             <div className="vetting-text">
-              <h2>Your Journey with Hubhawks live</h2>
+              <h2>Your Journey with Hubhawks Live</h2>
               <p>
                 Our talented professionals are ready to bring your ideas to
                 life. To go live, start here. Every author begins with an idea —
-                a story, a message, a vision waiting to be shared. At Hubhawks,
-                we help transform that spark into a clear, structured journey.
+                a story, a message, a vision waiting to be shared. At Hubhawks
+                Live, we help transform that spark into a clear, structured
+                journey.
               </p>
               <p>
                 From shaping your first draft to refining details and preparing
@@ -574,12 +669,12 @@ export default function Home({ images }) {
               </p>
 
               <p>
-                A spark of imagination that deserves to shine. At Hubhawks, we
-                turn that spark into a structured path, supporting you through
-                writing, editing, design, and launch. Our author-first approach
-                ensures your story not only comes alive but also reaches the
-                right audience, leaving a lasting impact in the world of
-                readers.
+                A spark of imagination that deserves to shine. At Hubhawks Live,
+                we turn that spark into a structured path, supporting you
+                through writing, editing, design, and launch. Our author-first
+                approach ensures your story not only comes alive but also
+                reaches the right audience, leaving a lasting impact in the
+                world of readers.
               </p>
 
               <div className="vetting-buttons">
@@ -970,7 +1065,7 @@ export default function Home({ images }) {
               <circle cx="12" cy="12" r="2"></circle>
             </svg>
           </div>
-          <h2 className="snipers-title">Our Snipers Have Got You</h2>
+          <h2 className="snipers-title">Our Freelancer Have Got You</h2>
           <p className="snipers-desc">
             Join thousands of authors who trust HubHawks Live for their
             publishing needs. From cover design to marketing campaigns, our

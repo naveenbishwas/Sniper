@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="footer-logo">
               <div className="footer-icon">
                 <Image
-                  src={"/logo3.png"}
+                  src={"/logo-ss.png"}
                   className="header__logo"
                   width={55}
                   height={55}
@@ -33,7 +33,9 @@ const Footer = () => {
             <ul>
               <li>Home</li>
               <li>About</li>
-              <li>Services</li>
+              <Link href="#service-section" id="service-footer">
+                <li>Services</li>
+              </Link>
             </ul>
           </div>
 
