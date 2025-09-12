@@ -650,6 +650,7 @@ export default function Home({ images }) {
         </div>
       </section>
 
+      {/* Vetting Section */}
       <section className="vetting-section">
         <div className="vetting-wrapper">
           <div className="vetting-container">
