@@ -209,6 +209,7 @@ export default function Header({ onSignupClick }) {
         {initial ? (
           <div className="account-wrap">
             <button
+              id="avatar"
               className="user-avatar"
               aria-haspopup="dialog"
               aria-expanded={open}
@@ -253,6 +254,7 @@ export default function Header({ onSignupClick }) {
 
                 <div className="acc-footer">
                   <button
+                    id="signout"
                     className="acc-signout"
                     onClick={() => {
                       ["fullName", "email", "role", "uniqueId"].forEach((k) =>

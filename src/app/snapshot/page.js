@@ -9,21 +9,39 @@ import Footer from "../components/footer/page";
 const images = [
   {
     id: 1,
-    thumb: "/images/thumb1.jpg",
-    full: "/images/full1.jpg",
-    title: "Cover Design 1",
+    thumb: "/12.jpeg",
+    full: "/sakeena.jpg",
+    title: "Sun Sakeena",
   },
   {
     id: 2,
-    thumb: "/images/thumb2.jpg",
-    full: "/images/full2.jpg",
-    title: "Cover Design 2",
+    thumb: "/dragger-front.png",
+    full: "/dagger.jpg",
+    title: "Daggers",
   },
   {
     id: 3,
-    thumb: "/images/thumb3.jpg",
-    full: "/images/full3.jpg",
-    title: "Cover Design 3",
+    thumb: "/ikigai-front.png",
+    full: "/ikigai.jpg",
+    title: "Harmonia Beyond Ikigai",
+  },
+  {
+    id: 1,
+    thumb: "/12.jpeg",
+    full: "/sakeena.jpg",
+    title: "Sun Sakeena",
+  },
+  {
+    id: 2,
+    thumb: "/dragger-front.png",
+    full: "/dagger.jpg",
+    title: "Daggers",
+  },
+  {
+    id: 3,
+    thumb: "/ikigai-front.png",
+    full: "/ikigai.jpg",
+    title: "Harmonia Beyond Ikigai",
   },
 ];
 
@@ -33,28 +51,43 @@ export default function GalleryPage() {
   return (
     <>
       <Header />
-      <div className="galleryPage">
-        <h1 className="title">Image Gallery</h1>
-        <div className="grid">
+      <div className="snapshot-page">
+        <h1 className="snapshot-title">Image Gallery</h1>
+        <div className="snapshot-grid">
           {images.map((img) => (
-            <div key={img.id} className="card" onClick={() => setSelected(img)}>
-              <Image
-                src={img.thumb}
-                alt={img.title}
-                width={400}
-                height={250}
-                className="thumb"
-              />
-              <p>{img.title}</p>
+            <div
+              key={img.id}
+              className="snapshot-card"
+              onClick={() => setSelected(img)}
+            >
+              <div className="snapshot-image-wrapper">
+                <Image
+                  src={img.thumb}
+                  alt={img.title}
+                  fill
+                  className="snapshot-thumb"
+                />
+              </div>
+              <div className="snapshot-footer">
+                <p className="snapshot-caption">{img.title}</p>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Modal */}
         {selected && (
-          <div className="modalOverlay" onClick={() => setSelected(null)}>
-            <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-              <button className="closeBtn" onClick={() => setSelected(null)}>
+          <div
+            className="snapshot-modal-overlay"
+            onClick={() => setSelected(null)}
+          >
+            <div
+              className="snapshot-modal-content"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="snapshot-close-btn"
+                onClick={() => setSelected(null)}
+              >
                 ✕
               </button>
               <Image
@@ -62,9 +95,9 @@ export default function GalleryPage() {
                 alt={selected.title}
                 width={800}
                 height={500}
-                className="fullImage"
+                className="snapshot-full-image"
               />
-              <p className="caption">{selected.title}</p>
+              <p className="snapshot-modal-caption">{selected.title}</p>
             </div>
           </div>
         )}

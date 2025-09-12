@@ -153,7 +153,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>
-            © 2024 BookSnipers. All rights reserved. Precision targeting for
+            © 2024 Hubhawaks Live. All rights reserved. Precision targeting for
             your book services.
           </p>
           <p>

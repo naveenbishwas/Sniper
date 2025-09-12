@@ -191,7 +191,7 @@
   }
 }
 
-.user-avatar {
+#avatar {
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -302,7 +302,8 @@
   margin-top: 10px;
   padding-top: 10px;
 }
-.acc-signout {
+
+#signout {
   width: 100%;
   background: var(--brand);
   border: 1px solid #e5e5e5;

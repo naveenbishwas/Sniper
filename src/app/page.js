@@ -9,8 +9,53 @@ import SignupModal from "./signup/signUpClient";
 import GigsPage from "./components/gigsPage/page";
 import BeSniperModal from "./components/beSniper/page";
 import HireFreelancer from "./components/HireFreelancer/page";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
+
+const slidesToShow = 4;
+
+const categories = [
+  {
+    icon: "🎨",
+    title: "Book Cover Designing",
+    desc: "Eye-catching book covers designed to attract readers and reflect your story.",
+  },
+  {
+    icon: "✍️",
+    title: "Ghostwriting",
+    desc: "Professional ghostwriters bring your ideas to life with engaging words.",
+  },
+  {
+    icon: "🌍",
+    title: "Translation",
+    desc: "Accurate, culturally relevant translations across multiple languages.",
+  },
+  {
+    icon: "🤝",
+    title: "Literary Representation",
+    desc: "Get connected with trusted literary agents to publish and promote your work.",
+  },
+  {
+    icon: "📈",
+    title: "Amazon Marketing Services (AMS)",
+    desc: "Boost your book’s visibility and sales with expert Amazon marketing strategies.",
+  },
+  {
+    icon: "🖌️",
+    title: "Illustrations",
+    desc: "Custom illustrations that add depth, creativity, and appeal to your projects.",
+  },
+  {
+    icon: "🎙️",
+    title: "Voice Over",
+    desc: "Professional voice artists deliver clear, expressive, and impactful narration.",
+  },
+  {
+    icon: "🎬",
+    title: "Video Editing",
+    desc: "High-quality editing to make your videos engaging, polished, and impactful.",
+  },
+];
 
 export default function Home({ images }) {
   const [showSignup, setShowSignup] = useState(false);
@@ -22,6 +67,60 @@ export default function Home({ images }) {
   const [animationClass, setAnimationClass] = useState("");
   const progressRef = useRef(null);
   const itemsRef = useRef([]);
+  const [expanded, setExpanded] = useState(false);
+  const total = categories.length;
+
+  // Create clones on both ends for seamless looping
+  const extended = useMemo(
+    () => [
+      ...categories.slice(-slidesToShow),
+      ...categories,
+      ...categories.slice(0, slidesToShow),
+    ],
+    [categories]
+  );
+
+  // Start from the first "real" slide
+  const [index, setIndex] = useState(slidesToShow);
+  const [transitionOn, setTransitionOn] = useState(true);
+
+  const trackRef = useRef(null);
+
+  const nextCategorySlide = () => {
+    if (transitionOn) setIndex((i) => i + 1);
+  };
+
+  const prevCategorySlide = () => {
+    if (transitionOn) setIndex((i) => i - 1);
+  };
+
+  useEffect(() => {
+    const onTransitionEnd = () => {
+      // Jump forward (from cloned tail to real head)
+      if (index >= total + slidesToShow) {
+        setTransitionOn(false);
+        setIndex(slidesToShow);
+        // Double RAF ensures the DOM applies the snap before re-enabling transition
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => setTransitionOn(true));
+        });
+      }
+      // Jump backward (from cloned head to real tail)
+      else if (index <= 0) {
+        setTransitionOn(false);
+        setIndex(total);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => setTransitionOn(true));
+        });
+      }
+    };
+
+    const el = trackRef.current;
+    if (!el) return;
+    el.addEventListener("transitionend", onTransitionEnd);
+    return () => el.removeEventListener("transitionend", onTransitionEnd);
+  }, [index, total, slidesToShow]);
+  // const boxesToShow = expanded ? totalBoxes : 8;
 
   // Gallery images
   const items = [
@@ -259,11 +358,11 @@ export default function Home({ images }) {
 
   const testimonials = [
     {
-      image: "/t1.jpg",
+      image: "/pranav.jpeg",
       stars: 5,
-      text: "Lorem ipsum dolor sit amet consectetur non adipiscing elit gravida posuere odio metus adipiscing tincidunt venenatis amet sagittis tellus porttitor enim blandit venenatis tellus.",
-      name: "Randall Robertson",
-      title: "Project lead at Agency",
+      text: "Really, I must congratulate the team for designing such a marvelous and thoughtful cover! It's unanimously liked! The cover is so effective!, that I gained 2000 followers on Insta in 5 days, by boosting a reel based on the cover alone! My fullest appreciation for the professional involved in making the cover. I was always a little doubtful as to how a story with a tiger could be marketed in our country. There you proved me wrong.",
+      name: "Pranav Mishra",
+      title: "The Tiger That Crashed My Wedding",
       color: "var(--themeColor)",
     },
     {
@@ -340,51 +439,8 @@ export default function Home({ images }) {
     },
   ];
 
-  const categories = [
-    {
-      icon: "🎨",
-      title: "Book Cover Designing",
-      desc: "Eye-catching book covers designed to attract readers and reflect your story.",
-    },
-    {
-      icon: "✍️",
-      title: "Ghostwriting",
-      desc: "Professional ghostwriters bring your ideas to life with engaging words.",
-    },
-    {
-      icon: "🌍",
-      title: "Translation",
-      desc: "Accurate, culturally relevant translations across multiple languages.",
-    },
-    {
-      icon: "🤝",
-      title: "Literary Representation",
-      desc: "Get connected with trusted literary agents to publish and promote your work.",
-    },
-    {
-      icon: "📈",
-      title: "Amazon Marketing Services (AMS)",
-      desc: "Boost your book’s visibility and sales with expert Amazon marketing strategies.",
-    },
-    {
-      icon: "🖌️",
-      title: "Illustrations",
-      desc: "Custom illustrations that add depth, creativity, and appeal to your projects.",
-    },
-    {
-      icon: "🎙️",
-      title: "Voice Over",
-      desc: "Professional voice artists deliver clear, expressive, and impactful narration.",
-    },
-    {
-      icon: "🎬",
-      title: "Video Editing",
-      desc: "High-quality editing to make your videos engaging, polished, and impactful.",
-    },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const slidesToShow = 4;
+  // const slidesToShow = 4;
   const nextSlide = () =>
     setCurrentIndex((p) => (p >= categories.length - slidesToShow ? 0 : p + 1));
   const prevSlide = () =>
@@ -481,84 +537,79 @@ export default function Home({ images }) {
 
       <section className="browse-talent-section" id="service-section">
         <div className="browse-talent-container">
-          <div className="browse-talent-container-df">
-            <span>
-              <h1>Browse talent by category</h1>
-              <p>Connect with talented freelancers across various fields.</p>
-            </span>
-            <div className="browse-buttons">
-              <button className="post-job-btn">Post a Job</button>
-            </div>
+          <h1>Browse Talent By Category</h1>
+          <p>Connect with talented freelancers across various fields.</p>
+          <div className="browse-buttons">
+            <button className="post-job-btn">Post a Job</button>
           </div>
 
-          <div className="category-cards">
-            <div className="slider-container" aria-roledescription="carousel">
-              <button
-                className="nav-button prev-button"
-                onClick={prevSlide}
-                aria-label="Previous"
+          <div className="slider-container" aria-roledescription="carousel">
+            <button
+              className="nav-button prev-button"
+              onClick={prevCategorySlide}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5 8.25 12l7.5-7.5"
+                ></path>
+              </svg>
+            </button>
 
-              <div className="slider-wrapper">
-                <div className="fade fade-left" aria-hidden="true"></div>
-                <div className="fade fade-right" aria-hidden="true"></div>
+            <div className="slider-wrapper">
+              <div className="fade fade-left"></div>
+              <div className="fade fade-right"></div>
 
-                <div
-                  className="slider-track"
-                  style={{
-                    transform: `translateX(-${
-                      currentIndex * (100 / slidesToShow)
-                    }%)`,
-                  }}
-                >
-                  {categories.map((cat, index) => (
-                    <div className="slide" key={index}>
-                      <div className="card">
-                        <div className="icon">{cat.icon}</div>
-                        <h3>{cat.title}</h3>
-                        <p>{cat.desc}</p>
-                      </div>
+              <div
+                className="slider-track"
+                ref={trackRef}
+                style={{
+                  transform: `translateX(-${(100 / slidesToShow) * index}%)`,
+                  transition: transitionOn
+                    ? "transform 0.5s ease-in-out"
+                    : "none",
+                  width: `auto`,
+                }}
+              >
+                {extended.map((cat, i) => (
+                  <div className="slide" key={`${cat.title}-${i}`}>
+                    <div className="card">
+                      <div className="icon">{cat.icon}</div>
+                      <h3>{cat.title}</h3>
+                      <p>{cat.desc}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-
-              <button
-                className="nav-button next-button"
-                onClick={nextSlide}
-                aria-label="Next"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
             </div>
+
+            <button
+              className="nav-button next-button"
+              onClick={nextCategorySlide}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                ></path>
+              </svg>
+            </button>
           </div>
         </div>
       </section>
@@ -618,7 +669,7 @@ export default function Home({ images }) {
           </div>
 
           <div className="integration-right">
-            <h1>A showcase of the projects we’ve delivered</h1>
+            <h1>Yours can be next!</h1>
             <p>
               Impactful book designs, publishing assets, and campaigns that
               helped authors reach more readers and build lasting brands.
@@ -957,17 +1008,6 @@ export default function Home({ images }) {
                       <h2 className="mmg-card-title">{item.title}</h2>
                       <p className="mmg-card-desc">{item.desc}</p>
                     </div>
-
-                    {item.creditHref && (
-                      <a
-                        href={item.creditHref}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="mmg-credit"
-                      >
-                        Photo by Unsplash
-                      </a>
-                    )}
                   </div>
                 </article>
               ))}
@@ -1066,11 +1106,11 @@ export default function Home({ images }) {
               <circle cx="12" cy="12" r="2"></circle>
             </svg>
           </div>
-          <h2 className="snipers-title">Our Freelancer Have Got You</h2>
+          <h2 className="snipers-title">Our Freelancers Have Got You</h2>
           <p className="snipers-desc">
             Join thousands of authors who trust HubHawks Live for their
             publishing needs. From cover design to marketing campaigns, our
-            expert snipers deliver results with precision.
+            expert freelancer deliver results with precision.
           </p>
           <div className="snipers-cta">
             <button className="snipers-btn">Join Us</button>

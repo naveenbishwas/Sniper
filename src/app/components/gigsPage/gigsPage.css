@@ -136,13 +136,13 @@
 /* bottom row */
 .gig-bottom {
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   gap: 12px;
 }
 .gig-price {
   font-weight: 800;
-  color: var(--price);
+  color: #1f3a8a;
   font-size: 1rem;
 }
 
@@ -310,11 +310,6 @@
   justify-content: space-between;
   gap: 12px;
   margin-top: auto; /* push to bottom */
-}
-.gig-price {
-  font-weight: 800;
-  color: var(--price);
-  font-size: 1rem;
 }
 
 /* button (neutral/dark, subtle hover) */

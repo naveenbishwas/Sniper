@@ -1,80 +1,140 @@
-.galleryPage {
-  padding: 40px;
+/* === PAGE STRUCTURE === */
+.snapshot-page {
+  padding: 60px 40px;
+  background: #f5f7fa;
+  min-height: 100vh;
   text-align: center;
 }
 
-.title {
-  font-size: 2rem;
+.snapshot-title {
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  color: #1a1a1a;
 }
 
-.grid {
+/* === GRID LAYOUT === */
+.snapshot-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  justify-content: center;
 }
 
-.card {
-  cursor: pointer;
+/* === CARD === */
+.snapshot-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
-}
-.card:hover {
-  transform: translateY(-5px);
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 380px;
 }
 
-.thumb {
-  border-radius: 8px;
-  object-fit: cover;
+.snapshot-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* === IMAGE === */
+.snapshot-image-wrapper {
+  position: relative;
   width: 100%;
-  height: auto;
+  height: 80%;
+  overflow: hidden;
 }
 
-.modalOverlay {
+.snapshot-thumb {
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+/* === FOOTER LABEL === */
+.snapshot-footer {
+  background-color: #0b1120;
+  padding: 12px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snapshot-caption {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* === MODAL === */
+.snapshot-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 1000;
 }
 
-.modalContent {
-  position: relative;
+.snapshot-modal-content {
   background: #000;
   padding: 20px;
   border-radius: 12px;
   max-width: 90%;
   max-height: 85%;
   overflow: auto;
+  position: relative;
 }
 
-.fullImage {
-  border-radius: 8px;
-  width: 100%;
-  height: auto;
-}
-
-.caption {
-  color: #fff;
-  margin-top: 10px;
-  font-size: 1.1rem;
-}
-
-.closeBtn {
+.snapshot-close-btn {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: #fff;
+  background: #d70000;
+  color: #ffffff;
   border: none;
   border-radius: 50%;
   width: 36px;
   height: 36px;
   font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.snapshot-full-image {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+}
+
+.snapshot-modal-caption {
+  color: #fff;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .snapshot-page {
+    padding: 40px 20px;
+  }
+
+  .snapshot-title {
+    font-size: 2rem;
+  }
+
+  .snapshot-card {
+    height: 260px;
+  }
+
+  .snapshot-caption {
+    font-size: 0.95rem;
+  }
 }
