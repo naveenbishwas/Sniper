@@ -1,36 +1,35 @@
-/* Layout */
-.mg-container {
+/* Container & Title */
+.gm-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 16px;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
-    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
+    "Helvetica Neue", Arial;
   color: #111;
 }
 
-.mg-title {
+.gm-title {
   font-size: 35px;
   font-weight: 700;
   margin: 8px 0 24px;
   letter-spacing: 0.3px;
 }
 
-@media screen and (max-width: 768px) {
-  .mg-title {
+@media (max-width: 768px) {
+  .gm-title {
     font-size: 26px;
   }
 }
 
 /* Grid & Cards */
-.mg-grid {
+.gm-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 16px;
 }
 
-.mg-card {
-  grid-column: span 6; /* 2 per row on desktop-ish */
+.gm-card {
+  grid-column: span 6; /* 2 per row by default */
   background: #fff;
   border: 1px solid #eaeaea;
   border-radius: 12px;
@@ -41,33 +40,30 @@
   outline: none;
 }
 
-.mg-card:focus {
+.gm-card:focus {
   box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.25);
 }
-
-.mg-card:hover {
+.gm-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
   border-color: #e3e3e3;
 }
 
-.mg-thumb {
+.gm-thumb {
   position: relative;
   height: 0;
-  padding-bottom: 58%; /* 16:9-ish */
-  overflow: hidden;
+  padding-bottom: 58%; /* ~16:9 */
   background: #f6f6f6;
+  overflow: hidden;
 }
 
-.mg-thumb img {
+.gm-img {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 
-.mg-play {
+.gm-play {
   position: absolute;
   right: 12px;
   bottom: 12px;
@@ -81,7 +77,7 @@
   user-select: none;
 }
 
-.mg-card-title {
+.gm-card-title {
   font-size: 16px;
   font-weight: 600;
   padding: 12px 14px 14px;
@@ -90,25 +86,20 @@
   text-overflow: ellipsis;
 }
 
-/* Responsive */
+/* Responsive column counts */
 @media (min-width: 980px) {
-  .mg-card {
+  .gm-card {
     grid-column: span 4;
   } /* 3 per row */
 }
-@media (min-width: 1280px) {
-  .mg-card {
-    /* grid-column: span 3; */
-  } /* 4 per row */
-}
 @media (max-width: 520px) {
-  .mg-card {
+  .gm-card {
     grid-column: span 12;
-  } /* 1 per row on small screens */
+  } /* 1 per row */
 }
 
 /* Overlay / Modal */
-.mg-overlay {
+.gm-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
@@ -119,7 +110,7 @@
   z-index: 9999;
 }
 
-.mg-close {
+.gm-close {
   position: fixed;
   top: 14px;
   right: 14px;
@@ -133,12 +124,11 @@
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
-.mg-close:hover {
+.gm-close:hover {
   background: #fff;
 }
 
-.mg-lightbox {
+.gm-lightbox {
   width: min(1200px, 96vw);
   max-height: 90vh;
   display: flex;
@@ -146,7 +136,7 @@
   gap: 10px;
 }
 
-.mg-media {
+.gm-media {
   width: 100%;
   max-height: 80vh;
   object-fit: contain;
@@ -155,7 +145,7 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
-.mg-lightbox-title {
+.gm-lightbox-title {
   color: #fff;
   font-weight: 600;
   text-align: center;

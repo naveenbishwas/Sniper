@@ -16,42 +16,42 @@ const slidesToShow = 4;
 
 const categories = [
   {
-    icon: "🎨",
+    image: "/book-cover.png",
     title: "Book Cover Designing",
     desc: "Eye-catching book covers designed to attract readers and reflect your story.",
   },
   {
-    icon: "✍️",
+    image: "/ghost.png",
     title: "Ghostwriting",
     desc: "Professional ghostwriters bring your ideas to life with engaging words.",
   },
   {
-    icon: "🌍",
+    image: "/TRANSLATION-ICON.png",
     title: "Translation",
     desc: "Accurate, culturally relevant translations across multiple languages.",
   },
   {
-    icon: "🤝",
+    image: "/LITERARY.png",
     title: "Literary Representation",
     desc: "Get connected with trusted literary agents to publish and promote your work.",
   },
   {
-    icon: "📈",
+    image: "/amazon.png",
     title: "Amazon Marketing Services (AMS)",
     desc: "Boost your book’s visibility and sales with expert Amazon marketing strategies.",
   },
   {
-    icon: "🖌️",
+    image: "/ILLUSTRATION.png",
     title: "Illustrations",
     desc: "Custom illustrations that add depth, creativity, and appeal to your projects.",
   },
   {
-    icon: "🎙️",
+    image: "/VOICOVER.png",
     title: "Voice Over",
     desc: "Professional voice artists deliver clear, expressive, and impactful narration.",
   },
   {
-    icon: "🎬",
+    image: "/VIDEO-EDITING.png",
     title: "Video Editing",
     desc: "High-quality editing to make your videos engaging, polished, and impactful.",
   },
@@ -220,30 +220,47 @@ export default function Home({ images }) {
 
   const gallery = [
     {
-      src: "/sakeena-front.png",
-      alt: "Sun Sakeena",
-      // href: "https://architect-sigma.vercel.app/",
+      src: "/s1.png",
+      alt: "The Prince of Redemption",
     },
     {
-      src: "/guilt-front.png",
-      alt: "Guilt Trip",
-      // href: "https://cupidclothings.com/",
+      src: "/s2.png",
+      alt: "Wings of Thought",
     },
-    { src: "/timepass-front.png", alt: "Total Timepass" },
+    { src: "/s3.png", alt: "Hi Babe" },
     {
-      src: "/ikigai-front.png",
-      alt: "Harmonia",
-      // href: "https://www.devkinandansteel.com/",
+      src: "/s4.png",
+      alt: "Money Talks",
     },
     {
-      src: "/dear-front.png",
-      alt: "Dear Remembrance",
-      // href: "https://www.kryysglobal.com/",
+      src: "/s5.png",
+      alt: "Voyage",
     },
     {
-      src: "/dragger-front.png",
-      alt: "Daggers",
-      // href: "https://aivajewellery.com/",
+      src: "/s6.png",
+      alt: "FrankEnstien",
+    },
+
+    {
+      src: "/s6.png",
+      alt: "Dracula",
+    },
+
+    {
+      src: "/s7.png",
+      alt: "FrankEnstien",
+    },
+    {
+      src: "/s8.png",
+      alt: "Jane Eyre",
+    },
+    {
+      src: "/s9.png",
+      alt: "The Jungle Book",
+    },
+    {
+      src: "/s10.png",
+      alt: "The Upanishads",
     },
   ];
 
@@ -582,7 +599,15 @@ export default function Home({ images }) {
                 {extended.map((cat, i) => (
                   <div className="slide" key={`${cat.title}-${i}`}>
                     <div className="card">
-                      <div className="icon">{cat.icon}</div>
+                      <div className="icon">
+                        <Image
+                          src={cat.image}
+                          alt={cat.title}
+                          width={50}
+                          height={50}
+                          unoptimized
+                        />
+                      </div>
                       <h3>{cat.title}</h3>
                       <p>{cat.desc}</p>
                     </div>
@@ -674,7 +699,7 @@ export default function Home({ images }) {
               Impactful book designs, publishing assets, and campaigns that
               helped authors reach more readers and build lasting brands.
             </p>
-            <Link href="/snapshot">
+            <Link href="/gallery-section">
               <button className="cta-button" id="integration-btn">
                 Explore our work
                 <span className="arrow-wrapper">
@@ -700,6 +725,312 @@ export default function Home({ images }) {
           </div>
         </div>
       </section>
+
+      <div className="logo-slider">
+        <h1>Our Partners</h1>
+        <div className="logo-track">
+          <Image
+            src="/empire1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/aqua1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/comforto.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image src="/da1.png" width={0} height={0} alt="" unoptimized></Image>
+          <Image
+            src="/adpl2.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/edoofa.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+
+          <Image
+            src="/hardoll.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/hub1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+
+          <Image
+            src="/nira.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/orchid-blue.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/poco.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/sain.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image src="/sky.png" width={0} height={0} alt="" unoptimized></Image>
+          <Image
+            src="/aurave1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image src="/uk.png" width={0} height={0} alt="" unoptimized></Image>
+          <Image
+            src="/cupid1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/e-travel.avif"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/isu1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/kapur1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/madve.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/mireads.avif"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/power-mower.webp"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/uberlyfe1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/hub1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+
+          {/* Repeat the same logos to make the loop seamless */}
+          <Image
+            src="/empire1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/aqua1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/comforto.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image src="/da1.png" width={0} height={0} alt="" unoptimized></Image>
+
+          <Image
+            src="/edoofa.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+
+          <Image
+            src="/hardoll.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/hub1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+
+          <Image
+            src="/nira.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/orchid-blue.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/poco.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/sain.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image src="/sky.png" width={0} height={0} alt="" unoptimized></Image>
+          <Image
+            src="/aurave1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image src="/uk.png" width={0} height={0} alt="" unoptimized></Image>
+          <Image
+            src="/cupid1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/e-travel.avif"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/isu1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/kapur1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/madve.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/mireads.avif"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/power-mower.webp"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/uberlyfe1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+          <Image
+            src="/hub1.png"
+            width={0}
+            height={0}
+            alt=""
+            unoptimized
+          ></Image>
+        </div>
+      </div>
 
       {/* Vetting Section */}
       <section className="vetting-section">
@@ -742,7 +1073,7 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Award-Winning Designers"
                 >
-                  <svg viewBox="0 0 64 64" className="ti ti-medal">
+                  <svg id="award" viewBox="0 0 64 64" className="ti ti-medal">
                     <defs>
                       <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1">
                         <stop offset="0" stopColor="#FFC94C" />
@@ -872,6 +1203,69 @@ export default function Home({ images }) {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="teamSection">
+        <div className="container">
+          <div className="content">
+            <div className="textContent" id="meet-title">
+              <h2 className="title">Meet Our Team</h2>
+              <p className="subtitle">
+                Passionate professionals dedicated to delivering excellence
+              </p>
+              <p className="description">
+                Our diverse team brings together years of experience,
+                creativity, and innovation to every project. We believe in
+                collaboration, continuous learning, and pushing boundaries to
+                achieve remarkable results.
+              </p>
+
+              <div className="stats" id="team-stats">
+                <div className="stat">
+                  <h3>50+</h3>
+                  <p>Team Members</p>
+                </div>
+                <div className="stat">
+                  <h3>10+</h3>
+                  <p>Years Experience</p>
+                </div>
+                <div className="stat">
+                  <h3>200+</h3>
+                  <p>Projects Completed</p>
+                </div>
+              </div>
+
+              <div className="values">
+                <h3>Our Core Values</h3>
+                <ul>
+                  <li>Innovation and creativity in everything we do</li>
+                  <li>Commitment to quality and excellence</li>
+                  <li>Collaborative spirit and teamwork</li>
+                  <li>Continuous learning and growth</li>
+                </ul>
+              </div>
+
+              <div className="team-btn">
+                <button>Know More</button>
+              </div>
+            </div>
+
+            <div className="imageContent">
+              <div className="imageWrapper">
+                <Image
+                  src="/team.png"
+                  width={0}
+                  height={0}
+                  alt="team-img"
+                  unoptimized
+                ></Image>
+                <div className="imageOverlay">
+                  <p>Together we achieve more</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
