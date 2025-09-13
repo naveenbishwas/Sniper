@@ -126,14 +126,14 @@ export default function Home({ images }) {
   const items = [
     {
       title: "Total Timepass",
-      src: "/timepass-front.png",
+      src: "/tt1.png",
       alt: "Mountain landscape",
-      hoverSrc: "/timepass-back.png",
+      hoverSrc: "/tt2.png",
     },
     {
       title: "Sun Sakeena",
-      src: "/sakeena-front.png", // ✅ leading slash
-      hoverSrc: "/sakeena-back.png",
+      src: "/12.jpeg", // ✅ leading slash
+      hoverSrc: "/12-1.png",
       alt: "Modern architecture",
       creditHref: "https://unsplash.com",
     },
@@ -188,16 +188,24 @@ export default function Home({ images }) {
     },
     {
       title: "Ekaki",
-      src: "/ekaki.png", // ✅
-      hoverSrc: "/ekaki-back.png",
+      src: "/ek1.png", // ✅
+      hoverSrc: "/ek2.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
 
     {
-      title: "Daggers of Treason",
-      src: "/dragger-front.png", // ✅
-      hoverSrc: "/dragger-back.png",
+      title: "The Rise of Immortal",
+      src: "/rise2-front.png", // ✅
+      hoverSrc: "/rise2-back.png",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
+
+    {
+      title: "The Price of Redemption",
+      src: "/s1.png", // ✅
+      hoverSrc: "/ss2.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
@@ -210,9 +218,9 @@ export default function Home({ images }) {
       creditHref: "https://unsplash.com",
     },
     {
-      title: "The Rise of Immortal",
-      src: "/rise2-front.png", // ✅
-      hoverSrc: "/rise2-back.png",
+      title: "Daggers of Treason",
+      src: "/dragger-front.png", // ✅
+      hoverSrc: "/dragger-back.png",
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
@@ -428,28 +436,28 @@ export default function Home({ images }) {
   const steps = [
     {
       id: 1,
-      image: "/process1.png",
+      image: "/c-call.jpeg",
       title: "Consultation call",
       description:
         "Our dedicated sales team reaches out to understand your specific needs and project goals.",
     },
     {
       id: 2,
-      image: "/process2.png",
+      image: "/p-brief.jpeg",
       title: "Project Brief",
       description:
         "Authors post detailed project requirements on the platform, outlining their specific needs and expectations.",
     },
     {
       id: 3,
-      image: "/process1.png",
+      image: "/f-call.jpeg",
       title: "Freelancers Apply",
       description:
         "Qualified service providers submit proposals after carefully reviewing your project requirements.",
     },
     {
       id: 4,
-      image: "/process2.png",
+      image: "/p-p.jpeg",
       title: "Project Process",
       description:
         "Our targeted matching system ensures authors connect with the ideal service providers, after which secure payment processing enables the work to get underway.",
@@ -726,312 +734,6 @@ export default function Home({ images }) {
         </div>
       </section>
 
-      <div className="logo-slider">
-        <h1>Our Partners</h1>
-        <div className="logo-track">
-          <Image
-            src="/empire1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/aqua1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/comforto.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image src="/da1.png" width={0} height={0} alt="" unoptimized></Image>
-          <Image
-            src="/adpl2.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/edoofa.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-
-          <Image
-            src="/hardoll.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/hub1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-
-          <Image
-            src="/nira.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/orchid-blue.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/poco.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/sain.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image src="/sky.png" width={0} height={0} alt="" unoptimized></Image>
-          <Image
-            src="/aurave1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image src="/uk.png" width={0} height={0} alt="" unoptimized></Image>
-          <Image
-            src="/cupid1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/e-travel.avif"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/isu1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/kapur1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/madve.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/mireads.avif"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/power-mower.webp"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/uberlyfe1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/hub1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-
-          {/* Repeat the same logos to make the loop seamless */}
-          <Image
-            src="/empire1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/aqua1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/comforto.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image src="/da1.png" width={0} height={0} alt="" unoptimized></Image>
-
-          <Image
-            src="/edoofa.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-
-          <Image
-            src="/hardoll.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/hub1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-
-          <Image
-            src="/nira.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/orchid-blue.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/poco.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/sain.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image src="/sky.png" width={0} height={0} alt="" unoptimized></Image>
-          <Image
-            src="/aurave1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image src="/uk.png" width={0} height={0} alt="" unoptimized></Image>
-          <Image
-            src="/cupid1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/e-travel.avif"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/isu1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/kapur1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/madve.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/mireads.avif"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/power-mower.webp"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/uberlyfe1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-          <Image
-            src="/hub1.png"
-            width={0}
-            height={0}
-            alt=""
-            unoptimized
-          ></Image>
-        </div>
-      </div>
-
       {/* Vetting Section */}
       <section className="vetting-section">
         <div className="vetting-wrapper">
@@ -1073,26 +775,82 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Award-Winning Designers"
                 >
-                  <svg id="award" viewBox="0 0 64 64" className="ti ti-medal">
+                  <svg
+                    id="award"
+                    width="80"
+                    height="80"
+                    viewBox="0 0 80 80"
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    ariaLabel="Medal icon"
+                  >
                     <defs>
-                      <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0" stopColor="#FFC94C" />
-                        <stop offset="1" stopColor="#FF9F1C" />
+                      <linearGradient
+                        id="medalGrad"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop offset="0%" stop-color="#FFC44D" />
+                        <stop offset="100%" stop-color="#FF9F1C" />
                       </linearGradient>
+                      <filter
+                        id="softShadow"
+                        x="-20%"
+                        y="-20%"
+                        width="140%"
+                        height="140%"
+                      >
+                        <feDropShadow
+                          dx="0"
+                          dy="1.2"
+                          stdDeviation="1.2"
+                          flood-opacity="0.25"
+                        />
+                      </filter>
                     </defs>
-                    <circle cx="32" cy="28" r="14" fill="url(#g-gold)" />
-                    <polygon
-                      points="32,20 35,26 42,27 37,31 38,38 32,35 26,38 27,31 22,27 29,26"
-                      fill="#fff"
-                      opacity=".95"
-                    />
+
                     <path
-                      d="M22 6l8 10M42 6l-8 10"
-                      stroke="#5B6BFF"
-                      strokeWidth="6"
+                      d="M16 10 L32 30"
+                      stroke="#586CFF"
+                      strokeWidth="10"
                       strokeLinecap="round"
                     />
+                    <path
+                      d="M64 10 L48 30"
+                      stroke="#7A8CFF"
+                      strokeWidth="10"
+                      strokeLinecap="round"
+                    />
+
+                    <circle cx="40" cy="50" r="18" fill="url(#medalGrad)" />
+                    <circle
+                      cx="40"
+                      cy="50"
+                      r="18"
+                      fill="none"
+                      stroke="#E58A00"
+                      strokeWidth="2"
+                    />
+
+                    <polygon
+                      points="
+      40,35
+      43.8,44.6
+      54.8,44.6
+      45.9,51.4
+      49.0,61
+      40,55.3
+      31.0,61
+      34.1,51.4
+      25.2,44.6
+      36.2,44.6"
+                      fill="#FFFFFF"
+                      filter="url(#softShadow)"
+                    />
                   </svg>
+
                   <span>Award-Winning Designers</span>
                 </div>
 
@@ -1213,14 +971,12 @@ export default function Home({ images }) {
           <div className="content">
             <div className="textContent" id="meet-title">
               <h2 className="title">Meet Our Team</h2>
-              <p className="subtitle">
-                Passionate professionals dedicated to delivering excellence
-              </p>
               <p className="description">
-                Our diverse team brings together years of experience,
-                creativity, and innovation to every project. We believe in
-                collaboration, continuous learning, and pushing boundaries to
-                achieve remarkable results.
+                Passionate professionals dedicated to delivering excellence Our
+                diverse team brings together years of experience, creativity,
+                and innovation to every project. We believe in collaboration,
+                continuous learning, and pushing boundaries to achieve
+                remarkable results.
               </p>
 
               <div className="stats" id="team-stats">
@@ -1270,6 +1026,276 @@ export default function Home({ images }) {
           </div>
         </div>
       </section>
+
+      <div className="logo-slider">
+        <h1>Our Partners</h1>
+        <div className="logo-track">
+          <div className="logo-item">
+            <Image
+              src="/audible.png"
+              alt="Audible"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/bhari.webp"
+              alt="Bhari"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/bloom.png"
+              alt="Bloom"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/crosswor.png"
+              alt="Crossword"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/finger.png"
+              alt="Finger"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+
+          <div className="logo-item">
+            <Image
+              src="/harper.avif"
+              alt="Harper"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/higgino.png"
+              alt="Higgino"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/iroc.jpeg" alt="IROC" fill sizes="160px" unoptimized />
+          </div>
+
+          <div className="logo-item">
+            <Image
+              src="/kunzum.png"
+              alt="Kunzum"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/om.png" alt="OM" fill sizes="160px" unoptimized />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/oxford.avif"
+              alt="Oxford"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/red.webp" alt="Red" fill sizes="160px" unoptimized />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/sapna.png"
+              alt="Sapna"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/scholastic.png"
+              alt="Scholastic"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/simon.jpg"
+              alt="Simon"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item" id="background">
+            <Image
+              src="/jaico.png"
+              alt="Jaico"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/tara.png" alt="Tara" fill sizes="160px" unoptimized />
+          </div>
+
+          {/* Repeat for seamless scroll */}
+          <div className="logo-item">
+            <Image
+              src="/audible.png"
+              alt="Audible"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/bhari.webp"
+              alt="Bhari"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/bloom.png"
+              alt="Bloom"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/crosswor.png"
+              alt="Crossword"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/finger.png"
+              alt="Finger"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+
+          <div className="logo-item">
+            <Image
+              src="/harper.avif"
+              alt="Harper"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/higgino.png"
+              alt="Higgino"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/iroc.jpeg" alt="IROC" fill sizes="160px" unoptimized />
+          </div>
+
+          <div className="logo-item">
+            <Image
+              src="/kunzum.png"
+              alt="Kunzum"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/om.png" alt="OM" fill sizes="160px" unoptimized />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/oxford.avif"
+              alt="Oxford"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/red.webp" alt="Red" fill sizes="160px" unoptimized />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/sapna.png"
+              alt="Sapna"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/scholastic.png"
+              alt="Scholastic"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/simon.jpg"
+              alt="Simon"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item" id="background">
+            <Image
+              src="/jaico.png"
+              alt="Jaico"
+              fill
+              sizes="160px"
+              unoptimized
+            />
+          </div>
+          <div className="logo-item">
+            <Image src="/tara.png" alt="Tara" fill sizes="160px" unoptimized />
+          </div>
+        </div>
+      </div>
 
       <section className="hero-section">
         <div id="dark-overlay"></div>

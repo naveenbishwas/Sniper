@@ -1,5 +1,6 @@
 #border-line {
   border: 0.4px solid rgb(215, 214, 214);
+  display: none;
 }
 
 .how-it-works {
@@ -631,6 +632,7 @@ html {
   max-width: 1350px;
   margin: auto;
   padding: 3% 0;
+  padding-top: 1%;
 }
 
 .browse-talent-container h1 {
@@ -643,9 +645,9 @@ html {
 }
 
 .browse-talent-container p {
-  font-size: 13px;
+  font-size: 16px;
   color: #475569;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   line-height: 1.5;
   text-align: center;
 }
@@ -833,7 +835,7 @@ section#service-section {
 }
 
 .vetting-wrapper {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -842,6 +844,7 @@ section#service-section {
 .vetting-container {
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 60px;
   position: relative;
   height: 100vh;
@@ -853,7 +856,7 @@ section#service-section {
 
 .vetting-text h2 {
   color: var(--foreground);
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 700;
   margin: 0 0 10px; /* tighter */
 }
@@ -947,13 +950,14 @@ section#service-section {
 }
 
 .vetting-scrollable {
-  flex: 1;
+  /* flex: 1; */
   height: 80vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 40px;
   padding-right: 10px;
+  width: 600px;
 }
 
 .vetting-scrollable::-webkit-scrollbar {
@@ -973,7 +977,7 @@ section#service-section {
 .vetting-image img {
   border-radius: 10px;
   width: 100%;
-  max-width: 350px;
+  max-width: 100px;
   height: auto;
 }
 
@@ -1075,7 +1079,7 @@ section.integration {
   padding-bottom: 8%;
 }
 .integration-df {
-  width: 95%;
+  width: 1300px;
   display: flex;
   justify-content: center;
   gap: 40px;
@@ -1249,7 +1253,7 @@ section.integration {
 }
 .integration-right h1 {
   font-family: "__nextjs-Geist";
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-top: 15%;
   line-height: 1.2;
   margin-bottom: 20px;
@@ -1320,11 +1324,12 @@ section.integration {
 
 .hero-section {
   position: relative;
-  background-image: url("/post.jpg");
+  background-image: url(/post2.png);
   background-size: cover;
   background-position: center;
   height: auto;
   padding-bottom: 120px;
+  background-position: top;
   color: white;
 }
 
@@ -1348,7 +1353,7 @@ section.integration {
 .hero-container {
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 40px;
   flex-wrap: wrap;
 }
 
@@ -1471,6 +1476,11 @@ section.integration {
     font-size: 16px;
   }
 }
+/* fix typo */
+#background {
+  background-color: #0c0e12;
+  padding: 10px; /* was pad */
+}
 
 .logo-slider {
   overflow: hidden;
@@ -1488,35 +1498,51 @@ section.integration {
   letter-spacing: -0.5px;
 }
 
+/* scrolling track unchanged */
 .logo-track {
   display: flex;
-  width: max-content; /* shrink-wrap content */
+  width: max-content;
   gap: 60px;
   align-items: center;
   animation: scroll 40s linear infinite;
 }
 
-.logo-track img {
-  height: 60px;
-  width: auto;
-  object-fit: contain;
-  transition: all 0.3s ease;
-  padding: 6px 0;
+/* each logo sits in a fixed-size box so all appear equal */
+.logo-item {
+  flex: 0 0 auto;
+  width: 160px; /* <- uniform width */
+  height: 80px; /* <- uniform height */
+  position: relative; /* required for Next/Image with fill */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Next/Image <img> should scale to fit the box */
+.logo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* preserves aspect while fitting box */
+}
+
+/* optional: subtle baseline polish */
+.logo-track img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+  padding: 6px 0;
+}
 .logo-track img:hover {
-  filter: grayscale(100%) brightness(0.85);
+  filter: grayscale(100%) brightness(0.92);
   transform: scale(1.05);
 }
 
-/* Smooth infinite loop */
+/* keep (or add) your keyframes if not present already */
 @keyframes scroll {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
     transform: translateX(-50%);
-  }
+  } /* duplicated logos make it seamless */
 }
 
 .slide .card img {
@@ -1747,6 +1773,8 @@ section.integration {
   font-weight: bold;
   color: var(--foreground);
   margin-bottom: 20px;
+  letter-spacing: -1px;
+  word-spacing: 1px;
 }
 
 .testimonial-left p {
@@ -1805,6 +1833,7 @@ section.integration {
   width: 350px;
   height: auto;
   border-radius: 20px;
+  filter: grayscale(100%) brightness(90%);
 }
 
 .testimonial-content {
@@ -1932,7 +1961,7 @@ section.integration {
 }
 
 .projects-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -2164,7 +2193,7 @@ section.integration {
 /* Root container */
 .mmg-root {
   min-height: 100vh;
-  background: var(--mmg-bg);
+  /* background: var(--mmg-bg); */
   color: var(--mmg-text);
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
@@ -2317,7 +2346,7 @@ section.integration {
 }
 
 .projects-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -2541,7 +2570,7 @@ section.integration {
 /* Root container */
 .mmg-root {
   min-height: 100vh;
-  background: var(--mmg-bg);
+  /* background: var(--mmg-bg); */
   color: var(--mmg-text);
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
@@ -2716,7 +2745,9 @@ section.integration {
 }
 
 #award {
-  margin-top: 5px;
+  /* margin-top: 5px; */
+  width: 35px;
+  height: 35px;
 }
 
 .team-btn button {
@@ -2747,7 +2778,7 @@ section.integration {
   background: linear-gradient(135deg, #343c4e 0%, #111725 100%);
   position: relative;
   overflow: hidden;
-  margin-bottom: 8%;
+  /* margin-bottom: 8%; */
 }
 
 .teamSection::before {
@@ -2762,7 +2793,7 @@ section.integration {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 20px;
   position: relative;
@@ -2770,18 +2801,17 @@ section.integration {
 }
 
 .content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* gap: 60px; */
+  display: flex;
   align-items: center;
 }
 
 .textContent {
   color: white;
+  flex: 4;
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 16px;
   background: linear-gradient(45deg, #fff, #f0f0f0);
@@ -2863,6 +2893,7 @@ section.integration {
 }
 
 .imageContent {
+  flex: 5;
   display: flex;
   justify-content: center;
   align-items: center;
