@@ -1,5 +1,3 @@
-
-
 "use client";
 import React, { useState } from "react";
 import "./HireFreelancer.css";
@@ -7,7 +5,8 @@ import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { generateUniqueId } from "@/lib/generateUniqueId";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+// Keeping these imports in case you use them later; safe to remove if unused.
+// import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const HireFreelancer = ({ onClose }) => {
   const [firstField, setFirstField] = useState("");
@@ -169,16 +168,28 @@ const HireFreelancer = ({ onClose }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    // ⬇️ Removed onClick={onClose} here so outside clicks DON'T close the modal
+    <div className="modal-overlay">
+      {/* Keeping stopPropagation is fine; it prevents any future overlay handlers from firing */}
       <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
-        <div className="hiring-page">
-          <button className="close-modal" onClick={onClose}>
+        <div
+          className="hiring-page"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="hire-title"
+        >
+          {/* Close only via this button */}
+          <button
+            className="close-modal"
+            onClick={onClose}
+            aria-label="Close modal"
+          >
             &times;
           </button>
 
           {step === 1 && (
             <div className="plan fade-in">
-              <h3 className="question">
+              <h3 id="hire-title" className="question">
                 What do you plan to hire service for?
               </h3>
               <div className="option-buttons">

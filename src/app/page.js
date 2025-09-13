@@ -782,7 +782,7 @@ export default function Home({ images }) {
                     viewBox="0 0 80 80"
                     xmlns="http://www.w3.org/2000/svg"
                     role="img"
-                    ariaLabel="Medal icon"
+                    aria-label="Medal icon"
                   >
                     <defs>
                       <linearGradient
@@ -792,8 +792,8 @@ export default function Home({ images }) {
                         x2="0"
                         y2="1"
                       >
-                        <stop offset="0%" stop-color="#FFC44D" />
-                        <stop offset="100%" stop-color="#FF9F1C" />
+                        <stop offset="0%" stopColor="#FFC44D" />
+                        <stop offset="100%" stopColor="#FF9F1C" />
                       </linearGradient>
                       <filter
                         id="softShadow"
@@ -806,7 +806,7 @@ export default function Home({ images }) {
                           dx="0"
                           dy="1.2"
                           stdDeviation="1.2"
-                          flood-opacity="0.25"
+                          floodOpacity="0.25"
                         />
                       </filter>
                     </defs>
@@ -1032,7 +1032,7 @@ export default function Home({ images }) {
         <div className="logo-track">
           <div className="logo-item">
             <Image
-              src="/audible.png"
+              src="/Audible2.png"
               alt="Audible"
               fill
               sizes="160px"
@@ -1041,7 +1041,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/bhari.webp"
+              src="/Bhari2.png"
               alt="Bhari"
               fill
               sizes="160px"
@@ -1050,7 +1050,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/bloom.png"
+              src="/Bloom2.png"
               alt="Bloom"
               fill
               sizes="160px"
@@ -1059,7 +1059,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/crosswor.png"
+              src="/Crosswor2.png"
               alt="Crossword"
               fill
               sizes="160px"
@@ -1068,7 +1068,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/finger.png"
+              src="/Fingerprint2.png"
               alt="Finger"
               fill
               sizes="160px"
@@ -1078,7 +1078,7 @@ export default function Home({ images }) {
 
           <div className="logo-item">
             <Image
-              src="/harper.avif"
+              src="/Harper2.png"
               alt="Harper"
               fill
               sizes="160px"
@@ -1087,7 +1087,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/higgino.png"
+              src="/Higgino2.png"
               alt="Higgino"
               fill
               sizes="160px"
@@ -1095,12 +1095,12 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/iroc.jpeg" alt="IROC" fill sizes="160px" unoptimized />
+            <Image src="/iroc2.png" alt="IROC" fill sizes="160px" unoptimized />
           </div>
 
           <div className="logo-item">
             <Image
-              src="/kunzum.png"
+              src="/Kunzum2.png"
               alt="Kunzum"
               fill
               sizes="160px"
@@ -1108,11 +1108,11 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/om.png" alt="OM" fill sizes="160px" unoptimized />
+            <Image src="/om2.png" alt="OM" fill sizes="160px" unoptimized />
           </div>
           <div className="logo-item">
             <Image
-              src="/oxford.avif"
+              src="/oxford2.png"
               alt="Oxford"
               fill
               sizes="160px"
@@ -1120,11 +1120,11 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/red.webp" alt="Red" fill sizes="160px" unoptimized />
+            <Image src="/red2.png" alt="Red" fill sizes="160px" unoptimized />
           </div>
           <div className="logo-item">
             <Image
-              src="/sapna.png"
+              src="/sapna2.png"
               alt="Sapna"
               fill
               sizes="160px"
@@ -1133,7 +1133,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/scholastic.png"
+              src="/scholastic2.png"
               alt="Scholastic"
               fill
               sizes="160px"
@@ -1142,7 +1142,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/simon.jpg"
+              src="/simon2.png"
               alt="Simon"
               fill
               sizes="160px"
@@ -1151,7 +1151,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item" id="background">
             <Image
-              src="/jaico.png"
+              src="/jaico2.png"
               alt="Jaico"
               fill
               sizes="160px"
@@ -1159,13 +1159,22 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/tara.png" alt="Tara" fill sizes="160px" unoptimized />
+            <Image src="/tara2.png" alt="Tara" fill sizes="160px" unoptimized />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/title2.png"
+              alt="Tara"
+              fill
+              sizes="160px"
+              unoptimized
+            />
           </div>
 
           {/* Repeat for seamless scroll */}
           <div className="logo-item">
             <Image
-              src="/audible.png"
+              src="/Audible2.png"
               alt="Audible"
               fill
               sizes="160px"
@@ -1174,7 +1183,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/bhari.webp"
+              src="/Bhari2.png"
               alt="Bhari"
               fill
               sizes="160px"
@@ -1183,7 +1192,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/bloom.png"
+              src="/Bloom2.png"
               alt="Bloom"
               fill
               sizes="160px"
@@ -1192,7 +1201,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/crosswor.png"
+              src="/Crosswor2.png"
               alt="Crossword"
               fill
               sizes="160px"
@@ -1201,7 +1210,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/finger.png"
+              src="/Fingerprint2.png"
               alt="Finger"
               fill
               sizes="160px"
@@ -1211,7 +1220,7 @@ export default function Home({ images }) {
 
           <div className="logo-item">
             <Image
-              src="/harper.avif"
+              src="/Harper2.png"
               alt="Harper"
               fill
               sizes="160px"
@@ -1220,7 +1229,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/higgino.png"
+              src="/Higgino2.png"
               alt="Higgino"
               fill
               sizes="160px"
@@ -1228,12 +1237,12 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/iroc.jpeg" alt="IROC" fill sizes="160px" unoptimized />
+            <Image src="/iroc2.png" alt="IROC" fill sizes="160px" unoptimized />
           </div>
 
           <div className="logo-item">
             <Image
-              src="/kunzum.png"
+              src="/Kunzum2.png"
               alt="Kunzum"
               fill
               sizes="160px"
@@ -1241,11 +1250,11 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/om.png" alt="OM" fill sizes="160px" unoptimized />
+            <Image src="/om2.png" alt="OM" fill sizes="160px" unoptimized />
           </div>
           <div className="logo-item">
             <Image
-              src="/oxford.avif"
+              src="/oxford2.png"
               alt="Oxford"
               fill
               sizes="160px"
@@ -1253,11 +1262,11 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/red.webp" alt="Red" fill sizes="160px" unoptimized />
+            <Image src="/red2.png" alt="Red" fill sizes="160px" unoptimized />
           </div>
           <div className="logo-item">
             <Image
-              src="/sapna.png"
+              src="/sapna2.png"
               alt="Sapna"
               fill
               sizes="160px"
@@ -1266,7 +1275,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/scholastic.png"
+              src="/scholastic2.png"
               alt="Scholastic"
               fill
               sizes="160px"
@@ -1275,7 +1284,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/simon.jpg"
+              src="/simon2.png"
               alt="Simon"
               fill
               sizes="160px"
@@ -1284,7 +1293,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item" id="background">
             <Image
-              src="/jaico.png"
+              src="/jaico2.png"
               alt="Jaico"
               fill
               sizes="160px"
@@ -1292,7 +1301,16 @@ export default function Home({ images }) {
             />
           </div>
           <div className="logo-item">
-            <Image src="/tara.png" alt="Tara" fill sizes="160px" unoptimized />
+            <Image src="/tara2.png" alt="Tara" fill sizes="160px" unoptimized />
+          </div>
+          <div className="logo-item">
+            <Image
+              src="/title2.png"
+              alt="Tara"
+              fill
+              sizes="160px"
+              unoptimized
+            />
           </div>
         </div>
       </div>
@@ -1509,22 +1527,16 @@ export default function Home({ images }) {
       <div className="sniper-support-df">
         <div className="snipers-support-section">
           <div className="snipers-icon">
-            <svg
-              id="logo-icon"
-              className="header__logo"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              stroke="#f4c200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <circle cx="12" cy="12" r="6"></circle>
-              <circle cx="12" cy="12" r="2"></circle>
-            </svg>
+            <Link href="/">
+              <Image
+                src={"/hub-white.png"}
+                className="header__logo"
+                width={55}
+                height={55}
+                unoptimized
+                alt="logo"
+              />
+            </Link>
           </div>
           <h2 className="snipers-title">Our Freelancers Have Got You</h2>
           <p className="snipers-desc">

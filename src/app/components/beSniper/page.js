@@ -141,9 +141,7 @@
 
 //     if (Object.keys(newErrors).length > 0) {
 //       setErrors(newErrors);
-//       // scroll to first error for visibility
 //       setTimeout(() => {
-//         const firstErrorKey = Object.keys(newErrors)[0];
 //         const el = document.querySelector(`.input-error`);
 //         if (el && typeof el.scrollIntoView === "function") {
 //           el.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -167,7 +165,7 @@
 //       const userDoc = {
 //         ...formData,
 //         occupation: occupationToSave,
-//         occupationRaw, // optional trace
+//         occupationRaw,
 //         email: email.toLowerCase(),
 //         name,
 //         role,
@@ -187,13 +185,8 @@
 //         createdAt: new Date().toISOString(),
 //       };
 
-//       console.log("[BeSniper] setDoc payload (users):", userDoc);
 //       await setDoc(doc(db, "users", email.toLowerCase()), userDoc);
-//       console.info("[BeSniper] setDoc(users) ✓");
-
-//       console.log("[BeSniper] addDoc payload (be-sniper-forms):", beSniperDoc);
 //       await addDoc(collection(db, "be-sniper-forms"), beSniperDoc);
-//       console.info("[BeSniper] addDoc(be-sniper-forms) ✓");
 
 //       localStorage.setItem("uniqueId", uniqueId);
 //       localStorage.setItem("userRole", role);
@@ -213,26 +206,6 @@
 //   const isValidPhone = (phone) => /^[0-9]{10,15}$/.test(phone);
 //   const isValidURL = (url) =>
 //     /^(https?:\/\/)?([\w\d\-]+\.){1,}([a-zA-Z]{2,})(\/.*)?$/.test(url);
-
-//   // const categoryOptions = [
-//   //   "Graphic Designers / Graphic Designing",
-//   //   "Copywriters / Copywriting",
-//   //   "Copy Editors / Copy Editing",
-//   //   "Proofreaders / Proofreading",
-//   //   "Beta Readers / Beta Reading",
-//   //   "Translators / Translation",
-//   //   "Illustrators / Illustration",
-//   //   "Ghost Writers / Ghost Writing",
-//   //   "Voice Over Artists / Voice Over",
-//   //   "Video Editors / Video Editing",
-//   //   "Typesetter / Typesetting",
-//   //   "Literary Agents / Literary Representation",
-//   //   "Social Media Managers / Social Media Management",
-//   //   "Amazon Marketing Executives / Amazon Marketing Services",
-//   //   "Full Stack Developers / Web Development",
-//   //   "Content Writers / Content Writing",
-//   //   "Emcees / Event Coordination",
-//   // ];
 
 //   const languageOptions = [
 //     "English",
@@ -275,17 +248,26 @@
 
 //   return (
 //     <>
-//       <div className="modal-overlay" onClick={onClose}>
-//         <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
-//           <div className="sniper-page">
-//             <button className="close-modal" onClick={onClose}>
-//               &times;
-//             </button>
+//       {/* One overlay = backdrop + centering + fade */}
+//       <div className="sniper-overlay" onClick={onClose}>
+//         <div
+//           className="sniper-container"
+//           onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+//           role="dialog"
+//           aria-modal="true"
+//           aria-labelledby="be-sniper-title"
+//         >
+//           <button className="close-modal" onClick={onClose} aria-label="Close">
+//             &times;
+//           </button>
 
+//           <div className="sniper-page">
 //             {/* Step 1 */}
 //             {step === 1 && (
 //               <div className="kind-of-freelancer">
-//                 <h3 className="question">What kind of freelancer are you?</h3>
+//                 <h3 id="be-sniper-title" className="question">
+//                   What kind of freelancer are you?
+//                 </h3>
 //                 <div className="option-buttons">
 //                   {[
 //                     { value: "agency-employer", label: "Agency / Employer" },
@@ -447,7 +429,6 @@
 //                             value={formData[field.name] || ""}
 //                             onChange={(e) => {
 //                               handleInputChange(e);
-//                               // if user switches off "Others", clear the custom field + error
 //                               if (
 //                                 field.name === "occupation" &&
 //                                 e.target.value !== "Others"
@@ -485,7 +466,6 @@
 //                           <p className="error-text">{errors[field.name]}</p>
 //                         )}
 
-//                         {/* Show free-text when Occupation === "Others" */}
 //                         {field.name === "occupation" &&
 //                           formData.occupation === "Others" && (
 //                             <div
@@ -521,27 +501,6 @@
 //                           )}
 //                       </div>
 //                     ))}
-
-//                     {/* CATEGORIES DROPDOWN */}
-//                     {/* <div className="form-group">
-//                       <label className="input-label">Category</label>
-//                       <select
-//                         name="categories"
-//                         value={formData.categories}
-//                         onChange={handleInputChange}
-//                         className={errors.categories ? "input-error" : ""}
-//                       >
-//                         <option value="">Select Category</option>
-//                         {categoryOptions.map((cat, idx) => (
-//                           <option key={idx} value={cat}>
-//                             {cat}
-//                           </option>
-//                         ))}
-//                       </select>
-//                       {errors.categories && (
-//                         <p className="error-text">{errors.categories}</p>
-//                       )}
-//                     </div> */}
 //                   </div>
 //                   <div className="next-prev-btn">
 //                     <button className="next" onClick={() => setStep(3)}>
@@ -565,7 +524,7 @@
 //   );
 // }
 
-// // --- validators ---
+// // --- validators (unchanged) ---
 // function isValidEmail(email) {
 //   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 // }
@@ -637,7 +596,7 @@ export default function BeSniperModal({ onClose }) {
       return;
     }
     setErrors((prev) => {
-      const { freelancerType, ...rest } = prev;
+      const { freelancerType: _drop, ...rest } = prev;
       return rest;
     });
     setStep(2);
@@ -664,7 +623,7 @@ export default function BeSniperModal({ onClose }) {
       return;
     }
     setErrors((prev) => {
-      const { howDoneBefore, ...rest } = prev;
+      const { howDoneBefore: _drop, ...rest } = prev;
       return rest;
     });
     setStep(4);
@@ -780,11 +739,6 @@ export default function BeSniperModal({ onClose }) {
     }
   };
 
-  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isValidPhone = (phone) => /^[0-9]{10,15}$/.test(phone);
-  const isValidURL = (url) =>
-    /^(https?:\/\/)?([\w\d\-]+\.){1,}([a-zA-Z]{2,})(\/.*)?$/.test(url);
-
   const languageOptions = [
     "English",
     "Hindi",
@@ -826,16 +780,17 @@ export default function BeSniperModal({ onClose }) {
 
   return (
     <>
-      {/* One overlay = backdrop + centering + fade */}
-      <div className="sniper-overlay" onClick={onClose}>
+      {/* overlay WITHOUT outside click-to-close */}
+      <div className="sniper-overlay">
         <div
           className="sniper-container"
-          onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+          onClick={(e) => e.stopPropagation()} // keep clicks inside from bubbling
           role="dialog"
           aria-modal="true"
           aria-labelledby="be-sniper-title"
         >
-          <button className="close-modal" onClick={onClose} aria-label="Close">
+          {/* Explicit Cancel button to close */}
+          <button className="close-modal" onClick={onClose} aria-label="Cancel">
             &times;
           </button>
 

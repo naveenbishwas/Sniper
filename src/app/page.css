@@ -510,7 +510,12 @@
   border-radius: 50px;
 }
 
-.snipers-icon {
+img.header__logo {
+  width: 140px;
+  height: auto;
+}
+
+/* .snipers-icon {
   background-color: var(--themeColor);
   padding: 8px;
   border-radius: 50%;
@@ -519,7 +524,7 @@
   margin: 0 auto 20px;
   width: 80px;
   height: 80px;
-}
+} */
 
 #logo-icon {
   stroke: #000;
@@ -1288,6 +1293,11 @@ section.integration {
   font-size: 16px;
   display: flex;
   align-items: center;
+}
+
+span.arrow-wrapper {
+  margin-top: 4px;
+  stroke: #000;
 }
 
 #integration-btn svg {
