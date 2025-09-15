@@ -2780,6 +2780,21 @@ span.arrow-wrapper {
   transform: translateY(0) !important;
 }
 
+article#grid-11 img {
+  height: 388px;
+  object-fit: cover;
+}
+
+article#grid-14 img {
+  height: 200px;
+  object-fit: cover;
+}
+
+article#grid-15 img {
+  height: 490px;
+  object-fit: cover;
+}
+
 /* components/team-section.css */
 
 .teamSection {

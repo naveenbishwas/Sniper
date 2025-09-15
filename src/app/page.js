@@ -224,6 +224,13 @@ export default function Home({ images }) {
       alt: "Urban night",
       creditHref: "https://unsplash.com",
     },
+    {
+      title: "Dracula",
+      src: "/dracul2-front.png", // ✅
+      hoverSrc: "/dracula2-back.png",
+      alt: "Urban night",
+      creditHref: "https://unsplash.com",
+    },
   ];
 
   const gallery = [
@@ -243,10 +250,6 @@ export default function Home({ images }) {
     {
       src: "/s5.png",
       alt: "Voyage",
-    },
-    {
-      src: "/s6.png",
-      alt: "FrankEnstien",
     },
 
     {
@@ -1078,7 +1081,7 @@ export default function Home({ images }) {
 
           <div className="logo-item">
             <Image
-              src="/Harper2.png"
+              src="/harper2.png"
               alt="Harper"
               fill
               sizes="160px"
@@ -1087,7 +1090,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item">
             <Image
-              src="/Higgino2.png"
+              src="/higgino2.png"
               alt="Higgino"
               fill
               sizes="160px"
@@ -1151,7 +1154,7 @@ export default function Home({ images }) {
           </div>
           <div className="logo-item" id="background">
             <Image
-              src="/jaico2.png"
+              src="/Jaico2.png"
               alt="Jaico"
               fill
               sizes="160px"
@@ -1417,9 +1420,15 @@ export default function Home({ images }) {
           <div className="mmg-container">
             <div className="mmg-gallery">
               {items.map((item, idx) => (
+                // <article
+                //   key={idx}
+                //   ref={(el) => (itemsRef.current[idx] = el)}
+                //   className="mmg-item"
+                //   style={{ ["--delay"]: String(idx + 1) }}
+                // >
                 <article
-                  key={idx}
-                  ref={(el) => (itemsRef.current[idx] = el)}
+                  key={item.id ?? idx} // key for React diffing
+                  id={`grid-${idx + 1}`} // unique DOM id like grid-1, grid-2…
                   className="mmg-item"
                   style={{ ["--delay"]: String(idx + 1) }}
                 >
