@@ -439,28 +439,28 @@ export default function Home({ images }) {
   const steps = [
     {
       id: 1,
-      image: "/c-call.jpeg",
+      image: "/call2.png",
       title: "Consultation call",
       description:
         "Our dedicated sales team reaches out to understand your specific needs and project goals.",
     },
     {
       id: 2,
-      image: "/p-brief.jpeg",
+      image: "/pp2.png",
       title: "Project Brief",
       description:
         "Authors post detailed project requirements on the platform, outlining their specific needs and expectations.",
     },
     {
       id: 3,
-      image: "/f-call.jpeg",
+      image: "/fa2.png",
       title: "Freelancers Apply",
       description:
         "Qualified service providers submit proposals after carefully reviewing your project requirements.",
     },
     {
       id: 4,
-      image: "/p-p.jpeg",
+      image: "/pp2.png",
       title: "Project Process",
       description:
         "Our targeted matching system ensures authors connect with the ideal service providers, after which secure payment processing enables the work to get underway.",

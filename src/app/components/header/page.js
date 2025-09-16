@@ -186,7 +186,7 @@ export default function Header({ onSignupClick }) {
             className="header__logo"
             width={55}
             height={55}
-            unoptimized
+            unoptimizedx
             alt="logo"
           />
         </Link>
