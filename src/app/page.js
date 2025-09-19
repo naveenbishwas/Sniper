@@ -398,7 +398,7 @@ export default function Home({ images }) {
       stars: 4,
       text: "I was pleasantly surprised to see and hold the book cover. It clearly has the refinement and finish to be the envy of any tier-1 publisher. From the treatment of the letter - its font, size and placement - to the overall design and color choices, everything comes together beautifully. The professional managed to capture not just the story's essence, but also its richness, right on the cover. It's evident how much craft and skill they have put into the design - balancing storytelling with market appeal. I truly appreciate the creativity and your patience in understanding the vision, and for creating something I can proudly say represents my book.",
       name: "Akash Pasricha",
-      title: "Design Director at Bright",
+      title: "Lost Secret",
       color: "var(--themeColor)",
     },
     {
