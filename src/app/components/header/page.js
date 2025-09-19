@@ -90,10 +90,11 @@ export default function Header({ onSignupClick }) {
         <Link href="/">
           <Image
             src="/logo-ss.png"
+            // src="/l.png"
             className="header__logo"
             width={55}
             height={55}
-            unoptimizedx
+            unoptimized
             alt="logo"
           />
         </Link>
