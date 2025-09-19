@@ -393,7 +393,7 @@ export default function BeSniperModal({ onClose }) {
             )}
 
             {/* Step 3 */}
-            {step === 3 && (
+            {/* {step === 3 && (
               <div className="done">
                 <h3 className="question">
                   Have you done freelance work before?
@@ -430,6 +430,82 @@ export default function BeSniperModal({ onClose }) {
                 {errors.howDoneBefore && (
                   <p className="error-text">{errors.howDoneBefore}</p>
                 )}
+                <div className="next-prev-btn">
+                  <button className="next" onClick={() => setStep(2)}>
+                    Prev
+                  </button>
+                  <button className="next" onClick={handleDoneBeforeStep}>
+                    Next
+                  </button>
+                </div>
+              </div>
+            )} */}
+            {step === 3 && (
+              <div className="done">
+                <h3 className="question">
+                  Have you done freelance work before?
+                </h3>
+
+                <div className="option-grid">
+                  {[
+                    {
+                      value: "Getting Started",
+                      label: "Getting Started",
+                      img: "/getting-started.jpeg",
+                    },
+                    {
+                      value: "Done Offline Before",
+                      label: "Done Offline Before",
+                      img: "/done-offline.jpeg",
+                    },
+                    {
+                      value: "Done Online Before",
+                      label: "Done Online Before",
+                      img: "/done-online.jpeg",
+                    },
+                    {
+                      value: "Both Online & Offline",
+                      label: "Both Online & Offline",
+                      img: "/both-online-offline.jpeg",
+                    },
+                  ].map((opt) => {
+                    const selected = howDoneBefore === opt.value;
+                    return (
+                      <label
+                        key={opt.value}
+                        className={`option-card ${selected ? "selected" : ""}`}
+                      >
+                        <input
+                          type="radio"
+                          name="howDoneBefore"
+                          value={opt.value}
+                          checked={selected}
+                          onChange={() => {
+                            setHowDoneBefore(opt.value);
+                            setErrors((prev) => ({
+                              ...prev,
+                              howDoneBefore: "",
+                            }));
+                          }}
+                        />
+                        <div className="card-body">
+                          <img
+                            src={opt.img}
+                            alt={opt.label}
+                            className="card-img"
+                          />
+                          <span className="card-label">{opt.label}</span>
+                        </div>
+                        {selected && <span className="checkmark">✓</span>}
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {errors.howDoneBefore && (
+                  <p className="error-text">{errors.howDoneBefore}</p>
+                )}
+
                 <div className="next-prev-btn">
                   <button className="next" onClick={() => setStep(2)}>
                     Prev

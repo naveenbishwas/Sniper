@@ -187,7 +187,7 @@ const HireFreelancer = ({ onClose }) => {
             &times;
           </button>
 
-          {step === 1 && (
+          {/* {step === 1 && (
             <div className="plan fade-in">
               <h3 id="hire-title" className="question">
                 What do you plan to hire service for?
@@ -215,6 +215,65 @@ const HireFreelancer = ({ onClose }) => {
               {formErrors.firstField && (
                 <p className="error-text">{formErrors.firstField}</p>
               )}
+              <div className="next-btn">
+                <button className="next" onClick={handleFirstField}>
+                  Next
+                </button>
+              </div>
+            </div>
+          )} */}
+          {step === 1 && (
+            <div className="plan fade-in">
+              <h3 id="hire-title" className="question">
+                What do you plan to hire service for?
+              </h3>
+
+              <div className="option-grid">
+                {[
+                  {
+                    value: "personal",
+                    label: "Personal",
+                    img: "/personal.jpeg",
+                  },
+                  { value: "job", label: "Job", img: "/job.jpeg" },
+                  {
+                    value: "business",
+                    label: "Business",
+                    // img: "/hire-business.jpeg",
+                    img: "/job.jpeg",
+                  },
+                ].map((opt) => {
+                  const selected = firstField === opt.value;
+                  return (
+                    <label
+                      key={opt.value}
+                      className={`option-card ${selected ? "selected" : ""}`}
+                    >
+                      <input
+                        type="radio"
+                        name="firstField"
+                        value={opt.value}
+                        checked={selected}
+                        onChange={() => setFirstField(opt.value)}
+                      />
+                      <div className="card-body">
+                        <img
+                          src={opt.img}
+                          alt={opt.label}
+                          className="card-img"
+                        />
+                        <span className="card-label">{opt.label}</span>
+                      </div>
+                      {selected && <span className="checkmark">✓</span>}
+                    </label>
+                  );
+                })}
+              </div>
+
+              {formErrors.firstField && (
+                <p className="error-text">{formErrors.firstField}</p>
+              )}
+
               <div className="next-btn">
                 <button className="next" onClick={handleFirstField}>
                   Next
