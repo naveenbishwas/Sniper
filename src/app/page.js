@@ -710,7 +710,7 @@ export default function Home({ images }) {
               Impactful book designs, publishing assets, and campaigns that
               helped authors reach more readers and build lasting brands.
             </p>
-            <Link href="/gallery-section">
+            <Link href="/snapshot">
               <button className="cta-button" id="integration-btn">
                 Explore our work
                 <span className="arrow-wrapper">

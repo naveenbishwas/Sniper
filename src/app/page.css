@@ -1800,9 +1800,24 @@ span.arrow-wrapper {
 
 .testimonial-section {
   background: #f9fafc;
+  /* background: linear-gradient(135deg, #2c3341 0%, #ba0100 100%); */
   padding: 80px 20px;
   font-family: Arial, sans-serif;
 }
+
+/* Optional: add a light texture effect with overlay */
+/* .testimonial-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 255, 255, 0.05),
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+} */
 
 .testimonial-wrapper {
   max-width: 1200px;
@@ -1812,6 +1827,8 @@ span.arrow-wrapper {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 1;
 }
 
 .testimonial-left {

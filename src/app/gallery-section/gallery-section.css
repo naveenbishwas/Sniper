@@ -9,52 +9,54 @@
 }
 
 .gm-title {
-  font-size: 50px;
+  font-size: 48px;
   padding-bottom: 15px;
   text-align: center;
   font-weight: 700;
-  margin: 8px 0 24px;
+  margin: 8px 0 32px;
   letter-spacing: 0.3px;
 }
 
 @media (max-width: 768px) {
   .gm-title {
     font-size: 26px;
+    margin-bottom: 20px;
   }
 }
 
 /* Grid & Cards */
 .gm-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
 }
 
 .gm-card {
-  grid-column: span 6; /* 2 per row by default */
   background: #fff;
   border: 1px solid #eaeaea;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    border-color 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   outline: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .gm-card:focus {
   box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.25);
 }
 .gm-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
   border-color: #e3e3e3;
 }
 
+/* Thumbnail */
 .gm-thumb {
   position: relative;
-  height: 0;
-  padding-bottom: 58%; /* ~16:9 */
+  width: 100%;
+  height: 200px; /* fixed height for uniformity */
   background: #f6f6f6;
   overflow: hidden;
 }
@@ -62,49 +64,44 @@
 .gm-img {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
 .gm-play {
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  font-size: 24px;
-  line-height: 1;
+  right: 14px;
+  bottom: 14px;
+  font-size: 26px;
   background: rgba(0, 0, 0, 0.65);
   color: #fff;
   padding: 10px 12px;
-  border-radius: 999px;
+  border-radius: 50%;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  user-select: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.gm-card:hover .gm-play {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.05);
 }
 
+/* Title under card */
 .gm-card-title {
   font-size: 16px;
   font-weight: 600;
-  padding: 12px 14px 14px;
+  padding: 12px 14px 16px;
+  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Responsive column counts */
-@media (min-width: 980px) {
-  .gm-card {
-    grid-column: span 4;
-  } /* 3 per row */
-}
-@media (max-width: 520px) {
-  .gm-card {
-    grid-column: span 12;
-  } /* 1 per row */
 }
 
 /* Overlay / Modal */
 .gm-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,17 +111,18 @@
 
 .gm-close {
   position: fixed;
-  top: 14px;
-  right: 14px;
-  font-size: 22px;
-  width: 40px;
-  height: 40px;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  width: 42px;
+  height: 42px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.9);
   color: #111;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background 0.2s ease;
 }
 .gm-close:hover {
   background: #fff;
@@ -135,7 +133,7 @@
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .gm-media {
@@ -151,4 +149,5 @@
   color: #fff;
   font-weight: 600;
   text-align: center;
+  font-size: 18px;
 }
