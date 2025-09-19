@@ -451,22 +451,22 @@ export default function BeSniperModal({ onClose }) {
                     {
                       value: "Getting Started",
                       label: "Getting Started",
-                      img: "/getting-started.jpeg",
+                      img: "/getting-started2.png",
                     },
                     {
                       value: "Done Offline Before",
                       label: "Done Offline Before",
-                      img: "/done-offline.jpeg",
+                      img: "/done-offline.png",
                     },
                     {
                       value: "Done Online Before",
                       label: "Done Online Before",
-                      img: "/done-online.jpeg",
+                      img: "/online3.png",
                     },
                     {
                       value: "Both Online & Offline",
                       label: "Both Online & Offline",
-                      img: "/both-online-offline.jpeg",
+                      img: "/both-online-oflline2.png",
                     },
                   ].map((opt) => {
                     const selected = howDoneBefore === opt.value;
