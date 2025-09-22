@@ -120,7 +120,6 @@ export default function Home({ images }) {
     el.addEventListener("transitionend", onTransitionEnd);
     return () => el.removeEventListener("transitionend", onTransitionEnd);
   }, [index, total, slidesToShow]);
-  // const boxesToShow = expanded ? totalBoxes : 8;
 
   // Gallery images
   const items = [
