@@ -69,15 +69,25 @@ export default function Home({ images }) {
   const itemsRef = useRef([]);
   const [expanded, setExpanded] = useState(false);
   const total = categories.length;
+  // const slidesToShow = 4;
+  const [slidesToShow, setSlidesToShow] = useState(4);
 
   // Create clones on both ends for seamless looping
+  // const extended = useMemo(
+  //   () => [
+  //     ...categories.slice(-slidesToShow),
+  //     ...categories,
+  //     ...categories.slice(0, slidesToShow),
+  //   ],
+  //   [categories]
+  // );
   const extended = useMemo(
     () => [
       ...categories.slice(-slidesToShow),
       ...categories,
       ...categories.slice(0, slidesToShow),
     ],
-    [categories]
+    [categories, slidesToShow] // 👈 add slidesToShow here
   );
 
   // Start from the first "real" slide
@@ -120,6 +130,23 @@ export default function Home({ images }) {
     el.addEventListener("transitionend", onTransitionEnd);
     return () => el.removeEventListener("transitionend", onTransitionEnd);
   }, [index, total, slidesToShow]);
+
+  // update based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        setSlidesToShow(1); // mobile
+      } else if (window.innerWidth <= 768) {
+        setSlidesToShow(2); // tablet
+      } else {
+        setSlidesToShow(4); // desktop
+      }
+    };
+
+    handleResize(); // run on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Gallery images
   const items = [

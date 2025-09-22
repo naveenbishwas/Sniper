@@ -13,6 +13,7 @@ const Footer = () => {
               <div className="footer-icon">
                 <Image
                   src={"/logo-ss.png"}
+                  // src={"/123.png"}
                   className="header__logo"
                   width={55}
                   height={55}
