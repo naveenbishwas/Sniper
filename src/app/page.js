@@ -401,11 +401,11 @@ export default function Home({ images }) {
       color: "var(--themeColor)",
     },
     {
-      image: "/t3.jpg",
+      image: "/dharavi.jpeg",
       stars: 5,
-      text: "Amazing team! Really helped streamline our workflow and project delivery. Couldn’t recommend more.",
-      name: "Mohit Sharma",
-      title: "CEO at TechWay",
+      text: "From thoughtful editing to a stunning cover design, they guided me through every step of the process with professionalism and care. Their belief in my story and their commitment to excellence made this journey truly rewarding. I'm grateful for their unwavering support and highly recommend them to any author looking for a trusted partner.",
+      name: "Atul Mohite",
+      title: "The Awakening Of  Dharavi",
       color: "var(--themeColor)",
     },
   ];
@@ -736,7 +736,8 @@ export default function Home({ images }) {
         </div>
       </section>
 
-      {/* Vetting Section */}
+      {/* Vetting Sectionnn */}
+
       <section className="vetting-section">
         <div className="vetting-wrapper">
           <div className="vetting-container">
