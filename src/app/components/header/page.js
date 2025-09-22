@@ -118,7 +118,7 @@ export default function Header({ onSignupClick }) {
           <div className="account-wrap">
             <button
               id="avatar"
-              className="user-avatar"
+              // className="user-avatar"
               aria-haspopup="dialog"
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}

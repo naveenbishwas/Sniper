@@ -446,7 +446,7 @@ export default function Home({ images }) {
     },
     {
       id: 2,
-      image: "/pp2.png",
+      image: "/pb2.png",
       title: "Project Brief",
       description:
         "Authors post detailed project requirements on the platform, outlining their specific needs and expectations.",
