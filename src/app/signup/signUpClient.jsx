@@ -465,7 +465,7 @@ export default function SignupModal({ onClose }) {
             <h2 id="signup-title">
               Sign up to{" "}
               {role === "beSniper"
-                ? "Be a Sniper"
+                ? "Be a Freelancer"
                 : role === "HireFreelancer"
                 ? "Hire a Freelancer"
                 : "Get Started"}
