@@ -32,6 +32,20 @@
 }
 
 /* Modal card container (scroll inside if tall) */
+/* .sniper-container {
+  position: relative;
+  width: min(980px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #fff, #fff) padding-box,
+    linear-gradient(135deg, rgba(186, 2, 1, 0.2), rgba(186, 2, 1, 0)) border-box;
+  border: 1px solid color-mix(in srgb, var(--brand) 18%, var(--border));
+  box-shadow: var(--shadow-lg);
+  animation: popup 0.25s ease-out forwards;
+} */
+
+/* Default container (all steps) */
 .sniper-container {
   position: relative;
   width: min(980px, 100%);
@@ -44,6 +58,42 @@
   box-shadow: var(--shadow-lg);
   animation: popup 0.25s ease-out forwards;
 }
+
+/* Step 2 only → narrower */
+.sniper-container.narrow-container {
+  width: min(600px, 100%); /* reduce for step 2 */
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.checkbox-item input {
+  accent-color: #ba0201; /* brand red for ticks */
+  /* transform: scale(1.2); */
+}
+
+.checkbox-item:hover {
+  border-color: #ba0201;
+  background: #fff5f5;
+}
+
 @keyframes popup {
   from {
     transform: scale(0.9);
@@ -265,13 +315,12 @@ textarea {
   font-weight: 600;
   margin-bottom: 24px;
 }
-
-/* 3 cards in a row */
 .option-grid {
   display: flex;
   justify-content: center;
   gap: 24px;
   flex-wrap: wrap;
+  align-items: stretch; /* ensure equal height */
 }
 
 .option-card {
@@ -284,6 +333,10 @@ textarea {
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
+
+  display: flex; /* make card itself a flexbox */
+  flex-direction: column; /* stack items */
+  justify-content: space-between;
 }
 
 .option-card:hover {
@@ -304,7 +357,21 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  flex-grow: 1; /* ensures all card-bodies stretch equally */
   gap: 12px;
+}
+
+.card-body img {
+  height: 100px; /* make icons same size */
+  object-fit: contain;
+}
+
+.card-body p {
+  min-height: 40px; /* reserve space for text so they align */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-img {

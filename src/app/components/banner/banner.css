@@ -163,5 +163,18 @@
 
   .sniper-hero {
     padding: 60px 15px;
+    height: 80vh !important;
+    min-height: unset;
+  }
+
+  .btn-black,
+  .btn-white {
+    padding: 8px 11px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-size: 15px;
+    font-family: sans-serif;
   }
 }

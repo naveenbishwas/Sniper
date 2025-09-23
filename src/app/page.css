@@ -1450,7 +1450,13 @@ span.arrow-wrapper {
   #integration-btn {
     font-size: 14px;
     width: 180px !important;
-    padding: 5px 0 5px 10px !important;
+    padding: 5px 0 5px 16px !important;
+  }
+
+  span.arrow.first-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   section.integration {
@@ -2448,6 +2454,20 @@ span.arrow-wrapper {
     height: 24px;
   }
 
+  span.arrow-wrapper {
+    background-color: #000;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span.arrow-wrapper svg {
+    stroke: #fff;
+  }
+
   .testimonial-card {
     gap: 5px !important;
   }
@@ -2747,6 +2767,19 @@ span.arrow-wrapper {
     column-count: 2;
     column-gap: 0.75rem;
   }
+
+  .logo-slider h1 {
+    margin-bottom: 30px !important;
+  }
+
+  .vetting-text p {
+    font-size: 15px !important;
+  }
+
+  #meet-title {
+    text-align: left !important;
+  }
+
   .masonrySection {
     padding: 1.5rem 0.75rem;
   }
@@ -3222,16 +3255,20 @@ article#grid-15 img {
     text-align: center;
   }
 
-  #meet-title h2 {
-    text-align: center;
-  }
-
   .values li {
     text-align: left !important;
   }
 
   .logo-slider {
     padding: 40px !important;
+  }
+
+  .logo-track img {
+    width: 130px !important;
+  }
+
+  .logo-track {
+    gap: 30px !important;
   }
 
   .description {
