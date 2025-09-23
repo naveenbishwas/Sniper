@@ -264,3 +264,9 @@ button#show:hover {
   color: var(--brand-ink);
   border-color: color-mix(in srgb, var(--brand) 50%, transparent);
 }
+
+@media screen and (max-width: 768px) {
+  .signup-form {
+    padding: 0 !important;
+  }
+}
