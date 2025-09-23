@@ -1565,7 +1565,7 @@ export default function Home({ images }) {
           <div className="snipers-icon">
             <Link href="/">
               <Image
-                src={"/hub-white.png"}
+                src={"/hub-white2.png"}
                 className="header__logo"
                 width={55}
                 height={55}
