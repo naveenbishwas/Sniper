@@ -333,21 +333,51 @@ export default function SignupModal({ onClose }) {
   const [errorMsg, setErrorMsg] = useState("");
 
   // Unique ID generator
-  const generateUniqueId = async (name, email) => {
-    const cleanedName = name.toLowerCase().replace(/\s/g, "");
+  // const generateUniqueId = async (name, email) => {
+  //   const cleanedName = name.toLowerCase().replace(/\s/g, "");
+  //   const randomNum = Math.floor(100 + Math.random() * 900);
+  //   const uniqueId = `${cleanedName}${randomNum}`;
+
+  //   const docRef = doc(db, "uniqueUserIds", uniqueId);
+  //   const docSnap = await getDoc(docRef);
+
+  //   if (docSnap.exists()) return generateUniqueId(name, email);
+
+  //   await setDoc(docRef, {
+  //     uniqueId,
+  //     createdAt: new Date().toISOString(),
+  //     email,
+  //     name,
+  //   });
+
+  //   return uniqueId;
+  // };
+
+  const generateUniqueId = async (role = "unknown", email = "", name = "") => {
+    // decide prefix based on role
+    let prefix = "user"; // fallback
+    if (role === "beSniper" || role === "BeFreelancer") {
+      prefix = "hawkee";
+    } else if (role === "HireFreelancer") {
+      prefix = "hawker";
+    }
+
     const randomNum = Math.floor(100 + Math.random() * 900);
-    const uniqueId = `${cleanedName}${randomNum}`;
+    const uniqueId = `${prefix}${randomNum}`;
 
     const docRef = doc(db, "uniqueUserIds", uniqueId);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) return generateUniqueId(name, email);
+    if (docSnap.exists()) {
+      return generateUniqueId(role, email, name); // retry
+    }
 
     await setDoc(docRef, {
       uniqueId,
+      role: role || "unknown",
       createdAt: new Date().toISOString(),
-      email,
-      name,
+      email: email || "",
+      name: name || "",
     });
 
     return uniqueId;

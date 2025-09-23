@@ -152,9 +152,9 @@ export default function Home({ images }) {
   const items = [
     {
       title: "Total Timepass",
-      src: "/tt1.png",
+      src: "/tt2.png",
       alt: "Mountain landscape",
-      hoverSrc: "/tt2.png",
+      hoverSrc: "/tt1.png",
     },
     {
       title: "Sun Sakeena",
