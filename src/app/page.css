@@ -2423,6 +2423,29 @@ span.arrow-wrapper {
 
   .testimonial-buttons {
     justify-content: center;
+    margin-top: 6%;
+  }
+
+  .testimonial-buttons button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .testimonial-content h4 {
+    font-size: 21px;
+  }
+
+  .testimonial-section {
+    padding: 40px 20px;
+  }
+
+  .sniper-support-df {
+    padding: 13% 0;
+  }
+
+  .testimonial-buttons button svg {
+    width: 24px;
+    height: 24px;
   }
 
   .testimonial-card {
@@ -2734,6 +2757,17 @@ span.arrow-wrapper {
   .masonryItem {
     margin-bottom: 0.75rem;
   }
+  .snipers-btn {
+    background-color: var(--themeColor);
+    color: var(--background);
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    padding: 7px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2820,6 +2854,11 @@ span.arrow-wrapper {
 @media (max-width: 768px) {
   .mmg-gallery {
     columns: 2;
+  }
+
+  .snipers-icon a {
+    display: flex;
+    justify-content: center;
   }
 }
 @media (max-width: 480px) {

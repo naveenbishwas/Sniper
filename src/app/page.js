@@ -546,7 +546,7 @@ export default function Home({ images }) {
   return (
     <div className="main-page">
       <Header onSignupClick={handleSignupClick} />
-      <Banner />
+      <Banner onSignupClick={handleSignupClick} />
 
       <section className="number-stats" ref={aboutCountersRef} id="about">
         <div className="about__stats">

@@ -2,7 +2,7 @@ import Head from "next/head";
 import "./banner.css";
 import Link from "next/link";
 
-export default function Banner() {
+export default function Banner({ onSignupClick }) {
   return (
     <>
       <Head>
@@ -22,12 +22,18 @@ export default function Banner() {
         </p>
         <div className="sniper-search-section"></div>
         <div className="sniper-buttons">
-          <Link href="/signup">
-            <button className="btn-black">Hire a Sniper</button>
-          </Link>
-          <Link href="/signup">
-            <button className="btn-white">Be a Sniper</button>
-          </Link>
+          <button
+            className="btn-black"
+            onClick={() => onSignupClick("HireFreelancer")}
+          >
+            Hire a Sniper
+          </button>
+          <button
+            className="btn-white"
+            onClick={() => onSignupClick("beSniper")}
+          >
+            Be a Sniper
+          </button>
         </div>
       </div>
     </>
