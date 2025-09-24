@@ -805,7 +805,7 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Award-Winning Designers"
                 >
-                  <svg
+                  {/* <svg
                     id="award"
                     width="80"
                     height="80"
@@ -879,7 +879,14 @@ export default function Home({ images }) {
                       fill="#FFFFFF"
                       filter="url(#softShadow)"
                     />
-                  </svg>
+                  </svg> */}
+                  <Image
+                    src="ic1.png"
+                    width={30}
+                    height={30}
+                    alt="icon-img"
+                    unoptimized
+                  ></Image>
 
                   <span>Award-Winning Designers</span>
                 </div>
@@ -890,7 +897,7 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Author-First Process"
                 >
-                  <svg viewBox="0 0 64 64" className="ti ti-book">
+                  {/* <svg viewBox="0 0 64 64" className="ti ti-book">
                     <path
                       d="M8 14c8-4 16-4 24 0v36c-8-4-16-4-24 0V14z"
                       fill="#A066FF"
@@ -912,7 +919,14 @@ export default function Home({ images }) {
                       strokeWidth="3"
                       strokeLinecap="round"
                     />
-                  </svg>
+                  </svg> */}
+                  <Image
+                    src="ic4.png"
+                    width={30}
+                    height={30}
+                    alt="icon-img"
+                    unoptimized
+                  ></Image>
                   <span>Author-First Process</span>
                 </div>
 
@@ -922,7 +936,7 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Fast Turnaround"
                 >
-                  <svg viewBox="0 0 64 64" className="ti ti-calendar">
+                  {/* <svg viewBox="0 0 64 64" className="ti ti-calendar">
                     <rect
                       x="8"
                       y="12"
@@ -941,7 +955,14 @@ export default function Home({ images }) {
                     />
                     <circle cx="20" cy="12" r="4" fill="#fff" />
                     <circle cx="44" cy="12" r="4" fill="#fff" />
-                  </svg>
+                  </svg> */}
+                  <Image
+                    src="ic3.png"
+                    width={30}
+                    height={30}
+                    alt="icon-img"
+                    unoptimized
+                  ></Image>
                   <span>Fast Turnaround</span>
                 </div>
 
@@ -951,7 +972,7 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Rights-Safe & Secure"
                 >
-                  <svg viewBox="0 0 64 64" className="ti ti-shield">
+                  {/* <svg viewBox="0 0 64 64" className="ti ti-shield">
                     <path
                       d="M32 6l18 6v14c0 13-8 22-18 26-10-4-18-13-18-26V12l18-6z"
                       fill="#00C853"
@@ -967,7 +988,14 @@ export default function Home({ images }) {
                     >
                       ©
                     </text>
-                  </svg>
+                  </svg> */}
+                  <Image
+                    src="ic2.png"
+                    width={30}
+                    height={30}
+                    alt="icon-img"
+                    unoptimized
+                  ></Image>
                   <span>Rights-Safe & Secure</span>
                 </div>
               </div>

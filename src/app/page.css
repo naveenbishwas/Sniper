@@ -627,6 +627,26 @@ img.header__logo {
   height: auto;
 }
 
+.vetting-trust .trust-item:nth-child(1) img {
+  filter: invert(37%) sepia(100%) saturate(500%) hue-rotate(200deg)
+    brightness(95%) contrast(90%);
+}
+
+.vetting-trust .trust-item:nth-child(2) img {
+  filter: invert(20%) sepia(60%) saturate(1300%) hue-rotate(270deg)
+    brightness(105%) contrast(105%);
+}
+
+.vetting-trust .trust-item:nth-child(3) img {
+  filter: invert(55%) sepia(95%) saturate(5000%) hue-rotate(5deg)
+    brightness(110%) contrast(100%);
+}
+
+.vetting-trust .trust-item:nth-child(4) img {
+  filter: invert(45%) sepia(95%) saturate(4500%) hue-rotate(195deg)
+    brightness(115%) contrast(105%);
+}
+
 /* .snipers-icon {
   background-color: var(--themeColor);
   padding: 8px;
