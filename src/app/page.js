@@ -11,6 +11,9 @@ import BeSniperModal from "./components/beSniper/page";
 import HireFreelancer from "./components/HireFreelancer/page";
 import { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { Star } from "lucide-react";
 
 const slidesToShow = 4;
 
@@ -70,17 +73,10 @@ export default function Home({ images }) {
   const [expanded, setExpanded] = useState(false);
   const total = categories.length;
   // const slidesToShow = 4;
+  // const [current, setCurrent] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [slidesToShow, setSlidesToShow] = useState(4);
 
-  // Create clones on both ends for seamless looping
-  // const extended = useMemo(
-  //   () => [
-  //     ...categories.slice(-slidesToShow),
-  //     ...categories,
-  //     ...categories.slice(0, slidesToShow),
-  //   ],
-  //   [categories]
-  // );
   const extended = useMemo(
     () => [
       ...categories.slice(-slidesToShow),
@@ -410,33 +406,56 @@ export default function Home({ images }) {
     },
   ];
 
+  // const testimonials = [
+  //   {
+  //     image: "/pranav.jpeg",
+  //     stars: 5,
+  //     text: "Really, I must congratulate the team for designing such a marvelous and thoughtful cover! It's unanimously liked! The cover is so effective!, that I gained 2000 followers on Insta in 5 days, by boosting a reel based on the cover alone! My fullest appreciation for the professional involved in making the cover. I was always a little doubtful as to how a story with a tiger could be marketed in our country. There you proved me wrong.",
+  //     name: "Pranav Mishra",
+  //     title: "The Tiger That Crashed My Wedding",
+  //     color: "var(--themeColor)",
+  //   },
+  //   {
+  //     image: "/akash.png",
+  //     stars: 4,
+  //     text: "I was pleasantly surprised to see and hold the book cover. It clearly has the refinement and finish to be the envy of any tier-1 publisher. From the treatment of the letter - its font, size and placement - to the overall design and color choices, everything comes together beautifully. The professional managed to capture not just the story's essence, but also its richness, right on the cover. It's evident how much craft and skill they have put into the design - balancing storytelling with market appeal. I truly appreciate the creativity and your patience in understanding the vision, and for creating something I can proudly say represents my book.",
+  //     name: "Akash Pasricha",
+  //     title: "Lost Secret",
+  //     color: "var(--themeColor)",
+  //   },
+  //   {
+  //     image: "/dharavi.jpeg",
+  //     stars: 5,
+  //     text: "From thoughtful editing to a stunning cover design, they guided me through every step of the process with professionalism and care. Their belief in my story and their commitment to excellence made this journey truly rewarding. I'm grateful for their unwavering support and highly recommend them to any author looking for a trusted partner.",
+  //     name: "Atul Mohite",
+  //     title: "The Awakening Of  Dharavi",
+  //     color: "var(--themeColor)",
+  //   },
+  // ];
+
   const testimonials = [
     {
-      image: "/pranav.jpeg",
+      image: "/t1.png",
       stars: 5,
       text: "Really, I must congratulate the team for designing such a marvelous and thoughtful cover! It's unanimously liked! The cover is so effective!, that I gained 2000 followers on Insta in 5 days, by boosting a reel based on the cover alone! My fullest appreciation for the professional involved in making the cover. I was always a little doubtful as to how a story with a tiger could be marketed in our country. There you proved me wrong.",
       name: "Pranav Mishra",
       title: "The Tiger That Crashed My Wedding",
-      color: "var(--themeColor)",
     },
     {
-      image: "/akash.png",
+      image: "/t2.png",
       stars: 4,
       text: "I was pleasantly surprised to see and hold the book cover. It clearly has the refinement and finish to be the envy of any tier-1 publisher. From the treatment of the letter - its font, size and placement - to the overall design and color choices, everything comes together beautifully. The professional managed to capture not just the story's essence, but also its richness, right on the cover. It's evident how much craft and skill they have put into the design - balancing storytelling with market appeal. I truly appreciate the creativity and your patience in understanding the vision, and for creating something I can proudly say represents my book.",
       name: "Akash Pasricha",
       title: "Lost Secret",
-      color: "var(--themeColor)",
     },
     {
-      image: "/dharavi.jpeg",
+      image: "/t3.png",
       stars: 5,
       text: "From thoughtful editing to a stunning cover design, they guided me through every step of the process with professionalism and care. Their belief in my story and their commitment to excellence made this journey truly rewarding. I'm grateful for their unwavering support and highly recommend them to any author looking for a trusted partner.",
       name: "Atul Mohite",
-      title: "The Awakening Of  Dharavi",
-      color: "var(--themeColor)",
+      title: "The Awakening Of Dharavi",
     },
   ];
-
   const [loadedImages, setLoadedImages] = useState(new Set());
 
   const handleImageLoad = (index) => {
@@ -495,24 +514,63 @@ export default function Home({ images }) {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   // const slidesToShow = 4;
-  const nextSlide = () =>
-    setCurrentIndex((p) => (p >= categories.length - slidesToShow ? 0 : p + 1));
-  const prevSlide = () =>
-    setCurrentIndex((p) => (p <= 0 ? categories.length - slidesToShow : p - 1));
+  // const nextSlide = () =>
+  //   setCurrentIndex((p) => (p >= categories.length - slidesToShow ? 0 : p + 1));
+  // const prevSlide = () =>
+  //   setCurrentIndex((p) => (p <= 0 ? categories.length - slidesToShow : p - 1));
+
+  // const handleNext = () => {
+  //   setAnimationClass("slide-right");
+  //   setTimeout(() => setCurrent((p) => (p + 1) % testimonials.length), 50);
+  // };
+  // const handlePrev = () => {
+  //   setAnimationClass("slide-left");
+  //   setTimeout(
+  //     () => setCurrent((p) => (p === 0 ? testimonials.length - 1 : p - 1)),
+  //     50
+  //   );
+  // };
+
+  // const { image, stars, text, name, title, color } = testimonials[current];
 
   const handleNext = () => {
-    setAnimationClass("slide-right");
-    setTimeout(() => setCurrent((p) => (p + 1) % testimonials.length), 50);
-  };
-  const handlePrev = () => {
-    setAnimationClass("slide-left");
-    setTimeout(
-      () => setCurrent((p) => (p === 0 ? testimonials.length - 1 : p - 1)),
-      50
-    );
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length);
+      setIsTransitioning(false);
+    }, 150);
   };
 
-  const { image, stars, text, name, title, color } = testimonials[current];
+  const handlePrev = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrent((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+      setIsTransitioning(false);
+    }, 150);
+  };
+
+  // Auto-slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isTransitioning) {
+        handleNext();
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isTransitioning]);
+
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`star-icon ${i < rating ? "star-filled" : "star-empty"}`}
+      />
+    ));
+  };
+
+  /////////////////////////////////////////
 
   useEffect(() => {
     const t = setTimeout(() => setAnimationClass(""), 500);
@@ -1524,7 +1582,7 @@ export default function Home({ images }) {
         </span>
       </div>
 
-      <section className="testimonial-section">
+      {/* <section className="testimonial-section">
         <div className="testimonial-wrapper">
           <div className="testimonial-left">
             <h2>Here’s what our great customers say.</h2>
@@ -1586,8 +1644,102 @@ export default function Home({ images }) {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      {/* ===== Testimonial Section ===== */}
+      <section className="testimonial-section">
+        <div className="testimonial-container">
+          <div className="testimonial-grid">
+            <div className="testimonial-left">
+              <h2 className="testimonial-heading">
+                Here's what our
+                <span className="theme-text">great customers</span> say.
+              </h2>
+              <p className="testimonial-subtext">
+                Our clients share their experiences about working with our
+                freelancers and how it transformed their projects.
+              </p>
+              <div className="nav-buttons">
+                <button
+                  onClick={handlePrev}
+                  disabled={isTransitioning}
+                  className="nav-btn"
+                >
+                  <ChevronLeft className="icon" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={isTransitioning}
+                  className="nav-btn"
+                >
+                  <ChevronRight className="icon" />
+                </button>
+              </div>
+              <div className="dots">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (!isTransitioning) {
+                        setIsTransitioning(true);
+                        setTimeout(() => {
+                          setCurrent(index);
+                          setIsTransitioning(false);
+                        }, 150);
+                      }
+                    }}
+                    className={`dot ${index === current ? "active-dot" : ""}`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="testimonial-right">
+              <div
+                className={`testimonial-card ${
+                  isTransitioning ? "fade-out" : "fade-in"
+                }`}
+              >
+                <div className="testimonial-content">
+                  {/* Left Image */}
+                  <div className="testimonial-image">
+                    <img
+                      src={testimonials[current].image}
+                      alt={testimonials[current].name}
+                      className="bw-image"
+                      onError={(e) => {
+                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                          testimonials[current].name
+                        )}&background=6366f1&color=fff&size=128`;
+                      }}
+                    />
+                  </div>
 
+                  {/* Right Text */}
+                  <div className="testimonial-text-block">
+                    <p className="testimonial-text">
+                      {testimonials[current].text}
+                    </p>
+                    <div className="testimonial-footer">
+                      <h4>{testimonials[current].name}</h4>
+                      <p className="profile-title">
+                        {testimonials[current].title}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Progress Bar */}
+          <div className="progress">
+            <div
+              className="progress-fill"
+              style={{
+                width: `${((current + 1) / testimonials.length) * 100}%`,
+              }}
+            />
+          </div>
+        </div>
+      </section>
       <div className="sniper-support-df">
         <div className="snipers-support-section">
           <div className="snipers-icon">
