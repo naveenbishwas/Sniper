@@ -83,7 +83,7 @@ export default function Home({ images }) {
       ...categories,
       ...categories.slice(0, slidesToShow),
     ],
-    [categories, slidesToShow] // 👈 add slidesToShow here
+    [slidesToShow] // 👈 add slidesToShow here
   );
 
   // Start from the first "real" slide
@@ -1651,7 +1651,7 @@ export default function Home({ images }) {
           <div className="testimonial-grid">
             <div className="testimonial-left">
               <h2 className="testimonial-heading">
-                Here's what our
+                Here what our
                 <span className="theme-text">great customers</span> say.
               </h2>
               <p className="testimonial-subtext">
