@@ -14,7 +14,7 @@ export default function SuccessPage() {
 
     if (storedId) {
       setUniqueId(storedId);
-      localStorage.removeItem("uniqueId"); // Optional: cleanup
+      // localStorage.removeItem("uniqueId");
     }
 
     const timeout = setTimeout(() => {
