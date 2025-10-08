@@ -19,9 +19,11 @@ export default function SuccessPage() {
 
     const timeout = setTimeout(() => {
       if (storedRole === "beSniper") {
-        router.push("/components/gigsPage");
+        // router.push("/components/gigsPage");
+        router.push("/");
       } else if (storedRole === "HireFreelancer") {
-        router.push("/components/cardProfile");
+        // router.push("/components/cardProfile");
+        router.push("/");
       } else {
         router.push("/");
       }

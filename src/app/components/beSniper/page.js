@@ -19,7 +19,7 @@
 //   const [formData, setFormData] = useState({
 //     name: "",
 //     bio: "",
-//     language: "",
+//     language: [], // changed to array
 //     occupation: "",
 //     categories: "",
 //     link: "",
@@ -28,7 +28,6 @@
 //     phone: "",
 //   });
 
-//   // free-text value when user selects "Others"
 //   const [otherOccupation, setOtherOccupation] = useState("");
 
 //   const router = useRouter();
@@ -46,8 +45,29 @@
 //   }, []);
 
 //   const handleInputChange = (e) => {
-//     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-//     setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
+//     const { name, value } = e.target;
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+//     setErrors((prev) => ({ ...prev, [name]: "" }));
+
+//     // 👇 bio live character count logic
+//     if (name === "bio") {
+//       const min = 150;
+//       const max = 500;
+//       if (value.length < min) {
+//         setBioCount(`${min - value.length} characters remaining`);
+//       } else if (value.length > max) {
+//         setBioCount(`${value.length - max} characters over limit`);
+//       } else {
+//         setBioCount(`${value.length} characters`);
+//       }
+//     }
+//   };
+
+//   // For multi-select language
+//   const handleLanguageChange = (e) => {
+//     const selected = Array.from(e.target.selectedOptions, (opt) => opt.value);
+//     setFormData((prev) => ({ ...prev, language: selected }));
+//     setErrors((prev) => ({ ...prev, language: "" }));
 //   };
 
 //   const handleMainSubmit = () => {
@@ -117,7 +137,8 @@
 //     if (!bio.trim() || bio.length < 150 || /[\d]{10}|@|\+91/.test(bio))
 //       newErrors.bio = "Bio must be 150+ characters and without contact info.";
 
-//     if (!language.trim()) newErrors.language = "Languages Known is required.";
+//     if (!language.length)
+//       newErrors.language = "Please select at least one language.";
 
 //     if (!occupation.trim()) {
 //       newErrors.occupation = "Occupation is required.";
@@ -126,8 +147,6 @@
 //         newErrors.otherOccupation = "Please specify your occupation.";
 //       }
 //     }
-
-//     // if (!categories.trim()) newErrors.categories = "Category is required.";
 
 //     if (!link.trim() || !isValidURL(link))
 //       newErrors.link = "Enter valid Portfolio Link.";
@@ -146,12 +165,10 @@
 //         if (el && typeof el.scrollIntoView === "function") {
 //           el.scrollIntoView({ behavior: "smooth", block: "center" });
 //         }
-//         console.warn("Validation blocked submit:", newErrors);
 //       }, 0);
 //       return;
 //     }
 
-//     // --- FIRESTORE WRITES ---
 //     try {
 //       setIsSubmitting(true);
 
@@ -221,88 +238,41 @@
 //   ];
 
 //   const occupationOptions = [
-//     "Graphic Designers / Graphic Designing",
-//     "Copywriters / Copywriting",
-//     "Copy Editors / Copy Editing",
-//     "Proofreaders / Proofreading",
-//     "Beta Readers / Beta Reading",
-//     "Translators / Translation",
-//     "Illustrators / Illustration",
-//     "Ghost Writers / Ghost Writing",
-//     "Voice Over Artists / Voice Over",
-//     "Video Editors / Video Editing",
-//     "Typesetter / Typesetting",
-//     "Literary Agents / Literary Representation",
-//     "Social Media Managers / Social Media Management",
-//     "Amazon Marketing Executives / Amazon Marketing Services",
-//     "Full Stack Developers / Web Development",
-//     "Content Writers / Content Writing",
-//     "Emcees / Event Coordination",
+//     "Graphic Designers ",
+//     "Copywriters",
+//     "Copy Editors",
+//     "Proofreaders",
+//     "Beta Readers",
+//     "Translators",
+//     "Illustrators",
+//     "Ghost Writers",
+//     "Voice Over Artists",
+//     "Video Editors",
+//     "Typesetter",
+//     "Literary Agents resentation",
+//     "Social Media Managers  Management",
+//     "Amazon Marketing Executives ting Services",
+//     "Full Stack Developers ent",
+//     "Content Writers ing",
+//     "Emcees nation",
 //     "Others",
 //   ];
 
 //   return (
 //     <>
-//       {/* overlay WITHOUT outside click-to-close */}
 //       <div className="sniper-overlay">
 //         <div
 //           className={`sniper-container ${step === 2 ? "narrow-container" : ""}`}
-//           // className="sniper-container"
-//           onClick={(e) => e.stopPropagation()} // keep clicks inside from bubbling
+//           onClick={(e) => e.stopPropagation()}
 //           role="dialog"
 //           aria-modal="true"
 //           aria-labelledby="be-sniper-title"
 //         >
-//           {/* Explicit Cancel button to close */}
 //           <button className="close-modal" onClick={onClose} aria-label="Cancel">
 //             &times;
 //           </button>
 
 //           <div className="sniper-page">
-//             {/* Step 1 */}
-//             {/* {step === 1 && (
-//               <div className="kind-of-freelancer">
-//                 <h3 id="be-sniper-title" className="question">
-//                   What kind of freelancer are you?
-//                 </h3>
-//                 <div className="option-buttons">
-//                   {[
-//                     { value: "agency-employer", label: "Agency / Employer" },
-//                     { value: "side-hustle", label: "Side Hustle" },
-//                     { value: "solo-freelancer", label: "Solo Freelancer" },
-//                   ].map((option) => (
-//                     <label
-//                       key={option.value}
-//                       className={`option ${
-//                         freelancerType === option.value ? "selected" : ""
-//                       } ${errors.freelancerType ? "input-error" : ""}`}
-//                     >
-//                       <input
-//                         type="radio"
-//                         name="freelancerType"
-//                         value={option.value}
-//                         onChange={() => {
-//                           setFreelancerType(option.value);
-//                           setErrors((prev) => ({
-//                             ...prev,
-//                             freelancerType: "",
-//                           }));
-//                         }}
-//                       />
-//                       <span>{option.label}</span>
-//                     </label>
-//                   ))}
-//                 </div>
-//                 {errors.freelancerType && (
-//                   <p className="error-text">{errors.freelancerType}</p>
-//                 )}
-//                 <div className="next-btn">
-//                   <button className="next" onClick={handleMainSubmit}>
-//                     Next
-//                   </button>
-//                 </div>
-//               </div>
-//             )} */}
 //             {step === 1 && (
 //               <div className="kind-of-freelancer">
 //                 <h3 id="be-sniper-title" className="question">
@@ -361,7 +331,6 @@
 //                 </div>
 //               </div>
 //             )}
-
 //             {/* Step 2 */}
 //             {step === 2 && (
 //               <div className="work-experience step-2-narrow">
@@ -392,55 +361,7 @@
 //                 </div>
 //               </div>
 //             )}
-
 //             {/* Step 3 */}
-//             {/* {step === 3 && (
-//               <div className="done">
-//                 <h3 className="question">
-//                   Have you done freelance work before?
-//                 </h3>
-//                 <div className="option-buttons">
-//                   {[
-//                     "Getting Started",
-//                     "Done Offline Before",
-//                     "Done Online Before",
-//                     "Both Online & Offline",
-//                   ].map((label) => (
-//                     <label
-//                       key={label}
-//                       className={`option ${
-//                         howDoneBefore === label ? "selected" : ""
-//                       }`}
-//                     >
-//                       <input
-//                         type="radio"
-//                         name="howDoneBefore"
-//                         value={label}
-//                         onChange={() => {
-//                           setHowDoneBefore(label);
-//                           setErrors((prev) => ({
-//                             ...prev,
-//                             howDoneBefore: "",
-//                           }));
-//                         }}
-//                       />
-//                       <span>{label}</span>
-//                     </label>
-//                   ))}
-//                 </div>
-//                 {errors.howDoneBefore && (
-//                   <p className="error-text">{errors.howDoneBefore}</p>
-//                 )}
-//                 <div className="next-prev-btn">
-//                   <button className="next" onClick={() => setStep(2)}>
-//                     Prev
-//                   </button>
-//                   <button className="next" onClick={handleDoneBeforeStep}>
-//                     Next
-//                   </button>
-//                 </div>
-//               </div>
-//             )} */}
 //             {step === 3 && (
 //               <div className="done">
 //                 <h3 className="question">
@@ -517,7 +438,6 @@
 //                 </div>
 //               </div>
 //             )}
-
 //             {/* Step 4 */}
 //             {step === 4 && (
 //               <div className="user-details-form">
@@ -534,7 +454,7 @@
 //                       {
 //                         name: "language",
 //                         label: "Languages Known",
-//                         type: "select",
+//                         type: "checkboxes", // changed here
 //                         options: languageOptions,
 //                       },
 //                       {
@@ -581,6 +501,37 @@
 //                               </option>
 //                             ))}
 //                           </select>
+//                         ) : field.type === "checkboxes" ? (
+//                           <div className="checkbox-group">
+//                             {field.options.map((opt) => (
+//                               <label key={opt} className="checkbox-item">
+//                                 <input
+//                                   type="checkbox"
+//                                   value={opt}
+//                                   checked={formData.language.includes(opt)}
+//                                   onChange={(e) => {
+//                                     let updated = [...formData.language];
+//                                     if (e.target.checked) {
+//                                       updated.push(opt);
+//                                     } else {
+//                                       updated = updated.filter(
+//                                         (lang) => lang !== opt
+//                                       );
+//                                     }
+//                                     setFormData((prev) => ({
+//                                       ...prev,
+//                                       language: updated,
+//                                     }));
+//                                     setErrors((prev) => ({
+//                                       ...prev,
+//                                       language: "",
+//                                     }));
+//                                   }}
+//                                 />
+//                                 <span>{opt}</span>
+//                               </label>
+//                             ))}
+//                           </div>
 //                         ) : (
 //                           <input
 //                             type={field.name === "email" ? "email" : "text"}
@@ -655,7 +606,7 @@
 //   );
 // }
 
-// // --- validators (unchanged) ---
+// // --- validators ---
 // function isValidEmail(email) {
 //   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 // }
@@ -683,11 +634,12 @@ export default function BeSniperModal({ onClose }) {
   const [errors, setErrors] = useState({});
   const [successMsg, setSuccessMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bioCount, setBioCount] = useState(""); // ✅ live counter
 
   const [formData, setFormData] = useState({
     name: "",
     bio: "",
-    language: [], // changed to array
+    language: [],
     occupation: "",
     categories: "",
     link: "",
@@ -697,16 +649,13 @@ export default function BeSniperModal({ onClose }) {
   });
 
   const [otherOccupation, setOtherOccupation] = useState("");
-
   const router = useRouter();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const storedRole = localStorage.getItem("userRole");
     const storedId = localStorage.getItem("uniqueId");
-    if (storedRole === "beSniper" && storedId) {
-      setStep(1);
-    }
+    if (storedRole === "beSniper" && storedId) setStep(1);
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -716,52 +665,50 @@ export default function BeSniperModal({ onClose }) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
-  };
 
-  // For multi-select language
-  const handleLanguageChange = (e) => {
-    const selected = Array.from(e.target.selectedOptions, (opt) => opt.value);
-    setFormData((prev) => ({ ...prev, language: selected }));
-    setErrors((prev) => ({ ...prev, language: "" }));
+    // ✅ live bio character count
+    if (name === "bio") {
+      const min = 150;
+      const max = 500;
+      if (value.length < min)
+        setBioCount(`${min - value.length} characters remaining`);
+      else if (value.length > max)
+        setBioCount(`${value.length - max} characters over limit`);
+      else setBioCount(`${value.length} characters`);
+    }
   };
 
   const handleMainSubmit = () => {
-    if (!freelancerType) {
-      setErrors((prev) => ({
-        ...prev,
+    if (!freelancerType)
+      return setErrors((p) => ({
+        ...p,
         freelancerType: "Please select your freelancer type.",
       }));
-      return;
-    }
-    setErrors((prev) => {
-      const { freelancerType: _drop, ...rest } = prev;
+    setErrors((p) => {
+      const { freelancerType, ...rest } = p;
       return rest;
     });
     setStep(2);
   };
 
   const handlePeopleStep = () => {
-    if (!experience.trim() || isNaN(experience) || Number(experience) < 0) {
-      setErrors((prev) => ({
-        ...prev,
+    if (!experience.trim() || isNaN(experience) || Number(experience) < 0)
+      return setErrors((p) => ({
+        ...p,
         experience: "Experience must be a valid number.",
       }));
-      return;
-    }
-    setErrors((prev) => ({ ...prev, experience: "" }));
+    setErrors((p) => ({ ...p, experience: "" }));
     setStep(3);
   };
 
   const handleDoneBeforeStep = () => {
-    if (!howDoneBefore) {
-      setErrors((prev) => ({
-        ...prev,
+    if (!howDoneBefore)
+      return setErrors((p) => ({
+        ...p,
         howDoneBefore: "Please select one option.",
       }));
-      return;
-    }
-    setErrors((prev) => {
-      const { howDoneBefore: _drop, ...rest } = prev;
+    setErrors((p) => {
+      const { howDoneBefore, ...rest } = p;
       return rest;
     });
     setStep(4);
@@ -771,19 +718,9 @@ export default function BeSniperModal({ onClose }) {
     if (isSubmitting) return;
 
     const newErrors = {};
-    const {
-      name,
-      bio,
-      language,
-      occupation,
-      categories,
-      link,
-      work,
-      email,
-      phone,
-    } = formData;
+    const { name, bio, language, occupation, link, work, email, phone } =
+      formData;
 
-    // --- VALIDATION ---
     if (!name.trim() || name.length < 3)
       newErrors.name = "Full Name must be at least 3 letters.";
     else if (!/^[A-Za-z\s]+$/.test(name))
@@ -795,13 +732,12 @@ export default function BeSniperModal({ onClose }) {
     if (!language.length)
       newErrors.language = "Please select at least one language.";
 
-    if (!occupation.trim()) {
-      newErrors.occupation = "Occupation is required.";
-    } else if (occupation === "Others") {
-      if (!otherOccupation.trim() || otherOccupation.trim().length < 2) {
-        newErrors.otherOccupation = "Please specify your occupation.";
-      }
-    }
+    if (!occupation.trim()) newErrors.occupation = "Occupation is required.";
+    else if (
+      occupation === "Others" &&
+      (!otherOccupation.trim() || otherOccupation.trim().length < 2)
+    )
+      newErrors.otherOccupation = "Please specify your occupation.";
 
     if (!link.trim() || !isValidURL(link))
       newErrors.link = "Enter valid Portfolio Link.";
@@ -816,30 +752,26 @@ export default function BeSniperModal({ onClose }) {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       setTimeout(() => {
-        const el = document.querySelector(`.input-error`);
-        if (el && typeof el.scrollIntoView === "function") {
-          el.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+        const el = document.querySelector(".input-error");
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
       }, 0);
       return;
     }
 
     try {
       setIsSubmitting(true);
-
       const role = "beSniper";
       const uniqueId = await generateUniqueId(name, email, role);
 
-      const occupationToSave =
+      const occToSave =
         occupation === "Others" ? otherOccupation.trim() : occupation;
-      const occupationRaw = occupation;
+      const occRaw = occupation;
 
       const userDoc = {
         ...formData,
-        occupation: occupationToSave,
-        occupationRaw,
+        occupation: occToSave,
+        occupationRaw: occRaw,
         email: email.toLowerCase(),
-        name,
         role,
         uniqueId,
         createdAt: new Date().toISOString(),
@@ -847,8 +779,8 @@ export default function BeSniperModal({ onClose }) {
 
       const beSniperDoc = {
         ...formData,
-        occupation: occupationToSave,
-        occupationRaw,
+        occupation: occToSave,
+        occupationRaw: occRaw,
         freelancerType,
         experience,
         howDoneBefore,
@@ -865,7 +797,6 @@ export default function BeSniperModal({ onClose }) {
 
       setSuccessMsg("Submitted successfully!");
       setIsSubmitting(false);
-
       router.push("/components/successfull");
     } catch (error) {
       setIsSubmitting(false);
@@ -893,23 +824,23 @@ export default function BeSniperModal({ onClose }) {
   ];
 
   const occupationOptions = [
-    "Graphic Designers / Graphic Designing",
-    "Copywriters / Copywriting",
-    "Copy Editors / Copy Editing",
-    "Proofreaders / Proofreading",
-    "Beta Readers / Beta Reading",
-    "Translators / Translation",
-    "Illustrators / Illustration",
-    "Ghost Writers / Ghost Writing",
-    "Voice Over Artists / Voice Over",
-    "Video Editors / Video Editing",
-    "Typesetter / Typesetting",
-    "Literary Agents / Literary Representation",
-    "Social Media Managers / Social Media Management",
-    "Amazon Marketing Executives / Amazon Marketing Services",
-    "Full Stack Developers / Web Development",
-    "Content Writers / Content Writing",
-    "Emcees / Event Coordination",
+    "Graphic Designers ",
+    "Copywriters",
+    "Copy Editors",
+    "Proofreaders",
+    "Beta Readers",
+    "Translators",
+    "Illustrators",
+    "Ghost Writers",
+    "Voice Over Artists",
+    "Video Editors",
+    "Typesetter",
+    "Literary Agents resentation",
+    "Social Media Managers  Management",
+    "Amazon Marketing Executives ting Services",
+    "Full Stack Developers ent",
+    "Content Writers ing",
+    "Emcees nation",
     "Others",
   ];
 
@@ -928,6 +859,7 @@ export default function BeSniperModal({ onClose }) {
           </button>
 
           <div className="sniper-page">
+            {/* ✅ Steps 1-3 unchanged */}
             {step === 1 && (
               <div className="kind-of-freelancer">
                 <h3 id="be-sniper-title" className="question">
@@ -1093,152 +1025,168 @@ export default function BeSniperModal({ onClose }) {
                 </div>
               </div>
             )}
-            {/* Step 4 */}
+
+            {/* ✅ Step 4 — full form with language & occupation */}
             {step === 4 && (
               <div className="user-details-form">
                 <div className="user-details-form-scroll">
                   <h3 className="question">Please fill in your details</h3>
                   {successMsg && <p className="success-text">{successMsg}</p>}
-                  <div className="form-fields">
-                    {[
-                      { name: "name", label: "Full Name *Private" },
-                      {
-                        name: "bio",
-                        label: "Bio *No contact info (Chars Limit:- Min 150)",
-                      },
-                      {
-                        name: "language",
-                        label: "Languages Known",
-                        type: "checkboxes", // changed here
-                        options: languageOptions,
-                      },
-                      {
-                        name: "occupation",
-                        label: "Occupation",
-                        type: "select",
-                        options: occupationOptions,
-                      },
-                      { name: "link", label: "Portfolio Link" },
-                      {
-                        name: "work",
-                        label: "Best Work Link *No contact info",
-                      },
-                      { name: "email", label: "Email *Private" },
-                      { name: "phone", label: "Phone Number *Active" },
-                    ].map((field, idx) => (
-                      <div className="form-group" key={idx}>
-                        <label className="input-label">{field.label}</label>
 
-                        {field.type === "select" ? (
-                          <select
-                            name={field.name}
-                            value={formData[field.name] || ""}
-                            onChange={(e) => {
-                              handleInputChange(e);
-                              if (
-                                field.name === "occupation" &&
-                                e.target.value !== "Others"
-                              ) {
-                                setOtherOccupation("");
+                  <div className="form-fields">
+                    {/* Name */}
+                    <div className="form-group">
+                      <label className="input-label">Full Name *Private</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className={errors.name ? "input-error" : ""}
+                      />
+                      {errors.name && (
+                        <p className="error-text">{errors.name}</p>
+                      )}
+                    </div>
+
+                    {/* Bio */}
+                    <div className="form-group">
+                      <label className="input-label">
+                        Bio *No contact info (Min 150, Max 500)
+                      </label>
+                      <textarea
+                        name="bio"
+                        rows={4}
+                        value={formData.bio}
+                        onChange={handleInputChange}
+                        className={errors.bio ? "input-error" : ""}
+                      />
+                      {bioCount && (
+                        <p
+                          style={{
+                            fontSize: "12px",
+                            marginTop: "4px",
+                            color:
+                              formData.bio.length < 150
+                                ? "orange"
+                                : formData.bio.length > 500
+                                ? "red"
+                                : "green",
+                          }}
+                        >
+                          {bioCount}
+                        </p>
+                      )}
+                      {errors.bio && <p className="error-text">{errors.bio}</p>}
+                    </div>
+
+                    {/* Languages */}
+                    <div className="form-group">
+                      <label className="input-label">Languages Known</label>
+                      <div className="checkbox-group">
+                        {languageOptions.map((opt) => (
+                          <label key={opt} className="checkbox-item">
+                            <input
+                              type="checkbox"
+                              value={opt}
+                              checked={formData.language.includes(opt)}
+                              onChange={(e) => {
+                                let updated = [...formData.language];
+                                if (e.target.checked) updated.push(opt);
+                                else
+                                  updated = updated.filter(
+                                    (lang) => lang !== opt
+                                  );
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  language: updated,
+                                }));
                                 setErrors((prev) => ({
                                   ...prev,
-                                  otherOccupation: "",
+                                  language: "",
                                 }));
-                              }
-                            }}
-                            className={errors[field.name] ? "input-error" : ""}
-                            autoComplete="off"
-                          >
-                            <option value="">Select {field.label}</option>
-                            {field.options.map((opt) => (
-                              <option key={opt} value={opt}>
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
-                        ) : field.type === "checkboxes" ? (
-                          <div className="checkbox-group">
-                            {field.options.map((opt) => (
-                              <label key={opt} className="checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  value={opt}
-                                  checked={formData.language.includes(opt)}
-                                  onChange={(e) => {
-                                    let updated = [...formData.language];
-                                    if (e.target.checked) {
-                                      updated.push(opt);
-                                    } else {
-                                      updated = updated.filter(
-                                        (lang) => lang !== opt
-                                      );
-                                    }
-                                    setFormData((prev) => ({
-                                      ...prev,
-                                      language: updated,
-                                    }));
-                                    setErrors((prev) => ({
-                                      ...prev,
-                                      language: "",
-                                    }));
-                                  }}
-                                />
-                                <span>{opt}</span>
-                              </label>
-                            ))}
-                          </div>
-                        ) : (
-                          <input
-                            type={field.name === "email" ? "email" : "text"}
-                            name={field.name}
-                            placeholder={field.label}
-                            value={formData[field.name]}
-                            onChange={handleInputChange}
-                            className={errors[field.name] ? "input-error" : ""}
-                            autoComplete="off"
-                          />
-                        )}
+                              }}
+                            />
+                            <span>{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+                      {errors.language && (
+                        <p className="error-text">{errors.language}</p>
+                      )}
+                    </div>
 
+                    {/* Occupation */}
+                    <div className="form-group">
+                      <label className="input-label">Occupation</label>
+                      <select
+                        name="occupation"
+                        value={formData.occupation}
+                        onChange={(e) => {
+                          handleInputChange(e);
+                          if (e.target.value !== "Others")
+                            setOtherOccupation("");
+                        }}
+                        className={errors.occupation ? "input-error" : ""}
+                      >
+                        <option value="">Select Occupation</option>
+                        {occupationOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.occupation && (
+                        <p className="error-text">{errors.occupation}</p>
+                      )}
+
+                      {formData.occupation === "Others" && (
+                        <div style={{ marginTop: "8px" }}>
+                          <label className="input-label">
+                            Please specify your occupation
+                          </label>
+                          <input
+                            type="text"
+                            name="otherOccupation"
+                            placeholder="e.g., Book Publicist"
+                            value={otherOccupation}
+                            onChange={(e) => setOtherOccupation(e.target.value)}
+                            className={
+                              errors.otherOccupation ? "input-error" : ""
+                            }
+                          />
+                          {errors.otherOccupation && (
+                            <p className="error-text">
+                              {errors.otherOccupation}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Other fields */}
+                    {[
+                      { name: "link", label: "Portfolio Link" },
+                      { name: "work", label: "Best Work Link" },
+                      { name: "email", label: "Email *Private" },
+                      { name: "phone", label: "Phone Number *Active" },
+                    ].map((field, i) => (
+                      <div className="form-group" key={i}>
+                        <label className="input-label">{field.label}</label>
+                        <input
+                          type={field.name === "email" ? "email" : "text"}
+                          name={field.name}
+                          value={formData[field.name]}
+                          onChange={handleInputChange}
+                          className={errors[field.name] ? "input-error" : ""}
+                        />
                         {errors[field.name] && (
                           <p className="error-text">{errors[field.name]}</p>
                         )}
-
-                        {field.name === "occupation" &&
-                          formData.occupation === "Others" && (
-                            <div
-                              className="form-group"
-                              style={{ marginTop: "8px" }}
-                            >
-                              <label className="input-label">
-                                Please specify your occupation
-                              </label>
-                              <input
-                                type="text"
-                                name="otherOccupation"
-                                placeholder="e.g., Book Publicist"
-                                value={otherOccupation}
-                                onChange={(e) => {
-                                  setOtherOccupation(e.target.value);
-                                  setErrors((prev) => ({
-                                    ...prev,
-                                    otherOccupation: "",
-                                  }));
-                                }}
-                                className={
-                                  errors.otherOccupation ? "input-error" : ""
-                                }
-                                autoComplete="off"
-                              />
-                              {errors.otherOccupation && (
-                                <p className="error-text">
-                                  {errors.otherOccupation}
-                                </p>
-                              )}
-                            </div>
-                          )}
                       </div>
                     ))}
                   </div>
+
                   <div className="next-prev-btn">
                     <button className="next" onClick={() => setStep(3)}>
                       Prev

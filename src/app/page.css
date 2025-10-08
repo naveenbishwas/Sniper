@@ -623,8 +623,9 @@
 }
 
 img.header__logo {
-  width: 170px;
+  width: 230px;
   height: auto;
+  padding-bottom: 15px;
 }
 
 .vetting-trust .trust-item:nth-child(1) img {

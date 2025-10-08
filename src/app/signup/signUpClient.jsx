@@ -353,31 +353,37 @@ export default function SignupModal({ onClose }) {
   //   return uniqueId;
   // };
 
-  const generateUniqueId = async (role = "unknown", email = "", name = "") => {
-    // decide prefix based on role
-    let prefix = "user"; // fallback
-    if (role === "beSniper" || role === "BeFreelancer") {
-      prefix = "hawkee";
+  const generateUniqueId = async (
+    role = "unknown",
+    email = "",
+    fullName = ""
+  ) => {
+    let prefix = "user";
+
+    // Role-based prefix
+    if (role === "beSniper") {
+      prefix = "hawker"; // force hawker prefix
     } else if (role === "HireFreelancer") {
-      prefix = "hawker";
+      // use first name as prefix
+      prefix = (fullName.split(" ")[0] || "user").toLowerCase();
     }
 
+    // Generate random 3 digits
     const randomNum = Math.floor(100 + Math.random() * 900);
     const uniqueId = `${prefix}${randomNum}`;
 
+    // Check Firestore for duplicate
     const docRef = doc(db, "uniqueUserIds", uniqueId);
     const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) return generateUniqueId(role, email, fullName);
 
-    if (docSnap.exists()) {
-      return generateUniqueId(role, email, name); // retry
-    }
-
+    // Save to Firestore
     await setDoc(docRef, {
       uniqueId,
-      role: role || "unknown",
+      role,
+      email,
+      name: fullName,
       createdAt: new Date().toISOString(),
-      email: email || "",
-      name: name || "",
     });
 
     return uniqueId;
@@ -396,7 +402,7 @@ export default function SignupModal({ onClose }) {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      const uniqueId = await generateUniqueId(fullName, email);
+      const uniqueId = await generateUniqueId(role, email, fullName);
       localStorage.setItem("uniqueId", uniqueId);
       localStorage.setItem("fullName", fullName);
       localStorage.setItem("email", email);
@@ -434,7 +440,7 @@ export default function SignupModal({ onClose }) {
       const name = user.displayName || "googleuser";
       const userEmail = user.email;
 
-      const uniqueId = await generateUniqueId(name, userEmail);
+      const uniqueId = await generateUniqueId(role, userEmail, name);
 
       localStorage.setItem("uniqueId", uniqueId);
       localStorage.setItem("fullName", name);

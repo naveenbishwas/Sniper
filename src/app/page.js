@@ -1576,7 +1576,7 @@ export default function Home({ images }) {
         </div>
 
         <span>
-          <Link href="/gallery-section">
+          <Link href="/snapshot">
             <button className="view-btn">View All</button>
           </Link>
         </span>
@@ -1652,7 +1652,7 @@ export default function Home({ images }) {
             <div className="testimonial-left">
               <h2 className="testimonial-heading">
                 Here what our
-                <span className="theme-text">great customers</span> say.
+                <span className="theme-text"> great customers</span> say.
               </h2>
               <p className="testimonial-subtext">
                 Our clients share their experiences about working with our
@@ -1747,8 +1747,8 @@ export default function Home({ images }) {
               <Image
                 src={"/hub-white2.png"}
                 className="header__logo"
-                width={55}
-                height={55}
+                width={0}
+                height={0}
                 unoptimized
                 alt="logo"
               />
@@ -1756,7 +1756,7 @@ export default function Home({ images }) {
           </div>
           <h2 className="snipers-title">Our Freelancers Have Got You</h2>
           <p className="snipers-desc">
-            Join thousands of authors who trust HubHawks Live for their
+            Join thousands of authors who trust Hubhawks Live for their
             publishing needs. From cover design to marketing campaigns, our
             expert freelancer deliver results with precision.
           </p>
