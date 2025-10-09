@@ -177,6 +177,36 @@ export default function SignupModal({ onClose }) {
   };
 
   // ✅ Google Signup
+  // const loginWithGoogle = async () => {
+  //   try {
+  //     const provider = new GoogleAuthProvider();
+  //     const result = await signInWithPopup(auth, provider);
+  //     const user = result.user;
+
+  //     const name = user.displayName || "GoogleUser";
+  //     const userEmail = user.email;
+
+  //     const uniqueId = await generateUniqueId(role, userEmail, name);
+
+  //     // Save to localStorage
+  //     localStorage.setItem("uniqueId", uniqueId);
+  //     localStorage.setItem("fullName", name);
+  //     localStorage.setItem("email", userEmail);
+  //     localStorage.setItem("userRole", role);
+
+  //     if (role === "beSniper") {
+  //       localStorage.setItem("showBeSniperModal", "true");
+  //     } else if (role === "HireFreelancer") {
+  //       localStorage.setItem("showHireFreelancerModal", "true");
+  //     }
+
+  //     window.location.href = "/";
+  //   } catch (err) {
+  //     setErrorMsg(err.message || "Google signup failed");
+  //   }
+  // };
+
+  // ✅ Google Signup
   const loginWithGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -184,11 +214,31 @@ export default function SignupModal({ onClose }) {
       const user = result.user;
 
       const name = user.displayName || "GoogleUser";
-      const userEmail = user.email;
+      const userEmail = user.email.toLowerCase();
 
+      // 🔹 Step 1: Check if user already exists in Firestore
+      const userRef = doc(db, "users", userEmail);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        // 🧩 User already exists → show message and redirect
+        setErrorMsg("This email is already registered. Please login instead.");
+        await auth.signOut(); // optional: sign them out immediately
+        return;
+      }
+
+      // 🔹 Step 2: Continue signup if new user
       const uniqueId = await generateUniqueId(role, userEmail, name);
 
-      // Save to localStorage
+      // 💾 Save user data in Firestore
+      await setDoc(userRef, {
+        email: userEmail,
+        role: role || "unknown",
+        fullName: name,
+        uniqueId,
+      });
+
+      // 💾 Save locally
       localStorage.setItem("uniqueId", uniqueId);
       localStorage.setItem("fullName", name);
       localStorage.setItem("email", userEmail);
@@ -200,6 +250,7 @@ export default function SignupModal({ onClose }) {
         localStorage.setItem("showHireFreelancerModal", "true");
       }
 
+      // 🚀 Redirect
       window.location.href = "/";
     } catch (err) {
       setErrorMsg(err.message || "Google signup failed");

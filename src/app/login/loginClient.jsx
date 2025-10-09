@@ -228,9 +228,11 @@ export default function LoginClient() {
 
   const redirectUser = (userRole) => {
     if (userRole === "beSniper") {
-      router.replace("/components/gigsPage");
+      // router.replace("/components/gigsPage");
+      router.replace("/");
     } else if (userRole === "HireFreelancer") {
-      router.replace("/components/cardProfile");
+      // router.replace("/components/cardProfile");
+      router.replace("/");
     } else {
       router.replace("/");
     }
