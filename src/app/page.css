@@ -3328,9 +3328,14 @@ article#grid-15 img {
   .testimonial-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+    flex-direction: column;
   }
   .testimonial-card {
     max-width: 100%;
+  }
+
+  .nav-buttons {
+    justify-content: center;
   }
 }
 

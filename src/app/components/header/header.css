@@ -109,10 +109,6 @@
 }
 
 @media (max-width: 900px) {
-  .header {
-    padding: 10px 25px;
-  }
-
   .header__brand {
     font-size: 20px;
   }
@@ -130,10 +126,6 @@
 }
 
 @media (max-width: 600px) {
-  .header {
-    padding: 10px 17px;
-  }
-
   .sniper-buttons {
     display: flex !important;
   }
