@@ -258,17 +258,29 @@ export default function SignupModal({ onClose }) {
   };
 
   // ✅ Check if user clicked a CTA before signup
+  // const pendingAction = localStorage.getItem("pendingAction");
+
+  // if (pendingAction === "hire") {
+  //   localStorage.removeItem("pendingAction");
+  //   localStorage.setItem("showHireFreelancerModal", "true");
+  // } else if (pendingAction === "freelancer") {
+  //   localStorage.removeItem("pendingAction");
+  //   localStorage.setItem("showBeSniperModal", "true");
+  // } else if (pendingAction === "post-job") {
+  //   localStorage.removeItem("pendingAction");
+  //   window.location.href = "/post-job";
+  // }
+
   const pendingAction = localStorage.getItem("pendingAction");
 
-  if (pendingAction === "hire") {
+  if (pendingAction === "hire" || pendingAction === "post-job") {
+    // 🧩 "Hire a Freelancer" or "Post a Job" → same flow (HireFreelancer modal)
     localStorage.removeItem("pendingAction");
     localStorage.setItem("showHireFreelancerModal", "true");
-  } else if (pendingAction === "freelancer") {
+  } else if (pendingAction === "freelancer" || pendingAction === "sniper") {
+    // 🧩 "Join Us" or "Be a Freelancer" → BeSniper modal
     localStorage.removeItem("pendingAction");
     localStorage.setItem("showBeSniperModal", "true");
-  } else if (pendingAction === "post-job") {
-    localStorage.removeItem("pendingAction");
-    window.location.href = "/post-job";
   }
 
   return (

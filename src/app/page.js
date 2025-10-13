@@ -513,25 +513,6 @@ export default function Home({ images }) {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const slidesToShow = 4;
-  // const nextSlide = () =>
-  //   setCurrentIndex((p) => (p >= categories.length - slidesToShow ? 0 : p + 1));
-  // const prevSlide = () =>
-  //   setCurrentIndex((p) => (p <= 0 ? categories.length - slidesToShow : p - 1));
-
-  // const handleNext = () => {
-  //   setAnimationClass("slide-right");
-  //   setTimeout(() => setCurrent((p) => (p + 1) % testimonials.length), 50);
-  // };
-  // const handlePrev = () => {
-  //   setAnimationClass("slide-left");
-  //   setTimeout(
-  //     () => setCurrent((p) => (p === 0 ? testimonials.length - 1 : p - 1)),
-  //     50
-  //   );
-  // };
-
-  // const { image, stars, text, name, title, color } = testimonials[current];
 
   const handleNext = () => {
     if (isTransitioning) return;
@@ -605,63 +586,90 @@ export default function Home({ images }) {
   //   const userRole = localStorage.getItem("userRole");
 
   //   if (!userRole) {
-  //     // user not signed up yet
-  //     localStorage.setItem("pendingAction", action); // store the intent
+  //     // 🧭 User not signed up yet → store intended action
+  //     localStorage.setItem("pendingAction", action);
   //     setShowSignup(true); // open signup modal
   //   } else {
-  //     // already signed up
+  //     // 🧭 Already signed up → open the respective modal directly
   //     if (action === "hire") {
   //       setShowHire(true); // open HireFreelancer modal
   //     } else if (action === "freelancer") {
   //       setShowSteps(true); // open BeSniper modal
-  //     } else if (action === "post-job") {
-  //       window.location.href = "/post-job"; // or router.push("/post-job");
+  //     } else {
+  //       window.location.href = "/"; // default redirect
   //     }
   //   }
   // };
-
-  const handleActionClickHireAFreelancer = (action) => {
-    const userRole = localStorage.getItem("userRole");
-
-    if (!userRole) {
-      // user not signed up yet
-      localStorage.setItem("pendingAction", action); // store intent for future use
-      setShowSignup(true); // open signup modal
-    } else {
-      // already signed up → all go back to homepage
-      window.location.href = "/"; // redirect to home after any action
-    }
-  };
 
   // const handleActionClickBeAFreelancer = (action) => {
   //   const userRole = localStorage.getItem("userRole");
 
   //   if (!userRole) {
-  //     // 🧭 User not signed up → store intent and open signup modal
+  //     // 🧭 User not signed up yet → store intent and open signup modal
   //     localStorage.setItem("pendingAction", action);
   //     setShowSignup(true);
+
+  //     // 🪄 Automatically trigger the correct flow *after signup completes*
+  //     const checkSignup = setInterval(() => {
+  //       const newUserRole = localStorage.getItem("userRole");
+  //       if (newUserRole) {
+  //         clearInterval(checkSignup);
+
+  //         if (action === "freelancer") {
+  //           setShowSteps(true); // open BeSniper modal after signup
+  //         } else if (action === "hire") {
+  //           setShowHire(true); // fallback just in case
+  //         }
+  //       }
+  //     }, 500);
   //   } else {
-  //     // 🧭 User already signed up → perform the correct action
-  //     if (action === "hire") {
+  //     // 🧭 Already signed up → open BeSniper modal directly
+  //     if (action === "freelancer") {
+  //       setShowSteps(true);
+  //     } else if (action === "hire") {
   //       setShowHire(true);
-  //     } else if (action === "sniper") {
-  //       setShowSteps(true); // Be a Sniper Modal
-  //     } else if (action === "post-job") {
-  //       window.location.href = "/post-job"; // or use router.push
+  //     } else {
+  //       window.location.href = "/";
   //     }
   //   }
   // };
 
-  const handleActionClickBeAFreelancer = (action) => {
+  const handleActionClick = (action) => {
     const userRole = localStorage.getItem("userRole");
 
     if (!userRole) {
-      // 🧭 User not signed up → store intent and open signup modal
+      // 🧭 First-time user — store intent & open signup modal
       localStorage.setItem("pendingAction", action);
       setShowSignup(true);
+
+      // 🔁 Watch for signup completion, then open correct modal
+      const checkSignup = setInterval(() => {
+        const newUserRole = localStorage.getItem("userRole");
+        if (newUserRole) {
+          clearInterval(checkSignup);
+          const pendingAction = localStorage.getItem("pendingAction");
+
+          if (pendingAction === "hire" || pendingAction === "post-job") {
+            setShowHire(true); // open HireFreelancer modal
+          } else if (
+            pendingAction === "freelancer" ||
+            pendingAction === "sniper" // ✅ added this
+          ) {
+            setShowSteps(true); // open BeSniper modal
+          }
+
+          localStorage.removeItem("pendingAction"); // cleanup
+        }
+      }, 500);
     } else {
-      // 🧭 User already signed up → redirect to homepage
-      window.location.href = "/"; // redirect to home
+      // 🧭 Already signed up → open correct modal immediately
+      if (action === "hire" || action === "post-job") {
+        setShowHire(true);
+      } else if (action === "freelancer" || action === "sniper") {
+        setShowSteps(true);
+      } else {
+        window.location.href = "/";
+      }
     }
   };
 
@@ -717,12 +725,7 @@ export default function Home({ images }) {
           <p>Connect with talented freelancers across various fields.</p>
           <div className="browse-buttons">
             <Link href="">
-              <button
-                className="post-job-btn"
-                // onClick={() => handleActionClick("post-job")}
-              >
-                Post a Job
-              </button>
+              <button className="post-job-btn">Post a Job</button>
             </Link>
           </div>
 
@@ -923,7 +926,7 @@ export default function Home({ images }) {
 
               <div
                 className="vetting-buttons"
-                onClick={() => handleActionClickHireAFreelancer("hire")}
+                onClick={() => handleActionClick("hire")}
               >
                 <button className="hire-btn">Hire freelancer</button>
                 {/* <button className="learn-btn">Learn more</button> */}
@@ -937,81 +940,6 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Award-Winning Designers"
                 >
-                  {/* <svg
-                    id="award"
-                    width="80"
-                    height="80"
-                    viewBox="0 0 80 80"
-                    xmlns="http://www.w3.org/2000/svg"
-                    role="img"
-                    aria-label="Medal icon"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="medalGrad"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop offset="0%" stopColor="#FFC44D" />
-                        <stop offset="100%" stopColor="#FF9F1C" />
-                      </linearGradient>
-                      <filter
-                        id="softShadow"
-                        x="-20%"
-                        y="-20%"
-                        width="140%"
-                        height="140%"
-                      >
-                        <feDropShadow
-                          dx="0"
-                          dy="1.2"
-                          stdDeviation="1.2"
-                          floodOpacity="0.25"
-                        />
-                      </filter>
-                    </defs>
-
-                    <path
-                      d="M16 10 L32 30"
-                      stroke="#586CFF"
-                      strokeWidth="10"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M64 10 L48 30"
-                      stroke="#7A8CFF"
-                      strokeWidth="10"
-                      strokeLinecap="round"
-                    />
-
-                    <circle cx="40" cy="50" r="18" fill="url(#medalGrad)" />
-                    <circle
-                      cx="40"
-                      cy="50"
-                      r="18"
-                      fill="none"
-                      stroke="#E58A00"
-                      strokeWidth="2"
-                    />
-
-                    <polygon
-                      points="
-      40,35
-      43.8,44.6
-      54.8,44.6
-      45.9,51.4
-      49.0,61
-      40,55.3
-      31.0,61
-      34.1,51.4
-      25.2,44.6
-      36.2,44.6"
-                      fill="#FFFFFF"
-                      filter="url(#softShadow)"
-                    />
-                  </svg> */}
                   <Image
                     src="ic1.png"
                     width={30}
@@ -1029,29 +957,6 @@ export default function Home({ images }) {
                   role="img"
                   aria-label="Author-First Process"
                 >
-                  {/* <svg viewBox="0 0 64 64" className="ti ti-book">
-                    <path
-                      d="M8 14c8-4 16-4 24 0v36c-8-4-16-4-24 0V14z"
-                      fill="#A066FF"
-                    />
-                    <path
-                      d="M32 14c8-4 16-4 24 0v36c-8-4-16-4-24 0V14z"
-                      fill="#6AD1E3"
-                    />
-                    <path
-                      d="M40 20l-8 10 14-6"
-                      stroke="#fff"
-                      strokeWidth="3"
-                      fill="none"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M20 20h8"
-                      stroke="#fff"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                  </svg> */}
                   <Image
                     src="ic4.png"
                     width={30}
@@ -1585,7 +1490,7 @@ export default function Home({ images }) {
                 <div className="freelancer-actions v2">
                   <button
                     className="hire-btn"
-                    onClick={() => handleActionClickHireAFreelancer("hire")}
+                    onClick={() => handleActionClick("hire")}
                   >
                     Hire
                   </button>
@@ -1840,14 +1745,16 @@ export default function Home({ images }) {
           <div className="snipers-cta">
             <button
               className="snipers-btn"
-              onClick={() => handleActionClickBeAFreelancer("sniper")}
+              // onClick={() => handleActionClickBeAFreelancer("sniper")}
+              onClick={() => handleActionClick("sniper")}
             >
               Join Us
             </button>
             <button
               className="snipers-btn"
               id="post"
-              onClick={() => handleActionClickHireAFreelancer("hire")}
+              // onClick={() => handleActionClickHireAFreelancer("hire")}
+              onClick={() => handleActionClick("hire")}
             >
               Post a Job
             </button>
