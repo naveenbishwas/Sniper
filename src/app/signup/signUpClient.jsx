@@ -257,6 +257,20 @@ export default function SignupModal({ onClose }) {
     }
   };
 
+  // ✅ Check if user clicked a CTA before signup
+  const pendingAction = localStorage.getItem("pendingAction");
+
+  if (pendingAction === "hire") {
+    localStorage.removeItem("pendingAction");
+    localStorage.setItem("showHireFreelancerModal", "true");
+  } else if (pendingAction === "freelancer") {
+    localStorage.removeItem("pendingAction");
+    localStorage.setItem("showBeSniperModal", "true");
+  } else if (pendingAction === "post-job") {
+    localStorage.removeItem("pendingAction");
+    window.location.href = "/post-job";
+  }
+
   return (
     <>
       <Head>

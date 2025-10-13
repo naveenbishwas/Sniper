@@ -760,7 +760,7 @@ export default function BeSniperModal({ onClose }) {
 
     try {
       setIsSubmitting(true);
-      const role = "beSniper";
+      const role = "Be A Freelancer";
       const uniqueId = await generateUniqueId(name, email, role);
 
       const occToSave =

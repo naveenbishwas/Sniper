@@ -601,6 +601,70 @@ export default function Home({ images }) {
     setShowSignup(true);
   };
 
+  // const handleActionClickHireAFreelancer = (action) => {
+  //   const userRole = localStorage.getItem("userRole");
+
+  //   if (!userRole) {
+  //     // user not signed up yet
+  //     localStorage.setItem("pendingAction", action); // store the intent
+  //     setShowSignup(true); // open signup modal
+  //   } else {
+  //     // already signed up
+  //     if (action === "hire") {
+  //       setShowHire(true); // open HireFreelancer modal
+  //     } else if (action === "freelancer") {
+  //       setShowSteps(true); // open BeSniper modal
+  //     } else if (action === "post-job") {
+  //       window.location.href = "/post-job"; // or router.push("/post-job");
+  //     }
+  //   }
+  // };
+
+  const handleActionClickHireAFreelancer = (action) => {
+    const userRole = localStorage.getItem("userRole");
+
+    if (!userRole) {
+      // user not signed up yet
+      localStorage.setItem("pendingAction", action); // store intent for future use
+      setShowSignup(true); // open signup modal
+    } else {
+      // already signed up → all go back to homepage
+      window.location.href = "/"; // redirect to home after any action
+    }
+  };
+
+  // const handleActionClickBeAFreelancer = (action) => {
+  //   const userRole = localStorage.getItem("userRole");
+
+  //   if (!userRole) {
+  //     // 🧭 User not signed up → store intent and open signup modal
+  //     localStorage.setItem("pendingAction", action);
+  //     setShowSignup(true);
+  //   } else {
+  //     // 🧭 User already signed up → perform the correct action
+  //     if (action === "hire") {
+  //       setShowHire(true);
+  //     } else if (action === "sniper") {
+  //       setShowSteps(true); // Be a Sniper Modal
+  //     } else if (action === "post-job") {
+  //       window.location.href = "/post-job"; // or use router.push
+  //     }
+  //   }
+  // };
+
+  const handleActionClickBeAFreelancer = (action) => {
+    const userRole = localStorage.getItem("userRole");
+
+    if (!userRole) {
+      // 🧭 User not signed up → store intent and open signup modal
+      localStorage.setItem("pendingAction", action);
+      setShowSignup(true);
+    } else {
+      // 🧭 User already signed up → redirect to homepage
+      window.location.href = "/"; // redirect to home
+    }
+  };
+
   return (
     <div className="main-page">
       <Header onSignupClick={handleSignupClick} />
@@ -652,7 +716,14 @@ export default function Home({ images }) {
           <h1>Browse Talent By Category</h1>
           <p>Connect with talented freelancers across various fields.</p>
           <div className="browse-buttons">
-            <button className="post-job-btn">Post a Job</button>
+            <Link href="">
+              <button
+                className="post-job-btn"
+                // onClick={() => handleActionClick("post-job")}
+              >
+                Post a Job
+              </button>
+            </Link>
           </div>
 
           <div className="slider-container" aria-roledescription="carousel">
@@ -850,9 +921,12 @@ export default function Home({ images }) {
                 world of readers.
               </p>
 
-              <div className="vetting-buttons">
+              <div
+                className="vetting-buttons"
+                onClick={() => handleActionClickHireAFreelancer("hire")}
+              >
                 <button className="hire-btn">Hire freelancer</button>
-                <button className="learn-btn">Learn more</button>
+                {/* <button className="learn-btn">Learn more</button> */}
               </div>
 
               {/* Trust icons */}
@@ -1509,9 +1583,12 @@ export default function Home({ images }) {
                 <p className="freelancer-role">{f.desc}</p>
 
                 <div className="freelancer-actions v2">
-                  <button className="hire-btn">Hire</button>
-                  {/* Optional secondary link — keep if you want */}
-                  {/* <a href="#" className="ghost-link">View Profile</a> */}
+                  <button
+                    className="hire-btn"
+                    onClick={() => handleActionClickHireAFreelancer("hire")}
+                  >
+                    Hire
+                  </button>
                 </div>
               </div>
             </article>
@@ -1761,8 +1838,17 @@ export default function Home({ images }) {
             expert freelancer deliver results with precision.
           </p>
           <div className="snipers-cta">
-            <button className="snipers-btn">Join Us</button>
-            <button className="snipers-btn" id="post">
+            <button
+              className="snipers-btn"
+              onClick={() => handleActionClickBeAFreelancer("sniper")}
+            >
+              Join Us
+            </button>
+            <button
+              className="snipers-btn"
+              id="post"
+              onClick={() => handleActionClickHireAFreelancer("hire")}
+            >
               Post a Job
             </button>
           </div>
