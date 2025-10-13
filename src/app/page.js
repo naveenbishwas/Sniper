@@ -724,9 +724,12 @@ export default function Home({ images }) {
           <h1>Browse Talent By Category</h1>
           <p>Connect with talented freelancers across various fields.</p>
           <div className="browse-buttons">
-            <Link href="">
-              <button className="post-job-btn">Post a Job</button>
-            </Link>
+            <button
+              className="post-job-btn"
+              onClick={() => handleActionClick("hire")}
+            >
+              Post a Job
+            </button>
           </div>
 
           <div className="slider-container" aria-roledescription="carousel">
@@ -1422,7 +1425,13 @@ export default function Home({ images }) {
                 professionals ready to tackle your unique challenges.
               </p>
               <div className="hero-buttons">
-                <button className="orange-btn">Post a Job</button>
+                <button
+                  className="orange-btn"
+                  onClick={() => handleActionClick("hire")}
+                >
+                  Post a Job
+                </button>
+
                 <a href="#" className="browse-link">
                   Browse Freelancers →
                 </a>
