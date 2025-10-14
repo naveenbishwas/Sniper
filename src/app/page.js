@@ -1102,9 +1102,9 @@ export default function Home({ images }) {
                 </ul>
               </div>
 
-              <div className="team-btn">
+              {/* <div className="team-btn">
                 <button>Know More</button>
-              </div>
+              </div> */}
             </div>
 
             <div className="imageContent">
@@ -1418,23 +1418,23 @@ export default function Home({ images }) {
         <div className="hero-content">
           <div className="hero-container">
             <div className="hero-text">
-              <h1>Experience freelance talent like never before</h1>
+              <h1>Showcase Your Talent to the World</h1>
               <p>
-                Partnering with top freelancers can elevate your projects and
-                drive results. Our platform connects you with skilled
-                professionals ready to tackle your unique challenges.
+                Join our platform to find exciting projects that match your
+                skills. Collaborate with top clients, grow your portfolio, and
+                take control of your freelance career — all in one place.
               </p>
               <div className="hero-buttons">
                 <button
                   className="orange-btn"
-                  onClick={() => handleActionClick("hire")}
+                  onClick={() => handleActionClick("sniper")}
                 >
-                  Post a Job
+                  Looking For a Job
                 </button>
 
-                <a href="#" className="browse-link">
+                {/* <a href="#" className="browse-link">
                   Browse Freelancers →
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

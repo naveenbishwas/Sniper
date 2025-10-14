@@ -159,7 +159,10 @@ export default function SignupModal({ onClose }) {
       });
 
       // 🎯 Save flags for modal routing
-      if (role === "beSniper") {
+      // if (role === "beSniper") {
+      //   localStorage.setItem("showBeSniperModal", "true");
+      // }
+      if (role === "Be A Freelancer" || role === "beSniper") {
         localStorage.setItem("showBeSniperModal", "true");
       } else if (role === "HireFreelancer") {
         localStorage.setItem("showHireFreelancerModal", "true");
@@ -228,7 +231,10 @@ export default function SignupModal({ onClose }) {
       }
 
       // 🔹 Step 2: Continue signup if new user
-      const uniqueId = await generateUniqueId(role, userEmail, name);
+      // const uniqueId = await generateUniqueId(role, userEmail, name);
+      const uniqueId =
+        localStorage.getItem("uniqueId") ||
+        (await generateUniqueId(name, email, role));
 
       // 💾 Save user data in Firestore
       await setDoc(userRef, {
