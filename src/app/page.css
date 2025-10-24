@@ -2517,30 +2517,9 @@ span.arrow-wrapper {
   background-color: var(--themeHoverColor);
 }
 
-.masonrySection {
-  padding: 2rem 1rem;
-  background-color: #f8f9fa;
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 3rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
 .books-section {
   width: 100%;
   padding: 50px 5%;
-  /* background: #f8f8f8; */
   font-family: "Poppins", sans-serif;
   text-align: center;
 }
@@ -2559,24 +2538,6 @@ span.arrow-wrapper {
   justify-content: center;
   gap: 60px;
   row-gap: 40px;
-}
-
-@media (max-width: 1200px) {
-  .books-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .books-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .books-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .book-card {
@@ -2650,6 +2611,20 @@ span.arrow-wrapper {
   line-height: 1.4;
   margin: 0;
   text-transform: capitalize;
+}
+
+@media screen and (max-width: 768px) {
+  .books-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: unset;
+    row-gap: 0;
+    gap: 20px;
+  }
+
+  .books-section {
+    padding: 30px 4%;
+  }
 }
 
 /* components/team-section.css */
