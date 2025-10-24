@@ -205,6 +205,11 @@ export default function Home({ images }) {
       src: "/dracul2-front.png",
       hoverSrc: "/dracula2-back.png",
     },
+    {
+      title: "Shark Chutney",
+      src: "/shark12-front.png",
+      hoverSrc: "/shark12-back.png",
+    },
   ];
   const gallery = [
     {
