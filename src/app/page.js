@@ -146,115 +146,66 @@ export default function Home({ images }) {
 
   // Gallery images
   const items = [
-    {
-      title: "Total Timepass",
-      src: "/tt2.png",
-      alt: "Mountain landscape",
-      hoverSrc: "/tt1.png",
-    },
-    {
-      title: "Sun Sakeena",
-      src: "/12.jpeg", // ✅ leading slash
-      hoverSrc: "/12-1.png",
-      alt: "Modern architecture",
-      creditHref: "https://unsplash.com",
-    },
+    { title: "Total Timepass", src: "/tt2.png", hoverSrc: "/tt1.png" },
+    { title: "Sun Sakeena", src: "/12.jpeg", hoverSrc: "/12-1.png" },
     {
       title: "Dear Remembrance",
-      src: "/dear-front.png", // ✅
+      src: "/dear-front.png",
       hoverSrc: "/dear-back.png",
-      alt: "Waterfall",
-      creditHref: "https://unsplash.com",
     },
     {
       title: "⁠The Tiger that crashed my wedding",
-      src: "/11.jpeg", // ✅
+      src: "/11.jpeg",
       hoverSrc: "/11-2.png",
-      alt: "Nature landscape",
-      creditHref: "https://unsplash.com",
     },
     {
       title: "Harmonia",
-      src: "/ikigai-front.png", // ✅
+      src: "/ikigai-front.png",
       hoverSrc: "/ikigai-back.png",
-      alt: "Mountain sunset",
-      creditHref: "https://unsplash.com",
     },
     {
       title: "Kalyuga 2",
-      src: "/kal-front.png", // ✅
-      hoverSrc: "/kal-back.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
+      src: "/kalyug12-front.png",
+      hoverSrc: "/kalyug12-back.png",
     },
     {
       title: "Guilt Trip",
-      src: "/guilt-front.png", // ✅
-      hoverSrc: "/guilt-back.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
+      src: "/guilt12-front.png",
+      hoverSrc: "/guilt12-back.png",
     },
     {
       title: "⁠Financial Literacy",
-      src: "/financial.jpg", // ✅
-      hoverSrc: "/financial-back.jpg",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
+      src: "/finance12-front.jpg",
+      hoverSrc: "/finance12-back.jpg",
     },
     {
       title: "The Curse of Wildflower",
-      src: "/wild-front.png", // ✅
-      hoverSrc: "/wild-back.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
+      src: "/curse12-front.png",
+      hoverSrc: "/curse12-back.png",
     },
-    {
-      title: "Ekaki",
-      src: "/ek1.png", // ✅
-      hoverSrc: "/ek2.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
-    },
-
+    { title: "Ekaki", src: "/ek1.png", hoverSrc: "/ek2.png" },
     {
       title: "The Rise of Immortal",
-      src: "/rise2-front.png", // ✅
-      hoverSrc: "/rise2-back.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
+      src: "/importal12-front.png",
+      hoverSrc: "/importal12-back.png",
     },
-
-    {
-      title: "The Price of Redemption",
-      src: "/s1.png", // ✅
-      hoverSrc: "/ss2.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
-    },
-
+    { title: "The Price of Redemption", src: "/s1.png", hoverSrc: "/ss2.png" },
     {
       title: "The Crown Blood",
-      src: "/crown-front.png", // ✅
+      src: "/crown-front.png",
       hoverSrc: "/crown-back.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
     },
     {
       title: "Daggers of Treason",
-      src: "/dragger-front.png", // ✅
-      hoverSrc: "/dragger-back.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
+      src: "/drageer12-front.png",
+      hoverSrc: "/drageer12-back.png",
     },
     {
       title: "Dracula",
-      src: "/dracul2-front.png", // ✅
+      src: "/dracul2-front.png",
       hoverSrc: "/dracula2-back.png",
-      alt: "Urban night",
-      creditHref: "https://unsplash.com",
     },
   ];
-
   const gallery = [
     {
       src: "/s1.png",
@@ -406,33 +357,6 @@ export default function Home({ images }) {
     },
   ];
 
-  // const testimonials = [
-  //   {
-  //     image: "/pranav.jpeg",
-  //     stars: 5,
-  //     text: "Really, I must congratulate the team for designing such a marvelous and thoughtful cover! It's unanimously liked! The cover is so effective!, that I gained 2000 followers on Insta in 5 days, by boosting a reel based on the cover alone! My fullest appreciation for the professional involved in making the cover. I was always a little doubtful as to how a story with a tiger could be marketed in our country. There you proved me wrong.",
-  //     name: "Pranav Mishra",
-  //     title: "The Tiger That Crashed My Wedding",
-  //     color: "var(--themeColor)",
-  //   },
-  //   {
-  //     image: "/akash.png",
-  //     stars: 4,
-  //     text: "I was pleasantly surprised to see and hold the book cover. It clearly has the refinement and finish to be the envy of any tier-1 publisher. From the treatment of the letter - its font, size and placement - to the overall design and color choices, everything comes together beautifully. The professional managed to capture not just the story's essence, but also its richness, right on the cover. It's evident how much craft and skill they have put into the design - balancing storytelling with market appeal. I truly appreciate the creativity and your patience in understanding the vision, and for creating something I can proudly say represents my book.",
-  //     name: "Akash Pasricha",
-  //     title: "Lost Secret",
-  //     color: "var(--themeColor)",
-  //   },
-  //   {
-  //     image: "/dharavi.jpeg",
-  //     stars: 5,
-  //     text: "From thoughtful editing to a stunning cover design, they guided me through every step of the process with professionalism and care. Their belief in my story and their commitment to excellence made this journey truly rewarding. I'm grateful for their unwavering support and highly recommend them to any author looking for a trusted partner.",
-  //     name: "Atul Mohite",
-  //     title: "The Awakening Of  Dharavi",
-  //     color: "var(--themeColor)",
-  //   },
-  // ];
-
   const testimonials = [
     {
       image: "/t1.png",
@@ -581,58 +505,6 @@ export default function Home({ images }) {
     localStorage.setItem("userRole", selectedRole);
     setShowSignup(true);
   };
-
-  // const handleActionClickHireAFreelancer = (action) => {
-  //   const userRole = localStorage.getItem("userRole");
-
-  //   if (!userRole) {
-  //     // 🧭 User not signed up yet → store intended action
-  //     localStorage.setItem("pendingAction", action);
-  //     setShowSignup(true); // open signup modal
-  //   } else {
-  //     // 🧭 Already signed up → open the respective modal directly
-  //     if (action === "hire") {
-  //       setShowHire(true); // open HireFreelancer modal
-  //     } else if (action === "freelancer") {
-  //       setShowSteps(true); // open BeSniper modal
-  //     } else {
-  //       window.location.href = "/"; // default redirect
-  //     }
-  //   }
-  // };
-
-  // const handleActionClickBeAFreelancer = (action) => {
-  //   const userRole = localStorage.getItem("userRole");
-
-  //   if (!userRole) {
-  //     // 🧭 User not signed up yet → store intent and open signup modal
-  //     localStorage.setItem("pendingAction", action);
-  //     setShowSignup(true);
-
-  //     // 🪄 Automatically trigger the correct flow *after signup completes*
-  //     const checkSignup = setInterval(() => {
-  //       const newUserRole = localStorage.getItem("userRole");
-  //       if (newUserRole) {
-  //         clearInterval(checkSignup);
-
-  //         if (action === "freelancer") {
-  //           setShowSteps(true); // open BeSniper modal after signup
-  //         } else if (action === "hire") {
-  //           setShowHire(true); // fallback just in case
-  //         }
-  //       }
-  //     }, 500);
-  //   } else {
-  //     // 🧭 Already signed up → open BeSniper modal directly
-  //     if (action === "freelancer") {
-  //       setShowSteps(true);
-  //     } else if (action === "hire") {
-  //       setShowHire(true);
-  //     } else {
-  //       window.location.href = "/";
-  //     }
-  //   }
-  // };
 
   const handleActionClick = (action) => {
     const userRole = localStorage.getItem("userRole");
@@ -1513,58 +1385,26 @@ export default function Home({ images }) {
       {/* ===== Projects with Masonry Gallery Section ===== */}
       <div className="projects-section">
         <h2 className="projects-title">How Far We Have Come</h2>
-        <p className="projects-subtitle">
-          Our snipers have delivered exceptional results for authors across
-          genres. See some of our recent cover design projects.
-        </p>
 
-        <div className="mmg-root">
-          <div ref={progressRef} className="mmg-scroll-indicator" />
-
-          <div className="mmg-container">
-            <div className="mmg-gallery">
-              {items.map((item, idx) => (
-                // <article
-                //   key={idx}
-                //   ref={(el) => (itemsRef.current[idx] = el)}
-                //   className="mmg-item"
-                //   style={{ ["--delay"]: String(idx + 1) }}
-                // >
-                <article
-                  key={item.id ?? idx} // key for React diffing
-                  id={`grid-${idx + 1}`} // unique DOM id like grid-1, grid-2…
-                  className="mmg-item"
-                  style={{ ["--delay"]: String(idx + 1) }}
-                >
-                  <div className="mmg-item-inner">
-                    {/* Default image controls layout height */}
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className="mmg-img default-img"
-                      loading="lazy"
-                    />
-
-                    {/* Hover image layered on top only when present */}
-                    {item.hoverSrc && (
-                      <img
-                        src={item.hoverSrc}
-                        alt={`${item.alt} (hover)`}
-                        className="mmg-img hover-img"
-                        loading="lazy"
-                      />
-                    )}
-
-                    <div className="mmg-overlay">
-                      <h2 className="mmg-card-title">{item.title}</h2>
-                      <p className="mmg-card-desc">{item.desc}</p>
-                    </div>
+        <section className="books-section">
+          <div className="books-grid">
+            {items.map((book, index) => (
+              <div className="book-card" key={index}>
+                <div className="image-wrapper">
+                  <img src={book.src} alt={book.title} className="front" />
+                  <img
+                    src={book.hoverSrc}
+                    alt={`${book.title} Back`}
+                    className="back"
+                  />
+                  <div className="book-overlay">
+                    <h3>{book.title}</h3>
                   </div>
-                </article>
-              ))}
-            </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
+        </section>
 
         <span>
           <Link href="/snapshot">

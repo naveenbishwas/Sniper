@@ -2537,363 +2537,119 @@ span.arrow-wrapper {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Masonry via CSS columns */
-.masonry {
-  column-count: 4;
-  column-gap: 1rem;
-  column-fill: balance;
-}
-
-.masonryItem {
-  display: inline-block;
-  margin-bottom: 1rem;
+.books-section {
   width: 100%;
-  break-inside: avoid;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.masonryItem.loaded {
-  opacity: 1;
-  transform: translateY(0);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.masonryItem:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.masonryImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.masonryItem:hover .masonryImage {
-  transform: scale(1.05);
-}
-
-.caption {
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.4;
-  background: #fff;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .masonry {
-    column-count: 3;
-  }
-  .title {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .masonry {
-    column-count: 2;
-    column-gap: 0.75rem;
-  }
-
-  .logo-slider h1 {
-    margin-bottom: 30px !important;
-  }
-
-  .vetting-text p {
-    font-size: 15px !important;
-  }
-
-  #meet-title {
-    text-align: left !important;
-  }
-
-  .masonrySection {
-    padding: 1.5rem 0.75rem;
-  }
-  .title {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-  }
-  .masonryItem {
-    margin-bottom: 0.75rem;
-  }
-  .snipers-btn {
-    background-color: var(--themeColor);
-    color: var(--background);
-    font-weight: bold;
-    font-size: 14px;
-    border: none;
-    padding: 7px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s ease;
-  }
-}
-
-@media (max-width: 480px) {
-  .masonry {
-    column-count: 1;
-    column-gap: 0;
-  }
-  .masonrySection {
-    padding: 1rem 0.5rem;
-  }
-  .title {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  .container {
-    max-width: 100%;
-  }
-}
-
-/* Anim */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-:root {
-  --mmg-accent: #00a89d;
-  --mmg-text: #5c5e5f;
-  --mmg-bg: #f8f8f8;
-}
-
-/* Root container */
-.mmg-root {
-  min-height: 100vh;
-  /* background: var(--mmg-bg); */
-  color: var(--mmg-text);
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-}
-
-/* Scroll progress bar */
-.mmg-scroll-indicator {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 3px;
-  background: var(--mmg-accent);
-  z-index: 1000;
-  transition: width 0.3s ease;
-  width: 0;
-}
-
-/* Layout container */
-.mmg-container {
-  max-width: 1400px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-/* Section title (optional if you use it) */
-.mmg-title {
-  font-size: clamp(2.25rem, 2.5vw + 1.5rem, 3.5rem);
-  margin-bottom: 2rem;
-  color: var(--mmg-accent);
+  padding: 50px 5%;
+  /* background: #f8f8f8; */
+  font-family: "Poppins", sans-serif;
   text-align: center;
-  font-weight: 800;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: mmg-fadeUp 0.8s ease forwards;
 }
 
-/* Masonry grid layout */
-.mmg-gallery {
-  columns: 4;
-  column-gap: 1rem;
+.books-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 50px;
+  color: #222;
+  letter-spacing: 0.5px;
+}
+
+.books-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 60px;
+  row-gap: 40px;
+}
+
+@media (max-width: 1200px) {
+  .books-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.book-card {
+  position: relative;
   width: 100%;
+  max-width: 260px;
+  cursor: pointer;
+  perspective: 1000px;
 }
 
-@media (max-width: 768px) {
-  .mmg-gallery {
-    columns: 2;
-  }
-
-  .snipers-icon a {
-    display: flex;
-    justify-content: center;
-  }
-}
-@media (max-width: 480px) {
-  .mmg-gallery {
-    columns: 1;
-  }
-}
-
-/* Masonry item */
-.mmg-item {
-  break-inside: avoid;
-  margin-bottom: 1.5rem;
+.image-wrapper {
   position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: mmg-fadeUp 0.8s ease forwards;
-  animation-delay: calc(var(--delay) * 0.2s);
-  background: #fff; /* nice card base */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
-
-/* Inner wrapper establishes stacking context for overlay/hover image */
-.mmg-item-inner {
-  position: relative;
-  display: block;
-  overflow: hidden;
-}
-
-/* Images — default stays in normal flow to set height */
-.mmg-img {
   width: 100%;
-  height: auto;
-  display: block;
-  position: relative;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  background: #fff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Default/base image defines layout height */
-.default-img {
-  z-index: 1; /* in flow; no absolute positioning */
+.image-wrapper:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease;
+}
+
+.image-wrapper .back {
+  opacity: 0;
+}
+
+.image-wrapper:hover .back {
   opacity: 1;
-  transform: scale(1);
-  /* visibility: visible; */
 }
 
-/* Hover image is layered on top only */
-.hover-img {
+.image-wrapper:hover .front {
+  opacity: 0;
+}
+
+.book-overlay {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  transform: scale(1.05); /* slight zoom already prepared */
-  object-fit: cover;
-  pointer-events: none;
+  /* background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px); */
+  transition: opacity 0.4s ease;
+  color: #000000;
+  padding: 10px;
 }
 
-/* Swap on hover */
-.mmg-item-inner:hover .default-img {
-  opacity: 0;
-  transform: scale(1.02);
-}
-.mmg-item-inner:hover .hover-img {
+.image-wrapper:hover .book-overlay {
   opacity: 1;
-  transform: scale(1);
 }
 
-/* Overlay (title + desc) */
-.mmg-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to top, rgba(0, 168, 157, 0.9), transparent);
-  padding: 2rem 1.5rem;
-  color: #fff;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 3;
-}
-.mmg-item-inner:hover .mmg-overlay {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Overlay text */
-.mmg-card-title {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-.mmg-card-desc {
-  font-size: 0.95rem;
+.book-overlay h3 {
+  display: none;
+  font-size: 1.3rem;
+  font-weight: 500;
   line-height: 1.4;
-  opacity: 0.95;
-}
-
-/* Credit link */
-.mmg-credit {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  color: #fff;
-  font-size: 0.8rem;
-  opacity: 0.9;
-  text-decoration: none;
-  z-index: 4;
-}
-.mmg-credit:hover {
-  text-decoration: underline;
-  opacity: 1;
-}
-
-/* Animation keyframes */
-@keyframes mmg-fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-#award {
-  /* margin-top: 5px; */
-  width: 35px;
-  height: 35px;
-}
-
-.team-btn button {
-  background: var(--brand);
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  padding: 10px 22px;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
-  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
-  margin-top: 6%;
-}
-
-/* Optional manual fade-in utility */
-.mmg-fade-in {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-article#grid-11 img {
-  height: 388px;
-  object-fit: cover;
-}
-
-article#grid-14 img {
-  height: 200px;
-  object-fit: cover;
-}
-
-article#grid-15 img {
-  height: 490px;
-  object-fit: cover;
+  margin: 0;
+  text-transform: capitalize;
 }
 
 /* components/team-section.css */
