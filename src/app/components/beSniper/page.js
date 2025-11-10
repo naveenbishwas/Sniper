@@ -120,10 +120,10 @@ export default function BeSniperModal({ onClose }) {
     )
       newErrors.otherOccupation = "Please specify your occupation.";
 
-    if (!link.trim() || !isValidURL(link))
-      newErrors.link = "Enter valid Portfolio Link.";
-    if (!work.trim() || !isValidURL(work))
-      newErrors.work = "Enter valid Work Link.";
+    // if (!link.trim() || !isValidURL(link))
+    //   newErrors.link = "Enter valid Portfolio Link.";
+    // if (!work.trim() || !isValidURL(work))
+    //   newErrors.work = "Enter valid Work Link.";
 
     if (!email.trim() || !isValidEmail(email))
       newErrors.email = "Enter valid Email.";
@@ -548,8 +548,8 @@ export default function BeSniperModal({ onClose }) {
 
                     {/* Other fields */}
                     {[
-                      { name: "link", label: "Portfolio Link" },
-                      { name: "work", label: "Best Work Link" },
+                      // { name: "link", label: "Portfolio Link" },
+                      // { name: "work", label: "Best Work Link" },
                       { name: "email", label: "Email *Private" },
                       { name: "phone", label: "Phone Number *Active" },
                     ].map((field, i) => (
