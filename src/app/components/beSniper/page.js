@@ -171,7 +171,8 @@ export default function BeSniperModal({ onClose }) {
       };
 
       await setDoc(doc(db, "users", email.toLowerCase()), userDoc);
-      await addDoc(collection(db, "be-sniper-forms"), beSniperDoc);
+      // await addDoc(collection(db, "be-sniper-forms"), beSniperDoc);
+      await addDoc(collection(db, "Hawkee"), beSniperDoc);
 
       localStorage.setItem("uniqueId", uniqueId);
       localStorage.setItem("userRole", role);
