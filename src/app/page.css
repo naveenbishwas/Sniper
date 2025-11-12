@@ -625,7 +625,7 @@
 img.header__logo {
   width: 230px;
   height: auto;
-  padding-bottom: 15px;
+  padding: 5px 0;
 }
 
 .vetting-trust .trust-item:nth-child(1) img {
@@ -2622,6 +2622,22 @@ span.arrow-wrapper {
     gap: 20px;
   }
 
+  .snipers-btn {
+    background-color: var(--themeColor);
+    color: var(--background);
+    font-weight: 700;
+    font-size: 12px;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  img.header__logo {
+    width: 150px !important;
+  }
+
   .books-section {
     padding: 30px 4%;
   }
@@ -2809,6 +2825,10 @@ span.arrow-wrapper {
   margin: 0;
 }
 
+.nav-buttons.in-mobile {
+  display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .teamSection {
@@ -2824,6 +2844,7 @@ span.arrow-wrapper {
 
   .values li {
     text-align: left !important;
+    font-size: 13px !important;
   }
 
   .logo-slider {
@@ -2831,15 +2852,33 @@ span.arrow-wrapper {
   }
 
   .logo-track img {
-    width: 130px !important;
+    width: 100px !important;
   }
 
   .logo-track {
     gap: 30px !important;
   }
 
+  .testimonial-grid {
+    gap: 1rem !important;
+  }
+
+  .nav-buttons.in-desktop {
+    display: none !important;
+  }
+
+  .nav-buttons.in-mobile {
+    display: flex !important;
+    margin-top: 10px;
+  }
+
   .description {
     font-size: 15px !important;
+    text-align: left !important;
+  }
+
+  .values h3 {
+    text-align: left !important;
   }
 
   .title {

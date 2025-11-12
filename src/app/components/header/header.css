@@ -130,6 +130,15 @@
     display: flex !important;
   }
 
+  .header__left img {
+    width: 120px !important;
+  }
+
+  .user-avatar {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
   .gigs-section {
     padding-top: 0 !important;
   }
@@ -140,7 +149,7 @@
   }
 
   .header__left img {
-    border-radius: 50%;
+    padding-bottom: 0 !important;
     width: 130px;
     height: auto;
   }
@@ -399,4 +408,10 @@
 }
 .acc-signout:hover {
   background: #c62828;
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding: 0 20px;
+  }
 }

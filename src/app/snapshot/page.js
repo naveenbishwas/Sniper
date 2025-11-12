@@ -61,13 +61,13 @@ const imageItems = [
     thumb: "/ikigai-front.png",
     full: "/ikigai.jpg",
   },
-  {
-    id: "i4",
-    type: "image",
-    title: "Ocean Dreams",
-    thumb: "/ocean.png",
-    full: "/ocean-full.jpg",
-  },
+  // {
+  //   id: "i4",
+  //   type: "image",
+  //   title: "Ocean Dreams",
+  //   thumb: "/ocean.png",
+  //   full: "/ocean-full.jpg",
+  // },
 ];
 
 /** === Interleave: one video, one image, repeat === */

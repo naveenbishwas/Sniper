@@ -1487,14 +1487,14 @@ export default function Home({ images }) {
           <div className="testimonial-grid">
             <div className="testimonial-left">
               <h2 className="testimonial-heading">
-                Here what our
+                Here's what our
                 <span className="theme-text"> great customers</span> say.
               </h2>
               <p className="testimonial-subtext">
                 Our clients share their experiences about working with our
                 freelancers and how it transformed their projects.
               </p>
-              <div className="nav-buttons">
+              <div className="nav-buttons in-desktop">
                 <button
                   onClick={handlePrev}
                   disabled={isTransitioning}
@@ -1562,6 +1562,22 @@ export default function Home({ images }) {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="nav-buttons in-mobile">
+                <button
+                  onClick={handlePrev}
+                  disabled={isTransitioning}
+                  className="nav-btn"
+                >
+                  <ChevronLeft className="icon" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={isTransitioning}
+                  className="nav-btn"
+                >
+                  <ChevronRight className="icon" />
+                </button>
               </div>
             </div>
           </div>
