@@ -28,13 +28,13 @@ export default function Banner({ onSignupClick }) {
             className="btn-black"
             onClick={() => onSignupClick("HireFreelancer")}
           >
-            Hire a Sniper
+            Hire a Freelancer
           </button>
           <button
             className="btn-white"
             onClick={() => onSignupClick("beSniper")}
           >
-            Be a Sniper
+            Be a Freelancer
           </button>
         </div>
       </div>
