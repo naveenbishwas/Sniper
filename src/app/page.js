@@ -1487,7 +1487,7 @@ export default function Home({ images }) {
           <div className="testimonial-grid">
             <div className="testimonial-left">
               <h2 className="testimonial-heading">
-                Here's what our
+                {`Here's what our`}
                 <span className="theme-text"> great customers</span> say.
               </h2>
               <p className="testimonial-subtext">
