@@ -154,8 +154,6 @@ const HireFreelancer = ({ onClose }) => {
         createdAt: new Date().toISOString(),
       });
 
-      // Redploy
-
       // await addDoc(collection(db, "sniper-forms"), {
       await addDoc(collection(db, "Hawker"), {
         plan: firstField,
