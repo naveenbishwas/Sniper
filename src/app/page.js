@@ -984,7 +984,7 @@ export default function Home({ images }) {
               </div> */}
             </div>
 
-            <div className="imageContent">
+            {/* <div className="imageContent">
               <div className="imageWrapper">
                 <Image
                   src="/team.png"
@@ -997,7 +997,7 @@ export default function Home({ images }) {
                   <p>Together we achieve more</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
